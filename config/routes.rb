@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :employees
   devise_for :candidates
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: 'candidates#index'
+  resources :candidates, only: %i[index show]
 end
