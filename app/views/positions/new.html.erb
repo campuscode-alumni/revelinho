@@ -1,0 +1,16 @@
+<%= form_with model: @position, local: true do |f| %>
+  <%= f.label :title, 'Título' %>
+  <%= f.text_field :title %>
+
+  <%= f.label :industry, 'Área' %>
+  <%= f.text_field :industry %>
+
+  <%= f.label :description, 'Descrição' %>
+  <%= f.text_area :description %>
+
+  <%= f.label :salary, 'Salário' %>
+  <%= f.text_field :salary %>
+
+  <%= f.label :position_type, 'Tipo' %>
+  <%= f.select :position_type, @position.class.position_types, {} %>
+<% end %>
