@@ -29,5 +29,6 @@ feature 'employee create company on signup' do
     click_on 'Salvar'
 
     expect(current_path).to eq(company_path(employee.company))
+    expect(page).to have_content('Endereço: Av. Paulista, 1234')
   end
 end
