@@ -12,7 +12,7 @@
   <%= f.text_field :salary %>
 
   <%= f.label :position_type, 'Tipo' %>
-  <%= f.select :position_type, Position.position_types.keys.map { |p| I18n.t :"position_type.#{p}"}  %>
+  <%= f.select :position_type, Position.position_types.map { |k, v| [ I18n.t(:"position_type.#{k}"), k] }  %>
 
   <%= f.submit 'Enviar' %>
 <% end %>
