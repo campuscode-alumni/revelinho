@@ -1,9 +1,7 @@
-<h1>Home Page</h1>
-
-
+<%= image_tag 'revelinho.svg' %>
 <% if employee_signed_in? %>
   <p>Usuário <%= current_employee.email %> logado com sucesso.</p>
   <%= link_to 'Logout', destroy_employee_session_path, method: :delete %>
 <% else %>
-  <%= link_to 'Fazer cadastro', new_employee_registration_path %>
+  <%= link_to 'Fazer cadastro', new_employee_registration_path, class: 'btn btn-primary' %>
 <% end %>
