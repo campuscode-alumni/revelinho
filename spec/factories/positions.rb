@@ -4,8 +4,6 @@ FactoryBot.define do
     industry { 'MyString' }
     description { 'MyText' }
     salary { '9.99' }
-    piption { 'MyText' }
-    salary { '9.99' }
-    position_type { 1 }
+    position_type { 'full_time' }
   end
 end
