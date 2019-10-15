@@ -51,8 +51,24 @@ ActiveRecord::Schema.define(version: 2019_10_15_132316) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
+    t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "positions", force: :cascade do |t|
+    t.string "title"
+    t.string "industry"
+    t.text "description"
+    t.decimal "salary"
+    t.integer "position_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
+    t.index ["company_id"], name: "index_positions_on_company_id"
+  end
+
+  add_foreign_key "employees", "companies"
+  add_foreign_key "positions", "companies"
 end
