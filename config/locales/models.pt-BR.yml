@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      position: "Vaga"
+    attributes:
+      position:
+        title: "Título"
+        industry: "Área"
+        description: "Descrição"
+        salary: "Salário"
+        position_type: "Tipo"
+  # Humanização de keys dos Enums
+  position_type:
+    full_time: "CLT"
+    part_time: "Meio Período"
+    internship: "Estágio"
+    contractor: "PJ"

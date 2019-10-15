@@ -1,0 +1,46 @@
+<div class="container-fluid candidate-page p-0">
+  <div class="container-fluid candidate-header">
+    <div class="row name-wrapper">
+      <h1 class="name"><%= @candidate.name %></h1>
+    </div>
+    <div class="image-wrapper">
+      <img src="https://github.com/identicons/jasonlong.png" class="image" alt="<%= @candidate.name %>%">
+    </div>
+  </div>
+
+  <div class="candidate p-2">
+    <div class="container-fluid">
+      <div class="row justify-content-center text-wrapper">
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">E-mail</div>
+        <div class="spacer"></div>
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.email %></div>
+      </div>
+      <div class="row justify-content-center text-wrapper">
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Cidade</div>
+        <div class="spacer"></div>
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= "#{@candidate.city}, #{@candidate.state}" %></div>
+      </div>
+      <div class="row justify-content-center text-wrapper">
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">País</div>
+        <div class="spacer"></div>
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.country %></div>
+      </div>
+      <div class="row justify-content-center text-wrapper">
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Ocupação</div>
+        <div class="spacer"></div>
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.occupation %></div>
+      </div>
+      <div class="row justify-content-center text-wrapper">
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Formação</div>
+        <div class="spacer"></div>
+        <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.educational_level %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+        <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary' %>
+    </div>
+  </div>
+</div>

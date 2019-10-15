@@ -1,0 +1,16 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      candidate: 'Candidato'
+    attributes:
+      candidate:
+        name: 'Nome'
+        email: 'Email'
+        phone: 'Telefone'
+        occupation: 'Profissão'
+        educational_level: 'Nível de Escolaridade'
+        address: 'Endereço'
+        birthday: 'Data de Nascimento'
+        cpf: 'Cpf'
+        password: 'Senha'

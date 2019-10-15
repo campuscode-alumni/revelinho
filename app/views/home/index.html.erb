@@ -2,6 +2,9 @@
 <% if employee_signed_in? %>
   <p>Usuário <%= current_employee.email %> logado com sucesso.</p>
   <%= link_to 'Logout', destroy_employee_session_path, method: :delete %>
+  <%= link_to 'Criar vaga', new_position_path if employee_signed_in? %>
+  <%= link_to 'Candidatos disponíveis', candidates_path if employee_signed_in? %>
 <% else %>
   <%= link_to 'Fazer cadastro', new_employee_registration_path, class: 'btn btn-primary' %>
 <% end %>
+
