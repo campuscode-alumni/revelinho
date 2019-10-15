@@ -18,7 +18,8 @@ feature 'candidate register' do
     fill_in 'Confirmar Senha', with: '123456'
     click_on 'Registrar'
 
-    expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso'
+    expect(page).to have_content 'Bem vindo! Você realizou seu registro '\
+                                  'com sucesso'
   end
 
   scenario 'failed' do

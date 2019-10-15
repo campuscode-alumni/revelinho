@@ -529,14 +529,14 @@
       "/home/revelo/projetos/na_aula/revelinho/spec/factories/candidates.rb": [
         1,
         1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
         null,
         null
       ],
@@ -592,8 +592,39 @@
         null,
         null
       ],
+      "/home/revelo/projetos/na_aula/revelinho/spec/models/candidate_spec.rb": [
+        1,
+        null,
+        1,
+        null
+      ],
+      "/home/revelo/projetos/na_aula/revelinho/spec/models/company_spec.rb": [
+        1,
+        null,
+        1,
+        null
+      ],
+      "/home/revelo/projetos/na_aula/revelinho/app/models/company.rb": [
+        1,
+        null
+      ],
+      "/home/revelo/projetos/na_aula/revelinho/spec/models/employee_spec.rb": [
+        1,
+        null,
+        1,
+        null
+      ],
       "/home/revelo/projetos/na_aula/revelinho/app/controllers/application_controller.rb": [
         1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        5,
+        null,
+        null,
+        null,
         null
       ],
       "/home/revelo/projetos/na_aula/revelinho/app/controllers/home_controller.rb": [
@@ -602,6 +633,6 @@
         null
       ]
     },
-    "timestamp": 1571157023
+    "timestamp": 1571162283
   }
 }
