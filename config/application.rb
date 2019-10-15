@@ -31,5 +31,9 @@ module Revelinho
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    I18n.available_locales = [:en, :'pt-BR']
+
+    I18n.default_locale = :'pt-BR'
   end
 end

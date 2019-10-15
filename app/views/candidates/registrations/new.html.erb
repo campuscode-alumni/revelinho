@@ -1,40 +1,40 @@
-<h2>Sign up</h2>
+<h2>Registrar</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
-  <div class='field'>
+  <div class='form-group'>
     <%= f.label :name, 'Nome'%><br />
-    <%= f.text_field :name, autofocus: true, placeholder: 'Nome' %>
+    <%= f.text_field :name, placeholder: 'Nome' %>
   </div>
 
-  <div class='field'>
+  <div class='form-group'>
     <%= f.label :birthday, 'Data de Nascimento'%><br />
-    <%= f.date_field :birthday, autofocus: true, placeholder: 'Data de Nascimento' %>
+    <%= f.date_field :birthday, placeholder: 'Data de Nascimento' %>
   </div>
 
-  <div class='field'>
+  <div class='form-group'>
     <%= f.label :cpf, 'Cpf'%><br />
-    <%= f.text_field :cpf, autofocus: true, placeholder: 'cpf' %>
+    <%= f.text_field :cpf, placeholder: 'cpf' %>
   </div>
 
-  <div class='field'>
+  <div class='form-group'>
     <%= f.label :address, 'Endereço'%><br />
-    <%= f.text_field :address, autofocus: true, placeholder: 'endereço' %>
+    <%= f.text_field :address, placeholder: 'endereço' %>
   </div>
 
-  <div class='field'>
+  <div class='form-group'>
     <%= f.label :phone, 'Telefone'%><br />
-    <%= f.telephone_field :phone, autofocus: true, placeholder: 'telefone' %>
+    <%= f.telephone_field :phone, placeholder: 'telefone' %>
   </div>
 
-  <div class='field'>
+  <div class='form-group'>
     <%= f.label :occupation, 'Profissão'%><br />
-    <%= f.text_field :occupation, autofocus: true, placeholder: 'Profissão' %>
+    <%= f.text_field :occupation, placeholder: 'Profissão' %>
   </div>
 
-  <div class='field'>
+  <div class='form-group'>
     <%= f.label :educational_level, 'Nível de Escolaridade'%><br />
-    <%= f.text_field :educational_level, autofocus: true, placeholder: 'Nível de Escolaridade' %>
+    <%= f.text_field :educational_level, placeholder: 'Nível de Escolaridade' %>
   </div>
 
   <div class='field'>
