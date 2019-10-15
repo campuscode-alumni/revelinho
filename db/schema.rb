@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_15_123640) do
+ActiveRecord::Schema.define(version: 2019_10_15_162911) do
+
+  create_table "candidate_notes", force: :cascade do |t|
+    t.string "comment"
+    t.integer "employee_id", null: false
+    t.integer "candidate_id", null: false
+    t.integer "visibility", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_candidate_notes_on_candidate_id"
+    t.index ["employee_id"], name: "index_candidate_notes_on_employee_id"
+  end
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -46,5 +57,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_123640) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "candidate_notes", "candidates"
+  add_foreign_key "candidate_notes", "employees"
   add_foreign_key "employees", "companies"
 end

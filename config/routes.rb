@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :companies, only: %i[edit update]
+  resources :candidates, only: [:show] do
+    post 'add-comment', to: 'candidates#add_comment', as: :add_comment
+  end
 end
