@@ -12,9 +12,12 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     employee = Employee.new(params.require(:employee).permit(:email, :password))
-    employee.save
+    if employee.save
+      company_exists(employee)
 
-    redirect_to edit_company_path(Employee.last.company)
+      flash[:notice] = "Usuário #{employee.email} logado com sucesso."
+      redirect_to edit_company_path(employee.company)
+    end
   end
 
   # GET /resource/edit
@@ -62,4 +65,18 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def get_company(name, domain)
+    Company.find_by(url_domain: domain) || Company.create(name: name, url_domain: domain)
+  end
+
+  def company_exists(employee)
+    company_domain = employee.email.split('@')[1]
+    company_name = company_domain.split('.')[0].humanize
+    company = get_company(company_name, company_domain)
+
+    employee.update(company: company)
+  end
 end

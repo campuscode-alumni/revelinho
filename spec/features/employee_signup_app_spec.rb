@@ -12,9 +12,11 @@ feature 'Employee signup app' do
 
     click_on 'Sign up'
 
+    employee = Employee.last
+
     expect(page).to have_content('Usuário employee@company.com logado com sucesso.')
     expect(page).not_to have_content('Fazer cadastro')
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(edit_company_path(employee.company))
   end
 
   scenario 'and logout' do
