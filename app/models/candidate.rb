@@ -11,5 +11,4 @@ class Candidate < ApplicationRecord
             :educational_level,
             :cpf,
             :birthday, presence: true
-
 end

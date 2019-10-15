@@ -43,10 +43,10 @@ feature 'candidate register' do
   scenario 'and logout successfully' do
     candidate = create(:candidate, password: '123456')
 
+    login_as(candidate, scope: :candidate)
     visit root_path
     click_on 'Sair'
 
     expect(page).to have_content 'Logout efetuado com sucesso'
-
   end
 end
