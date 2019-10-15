@@ -16,7 +16,6 @@ feature 'employee create company on signup' do
   end
 
   scenario 'and update company after' do
-
     company = create(:company)
     employee = create(:employee, company: company)
 
