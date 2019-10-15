@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <% if notice.present? %>
+      <div class="alert alert-primary" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
