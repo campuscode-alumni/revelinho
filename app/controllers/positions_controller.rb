@@ -1,5 +1,5 @@
 class PositionsController < ApplicationController
-  before_action :authenticate_employee!, only: [:new, :create]
+  before_action :authenticate_employee!, only: %i[new create]
 
   def new
     @position = Position.new
