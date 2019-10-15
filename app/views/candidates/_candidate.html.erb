@@ -9,6 +9,9 @@
         <p class="card-text">
           <small class="text-muted"><%= candidate.email %></small>
         </p>
+        <p class="card-text">
+          <small class="text-muted"><%= "#{candidate.city}, #{candidate.state}" %></small>
+        </p>
         <p><%= candidate.occupation %></p>
         <p><%= candidate.educational_level %></p>
       </div>
