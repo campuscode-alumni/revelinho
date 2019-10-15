@@ -14,7 +14,11 @@ Candidate.create!(
   address: 'Rua Revelada, 10',
   occupation: 'full stack developer',
   educational_level: 'mestrado concluído',
-  status: :published
+  status: :published,
+  city: 'São Paulo',
+  state: 'São Paulo',
+  country: 'Brasil',
+  zip_code: '03141-030'
 )
 Candidate.create!(
   name: 'Rafael',
@@ -24,7 +28,11 @@ Candidate.create!(
   address: 'Rua Revelada, 10',
   occupation: 'back-end node.js developer',
   educational_level: 'graduação em andamento',
-  status: :published
+  status: :published,
+  city: 'São Paulo',
+  state: 'São Paulo',
+  country: 'Brasil',
+  zip_code: '03141-030'
 )
 Candidate.create!(
   name: 'Gustavo',
@@ -34,7 +42,11 @@ Candidate.create!(
   address: 'Rua Revelada, 10',
   occupation: 'web developer',
   educational_level: 'graduação completa',
-  status: :published
+  status: :published,
+  city: 'São Paulo',
+  state: 'São Paulo',
+  country: 'Brasil',
+  zip_code: '03141-030'
 )
 Candidate.create!(
   name: 'Patrícia',
@@ -44,5 +56,9 @@ Candidate.create!(
   address: 'Rua Revelada, 10',
   occupation: 'dev ops guru',
   educational_level: 'mestrado concluído',
-  status: :published
+  status: :published,
+  city: 'São Paulo',
+  state: 'São Paulo',
+  country: 'Brasil',
+  zip_code: '03141-030'
 )
