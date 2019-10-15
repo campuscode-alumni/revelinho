@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/revelo/workspace/revelinho/config/environment.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/home/revelo/workspace/revelinho/config/application.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/application.rb": [
         1,
         null,
         1,
@@ -45,13 +45,13 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/boot.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/boot.rb": [
         1,
         null,
         1,
         1
       ],
-      "/home/revelo/workspace/revelinho/config/environments/test.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/environments/test.rb": [
         null,
         null,
         null,
@@ -101,7 +101,7 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/application_controller_renderer.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -111,7 +111,7 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/assets.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -127,7 +127,7 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/backtrace_silencers.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -136,7 +136,7 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/content_security_policy.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/content_security_policy.rb": [
         null,
         null,
         null,
@@ -168,14 +168,14 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/cookies_serializer.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/devise.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/devise.rb": [
         null,
         null,
         null,
@@ -476,13 +476,13 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/filter_parameter_logging.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/inflections.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -500,13 +500,13 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/mime_types.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/initializers/wrap_parameters.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -522,14 +522,14 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/spec/factories/candidates.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/spec/factories/candidates.rb": [
         1,
         1,
         null,
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/spec/factories/companies.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/spec/factories/companies.rb": [
         1,
         1,
         1,
@@ -538,7 +538,7 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/spec/factories/employees.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/spec/factories/employees.rb": [
         1,
         1,
         2,
@@ -546,7 +546,7 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/spec/factories/positions.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/spec/factories/positions.rb": [
         1,
         1,
         1,
@@ -559,7 +559,7 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/config/routes.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/config/routes.rb": [
         1,
         1,
         1,
@@ -568,7 +568,7 @@
         1,
         null
       ],
-      "/home/revelo/workspace/revelinho/app/models/employee.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/app/models/employee.rb": [
         1,
         1,
         null,
@@ -577,12 +577,12 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/app/models/application_record.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "/home/revelo/workspace/revelinho/app/models/candidate.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/app/models/candidate.rb": [
         1,
         null,
         null,
@@ -590,32 +590,49 @@
         null,
         null
       ],
-      "/home/revelo/workspace/revelinho/app/models/company.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/app/models/company.rb": [
         1,
-        1,
-        null
-      ],
-      "/home/revelo/workspace/revelinho/app/controllers/application_controller.rb": [
-        1,
-        null
-      ],
-      "/home/revelo/workspace/revelinho/app/controllers/home_controller.rb": [
         1,
         1,
         null
       ],
-      "/home/revelo/workspace/revelinho/app/controllers/positions_controller.rb": [
+      "/home/revelo/Projetos/Revelo/revelinho/app/controllers/application_controller.rb": [
+        1,
+        null
+      ],
+      "/home/revelo/Projetos/Revelo/revelinho/app/controllers/home_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/revelo/Projetos/Revelo/revelinho/app/controllers/positions_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        0,
+        null,
+        null,
+        null,
         1,
         1,
         null,
-        null,
-        null,
+        null
+      ],
+      "/home/revelo/Projetos/Revelo/revelinho/app/models/position.rb": [
         1,
-        null,
-        null,
+        1,
+        1,
         null
       ]
     },
-    "timestamp": 1571084745
+    "timestamp": 1571146592
   }
 }

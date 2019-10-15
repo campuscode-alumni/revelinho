@@ -1,0 +1,16 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>
+					<%= @position.title %> <small>@ <%= @position.company.name %></small>
+				</h1>
+			</div>
+            <ul>
+                <li><%= @position.industry %></li>
+                <li><%= @position.description %></li>
+                <li>R$ <%= @position.salary %></li>           
+            </ul>
+		</div>
+	</div>
+</div>

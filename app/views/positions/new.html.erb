@@ -12,5 +12,7 @@
   <%= f.text_field :salary %>
 
   <%= f.label :position_type, 'Tipo' %>
-  <%= f.select :position_type, @position.class.position_types, {} %>
+  <%= f.select :position_type, Position.position_types.keys %>
+
+  <%= f.submit 'Enviar' %>
 <% end %>
