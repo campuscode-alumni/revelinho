@@ -4,47 +4,47 @@
     <%= render 'devise/shared/error_messages', resource: resource %>
     <div class="card bg-light py-3 px-4 m-2 col-md-8">
       <div class="form-group row">
-        <%= f.label :name, 'Nome', {class: 'col-2 col-form-label'} %> 
-        <%= f.text_field(:name, {class: 'col-10 form-control'}) %>
+        <%= f.label :name, 'Nome' %> 
+        <%= f.text_field(:name, {class: 'form-control'}) %>
       </div>
       <div class="form-group row">
-        <%= f.label :birthday, 'Data de Nascimento', {class: 'col-2 col-form-label'} %>
-        <%= f.date_field(:birthday, {class: 'col-10 form-control'}) %>
+        <%= f.label :birthday, 'Data de Nascimento' %>
+        <%= f.date_field(:birthday, {class: 'form-control'}) %>
       </div>
       <div class="form-group row">
-        <%= f.label :cpf, 'Cpf', {class: 'col-2 col-form-label'} %>
-        <%= f.text_field(:cpf, {class: 'col-10 form-control'}) %>
+        <%= f.label :cpf, 'Cpf' %>
+        <%= f.text_field(:cpf, {class: 'form-control'}) %>
       </div>
       <div class="form-group row">
-        <%= f.label :address, 'Endereço', {class: 'col-2 col-form-label'} %>
-        <%= f.text_field(:address, {class: 'col-10 form-control'}) %>
+        <%= f.label :address, 'Endereço' %>
+        <%= f.text_field(:address, {class: 'form-control'}) %>
       </div>
       <div class="form-group row">
-        <%= f.label :phone, 'Telefone', {class: 'col-2 col-form-label'} %>
-        <%= f.telephone_field(:phone, {class: 'col-10 form-control'}) %>
+        <%= f.label :phone, 'Telefone' %>
+        <%= f.telephone_field(:phone, {class: 'form-control'}) %>
       </div>
       <div class="form-group row">
-        <%= f.label :occupation, 'Profissão', {class: 'col-2 col-form-label'} %>
-        <%= f.text_field(:occupation, {class: 'col-10 form-control'}) %>
+        <%= f.label :occupation, 'Profissão' %>
+        <%= f.text_field(:occupation, {class: 'form-control'}) %>
       </div>
       <div class="form-group row">
-        <%= f.label :educational_level, 'Nível de Escolaridade', {class: 'col-2 col-form-label'} %>
-        <%= f.text_field(:educational_level, {class: 'col-10 form-control'}) %>
+        <%= f.label :educational_level, 'Nível de Escolaridade' %>
+        <%= f.text_field(:educational_level, {class: 'form-control'}) %>
       </div>
       <div class="form-group row">
-        <%= f.label :email, 'Email', {class: 'col-2 col-form-label'} %>
-        <%= f.text_field(:email, {class: 'col-10 form-control'}) %>
+        <%= f.label :email, 'Email' %>
+        <%= f.text_field(:email, {class: 'form-control'}) %>
       </div>
       <div class='field form-group row'>
-        <%= f.label :password, 'Senha', {class: 'col-2 col-form-label'}%>
-        <%= f.password_field :password, autocomplete: 'new-password', class: 'col-10 form-control' %>
+        <%= f.label :password, 'Senha'%>
+        <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
         <% if @minimum_password_length %>
           <em>(minimo de <%= @minimum_password_length %> caracteres)</em>
         <% end %><br />
       </div>
       <div class="form-group row">
-        <%= f.label :password_confirmation, 'Confirmar Senha', {class: 'col-2 col-form-label'} %>
-        <%= f.text_field(:password_confirmation, {class: 'col-10 form-control'}) %>
+        <%= f.label :password_confirmation, 'Confirmar Senha' %>
+        <%= f.text_field(:password_confirmation, {class: 'form-control'}) %>
       </div>
       <div class="actions form-group row justify-content-center">
         <%= f.submit 'Registrar', {class: 'btn btn-primary'} %>
