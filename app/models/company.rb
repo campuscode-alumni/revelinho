@@ -1,4 +1,4 @@
 class Company < ApplicationRecord
-  has_many :employees
-  has_many :positions
+  has_many :employees, dependent: :destroy 
+  has_many :positions, dependent: :destroy
 end
