@@ -549,9 +549,9 @@
       "/home/revelo/workspace/revelinho/spec/factories/companies.rb": [
         1,
         1,
-        2,
-        4,
-        4,
+        7,
+        9,
+        9,
         null,
         null
       ],
@@ -560,6 +560,7 @@
         1,
         8,
         8,
+        1,
         null,
         null
       ],
@@ -688,6 +689,25 @@
         1,
         null
       ],
+      "/home/revelo/workspace/revelinho/app/controllers/candidates_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        5,
+        5,
+        5,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
       "/home/revelo/workspace/revelinho/app/controllers/positions_controller.rb": [
         1,
         1,
@@ -725,6 +745,6 @@
         null
       ]
     },
-    "timestamp": 1571164920
+    "timestamp": 1571165413
   }
 }
