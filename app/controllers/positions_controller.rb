@@ -1,5 +1,5 @@
 class PositionsController < ApplicationController
-  before_action :authenticate_employee!, only: %i[ create]
+  before_action :authenticate_employee!, only: [:new, :create]
 
   def new
     @position = Position.new
@@ -19,8 +19,8 @@ class PositionsController < ApplicationController
     @position = Position.find(params[:id])
   end
 
-  private 
-  
+  private
+
   def position_params
     params.require(:position).permit(:title, :industry, :salary, :position_type, :description)
   end
