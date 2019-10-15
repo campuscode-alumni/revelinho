@@ -590,7 +590,40 @@
         null,
         null
       ],
+      "/home/revelo/workspace/revelinho/spec/models/candidate_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/home/revelo/workspace/revelinho/spec/models/company_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
       "/home/revelo/workspace/revelinho/app/models/company.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/revelo/workspace/revelinho/spec/models/employee_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/home/revelo/workspace/revelinho/spec/models/position_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/home/revelo/workspace/revelinho/app/models/position.rb": [
         1,
         1,
         null
@@ -607,7 +640,7 @@
       "/home/revelo/workspace/revelinho/app/controllers/positions_controller.rb": [
         1,
         1,
-        null,
+        1,
         null,
         null,
         1,
@@ -616,6 +649,6 @@
         null
       ]
     },
-    "timestamp": 1571084745
+    "timestamp": 1571143328
   }
 }
