@@ -36,7 +36,7 @@ feature 'Employee signup app' do
 
     click_on 'Sign up'
 
-    expect(page).to have_content('2 erros encontrados impedem de realizar o cadastro')
+    expect(page).to have_content('Não foi possível salvar o employee: 2 erros.')
   end
 
   scenario 'and logout' do
@@ -47,7 +47,7 @@ feature 'Employee signup app' do
 
     click_on 'Logout'
 
-    expect(page).to have_content('Fazer cadastro')
-    expect(page).not_to have_content('Logout')
+    expect(page).to have_link('Fazer cadastro')
+    expect(page).not_to have_link('Logout')
   end
 end

@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
-  before_action :authenticate_employee!, only: [:edit, :show]
-  before_action :set_company, only: [:edit, :update, :show]
-  before_action :own_company, only: [:edit, :update, :show]
+  before_action :authenticate_employee!, only: %i[edit show]
+  before_action :set_company, only: %i[edit update show]
+  before_action :own_company, only: %i[edit update show]
 
   def edit; end
 

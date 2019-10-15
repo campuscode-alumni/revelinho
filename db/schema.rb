@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_132316) do
     t.integer "company_id"
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
-  
+
   add_foreign_key "employees", "companies"
   add_foreign_key "positions", "companies"
 end
