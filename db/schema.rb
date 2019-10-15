@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_14_182126) do
+ActiveRecord::Schema.define(version: 2019_10_15_123640) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,8 +40,11 @@ ActiveRecord::Schema.define(version: 2019_10_14_182126) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
+    t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "employees", "companies"
 end

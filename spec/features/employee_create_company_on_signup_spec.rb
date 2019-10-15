@@ -11,7 +11,6 @@ feature 'employee create company on signup' do
     fill_in 'Password confirmation', with: '123456'
 
     click_on 'Sign up'
-
     expect(current_path).to eq(edit_company_path(Company.last))
   end
 end
