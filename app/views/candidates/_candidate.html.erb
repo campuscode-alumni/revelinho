@@ -1,4 +1,17 @@
-<div class="candidate">
-  <%= link_to candidate.name, candidate %>
-  <p><%= candidate.email %></p>
+<div class="candidate card mb-3">
+  <div class="row no-gutters">
+    <div class="candidate-image-wrapper col-sm-4 col-md-4 col-lg-3 col-xl-2">
+      <img src="https://github.com/identicons/jasonlong.png" class="candidate-image card-img" alt="<%= candidate.name %>%">
+    </div>
+    <div class="candidate-details">
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to candidate.name, candidate %></h5>
+        <p class="card-text">
+          <small class="text-muted"><%= candidate.email %></small>
+        </p>
+        <p><%= candidate.occupation %></p>
+        <p><%= candidate.educational_level %></p>
+      </div>
+    </div>
+  </div>
 </div>
