@@ -56,7 +56,7 @@ feature 'Candidates list' do
     expect(page).to have_content('Mestrado em andamento')
   end
 
-  scenario 'Returns to home' do
+  scenario 'Employee sees candidate\'s page and returns to home page' do
     create(:candidate, name: 'Gustavo', occupation: 'full stack developer',
                        educational_level: 'Mestrado em andamento')
 
