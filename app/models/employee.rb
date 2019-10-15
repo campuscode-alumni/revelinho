@@ -1,10 +1,11 @@
 class Employee < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  belongs_to :company
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  :recoverable, :rememberable, :validatable
   after_create :company_exists
+
+  belongs_to :company, required: false
 
   private
 
@@ -16,7 +17,7 @@ class Employee < ApplicationRecord
     company_domain = email.split('@')[1]
     company_name = company_domain.split('.')[0].humanize
     company = get_company(company_name, company_domain)
-    byebug
-    update(company: company)
+    
+    self.update_attributes(company: company)
   end
 end
