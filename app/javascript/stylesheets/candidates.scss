@@ -1,70 +1,94 @@
-$image-height: 8em;
 
-.candidate-header {
-  background-color: $purple;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include media-breakpoint-only(xs) {
-    min-height: 12em;
-  }
-  @include media-breakpoint-up(sm) {
-    min-height: 14em;
-  }
-  @include media-breakpoint-up(md) {
-    min-height: 16em;
-  }
+.candidates-list {
+  $image-size: 8em;
 
-  .name-wrapper {
-    .name {
-      color: $white;
-    }
-  }
-
-  .image-wrapper {
-    position: absolute;
-    bottom: -1 * $image-height / 2;
-
+  .image-container {
+    background-color: $purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     .image {
       border-radius: 50%;
-      height: $image-height;
+      height: $image-size;
+      width: $image-size;
     }
+  }
+
+  .details-container {
+    flex-grow: 1;
   }
 }
 
-.candidate {
-  margin-top: $image-height / 2;
+.candidate-page {
+  $image-height: 8em;
 
-  .text-wrapper {
-    padding: .2em;
-
-    @include media-breakpoint-down(sm) {
-      padding: .5em;
+  .candidate-header {
+    background-color: $purple;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include media-breakpoint-only(xs) {
+      min-height: 12em;
     }
-
-    .header {
-      font-weight: bold;
-
-      @include media-breakpoint-up(md) {
-        text-align: end;
-      }
-      @include media-breakpoint-down(sm) {
-        text-align: center;
+    @include media-breakpoint-up(sm) {
+      min-height: 14em;
+    }
+    @include media-breakpoint-up(md) {
+      min-height: 16em;
+    }
+  
+    .name-wrapper {
+      .name {
+        color: $white;
       }
     }
-
-    .spacer {
-      width: 40px;
+  
+    .image-wrapper {
+      position: absolute;
+      bottom: -1 * $image-height / 2;
+  
+      .image {
+        border-radius: 50%;
+        height: $image-height;
+      }
+    }
+  }
+  
+  .candidate {
+    margin-top: $image-height / 2;
+  
+    .text-wrapper {
+      padding: .2em;
   
       @include media-breakpoint-down(sm) {
-        display: none;
+        padding: .5em;
       }
-    }
-
-    .content{
-      @include media-breakpoint-down(sm) {
-        text-align: center;
+  
+      .header {
+        font-weight: bold;
+  
+        @include media-breakpoint-up(md) {
+          text-align: end;
+        }
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
+      }
+  
+      .spacer {
+        width: 40px;
+    
+        @include media-breakpoint-down(sm) {
+          display: none;
+        }
+      }
+  
+      .content{
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
       }
     }
   }
