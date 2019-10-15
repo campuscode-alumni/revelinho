@@ -14,4 +14,21 @@ feature 'employee create company on signup' do
 
     expect(current_path).to eq(edit_company_path(Company.last))
   end
+
+  scenario 'and update company after' do
+
+    company = create(:company)
+    employee = create(:employee, company: company)
+
+    login_as(employee, scope: :employee)
+    visit edit_company_path(employee.company)
+
+    fill_in 'Nome', with: 'Company'
+    fill_in 'Endereço', with: 'Av. Paulista, 1234'
+
+    click_on 'Salvar'
+
+    expect(current_path).to eq(company_path(employee.company))
+    expect(page).to have_content('Endereço: Av. Paulista, 1234')
+  end
 end

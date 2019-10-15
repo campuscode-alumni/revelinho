@@ -1,5 +1,12 @@
 <h1>Cadastro da Empresa</h1>
 <%=flash[:notice] %>
-<%= form_for :company do |f| %>
+
+<%= form_for @company do |f| %>
   <%= f.label :name, "Nome" %>:
+  <%= f.text_field :name %>
+
+  <%= f.label :address, "Endereço" %>:
+  <%= f.text_field :address %>
+
+  <%= f.submit 'Salvar' %>
 <% end %>
