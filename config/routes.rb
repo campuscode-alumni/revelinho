@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :employees
   devise_for :candidates
-  
-  root to: 'home#index'
+  resources :candidates, only: %i[index show]
+  root 'home#index'
+  resources :positions
 end

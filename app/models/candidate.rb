@@ -11,4 +11,6 @@ class Candidate < ApplicationRecord
             :educational_level,
             :cpf,
             :birthday, presence: true
+
+  enum status: { published: 0, hidden: 10 }
 end
