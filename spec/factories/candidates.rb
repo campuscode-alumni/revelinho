@@ -14,6 +14,7 @@ FactoryBot.define do
     status { :published }
     phone { '11970707070' }
     birthday { '12/12/1960' }
+    candidate_profile { nil }
 
     trait :hidden do
       status { :hidden }
