@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Candidate completes personal profile' do
   scenario 'successfully' do
-    candidate = create(:candidate)
+    candidate = create(:candidate, status: :hidden)
     candidate_profile = build(:candidate_profile)
     login_as(candidate, scope: :candidate)
 

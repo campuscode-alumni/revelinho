@@ -8,6 +8,7 @@ class CandidateProfilesController < ApplicationController
     @candidate_profile = CandidateProfile.new(candidate_profile_params)
     @candidate_profile.candidate = current_candidate
     if @candidate_profile.save
+      @candidate_profile.candidate.published!
       redirect_to @candidate_profile.candidate,
                   notice: 'Seu perfil foi atualizado com sucesso.'
     else
