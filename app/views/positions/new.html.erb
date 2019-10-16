@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    <h1 class="text-center">Cadastre a vaga desejada:</h1>
+    <%= form_with model: @position, local: true do |f| %>
+      <% if @position.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= "#{@position.errors.count} erro".pluralize(@position.errors.count) %> impediram que essa posição fosse salvada:</h2>
+
+          <ul>
+            <% @position.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= f.label :title, 'Título' %>
+      <%= f.text_field :title, class: "form-control" %>
+
+      <%= f.label :industry, 'Área' %>
+      <%= f.text_field :industry, class: "form-control" %>
+      
+      <%= f.label :description, 'Descrição' %>
+      <%= f.text_area :description, class: "form-control" %>
+      <div class="form-row">
+        <div class="col-9">
+          <%= f.label :salary, 'Salário' %>
+          <%= f.text_field :salary, class: "form-control" %>
+        </div>
+        <div class="col">
+          <%= f.label :position_type, 'Tipo' %>
+          <%= f.select :position_type, Position.position_types.map { |k, v| [ I18n.t(:"position_type.#{k}"), k] }, {}, class: "form-control"  %>
+        </div>
+      </div>
+      <%= f.submit 'Enviar', class: "mt-2 form-control btn btn-primary" %>
+    <% end %>
+    </div>
+  </div>
+</div>

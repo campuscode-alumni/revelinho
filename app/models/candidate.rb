@@ -4,4 +4,18 @@ class Candidate < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :candidate_notes, dependent: :destroy
+
+  validates :name,
+            :address,
+            :phone,
+            :occupation,
+            :educational_level,
+            :cpf,
+            :city,
+            :state,
+            :country,
+            :zip_code,
+            :birthday, presence: true
+
+  enum status: { published: 0, hidden: 10 }
 end

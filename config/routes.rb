@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :employees, controllers: { registrations: 'employees/registrations' }
+  devise_for :employees
   devise_for :candidates
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: 'home#index'
 
-  resources :companies, only: %i[edit update]
-  resources :candidates, only: [:show] do
+  resources :companies, only: %i[edit update show]
+  resources :candidates, only: %i[index show] do
     post 'add-comment', to: 'candidates#add_comment', as: :add_comment
   end
+  resources :positions
 end

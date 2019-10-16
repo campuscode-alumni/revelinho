@@ -19,8 +19,13 @@ feature 'Employee comments candidate' do
 
   scenario 'Employee sees comments' do
     candidate = create(:candidate)
-    gustavo = create(:employee, email: 'gustavo@empresa.com')
-    fernanda = create(:employee, email: 'fernanda@empresa.com')
+    company = create(:company)
+    gustavo = create(:employee, email: 'gustavo@empresa.com', company: company)
+    fernanda = create(
+      :employee,
+      email: 'fernanda@empresa.com',
+      company: company
+    )
     create(:candidate_note, comment: 'Precisamos ' \
     'contratar essa pessoa agora!', employee: gustavo, candidate: candidate)
     create(:candidate_note, comment: 'Eu acho melhor ' \
@@ -45,8 +50,12 @@ feature 'Employee comments candidate' do
     employee_google = create(:employee, email: 'gustavo@google.com')
     employee_facebook = create(:employee, email: 'fernando@facebook.com')
     candidate = create(:candidate)
-    create(:candidate_note, comment: 'Precisamos ' \
-    'contratar essa pessoa agora!', employee: employee_google, candidate: candidate)
+    create(
+      :candidate_note,
+      comment: 'Precisamos contratar essa pessoa agora!',
+      employee: employee_google,
+      candidate: candidate
+    )
     create(:candidate_note, comment: 'Eu sou do ' \
     'facebook', employee: employee_facebook, candidate: candidate)
 
@@ -60,6 +69,5 @@ feature 'Employee comments candidate' do
       expect(page).to have_content('gustavo')
       expect(page).to have_content('Precisamos contratar essa pessoa agora!')
     end
-
   end
 end
