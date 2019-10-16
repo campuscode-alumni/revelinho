@@ -50,4 +50,23 @@ feature 'Employee signup app' do
     expect(page).to have_link('Fazer cadastro')
     expect(page).not_to have_link('Logout')
   end
+
+  scenario 'and see your company dashboard' do
+    company = create(:company, name: 'Revelo', address: 'Av. Paulista',
+                               url_domain: 'revelo.com.br', status: :active)
+
+    visit root_path
+
+    click_on 'Fazer cadastro'
+
+    fill_in 'Email', with: 'joao.silva@revelo.com.br'
+    fill_in 'Password', with: '123456'
+    fill_in 'Password confirmation', with: '123456'
+
+    click_on 'Sign up'
+
+    expect(Company.count).to eq 1
+    expect(current_path).to eq(company_path(company))
+    expect(page).to have_css('h1', text: 'Revelo')
+  end
 end
