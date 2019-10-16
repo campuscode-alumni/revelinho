@@ -2,15 +2,24 @@
 pt-BR:
   activerecord:
     models:
-      candidate: 'Candidato'
+      candidate: Candidato
     attributes:
       candidate:
-        name: 'Nome'
-        email: 'Email'
-        phone: 'Telefone'
-        occupation: 'Profissão'
-        educational_level: 'Nível de Escolaridade'
-        address: 'Endereço'
-        birthday: 'Data de Nascimento'
-        cpf: 'Cpf'
-        password: 'Senha'
+        name: Nome
+        email: Email
+        phone: Telefone
+        occupation: Profissão
+        educational_level: Nível de Escolaridade
+        address: Endereço
+        birthday: Data de Nascimento
+        cpf: Cpf
+        password: Senha
+      candidate_profile:
+        work_experience: Experiência Profissional
+        education: Formação
+        skills: Habilidades
+        coding_languages: Linguagens de Programação
+        english_proficiency: Proficiência em Inglês
+        skype_username: Usuário do Skype
+        linkedin_profile_url: LinkedIn
+        github_profile_url: GitHub
