@@ -8,15 +8,15 @@ feature 'Candidate completes personal profile' do
     visit root_path
     click_on 'Concluir perfil'
 
-    fill_in 'Experiência profissional', with: 'Revelo'
+    fill_in 'Experiência Profissional', with: 'Revelo'
     fill_in 'Formação', with: 'Faculdade X'
     fill_in 'Linguagens de Programação', with: 'Ruby'
     fill_in 'Habilidades', with: 'Scrum'
-    fill_in 'Usuário do Skype', with: 'candidate.skype'
-    fill_in 'Linkedin', with: 'https://www.linkedin.com/in/candidate'
-    fill_in 'Git', with: 'https://github.com/candidate'
     fill_in 'Proficiência em Inglês', with: 'Fluente'
-    click_on 'Atualizar'
+    fill_in 'Usuário do Skype', with: 'candidate.skype'
+    fill_in 'LinkedIn', with: 'https://www.linkedin.com/in/candidate'
+    fill_in 'GitHub', with: 'https://github.com/candidate'
+    click_on 'Atualizar Perfil'
 
     expect(page).to have_content('Revelo')
     expect(page).to have_content('Faculdade X')

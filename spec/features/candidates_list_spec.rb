@@ -2,9 +2,9 @@ require 'rails_helper'
 
 feature 'Candidates list' do
   scenario 'Employee sees candidates list' do
-    create(:candidate, name: 'João')
-    create(:candidate, name: 'Henrique')
-    create(:candidate, name: 'Derick')
+    candidate_joao = create(:candidate, name: 'João')
+    candidate_henrique = create(:candidate, name: 'Henrique')
+    candidate_derick = create(:candidate, name: 'Derick')
 
     employee = create(:employee)
 
@@ -45,8 +45,9 @@ feature 'Candidates list' do
   end
 
   scenario 'Employee sees candidates\' page' do
-    create(:candidate, name: 'Gustavo', occupation: 'full stack developer',
+    candidate = create(:candidate, name: 'Gustavo', occupation: 'full stack developer',
                        educational_level: 'Mestrado em andamento')
+    create(:candidate_profile, candidate: candidate)
 
     employee = create(:employee)
 
@@ -61,8 +62,9 @@ feature 'Candidates list' do
   end
 
   scenario 'Employee sees candidate\'s page and returns to home page' do
-    create(:candidate, name: 'Gustavo', occupation: 'full stack developer',
+    candidate = create(:candidate, name: 'Gustavo', occupation: 'full stack developer',
                        educational_level: 'Mestrado em andamento')
+    create(:candidate_profile, candidate: candidate)
 
     employee = create(:employee)
 
