@@ -4,7 +4,7 @@ feature 'Employee signup app' do
   scenario 'successfully' do
     visit root_path
 
-    click_on 'Fazer cadastro'
+    click_on 'Cadastro de funcionário'
 
     fill_in 'Email', with: 'employee@company.com'
     fill_in 'Password', with: '123456'
@@ -28,7 +28,7 @@ feature 'Employee signup app' do
   scenario 'and fill in validates' do
     visit root_path
 
-    click_on 'Fazer cadastro'
+    click_on 'Cadastro de funcionário'
 
     fill_in 'Email', with: ''
     fill_in 'Password', with: ''
@@ -47,7 +47,7 @@ feature 'Employee signup app' do
 
     click_on 'Logout'
 
-    expect(page).to have_link('Fazer cadastro')
+    expect(page).to have_link('Cadastro de funcionário')
     expect(page).not_to have_link('Logout')
   end
 end
