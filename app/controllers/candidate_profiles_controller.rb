@@ -1,5 +1,6 @@
 class CandidateProfilesController < ApplicationController
   before_action :set_candidate_profile, only: %i[edit update]
+  before_action :authenticate_candidate!, only: %i[new create update]
   def new
     @candidate_profile = CandidateProfile.new
   end
