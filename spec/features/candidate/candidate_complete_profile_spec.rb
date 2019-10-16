@@ -79,9 +79,8 @@ feature 'Candidate completes personal profile' do
 
     visit dashboard_candidates_path
 
-
-    expect(page).to have_content("Seu perfil está ativo!")
-    expect(page).to have_link("Editar Perfil")
-    expect(page).not_to have_link("Concluir perfil")
+    expect(page).to have_content('Seu perfil está ativo!')
+    expect(page).to have_link('Editar Perfil')
+    expect(page).not_to have_link('Concluir perfil')
   end
 end

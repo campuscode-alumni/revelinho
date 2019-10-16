@@ -3,5 +3,6 @@ FactoryBot.define do
     name { 'Acme Corp' }
     address { 'Acme Street 80' }
     url_domain { 'acme.com' }
+    status { 'pending' }
   end
 end

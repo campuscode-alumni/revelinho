@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_125607) do
     t.string "url_domain"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
   end
 
   create_table "employees", force: :cascade do |t|

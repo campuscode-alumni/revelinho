@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    return super unless resource.is_a? Employee
+    return company_path(resource.company) unless resource.company.pending?
+
+    flash[:notice] = 'Preencha os dados corretamente'
+    edit_company_path(resource.company)
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name cpf birthday
                                                          occupation phone
