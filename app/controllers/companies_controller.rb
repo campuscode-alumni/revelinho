@@ -26,7 +26,8 @@ class CompaniesController < ApplicationController
   end
 
   def own_company
-    redirect_to root_path unless current_employee.company == @company
+    redirect_to company_path(current_employee.company) unless
+    current_employee.company == @company
   end
 
   def employee_pending
