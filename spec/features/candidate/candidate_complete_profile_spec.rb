@@ -29,4 +29,10 @@ feature 'Candidate completes personal profile' do
     candidate.reload
     expect(candidate).to be_published
   end
+
+  scenario 'and must be logged in' do
+    visit root_path
+
+    expect(page).not_to have_link('Concluir perfil')
+  end
 end
