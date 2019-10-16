@@ -2,17 +2,17 @@ require 'rails_helper'
 
 feature 'Employee completes company profile' do
   scenario 'successfully' do
-    company = create(:company)
+    company = create(:company, status: :pending)
     employee = create(:employee, company: company)
 
     company_profile = build(:company_profile)
 
     login_as(employee, scope: :employee)
 
-    visit root_path
+    visit company_path(company)
     click_on 'Completar perfil da empresa'
 
-    fill_in 'Descrição da Empresa', with: company_profile.full_description
+    fill_in 'Descrição da empresa', with: company_profile.full_description
     fill_in 'Benefícios', with: company_profile.benefits
     attach_file('Logo', Rails.root.join('spec',
                                         'support',

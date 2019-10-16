@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <h1>Complete o perfil da sua empresa</h1>
+      <%=flash[:notice] %>
+      <%= form_with model: @company_profile do |f| %>
+      <div class="form-group">
+        <%= f.label :full_description, "Descrição da empresa" %>
+        <%= f.text_field :full_description, class: 'form-control', placeholder: "Descrição da empresa" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :benefits, "Benefícios" %>:
+        <%= f.text_field :benefits, class: 'form-control', placeholder: 'Benefícios' %>
+      </div>
+        <%= f.submit 'Atualizar', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

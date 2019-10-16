@@ -6,7 +6,9 @@ feature 'Candidates list' do
     create(:candidate, name: 'Henrique')
     create(:candidate, name: 'Derick')
 
-    employee = create(:employee)
+    company_profile = create(:company_profile)
+    company = create(:company, company_profile: company_profile)
+    employee = create(:employee, company: company)
 
     login_as employee, scope: :employee
     visit root_path

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_124430) do
+ActiveRecord::Schema.define(version: 2019_10_16_134256) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 2019_10_16_124430) do
     t.string "url_domain"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
+    t.integer "company_profile_id"
+    t.index ["company_profile_id"], name: "index_companies_on_company_profile_id"
   end
 
   create_table "company_profiles", force: :cascade do |t|
@@ -77,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_124430) do
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
 
+  add_foreign_key "companies", "company_profiles"
   add_foreign_key "employees", "companies"
   add_foreign_key "positions", "companies"
 end

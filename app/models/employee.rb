@@ -9,8 +9,9 @@ class Employee < ApplicationRecord
   private
 
   def get_company(name, domain)
-    Company.find_by(url_domain: domain) || Company.create(name: name,
-                                                          url_domain: domain)
+    Company.find_by(url_domain: domain) ||
+      Company.create(name: name, url_domain: domain,
+                     company_profile: CompanyProfile.create)
   end
 
   def company_exists

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :companies, only: %i[edit update show]
+  resources :companies, only: %i[index edit update show]
+  resources :companies_profile, only: %i[edit update show]
   resources :candidates, only: %i[index show]
-  resources :positions  
+  resources :positions
 end

@@ -15,7 +15,8 @@ feature 'employee create company on signup' do
   end
 
   scenario 'and update company after' do
-    company = create(:company)
+    company_profile = create(:company_profile)
+    company = create(:company, company_profile: company_profile)
     employee = create(:employee, company: company)
 
     login_as(employee, scope: :employee)

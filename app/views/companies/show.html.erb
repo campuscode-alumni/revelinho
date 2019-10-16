@@ -1,2 +1,5 @@
 <h1><%= @company.name %></h1>
 <h4>Endereço: <%= @company.address %></h4>
+<% if @company.pending? %>
+  <%= link_to 'Completar perfil da empresa', edit_companies_profile_path %>
+<% end %>
