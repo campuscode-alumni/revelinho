@@ -3,9 +3,10 @@
   $image-size: 8em;
 
   .image-container {
-    background-color: $purple;
+    background-color: $red;
     display: flex;
     align-items: center;
+    align-content: center;
     justify-content: center;
     
     .image {
@@ -24,34 +25,49 @@
   $image-height: 8em;
 
   .candidate-header {
-    background-color: $purple;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @include media-breakpoint-only(xs) {
-      min-height: 12em;
-    }
-    @include media-breakpoint-up(sm) {
-      min-height: 14em;
-    }
-    @include media-breakpoint-up(md) {
-      min-height: 16em;
-    }
-  
-    .name-wrapper {
-      .name {
-        color: $white;
+    background-color: $red;
+    width: 100%;
+
+    .spacer {
+      @include media-breakpoint-down(xs) {
+        display: none;
       }
     }
-  
-    .image-wrapper {
-      position: absolute;
-      bottom: -1 * $image-height / 2;
-  
-      .image {
-        border-radius: 50%;
-        height: $image-height;
+    
+    .content {
+      position: relative;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      @include media-breakpoint-only(xs) {
+        min-height: 8em;
+      }
+      @include media-breakpoint-up(sm) {
+        min-height: 9em;
+      }
+      @include media-breakpoint-up(md) {
+        min-height: 10em;
+      }
+    
+      .name-wrapper {
+        display: flex;
+        align-items: center;
+        
+        .name {
+          color: $white;
+        }
+      }
+    
+      .image-wrapper {
+        position: absolute;
+        left: 0;
+        bottom: -1 * $image-height / 2;
+        width: 100%;
+    
+        .image {
+          border-radius: 50%;
+          height: $image-height;
+        }
       }
     }
   }
