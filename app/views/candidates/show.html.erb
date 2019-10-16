@@ -1,6 +1,6 @@
 <% if employee_signed_in? %>
   <div class="container-fluid employee-comments p-0">
-    <%= render @notes %>
-    <%= render partial: 'candidate_notes/form' %>
+    <%= render partial: 'candidate_notes/candidate_note', collection: @notes %>
+    <%= render partial: 'candidate_notes/form', locals: {candidate: @candidate} %>
   </div>
 <% end %>

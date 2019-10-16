@@ -1,6 +1,6 @@
 <div class="comment" id="comment-<%= candidate_note_counter + 1 %>">
   <p>
-    <small class="text-muted"><%= candidate_note.employee.email %></small>
+    <small class="text-muted"><%= "@#{candidate_note.employee_email.split('@')[0]}" %></small>
   </p>
   <p><%= candidate_note.comment %></p>
 </div>
