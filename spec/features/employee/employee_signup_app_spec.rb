@@ -57,7 +57,7 @@ feature 'Employee signup app' do
 
     visit root_path
 
-    click_on 'Fazer cadastro'
+    click_on 'Cadastro de funcionário'
 
     fill_in 'Email', with: 'joao.silva@revelo.com.br'
     fill_in 'Password', with: '123456'
