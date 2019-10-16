@@ -1,11 +1,15 @@
-class CompaniesProfileController < ApplicationController
+class CompanyProfilesController < ApplicationController
   before_action :set_company_profile, only: %i[edit update]
 
   def edit; end
 
   def update
     if @company_profile.update(company_profile_params)
-      redirect_to @company_profile
+      current_employee.company.active!
+      msg = 'O perfil da empresa foi atualizado com sucesso. '\
+            'Agora você pode cadastrar vagas.'
+      flash[:notice] = msg
+      redirect_to current_employee.company
     else
       render :edit
     end
@@ -18,6 +22,6 @@ class CompaniesProfileController < ApplicationController
   end
 
   def set_company_profile
-    @companies_profile = CompanyProfile.find(params[:id])
+    @company_profile = CompanyProfile.find(params[:id])
   end
 end

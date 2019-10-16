@@ -17,12 +17,12 @@ feature 'Employee completes company profile' do
     attach_file('Logo', Rails.root.join('spec',
                                         'support',
                                         'images',
-                                        'gatinho.png'))
+                                        'gatinho.jpg'))
 
     click_on 'Atualizar'
 
-    expect(employee.reload).to be_active
-    expect(page).to have_css('img[src*="spec/support/images/gatinho.jpg"]')
+    expect(employee.company.reload).to be_active
+    expect(page).to have_css('img[src*="gatinho.jpg"]')
     expect(page).to have_content company_profile.benefits
     expect(page).to have_content company_profile.full_description
     expect(page).to have_content 'O perfil da empresa foi atualizado com '\
