@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  belongs_to :company_profile
+  has_one :company_profile, dependent: :destroy
   has_many :employees, dependent: :destroy
   has_many :positions, dependent: :destroy
 
