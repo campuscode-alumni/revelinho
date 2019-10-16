@@ -63,4 +63,16 @@ feature 'Candidate completes personal profile' do
 
     expect(current_path).to eq new_candidate_session_path
   end
+
+  scenario 'and profile is already published' do
+    candidate = create(:candidate)
+    login_as(candidate, scope: :candidate)
+
+    visit root_path
+
+    
+    expect(page).to have_content("Seu perfil está ativo!")
+    expect(page).to have_link("Editar Perfil")
+    expect(page).not_to have_link("Concluir perfil")
+  end
 end
