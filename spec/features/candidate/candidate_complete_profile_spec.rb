@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Candidate completes personal profile' do
   scenario 'successfully' do
-    candidate = create(:candidate)
+    candidate = create(:candidate, status: :hidden)
     login_as(candidate, scope: :candidate)
 
     visit root_path
