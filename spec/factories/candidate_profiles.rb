@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :candidate_profile do
-    work_experience { 'MyText' }
-    education { 'MyText' }
-    skills { 'MyText' }
-    coding_languages { 'MyText' }
-    english_proficiency { 'MyString' }
-    skype_username { 'MyString' }
-    linkedin_profile_url { 'MyString' }
-    github_profile_url { 'MyString' }
+    work_experience { 'Revelo' }
+    education { 'Faculdade X' }
+    skills { 'Scrum' }
+    coding_languages { 'Ruby' }
+    english_proficiency { 'Fluente' }
+    skype_username { 'candidate.skype' }
+    linkedin_profile_url { 'https://www.linkedin.com/in/candidate' }
+    github_profile_url { 'https://github.com/candidate' }
     candidate { nil }
   end
 end
