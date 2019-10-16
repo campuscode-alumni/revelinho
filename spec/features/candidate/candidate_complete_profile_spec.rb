@@ -14,7 +14,7 @@ feature 'Candidate completes personal profile' do
     fill_in 'Linguagens de Programação', with: candidate_profile.coding_languages
     fill_in 'Habilidades', with: candidate_profile.skills
     fill_in 'Usuário do Skype', with: candidate_profile.skype_username
-    fill_in 'Linkedin', with: candidate_profile.linkedin_profile_url
+    fill_in 'LinkedIn', with: candidate_profile.linkedin_profile_url
     fill_in 'Git', with: candidate_profile.github_profile_url
     fill_in 'Proficiência em Inglês', with: candidate_profile.english_proficiency
     click_on 'Atualizar'
