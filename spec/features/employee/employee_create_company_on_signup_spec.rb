@@ -29,15 +29,4 @@ feature 'employee create company on signup' do
     expect(current_path).to eq(company_path(employee.company))
     expect(page).to have_content('Endereço: Av. Paulista, 1234')
   end
-
-  scenario 'and cannot access other page until fix company profile' do
-    company = create(:company, status: :pending)
-    employee = create(:employee, email: 'employee@company.com',
-                                 company: company)
-    login_as(employee)
-
-    visit company_path(company)
-
-    expect(current_path).to eq edit_company_path(company)
-  end
 end

@@ -64,5 +64,16 @@ describe 'employee has limited access' do
 
       expect(response).to redirect_to(company_path(company))
     end
+
+    it 'and cannot access other page until fix company profile' do
+      company = create(:company, status: :pending)
+      employee = create(:employee, email: 'employee@company.com',
+                                   company: company)
+      login_as(employee)
+
+      get company_path(company)
+
+      expect(response).to redirect_to(edit_company_path(company))
+    end
   end
 end
