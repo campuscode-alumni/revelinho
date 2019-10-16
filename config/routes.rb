@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :candidates, only: %i[index show]
   root 'home#index'
   resources :positions, only: %i[new create show]
+  resources :candidate_profiles, only: %i[new create edit update]
 end
