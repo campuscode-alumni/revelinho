@@ -121,9 +121,10 @@
         color: $white;
         font-weight: bold;
       }
-
+      
       .comments {
-        
+        max-height: 25em;
+        overflow: auto;
       }
     }
   }
