@@ -13,7 +13,9 @@ class CompaniesController < ApplicationController
     redirect_to company_path(@company) if @company.update(company_params)
   end
 
-  def show; end
+  def show
+    @company_profile = @company.company_profile
+  end
 
   private
 

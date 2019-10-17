@@ -9,12 +9,12 @@
     <% if @company.pending? %>
       <div class="container mt-5">
         <div class="row justify-content-center">
-            <%= link_to 'Completar perfil da empresa', edit_company_profile_path(@company.company_profile), class: 'btn btn-outline-dark' %>
+            <%= link_to 'Completar perfil da empresa', new_company_profile_path, class: 'btn btn-outline-dark' %>
         </div>
       </div>
     <% else %>
       <div class="image-wrapper">
-        <%= image_tag @company.company_profile.logo %>
+        <%= image_tag @company_profile.logo %>
       </div>      
     <% end %>
   </div>
@@ -25,12 +25,12 @@
         <div class="row justify-content-center text-wrapper">
           <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Descrição da empresa</div>
           <div class="spacer"></div>
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company.company_profile.full_description %></div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.full_description %></div>
         </div>
         <div class="row justify-content-center text-wrapper">
           <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Benefícios</div>
           <div class="spacer"></div>
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company.company_profile.benefits %></div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.benefits %></div>
         </div>
       </div>
     </div>
