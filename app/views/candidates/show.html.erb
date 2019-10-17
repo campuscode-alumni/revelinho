@@ -9,7 +9,11 @@
         <div class="image-wrapper">
           <div class="row">
             <div class="col offset-1">
+              <% if @candidate.candidate_profile.avatar.attached? %>
+                <%= image_tag @candidate.candidate_profile.avatar, class: 'image img-thumbnail', style: "border-radius: 0" %>
+              <% else %>
               <img src="https://github.com/identicons/jasonlong.png" class="image" alt="<%= @candidate.name %>%">
+              <% end %>
             </div>
           </div>
         </div>

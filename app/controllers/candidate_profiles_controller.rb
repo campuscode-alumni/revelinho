@@ -43,6 +43,7 @@ class CandidateProfilesController < ApplicationController
                                               :english_proficiency,
                                               :skype_username,
                                               :linkedin_profile_url,
-                                              :github_profile_url)
+                                              :github_profile_url,
+                                              :avatar)
   end
 end
