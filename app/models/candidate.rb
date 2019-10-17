@@ -13,5 +13,5 @@ class Candidate < ApplicationRecord
             :cpf,
             :birthday, presence: true
 
-  enum status: { published: 0, hidden: 10 }
+  enum status: { hidden: 0, published: 10 }
 end

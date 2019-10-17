@@ -43,6 +43,7 @@ feature 'candidate register' do
 
   scenario 'and logout successfully' do
     candidate = create(:candidate, password: '123456')
+    create(:candidate_profile, candidate: candidate)
 
     login_as(candidate, scope: :candidate)
     visit root_path
