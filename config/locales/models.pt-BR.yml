@@ -7,6 +7,12 @@ pt-BR:
         title: "Título"
         industry: "Área"
         description: "Descrição"
+<<<<<<< HEAD
+=======
+        salary_from: "Salário de"
+        salary_to: "Salário até"
+        position_type: "Tipo"
+>>>>>>> 7df2dd4... add invite model and tests
   # Humanização de keys dos Enums
   position_type:
     full_time: "CLT"

@@ -22,7 +22,12 @@ class PositionsController < ApplicationController
   private
 
   def position_params
+<<<<<<< HEAD
     params.require(:position).permit(:title, :industry,
+=======
+    params.require(:position).permit(:title, :industry, :salary_from,
+                                     :salary_to, :position_type,
+>>>>>>> 7df2dd4... add invite model and tests
                                      :description)
   end
 end

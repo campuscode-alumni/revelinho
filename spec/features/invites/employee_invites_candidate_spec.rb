@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Invites' do
   scenario 'Employee invites candidate to position' do
+<<<<<<< HEAD
     company = create(:company, :active, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br')
     candidate = create(:candidate)
@@ -11,6 +12,15 @@ feature 'Invites' do
 
     login_as(employee, scope: :employee)
     visit candidate_path(candidate)
+=======
+    employee = create(:employee)
+    candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
+    create(:position, title: 'Engenheiro de Software Pleno')
+
+    login_as(employee, scope: :employee)
+    visit candidate
+>>>>>>> 7df2dd4... add invite model and tests
 
     select 'Engenheiro de Software Pleno', from: 'Posição'
     fill_in 'Mensagem', with: 'Olá, ser humano. Venha fazer parte do nosso time'
@@ -56,7 +66,11 @@ feature 'Invites' do
     )
 
     login_as(employee, scope: :employee)
+<<<<<<< HEAD
     visit candidate_path(candidate)
+=======
+    visit candidate
+>>>>>>> 7df2dd4... add invite model and tests
 
     expect(page).to have_content('Candidato convidado para:')
     expect(page).to have_content(position.title)

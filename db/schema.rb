@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_165252) do
+ActiveRecord::Schema.define(version: 2019_10_17_194409) do
 
   create_table "candidate_notes", force: :cascade do |t|
     t.string "comment"
@@ -88,10 +88,8 @@ ActiveRecord::Schema.define(version: 2019_10_17_165252) do
   create_table "invites", force: :cascade do |t|
     t.integer "position_id", null: false
     t.integer "candidate_id", null: false
-    t.integer "salary_from"
-    t.integer "salary_to"
     t.string "message"
-    t.integer "position_type"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["candidate_id"], name: "index_invites_on_candidate_id"
@@ -102,9 +100,12 @@ ActiveRecord::Schema.define(version: 2019_10_17_165252) do
     t.string "title"
     t.string "industry"
     t.text "description"
+    t.integer "position_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
+    t.integer "salary_from"
+    t.integer "salary_to"
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
 

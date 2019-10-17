@@ -22,6 +22,25 @@
       
       <%= f.label :description, 'Descrição' %>
       <%= f.text_area :description, class: "form-control" %>
+<<<<<<< HEAD
+=======
+      <div class="form-row">
+        <p>Faixa salarial</p>
+        <div class="col-9">
+          <%= f.label :salary_from, 'De:' %>
+          <%= f.number_field :salary_from, class: "form-control" %>
+        </div>
+        <div class="col-9">
+          <%= f.label :salary_to, 'Até:' %>
+          <%= f.number_field :salary_to, class: "form-control" %>
+        </div>
+
+        <div class="col">
+          <%= f.label :position_type, 'Tipo' %>
+          <%= f.select :position_type, Position.position_types.map { |k, v| [ I18n.t(:"position_type.#{k}"), k] }, {}, class: "form-control"  %>
+        </div>
+      </div>
+>>>>>>> 7df2dd4... add invite model and tests
       <%= f.submit 'Enviar', class: "mt-2 form-control btn btn-primary" %>
     <% end %>
     </div>
