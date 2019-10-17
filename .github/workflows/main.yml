@@ -12,6 +12,7 @@ jobs:
         ruby-version: '2.6.x' 
     - name: Test
       run: |
+        apt-get install libsqlite3-dev
         gem install bundler
         bundle install
         bundle exec rspec
@@ -21,9 +22,10 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/setup-ruby@v1
       with:
-        ruby-version: '2.6.x' 
+        ruby-version: '2.6.x'
     - name: Test
       run: |
+        apt-get install libsqlite3-dev
         gem install bundler
         bundle install
         bundle exec rubocop
