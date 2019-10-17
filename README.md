@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Esse projeto é uma réplica de funcionalidades do portal de posições da Revelo.
 
-Things you may want to cover:
+## Pré Requisitos
 
-* Ruby version
+- Ruby 2.6.4
+- Rails 6.0.0
+- SQLite
 
-* System dependencies
+## Testes
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Para rodar os testes, após executar `bin/setup`, execute `bundle exec rspec`
