@@ -41,7 +41,7 @@ feature 'Candidate completes personal profile' do
   end
 
   scenario 'and must fill in required fields' do
-    candidate = create(:candidate)
+    candidate = create(:candidate, status: :hidden)
     login_as(candidate, scope: :candidate)
 
     visit root_path
@@ -75,11 +75,12 @@ feature 'Candidate completes personal profile' do
 
   scenario 'and profile is already published' do
     candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
     login_as(candidate, scope: :candidate)
 
-    visit dashboard_candidates_path
+    visit root_path
 
-    expect(page).to have_content('Seu perfil está ativo!')
+    expect(page).to have_content('Seu perfil está ativo.')
     expect(page).to have_link('Editar Perfil')
     expect(page).not_to have_link('Concluir perfil')
   end

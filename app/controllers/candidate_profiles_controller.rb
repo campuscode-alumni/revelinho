@@ -22,7 +22,7 @@ class CandidateProfilesController < ApplicationController
 
   def update
     if @candidate_profile.update(candidate_profile_params)
-      redirect_to @candidate_profile.candidate.candidate,
+      redirect_to @candidate_profile.candidate,
                   notice: 'Seu perfil foi atualizado com sucesso.'
     else
       render :edit

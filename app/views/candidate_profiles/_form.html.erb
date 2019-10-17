@@ -13,22 +13,22 @@
 
   <div class="form-group">
     <%= form.label :work_experience, 'Experiência Profissional' %>
-    <%= form.text_field :work_experience, class: 'form-control' %>
+    <%= form.text_area :work_experience, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :education, 'Formação' %>
-    <%= form.text_field :education, class: 'form-control' %>
+    <%= form.text_area :education, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :skills, 'Habilidades' %>
-    <%= form.text_field :skills, class: 'form-control' %>
+    <%= form.text_area :skills, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :coding_languages, 'Linguagens de Programação' %>
-    <%= form.text_field :coding_languages, class: 'form-control' %>
+    <%= form.text_area :coding_languages, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -51,7 +51,8 @@
     <%= form.text_field :github_profile_url, class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit 'Atualizar Perfil', class: 'btn btn-primary '%>
+  <div class="actions float-right  mb-4">
+    <%= form.submit 'Atualizar Perfil', class: 'btn btn-primary'%>
+    <%= link_to 'Voltar', candidates_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>
