@@ -7,8 +7,6 @@ pt-BR:
         title: "Título"
         industry: "Área"
         description: "Descrição"
-        salary: "Salário"
-        position_type: "Tipo"
   # Humanização de keys dos Enums
   position_type:
     full_time: "CLT"

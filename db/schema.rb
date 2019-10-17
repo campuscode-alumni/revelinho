@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_125607) do
+ActiveRecord::Schema.define(version: 2019_10_17_165252) do
 
   create_table "candidate_notes", force: :cascade do |t|
     t.string "comment"
@@ -85,12 +85,23 @@ ActiveRecord::Schema.define(version: 2019_10_16_125607) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "invites", force: :cascade do |t|
+    t.integer "position_id", null: false
+    t.integer "candidate_id", null: false
+    t.integer "salary_from"
+    t.integer "salary_to"
+    t.string "message"
+    t.integer "position_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_invites_on_candidate_id"
+    t.index ["position_id"], name: "index_invites_on_position_id"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "title"
     t.string "industry"
     t.text "description"
-    t.decimal "salary"
-    t.integer "position_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
@@ -101,5 +112,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_125607) do
   add_foreign_key "candidate_notes", "employees"
   add_foreign_key "candidate_profiles", "candidates"
   add_foreign_key "employees", "companies"
+  add_foreign_key "invites", "candidates"
+  add_foreign_key "invites", "positions"
   add_foreign_key "positions", "companies"
 end

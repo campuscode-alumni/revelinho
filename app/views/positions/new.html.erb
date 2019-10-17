@@ -22,16 +22,6 @@
       
       <%= f.label :description, 'Descrição' %>
       <%= f.text_area :description, class: "form-control" %>
-      <div class="form-row">
-        <div class="col-9">
-          <%= f.label :salary, 'Salário' %>
-          <%= f.text_field :salary, class: "form-control" %>
-        </div>
-        <div class="col">
-          <%= f.label :position_type, 'Tipo' %>
-          <%= f.select :position_type, Position.position_types.map { |k, v| [ I18n.t(:"position_type.#{k}"), k] }, {}, class: "form-control"  %>
-        </div>
-      </div>
       <%= f.submit 'Enviar', class: "mt-2 form-control btn btn-primary" %>
     <% end %>
     </div>
