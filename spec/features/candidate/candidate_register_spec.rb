@@ -16,6 +16,10 @@ feature 'candidate register' do
     fill_in 'Email', with: candidate.email
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar Senha', with: '123456'
+    fill_in 'Cidade', with: 'Manaus'
+    fill_in 'Estado', with: 'Amazonas'
+    fill_in 'País', with: 'Brasil'
+    fill_in 'CEP', with: '02765-030'
     click_on 'Registrar'
 
     expect(page).to have_content 'Bem vindo! Você realizou seu registro '\

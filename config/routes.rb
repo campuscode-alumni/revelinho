@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   devise_for :candidates
   resources :candidates, only: %i[index show] do
     get 'dashboard', on: :collection
+    post 'add-comment', to: 'candidates#add_comment', as: :add_comment
   end
   resources :positions, only: %i[new create show]
   resources :candidate_profiles, only: %i[new create edit update]
   resources :companies, only: %i[edit update show]
-  resources :positions
 end

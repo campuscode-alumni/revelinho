@@ -24,6 +24,7 @@ feature 'Candidate completes personal profile' do
             with: candidate_profile.english_proficiency
     click_on 'Atualizar'
 
+    candidate.reload
     expect(page).to have_content(candidate_profile.work_experience)
     expect(page).to have_content(candidate_profile.education)
     expect(page).to have_content(candidate_profile.coding_languages)

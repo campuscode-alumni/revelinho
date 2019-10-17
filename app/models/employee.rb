@@ -4,6 +4,7 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :company, optional: true
+  has_many :candidate_notes, dependent: :destroy
   after_create :set_company
 
   private
