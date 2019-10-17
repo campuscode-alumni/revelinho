@@ -4,7 +4,11 @@
       <h1 class="name"><%= @candidate.name %></h1>
     </div>
     <div class="image-wrapper">
+      <% if @candidate.candidate_profile.avatar.attached? %>
+        <%= image_tag @candidate.candidate_profile.avatar, class: 'image img-thumbnail' %>
+      <% else %>
       <img src="https://github.com/identicons/jasonlong.png" class="image" alt="<%= @candidate.name %>%">
+      <% end %>
     </div>
   </div>
 
