@@ -16,6 +16,7 @@ class CandidatesController < ApplicationController
       'candidate_notes.comment').joins(employees: :candidate_notes).where(
         id: current_employee.company.id
       )
+    @positions = current_employee.company.positions
   end
 
   def add_comment
