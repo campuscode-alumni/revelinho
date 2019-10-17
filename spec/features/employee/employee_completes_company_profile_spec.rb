@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Employee completes company profile' do
+feature 'Employee tries to complete company profile' do
   scenario 'successfully' do
     company = create(:company, status: :pending)
     employee = create(:employee, company: company)
@@ -49,5 +49,11 @@ feature 'Employee completes company profile' do
     expect(page).not_to have_content company_profile.benefits
     expect(page).not_to have_content company_profile.full_description
     expect(page).to have_content 'Erro ao atualizar o perfil da empresa.'
+  end
+
+  scenario 'and fails because it is not logged in' do
+    visit new_company_profile_path
+
+    expect(current_path).to eq new_employee_session_path
   end
 end

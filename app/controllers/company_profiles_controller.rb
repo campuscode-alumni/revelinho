@@ -27,8 +27,4 @@ class CompanyProfilesController < ApplicationController
   def company_profile_params
     params.require(:company_profile).permit(:full_description, :benefits, :logo)
   end
-
-  def set_company_profile
-    @company_profile = CompanyProfile.find(params[:id])
-  end
 end

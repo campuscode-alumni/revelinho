@@ -3,9 +3,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: %i[edit update show]
   before_action :own_company, only: %i[edit update show]
 
-  def index
-    @company = current_employee.company
-  end
+  def index; end
 
   def edit; end
 
