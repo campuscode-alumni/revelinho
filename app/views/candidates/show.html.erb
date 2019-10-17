@@ -17,46 +17,49 @@
     </div>
   </div>
 
-  <div class="candidate p-2">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-9 content">
-          <div class="row justify-content-center text-wrapper">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">E-mail</div>
-            <div class="spacer"></div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.email %></div>
-          </div>
-          <div class="row justify-content-center text-wrapper">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Cidade</div>
-            <div class="spacer"></div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= "#{@candidate.city}, #{@candidate.state}" %></div>
-          </div>
-          <div class="row justify-content-center text-wrapper">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">País</div>
-            <div class="spacer"></div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.country %></div>
-          </div>
-          <div class="row justify-content-center text-wrapper">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Ocupação</div>
-            <div class="spacer"></div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.occupation %></div>
-          </div>
-          <div class="row justify-content-center text-wrapper">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Formação</div>
-            <div class="spacer"></div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.educational_level %></div>
-          </div>
+  <div class="candidate container-fluid px-2">
+    <div class="row" style="width: 100%">
+      <div class="col-9 content">
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">E-mail</div>
+          <div class="spacer"></div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.email %></div>
         </div>
-
-        <div class="col-3 employee-notes">
-          <% if employee_signed_in? %>
-            <div class="container-fluid employee-comments p-0">
-              <%= render partial: 'candidate_notes/candidate_note', collection: @notes %>
-              <%= render partial: 'candidate_notes/form', locals: {candidate: @candidate} %>
-            </div>
-          <% end %>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Cidade</div>
+          <div class="spacer"></div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= "#{@candidate.city}, #{@candidate.state}" %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">País</div>
+          <div class="spacer"></div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.country %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Ocupação</div>
+          <div class="spacer"></div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.occupation %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Formação</div>
+          <div class="spacer"></div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @candidate.educational_level %></div>
         </div>
       </div>
+
+      <% if employee_signed_in? %>
+        <div class="col-md-3 col-lg-3 col-xl-3 col-xs-12 col-sm-12 employee-notes border border-secondary p-0 rounded">
+          <div class="container-fluid employee-comments p-0">
+            <div class="header px-3">Comentários</div>
+            <div class="comments">
+              <%= render partial: 'candidate_notes/candidate_note', collection: @notes %>
+            </div>
+            <div class="new-comment">
+              <%= render partial: 'candidate_notes/form', locals: {candidate: @candidate} %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 

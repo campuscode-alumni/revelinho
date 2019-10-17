@@ -73,7 +73,8 @@
   }
   
   .candidate {
-    margin-top: $image-height / 2;
+    padding-top: $image-height / 2;
+    position: relative;
   
     .text-wrapper {
       padding: .2em;
@@ -105,6 +106,24 @@
         @include media-breakpoint-down(sm) {
           text-align: center;
         }
+      }
+    }
+
+    .employee-notes {
+      $header-height: 3em;
+      margin-top: -1 * ($image-height / 2 + $header-height);
+
+      .header {
+        height: $header-height;
+        background-color: $secondary;
+        display: flex;
+        align-items: center;
+        color: $white;
+        font-weight: bold;
+      }
+
+      .comments {
+        
       }
     }
   }
