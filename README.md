@@ -7,6 +7,8 @@ Esse projeto é uma réplica de funcionalidades do portal de posições da Revel
 - Ruby 2.6.4
 - Rails 6.0.0
 - SQLite
+- NodeJS
+- Yarn
 
 ## Testes
 
