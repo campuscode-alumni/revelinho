@@ -78,8 +78,10 @@
   
     .text-wrapper {
       padding: .2em;
-  
+      margin-right: 40px;
+      
       @include media-breakpoint-down(sm) {
+        margin-right: 0;
         padding: .5em;
       }
   
@@ -91,14 +93,6 @@
         }
         @include media-breakpoint-down(sm) {
           text-align: center;
-        }
-      }
-  
-      .spacer {
-        width: 40px;
-    
-        @include media-breakpoint-down(sm) {
-          display: none;
         }
       }
   

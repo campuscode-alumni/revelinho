@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Employee comments candidate' do
   scenario 'Employee writes comment' do
     candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
     gustavo = create(:employee, email: 'gustavo@empresa.com')
 
     login_as gustavo, scope: :employee
@@ -19,6 +20,7 @@ feature 'Employee comments candidate' do
 
   scenario 'Employee sees comments' do
     candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
     company = create(:company)
     gustavo = create(:employee, email: 'gustavo@empresa.com', company: company)
     fernanda = create(
@@ -50,6 +52,7 @@ feature 'Employee comments candidate' do
     employee_google = create(:employee, email: 'gustavo@google.com')
     employee_facebook = create(:employee, email: 'fernando@facebook.com')
     candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
     create(
       :candidate_note,
       comment: 'Precisamos contratar essa pessoa agora!',

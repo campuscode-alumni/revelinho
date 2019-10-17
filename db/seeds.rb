@@ -1,4 +1,4 @@
-Candidate.create!(
+lucas = Candidate.create!(
   name: 'Lucas',
   email: 'lucas@candidato.com',
   password: '123456',
@@ -14,7 +14,7 @@ Candidate.create!(
   zip_code: '03141-030',
   birthday: '12/04/1991'
 )
-Candidate.create!(
+rafael = Candidate.create!(
   name: 'Rafael',
   email: 'rafael@candidato.com',
   password: '123456',
@@ -30,7 +30,7 @@ Candidate.create!(
   zip_code: '03141-030',
   birthday: '12/04/1991'
 )
-Candidate.create!(
+gustavo = Candidate.create!(
   name: 'Gustavo',
   email: 'gustavo@candidato.com',
   password: '123456',
@@ -46,7 +46,7 @@ Candidate.create!(
   zip_code: '03141-030',
   birthday: '12/04/1991'
 )
-Candidate.create!(
+patricia = Candidate.create!(
   name: 'Patrícia',
   email: 'patricia@candidato.com',
   password: '123456',
@@ -61,4 +61,48 @@ Candidate.create!(
   country: 'Brasil',
   zip_code: '03141-030',
   birthday: '23/04/1991'
+)
+CandidateProfile.create!(
+  work_experience: 'Sou rubysta master',
+  education: 'mestrado concluído',
+  skills: 'Node, React, Rails',
+  coding_languages: 'Javascript, ruby',
+  english_proficiency: 'Fluente',
+  skype_username: 'lucas',
+  linkedin_profile_url: 'lucas',
+  github_profile_url: 'lucas',
+  candidate_id: lucas.id
+)
+CandidateProfile.create!(
+  work_experience: 'Sou rubysta master',
+  education: 'mestrado concluído',
+  skills: 'Node, React, Rails',
+  coding_languages: 'Javascript, ruby',
+  english_proficiency: 'Fluente',
+  skype_username: 'rafael',
+  linkedin_profile_url: 'rafael',
+  github_profile_url: 'rafael',
+  candidate_id: rafael.id
+)
+CandidateProfile.create!(
+  work_experience: 'Sou rubysta master',
+  education: 'mestrado concluído',
+  skills: 'Node, React, Rails',
+  coding_languages: 'Javascript, ruby',
+  english_proficiency: 'Fluente',
+  skype_username: 'gustavo',
+  linkedin_profile_url: 'gustavo',
+  github_profile_url: 'gustavo',
+  candidate_id: gustavo.id
+)
+CandidateProfile.create!(
+  work_experience: 'Sou rubysta master',
+  education: 'mestrado concluído',
+  skills: 'Node, React, Rails',
+  coding_languages: 'Javascript, ruby',
+  english_proficiency: 'Fluente',
+  skype_username: 'patricia.poke',
+  linkedin_profile_url: 'patricia.poke',
+  github_profile_url: 'patricia.poke',
+  candidate_id: patricia.id
 )

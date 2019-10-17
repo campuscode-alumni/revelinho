@@ -8,6 +8,9 @@ class CandidatesController < ApplicationController
   end
 
   def show
+    return redirect_to candidates_path unless @candidate.published?
+    return unless employee_signed_in?
+
     @notes = Company.select('candidate_notes.id, ' \
       'employees.email as employee_email, ' \
       'candidate_notes.comment').joins(employees: :candidate_notes).where(
@@ -24,6 +27,8 @@ class CandidatesController < ApplicationController
     candidate.candidate_notes << candidate_note
     redirect_to candidate
   end
+
+  def dashboard; end
 
   private
 

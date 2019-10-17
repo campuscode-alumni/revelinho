@@ -5,22 +5,21 @@ class Employee < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :company, optional: true
   has_many :candidate_notes, dependent: :destroy
-  after_create :company_exists
+  after_create :set_company
 
   private
 
-  def get_company(name, domain)
-    Company.find_by(url_domain: domain) || Company.create(name: name,
-                                                          url_domain: domain)
+  def get_company(email)
+    domain = email.split('@')[1]
+
+    Company.find_or_create_by(url_domain: domain) do |company|
+      company.name = domain.split('.')[0].humanize
+    end
   end
 
-  def company_exists
+  def set_company
     return if company.present?
 
-    company_domain = email.split('@')[1]
-    company_name = company_domain.split('.')[0].humanize
-    company = get_company(company_name, company_domain)
-
-    update(company: company)
+    update(company: get_company(email))
   end
 end
