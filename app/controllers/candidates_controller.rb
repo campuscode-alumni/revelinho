@@ -43,6 +43,10 @@ class CandidatesController < ApplicationController
     invite.accepted!
   end
 
+  def reject_invite
+    Invite.find(params[:id]).rejected!
+  end
+
   private
 
   def set_candidate
