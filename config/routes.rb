@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     end
     post 'invites/accept/:id', to: 'candidates#accept_invite', on: :member, as: :accept_invites
     post 'invites/reject/:id', to: 'candidates#reject_invite', on: :member, as: :reject_invites
+    get 'invites/select_process/:id', to: 'selection_processes#show', on: :collection, as: :selection_process
+    post 'invites/select_process/:id', to: 'selection_processes#send_message', on: :collection, as: :send_message
 
     post 'add-comment', to: 'candidates#add_comment', as: :add_comment
   end

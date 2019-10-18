@@ -38,10 +38,12 @@ class CandidatesController < ApplicationController
   end
 
   def accept_invite
-    return invites_candidates_path unless
+    return redirect_to invites_candidates_path unless
      SelectionProcess.create(invite: @invite)
 
     @invite.accepted!
+
+    redirect_to selection_process_candidates_path(@invite.selection_process)
   end
 
   def reject_invite
@@ -59,7 +61,7 @@ class CandidatesController < ApplicationController
   end
 
   def own_invite
-    redirect_to invites_candidates_path unless
+    return redirect_to invites_candidates_path unless
      current_candidate.invites.include? @invite
   end
 end

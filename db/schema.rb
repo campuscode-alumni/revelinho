@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_18_125607) do
+ActiveRecord::Schema.define(version: 2019_10_18_191837) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -117,6 +117,11 @@ ActiveRecord::Schema.define(version: 2019_10_18_125607) do
     t.index ["position_id"], name: "index_invites_on_position_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "selection_process_id", null: false
+    t.index ["selection_process_id"], name: "index_messages_on_selection_process_id"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "title"
     t.string "industry"
@@ -143,6 +148,7 @@ ActiveRecord::Schema.define(version: 2019_10_18_125607) do
   add_foreign_key "employees", "companies"
   add_foreign_key "invites", "candidates"
   add_foreign_key "invites", "positions"
+  add_foreign_key "messages", "selection_processes"
   add_foreign_key "positions", "companies"
   add_foreign_key "selection_processes", "invites"
 end
