@@ -10,9 +10,6 @@ class CompanyProfilesController < ApplicationController
     if current_employee.company.company_profile.save
       flash[:notice] = 'O perfil da empresa foi atualizado com sucesso.'
       redirect_to current_employee.company
-    else
-      flash[:notice] = 'Erro ao atualizar o perfil da empresa.'
-      render :new
     end
   end
 
