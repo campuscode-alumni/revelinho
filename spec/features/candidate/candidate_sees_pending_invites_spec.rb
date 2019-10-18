@@ -17,10 +17,10 @@ feature 'candidate sees pending invites' do
     expect(page).to have_link 'Aceitar'
     expect(page).to have_link 'Rejeitar'
     expect(page).to have_content invite.position.title
-    expect(page).to have_content invite.position.salary
+    expect(page).to have_content 'R$ 3.000,00'
     expect(page).to have_content invite.position.industry
     expect(page).to have_content invite.position.description
-    expect(page).to have_content invite.position.position_type
+    expect(page).to have_content 'CLT'
   end
 
   scenario 'and accept invite successfully' do
