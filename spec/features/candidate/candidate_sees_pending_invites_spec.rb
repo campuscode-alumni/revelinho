@@ -39,4 +39,18 @@ feature 'candidate sees pending invites' do
     expect(invite.status).to eq 'accepted'
     expect(invite.selection_process).to eq SelectionProcess.last
   end
+
+  scenario 'and can not access other candidate invites list' do
+    candidate = create(:candidate, status: :published)
+    other_candidate = create(:candidate, status: :published)
+    position = create(:position, :with_company,
+                      title: 'Desenvolvedor fullstack')
+    create(:invite, candidate: candidate, position: position,
+                    status: :pending)
+
+    login_as(other_candidate, scope: :candidate)
+    visit invites_candidates_path
+
+    expect(page).to_not have_content('Desenvolvedor fullstack')
+  end
 end
