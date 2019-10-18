@@ -1,5 +1,7 @@
 class CandidateProfile < ApplicationRecord
   belongs_to :candidate
+  has_one_attached :avatar
+
   validates :work_experience,
             :education,
             :skills,

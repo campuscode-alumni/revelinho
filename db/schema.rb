@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 2019_10_18_140929) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "candidate_notes", force: :cascade do |t|
+    t.string "comment"
+    t.integer "employee_id", null: false
+    t.integer "candidate_id", null: false
+    t.integer "visibility", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_candidate_notes_on_candidate_id"
+    t.index ["employee_id"], name: "index_candidate_notes_on_employee_id"
+  end
+
   create_table "candidate_profiles", force: :cascade do |t|
     t.text "work_experience"
     t.text "education"
@@ -123,6 +134,8 @@ ActiveRecord::Schema.define(version: 2019_10_18_140929) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "candidate_notes", "candidates"
+  add_foreign_key "candidate_notes", "employees"
   add_foreign_key "candidate_profiles", "candidates"
   add_foreign_key "company_profiles", "companies"
   add_foreign_key "employees", "companies"

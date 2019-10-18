@@ -12,9 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name cpf birthday
-                                                         occupation phone
-                                                         educational_level
-                                                         address])
+    devise_parameter_sanitizer.permit(
+      :sign_up,
+      keys: %i[name cpf birthday occupation phone educational_level
+               address city state country zip_code]
+    )
   end
 end
