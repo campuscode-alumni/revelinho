@@ -1,6 +1,8 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_candidate!, only: [:invites]
   before_action :set_candidate, only: [:show]
+  before_action :set_invite, only: %i[accept_invite reject_invite]
+  before_action :own_invite, only: %i[accept_invite reject_invite]
 
   def index
     @candidates = Candidate.published
@@ -35,9 +37,29 @@ class CandidatesController < ApplicationController
     @invites = current_candidate.invites.pending
   end
 
+  def accept_invite
+    return invites_candidates_path unless
+     SelectionProcess.create(invite: @invite)
+
+    @invite.accepted!
+  end
+
+  def reject_invite
+    @invite.rejected!
+  end
+
   private
 
   def set_candidate
     @candidate = Candidate.find(params[:id])
+  end
+
+  def set_invite
+    @invite = Invite.find(params[:id])
+  end
+
+  def own_invite
+    redirect_to invites_candidates_path unless
+     current_candidate.invites.include? @invite
   end
 end
