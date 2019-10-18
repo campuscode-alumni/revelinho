@@ -61,8 +61,8 @@ feature 'Employee tries to complete company profile' do
 
   scenario 'and must be member of company' do
     company = create(:company, status: :active)
-    other_company = create(:company, status: :active, name: 'Avelo', 
-                            address: 'Avenida Brigadeiro Beijinho')
+    other_company = create(:company, status: :active, name: 'Avelo',
+                                     address: 'Avenida Brigadeiro Beijinho')
     employee = create(:employee, company: company)
 
     login_as(employee, scope: :employee)
@@ -71,5 +71,7 @@ feature 'Employee tries to complete company profile' do
 
     expect(page).to have_content company.name
     expect(page).to have_content company.address
+    expect(page).not_to have_content other_company.name
+    expect(page).not_to have_content other_company.address
   end
 end
