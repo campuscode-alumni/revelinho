@@ -5,6 +5,6 @@
   <p><%=invite.position.description%></p>
   <p><%=invite.position.position_type%></p>
 
-  <%= link_to 'Negar', root_path %>
+  <%= link_to 'Rejeitar', reject_invites_candidate_path(invite), method: :post %>
   <%= link_to 'Aceitar convite', accept_invites_candidate_path(invite), method: :post %>
 <% end %>

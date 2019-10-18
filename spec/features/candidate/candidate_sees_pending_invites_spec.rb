@@ -69,7 +69,7 @@ feature 'candidate sees pending invites' do
 
     invite.reload
 
-    expect(invite).to be_accepted
+    expect(invite).to be_rejected
     expect(SelectionProcess.count).to eq 0
   end
 end
