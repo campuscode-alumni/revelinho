@@ -14,8 +14,8 @@ feature 'candidate sees pending invites' do
     visit root_path
     click_on 'Convites'
 
-    expect(page).to have_content 'Rejeitar'
-    expect(page).to have_content 'Aceitar'
+    expect(page).to have_link 'Aceitar'
+    expect(page).to have_link 'Rejeitar'
     expect(page).to have_content invite.position.title
     expect(page).to have_content invite.position.salary
     expect(page).to have_content invite.position.industry
@@ -33,11 +33,11 @@ feature 'candidate sees pending invites' do
     login_as(candidate, scope: :candidate)
     visit invites_candidates_path
 
-    click_link('Aceitar convite')
+    click_link('Aceitar')
 
     invite.reload
 
-    expect(invite.status).to eq 'accepted'
+    expect(invite).to be_accepted
     expect(invite.selection_process).to eq SelectionProcess.last
   end
 

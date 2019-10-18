@@ -38,15 +38,17 @@ class CandidatesController < ApplicationController
   def accept_invite
     invite = Invite.find(params[:id])
 
-    return unless SelectionProcess.create(invite: invite)
+    return invites_candidates_path unless
+     SelectionProcess.create(invite: invite)
 
     invite.accepted!
   end
 
   def reject_invite
     invite = Invite.find(params[:id])
-    redirect_to invites_candidates_path unless current_candidate.invites.include? invite
-    
+    redirect_to invites_candidates_path unless
+     current_candidate.invites.include? invite
+
     invite.rejected!
   end
 
