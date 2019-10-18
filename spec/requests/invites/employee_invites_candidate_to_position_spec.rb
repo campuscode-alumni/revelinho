@@ -19,7 +19,7 @@ describe 'Invitations' do
         message: 'Venha trabalhar conosco',
         position_id: position_invalid.id
       }
-      expect(response).to have_http_status(:forbidden)
+      expect(response).to redirect_to(root_path)
     end
   end
 end

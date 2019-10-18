@@ -23,6 +23,6 @@ class ApplicationController < ActionController::Base
   private
 
   def forbidden
-    render json: {}, status: :forbidden
+    redirect_to root_path
   end
 end
