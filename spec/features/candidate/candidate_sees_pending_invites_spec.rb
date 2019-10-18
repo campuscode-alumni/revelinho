@@ -22,4 +22,18 @@ feature 'candidate sees pending invites' do
     expect(page).to have_content invite.position.description
     expect(page).to have_content invite.position.position_type
   end
+
+  scenario 'and accept invite successfully' do
+    candidate = create(:candidate, status: :published)
+    position = create(:position, :with_company)
+    invite = create(:invite, candidate: candidate, position: position, status: :pending)
+
+    login_as(candidate, scope: :candidate)
+    visit invites_candidates_path
+
+    click_link('Aceitar convite')
+
+    expect(invite.status).to eq :accepted
+    expect(invite.selection_process).to eq SelectionProcess.last
+  end
 end
