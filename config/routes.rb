@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :candidates
   resources :candidates, only: %i[index show] do
     get 'dashboard', on: :collection
-    get 'invites', to: 'candidates#invites'
+    get 'invites', to: 'candidates#invites', on: :collection
     post 'add-comment', to: 'candidates#add_comment', as: :add_comment
   end
   resources :positions, only: %i[new create show]
