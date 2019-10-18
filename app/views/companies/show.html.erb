@@ -36,11 +36,48 @@
               <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.benefits %></div>
             </div>
           <% end %>
-        </div>
-        <div class="container mt-5">
-          <div class="row justify-content-center">
-            <%= link_to 'Editar perfil', root_path, class: 'btn btn-outline-info' %>
-          </div>
+          <% if @company_profile.employees_number %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Número de funcionários</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.employees_number %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.website %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Site da empresa</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.website %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.phone %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Telefone</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.phone %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.mission %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Missão</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.mission %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.category %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Categoria</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.category %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.attractives %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Atrativos</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.attractives %></div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

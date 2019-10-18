@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+    <%=flash[:notice] %>
+    <%= form_with model: @company_profile do |f| %>
+      <div class="form-group">
+        <%= f.label :full_description, "Descrição da empresa" %>
+        <%= f.text_area :full_description, class: 'form-control', placeholder: "Descrição da empresa" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :benefits, "Benefícios" %>:
+        <%= f.text_area :benefits, class: 'form-control', placeholder: 'Benefícios' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :employees_number, "Número de funcionários" %>
+        <%= f.text_field :employees_number, class: 'form-control', placeholder: 'Número de funcionários' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :website, "Site da empresa" %>:
+        <%= f.text_field :website, class: 'form-control', placeholder: 'Site da empresa' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :phone, "Telefone" %>:
+        <%= f.text_field :phone, class: 'form-control', placeholder: 'Telefone' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :mission, "Missão" %>:
+        <%= f.text_field :mission, class: 'form-control', placeholder: 'Missão' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :category, "Categoria" %>:
+        <%= f.text_field :category, class: 'form-control', placeholder: 'Categoria' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :attractives, "Atrativos" %>:
+        <%= f.text_area :attractives, class: 'form-control', placeholder: 'Atrativos' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :logo, "Logo" %>
+        <%= f.file_field :logo, class: 'form-control' %>
+      </div>
+        <%= f.submit 'Atualizar', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

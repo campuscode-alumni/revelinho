@@ -14,6 +14,12 @@ feature 'Employee tries to complete company profile' do
 
     fill_in 'Descrição da empresa', with: company_profile.full_description
     fill_in 'Benefícios', with: company_profile.benefits
+    fill_in 'Número de funcionários', with: company_profile.employees_number
+    fill_in 'Site da empresa', with: company_profile.website
+    fill_in 'Telefone', with: company_profile.phone
+    fill_in 'Missão', with: company_profile.mission
+    fill_in 'Categoria', with: company_profile.category
+    fill_in 'Atrativos', with: company_profile.attractives
     attach_file('Logo', Rails.root.join('spec',
                                         'support',
                                         'images',
@@ -27,7 +33,6 @@ feature 'Employee tries to complete company profile' do
     expect(page).to have_content company_profile.full_description
     expect(page).to have_content 'O perfil da empresa foi atualizado com '\
                                  'sucesso.'
-    expect(page).to have_link('Editar perfil')
   end
 
   scenario 'unsuccessfully' do
@@ -46,7 +51,6 @@ feature 'Employee tries to complete company profile' do
 
     expect(page).to have_content 'O perfil da empresa foi atualizado com '\
                                  'sucesso.'
-    expect(page).to have_link('Editar perfil')
   end
 
   scenario 'and fails because it is not logged in' do
