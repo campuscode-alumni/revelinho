@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :invite do
-    message { "MyString" }
+    message { 'We want YOU!' }
     status { 1 }
     candidate
     position
