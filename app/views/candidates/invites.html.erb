@@ -1,0 +1,10 @@
+<% @invites.each do |invite| %>
+  <p><%=invite.position.title%></p>
+  <p><%=invite.position.salary%></p>
+  <p><%=invite.position.industry%></p>
+  <p><%=invite.position.description%></p>
+  <p><%=invite.position.position_type%></p>
+
+  <%= link_to 'Negar', root_path %>
+  <%= link_to 'Aceitar', root_path %>
+<% end %>

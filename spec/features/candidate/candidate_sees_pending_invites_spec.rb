@@ -2,14 +2,17 @@ require 'rails_helper'
 
 feature 'candidate sees pending invites' do
   scenario 'successfully' do
+    position = create(:position, :with_company)
     candidate = create(:candidate, status: :published)
-    invite = create(:invite, candidate: candidate, status: pending)
+    create(:candidate_profile, candidate: candidate)
+    invite = create(:invite, candidate: candidate,
+                             position: position,
+                             status: :pending)
 
     login_as(candidate, scope: :candidate)
 
     visit root_path
-    # find('#my-pending_invites').click
-    click_link('my-pending-invites')
+    click_on 'Convites'
 
     expect(page).to have_content 'Negar'
     expect(page).to have_content 'Aceitar'

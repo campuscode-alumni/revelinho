@@ -1,4 +1,5 @@
 class CandidatesController < ApplicationController
+  before_action :authenticate_candidate!, only: [:invites]
   before_action :set_candidate, only: [:show]
 
   def index
@@ -29,6 +30,10 @@ class CandidatesController < ApplicationController
   end
 
   def dashboard; end
+
+  def invites
+    @invites = current_candidate.invites.pending
+  end
 
   private
 
