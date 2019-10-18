@@ -7,10 +7,10 @@ class CompanyProfilesController < ApplicationController
   end
 
   def create
-    if current_employee.company.company_profile.save
-      flash[:notice] = 'O perfil da empresa foi atualizado com sucesso.'
-      redirect_to current_employee.company
-    end
+    return unless current_employee.company.company_profile.save
+
+    flash[:notice] = 'O perfil da empresa foi atualizado com sucesso.'
+    redirect_to current_employee.company
   end
 
   private
@@ -22,6 +22,7 @@ class CompanyProfilesController < ApplicationController
 
   def company_profile_params
     params.require(:company_profile).permit(:full_description, :benefits, :logo,
-      :employees_number, :website, :phone, :mission, :category, :attractives)
+                                            :employees_number, :website, :phone,
+                                            :mission, :category, :attractives)
   end
 end
