@@ -122,4 +122,51 @@ feature 'Invites' do
       with_options: [position_other.title]
     )
   end
+
+  scenario 'Employee invites candidate to second position' do
+    company = create(:company, :active, url_domain: 'revelo.com.br')
+    employee = create(:employee, email: 'renata@revelo.com.br',
+                                 company: company)
+    candidate = create(:candidate, name: 'Gustavo')
+    create(:candidate_profile, candidate: candidate)
+    create(:position, title: 'Engenheiro de Software Pleno',
+                      company: company)
+    position = create(:position, title: 'Engenheiro de Sistemas',
+                                 company: company)
+    create(
+      :invite,
+      candidate: candidate,
+      position: position,
+      message: 'Olá, ser humano. Venha fazer parte do nosso time'
+    )
+
+    login_as(employee, scope: :employee)
+    visit candidate_path(candidate)
+
+    select 'Engenheiro de Software Pleno', from: 'Posição'
+    fill_in 'invite-message', with: 'Olá, ser humano. ' \
+    'Venha fazer parte do nosso time'
+    click_on 'Convidar'
+
+    candidate.reload
+    expect(page).to have_content('Gustavo convidado com sucesso para ' \
+    'Engenheiro de Software Pleno')
+    expect(candidate.invites.count).to eq(2)
+    expect(current_path).to eq(candidates_path)
+  end
+
+  scenario 'Employee sees position link when there are none ' \
+  'to invite a candidate to' do
+    company = create(:company, :active, url_domain: 'revelo.com.br')
+    employee = create(:employee, email: 'renata@revelo.com.br',
+                                 company: company)
+    candidate = create(:candidate, name: 'Gustavo')
+    create(:candidate_profile, candidate: candidate)
+
+    login_as(employee, scope: :employee)
+    visit candidate_path(candidate)
+
+    expect(page).to have_link('Adicionar posição', href: new_position_path)
+    expect(page).to have_button('Convidar', disabled: true)
+  end
 end

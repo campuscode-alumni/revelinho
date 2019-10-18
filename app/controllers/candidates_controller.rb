@@ -1,6 +1,8 @@
 class CandidatesController < ApplicationController
+  before_action :authenticate_employee!, only: %i[invite]
   before_action :set_candidate, only: %i[show invite]
   before_action :invite_params, only: %i[invite]
+  before_action :authorize_employee, only: %i[invite]
 
   def index
     @candidates = Candidate.published
@@ -47,8 +49,16 @@ class CandidatesController < ApplicationController
 
   private
 
+  def authorize_employee
+    return unless current_employee.company.id != @position.company.id
+
+    raise ActionController::UnpermittedParameters.new(
+      status: 'Employee unauthorized'
+    )
+  end
+
   def invite_params
-    @invite_params = params.permit(:position_id, :id, :message)
+    @invite_params = params.permit(:position_id, :message)
     @position = Position.find(@invite_params[:position_id])
   end
 
