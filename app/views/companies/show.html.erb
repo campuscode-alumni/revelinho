@@ -1,44 +1,60 @@
 <div class="container-fluid candidate-page p-0">
   <div class="container-fluid candidate-header">
     <div class="row name-wrapper">
-      <h1 class="name"><%= @company.name %></h1>
+      <h1 class="name"><%= @company.name %><br>
+        <small>
+          <%= @company.address %>
+        </small>
+      </h1>
     </div>
-    <div class="row address-wrapper">
-      <h4 class="address">Endereço: <%= @company.address %></h4>
-    </div>
-    <% if @company.pending? %>
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-            <%= link_to 'Completar perfil da empresa', new_company_profile_path, class: 'btn btn-outline-dark' %>
+  
+    <% if @company.company_profile %>
+      <% if @company_profile.logo.attached? %>
+        <div class="image-wrapper">
+          <%= image_tag @company_profile.logo, class: 'image img-thumbnail', style: "border-radius: 0"  %>
         </div>
-      </div>
-    <% else %>
-      <div class="image-wrapper">
-        <%= image_tag @company_profile.logo %>
-      </div>      
-    <% end %>
+      <% else %>
+        <div class="image-wrapper">
+          <img src="https://github.com/identicons/jasonlong.png" class="image" alt="<%=  %>%">
+        </div>
+      <% end %>
   </div>
-
-  <% unless @company.pending? %>
     <div class="candidate p-2">
-      <div class="container-fluid">
-        <div class="row justify-content-center text-wrapper">
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Descrição da empresa</div>
-          <div class="spacer"></div>
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.full_description %></div>
+      <div class="candidate p-2">
+        <div class="container-fluid">
+          <% if @company_profile.full_description %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Descrição da empresa</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.full_description %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.benefits %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Benefícios</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.benefits %></div>
+            </div>
+          <% end %>
         </div>
-        <div class="row justify-content-center text-wrapper">
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Benefícios</div>
-          <div class="spacer"></div>
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.benefits %></div>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <%= link_to 'Editar perfil', root_path, class: 'btn btn-outline-info' %>
+          </div>
         </div>
       </div>
     </div>
+  <% else %>
+  <div class="container mt-5">
+    <p>Só falta completar seu perfil :)</p>
+    <div class="row justify-content-center">
+      <%= link_to 'Completar perfil da empresa', new_company_profile_path, class: 'btn btn-outline-dark' %>
+    </div>
+  </div>
   <% end %>
-
   <div class="container mt-5">
     <div class="row justify-content-center">
-        <%= link_to 'Voltar', root_path, class: 'btn btn-outline-info' %>
+        <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary' %>
     </div>
   </div>
 </div>

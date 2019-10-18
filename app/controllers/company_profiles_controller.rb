@@ -8,7 +8,6 @@ class CompanyProfilesController < ApplicationController
 
   def create
     if current_employee.company.company_profile.save
-      current_employee.company.active!
       flash[:notice] = 'O perfil da empresa foi atualizado com sucesso.'
       redirect_to current_employee.company
     else

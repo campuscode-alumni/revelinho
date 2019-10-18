@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Employee tries to complete company profile' do
   scenario 'successfully' do
-    company = create(:company, status: :pending)
+    company = create(:company, status: :active)
     employee = create(:employee, company: company)
 
     company_profile = build(:company_profile)
@@ -27,28 +27,26 @@ feature 'Employee tries to complete company profile' do
     expect(page).to have_content company_profile.full_description
     expect(page).to have_content 'O perfil da empresa foi atualizado com '\
                                  'sucesso.'
+    expect(page).to have_link('Editar perfil')
   end
 
   scenario 'unsuccessfully' do
-    company = create(:company, status: :pending)
+    company = create(:company, status: :active)
     employee = create(:employee, company: company)
-
-    company_profile = build(:company_profile)
 
     login_as(employee, scope: :employee)
 
     visit company_path(company)
     click_on 'Completar perfil da empresa'
 
-    fill_in 'Descrição da empresa', with: company_profile.full_description
-    fill_in 'Benefícios', with: company_profile.benefits
+    fill_in 'Descrição da empresa', with: ''
+    fill_in 'Benefícios', with: ''
 
     click_on 'Atualizar'
 
-    expect(employee.company.reload).to be_pending
-    expect(page).not_to have_content company_profile.benefits
-    expect(page).not_to have_content company_profile.full_description
-    expect(page).to have_content 'Erro ao atualizar o perfil da empresa.'
+    expect(page).to have_content 'O perfil da empresa foi atualizado com '\
+                                 'sucesso.'
+    expect(page).to have_link('Editar perfil')
   end
 
   scenario 'and fails because it is not logged in' do
