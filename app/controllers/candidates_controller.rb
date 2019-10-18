@@ -44,7 +44,10 @@ class CandidatesController < ApplicationController
   end
 
   def reject_invite
-    Invite.find(params[:id]).rejected!
+    invite = Invite.find(params[:id])
+    redirect_to root_path unless current_candidate.invites.includes? invite
+    
+    invite.rejected!
   end
 
   private
