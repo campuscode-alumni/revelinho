@@ -5,8 +5,8 @@
       <%=flash[:notice] %>
       <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
       <div class="form-group">
-        <%= f.label :message, "Mensagem:" %>
-        <%= f.text_field :message, class: 'form-control' %>
+        <%= f.label :text, "Mensagem:" %>
+        <%= f.text_field :text, class: 'form-control' %>
       </div>      
         <%= f.submit 'Enviar', class: 'btn btn-primary' %>
       <% end %>
