@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'candidate sees pending invites' do
   scenario 'successfully' do
     candidate = create(:candidate, status: :published)
-    invite = create(:invite, candidate: candidate, status: pending)
+    invite = create(:invite, candidate: candidate, status: :pending)
 
     login_as(candidate, scope: :candidate)
 
@@ -16,5 +16,17 @@ feature 'candidate sees pending invites' do
     expect(page).to have_content invite.position.industry
     expect(page).to have_content invite.position.description
     expect(page).to have_content invite.position.position_type
+  end
+
+  scenario 'and accept invite successfully' do
+    candidate = create(:candidate, status: :published)
+    invite = create(:invite, candidate: candidate, status: :pending)
+
+    login_as(candidate, scope: :candidate)
+    visit candidate_invite_path
+
+    click_link('Aceitar convite')
+
+    expect(invite.selection_process).to eq SelectionProcess.last
   end
 end
