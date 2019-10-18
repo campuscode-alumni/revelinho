@@ -5,5 +5,9 @@ FactoryBot.define do
     description { 'MyText' }
     salary { '9.99' }
     position_type { 'full_time' }
+
+    trait :with_company do
+      company
+    end
   end
 end
