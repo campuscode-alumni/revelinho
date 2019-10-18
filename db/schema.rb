@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_140542) do
+ActiveRecord::Schema.define(version: 2019_10_18_122622) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -106,6 +106,17 @@ ActiveRecord::Schema.define(version: 2019_10_17_140542) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "invites", force: :cascade do |t|
+    t.string "message"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "position_id"
+    t.integer "candidate_id"
+    t.index ["candidate_id"], name: "index_invites_on_candidate_id"
+    t.index ["position_id"], name: "index_invites_on_position_id"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "title"
     t.string "industry"
@@ -123,5 +134,7 @@ ActiveRecord::Schema.define(version: 2019_10_17_140542) do
   add_foreign_key "candidate_notes", "employees"
   add_foreign_key "candidate_profiles", "candidates"
   add_foreign_key "employees", "companies"
+  add_foreign_key "invites", "candidates"
+  add_foreign_key "invites", "positions"
   add_foreign_key "positions", "companies"
 end
