@@ -14,12 +14,9 @@ class CandidatesController < ApplicationController
     return redirect_to candidates_path unless @candidate.published?
     return unless employee_signed_in?
 
-    current_company_id = current_employee.company.id
-    @notes = Company.select('candidate_notes.id, ' \
-      'employees.email as employee_email, ' \
-      'candidate_notes.comment').joins(employees: :candidate_notes).where(
-        id: current_company_id
-      )
+    @notes = CandidateNote.includes(employee: :company).where(
+      employees: { company: current_employee.company }
+    )
     @positions = @candidate.uninvited_positions(current_employee.company)
   end
 

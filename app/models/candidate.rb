@@ -27,8 +27,6 @@ class Candidate < ApplicationRecord
   end
 
   def uninvited_positions(company)
-    company.positions.reject do |position|
-      invited_positions(company).find_by(id: position.id).present?
-    end
+    company.positions.where.not(id: positions.ids)
   end
 end
