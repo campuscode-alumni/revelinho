@@ -106,3 +106,8 @@ CandidateProfile.create!(
   github_profile_url: 'patricia.poke',
   candidate_id: patricia.id
 )
+
+Employee.create!(
+  email: 'timbo@empresa.com.br',
+  password: '123456'
+)

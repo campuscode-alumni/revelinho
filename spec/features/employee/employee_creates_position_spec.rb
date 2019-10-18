@@ -13,12 +13,9 @@ feature 'Employee creates position' do
     fill_in 'Área', with: 'Desenvolvimento'
     fill_in 'Descrição', with: 'Vaga que exige conhecimentos em HTTP, CSS, '\
                                'JavaScript e Ruby on Rails'
-<<<<<<< HEAD
-=======
     select 'CLT', from: 'Tipo'
     fill_in 'De:', with: '2000'
     fill_in 'Até:', with: '4000'
->>>>>>> 7df2dd4... add invite model and tests
     click_on 'Enviar'
 
     expect(page).to have_content('Desenvolvedor Ruby')
@@ -26,11 +23,8 @@ feature 'Employee creates position' do
     expect(page).to have_content('Desenvolvimento')
     expect(page).to have_content('Vaga que exige conhecimentos em HTTP, CSS, '\
                                  'JavaScript e Ruby on Rails')
-<<<<<<< HEAD
-=======
     expect(page).to have_content('Salário de: 2000')
     expect(page).to have_content('até: 4000')
->>>>>>> 7df2dd4... add invite model and tests
   end
 
   scenario 'and must be logged in' do
@@ -50,21 +44,15 @@ feature 'Employee creates position' do
     fill_in 'Título', with: ''
     fill_in 'Área', with: ''
     fill_in 'Descrição', with: ''
-<<<<<<< HEAD
-=======
     fill_in 'De:', with: ''
     fill_in 'Até:', with: ''
->>>>>>> 7df2dd4... add invite model and tests
     click_on 'Enviar'
 
     expect(page).to have_content('Título não pode ficar em branco')
     expect(page).to have_content('Área não pode ficar em branco')
     expect(page).to have_content('Descrição não pode ficar em branco')
-<<<<<<< HEAD
-=======
     expect(page).to have_content('Salário de não pode ficar em branco')
     expect(page).to have_content('Salário até não pode ficar em branco')
->>>>>>> 7df2dd4... add invite model and tests
     expect(page).to have_content('Título não pode ficar em branco')
   end
 end

@@ -1,5 +1,6 @@
 class CandidatesController < ApplicationController
-  before_action :set_candidate, only: [:show]
+  before_action :set_candidate, only: %i[show invite]
+  before_action :invite_params, only: %i[invite]
 
   def index
     @candidates = Candidate.published
@@ -11,12 +12,13 @@ class CandidatesController < ApplicationController
     return redirect_to candidates_path unless @candidate.published?
     return unless employee_signed_in?
 
+    current_company_id = current_employee.company.id
     @notes = Company.select('candidate_notes.id, ' \
       'employees.email as employee_email, ' \
       'candidate_notes.comment').joins(employees: :candidate_notes).where(
-        id: current_employee.company.id
+        id: current_company_id
       )
-    @positions = current_employee.company.positions
+    @positions = @candidate.uninvited_positions(current_employee.company)
   end
 
   def add_comment
@@ -24,14 +26,31 @@ class CandidatesController < ApplicationController
       comment: params.require(:comment),
       employee: current_employee
     )
-    candidate = Candidate.find(params[:candidate_id])
+    candidate = Candidate.find(params[:id])
     candidate.candidate_notes << candidate_note
     redirect_to candidate
   end
 
   def dashboard; end
 
+  def invite
+    invite = @candidate.invites.new(@invite_params)
+    if invite.save
+      flash[:success] = "#{@candidate.name} convidado com sucesso para " \
+      "#{@position.title}"
+      redirect_to candidates_path
+    else
+      flash[:alert] = 'Erro ao tentar convidar candidato'
+      redirect_to @candidate
+    end
+  end
+
   private
+
+  def invite_params
+    @invite_params = params.permit(:position_id, :id, :message)
+    @position = Position.find(@invite_params[:position_id])
+  end
 
   def set_candidate
     @candidate = Candidate.find(params[:id])

@@ -22,8 +22,6 @@
       
       <%= f.label :description, 'Descrição' %>
       <%= f.text_area :description, class: "form-control" %>
-<<<<<<< HEAD
-=======
       <div class="form-row">
         <p>Faixa salarial</p>
         <div class="col-9">
@@ -40,7 +38,6 @@
           <%= f.select :position_type, Position.position_types.map { |k, v| [ I18n.t(:"position_type.#{k}"), k] }, {}, class: "form-control"  %>
         </div>
       </div>
->>>>>>> 7df2dd4... add invite model and tests
       <%= f.submit 'Enviar', class: "mt-2 form-control btn btn-primary" %>
     <% end %>
     </div>
