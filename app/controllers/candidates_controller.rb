@@ -35,6 +35,14 @@ class CandidatesController < ApplicationController
     @invites = current_candidate.invites.pending
   end
 
+  def accept_invite
+    invite = Invite.find(params[:id])
+
+    return unless SelectionProcess.create(invite: invite)
+
+    invite.accepted!
+  end
+
   private
 
   def set_candidate

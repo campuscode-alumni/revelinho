@@ -35,7 +35,9 @@ feature 'candidate sees pending invites' do
 
     click_link('Aceitar convite')
 
-    expect(invite.status).to eq :accepted
+    invite.reload
+
+    expect(invite.status).to eq 'accepted'
     expect(invite.selection_process).to eq SelectionProcess.last
   end
 

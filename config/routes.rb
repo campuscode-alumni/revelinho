@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'dashboard'
       get 'invites'
     end
+    post 'invites/accept/:id', to: 'candidates#accept_invite', on: :member, as: :accept_invites
 
     post 'add-comment', to: 'candidates#add_comment', as: :add_comment
   end
