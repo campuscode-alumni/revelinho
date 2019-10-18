@@ -23,7 +23,7 @@ class Candidate < ApplicationRecord
   enum status: { hidden: 0, published: 10 }
 
   def invited_positions(company)
-    positions.where(company_id: company.id)
+    positions.where(company: company)
   end
 
   def uninvited_positions(company)
