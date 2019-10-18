@@ -82,12 +82,14 @@
       </div>
     </div>
   <% else %>
-  <div class="container mt-5">
-    <p>Só falta completar seu perfil :)</p>
-    <div class="row justify-content-center">
-      <%= link_to 'Completar perfil da empresa', new_company_profile_path, class: 'btn btn-outline-dark' %>
-    </div>
-  </div>
+    <% if employee_signed_in? && current_employee.company == @company%>
+      <div class="container mt-5">
+        <p>Só falta completar seu perfil :)</p>
+        <div class="row justify-content-center">
+          <%= link_to 'Completar perfil da empresa', new_company_profile_path, class: 'btn btn-outline-dark' %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
   <div class="container mt-5">
     <div class="row justify-content-center">

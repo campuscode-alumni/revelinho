@@ -9,8 +9,8 @@ class CompanyProfilesController < ApplicationController
   def create
     return unless current_employee.company.company_profile.save
 
-    flash[:notice] = 'O perfil da empresa foi atualizado com sucesso.'
-    redirect_to current_employee.company
+    redirect_to current_employee.company,
+                notice: I18n.t('company_profile.create.success')
   end
 
   private
