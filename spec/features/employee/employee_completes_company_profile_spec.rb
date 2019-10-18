@@ -9,7 +9,7 @@ feature 'Employee tries to complete company profile' do
 
     login_as(employee, scope: :employee)
 
-    visit company_path(company)
+    visit dashboard_companies_path
     click_on 'Completar perfil da empresa'
 
     fill_in 'Descrição da empresa', with: company_profile.full_description
@@ -41,7 +41,7 @@ feature 'Employee tries to complete company profile' do
 
     login_as(employee, scope: :employee)
 
-    visit company_path(company)
+    visit dashboard_companies_path
     click_on 'Completar perfil da empresa'
 
     fill_in 'Descrição da empresa', with: ''
@@ -57,5 +57,19 @@ feature 'Employee tries to complete company profile' do
     visit new_company_profile_path
 
     expect(current_path).to eq new_employee_session_path
+  end
+
+  scenario 'and must be member of company' do
+    company = create(:company, status: :active)
+    other_company = create(:company, status: :active, name: 'Avelo', 
+                            address: 'Avenida Brigadeiro Beijinho')
+    employee = create(:employee, company: company)
+
+    login_as(employee, scope: :employee)
+
+    visit company_path(company)
+
+    expect(page).to have_content company.name
+    expect(page).to have_content company.address
   end
 end

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :companies, only: %i[index edit update show]
+  resources :companies, only: %i[index edit update show] do
+    get 'dashboard', on: :collection
+  end
   resources :company_profiles, only: %i[new create]
   resources :candidates, only: %i[index show] do
     get 'dashboard', on: :collection

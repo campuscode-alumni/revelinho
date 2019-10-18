@@ -19,6 +19,8 @@ class CompaniesController < ApplicationController
     @company_profile = @company.company_profile
   end
 
+  def dashboard; end
+
   private
 
   def set_company

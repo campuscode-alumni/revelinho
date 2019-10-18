@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron">
+        <h2>
+            <%= "Seja bem vindo ao portal da empresa #{current_employee.company.name}!" %>
+        </h2>
+        <% unless current_employee.company.company_profile %>
+          <div class="container mt-5">
+              <p>Só falta completar seu perfil :)</p>
+              <div class="row justify-content-center">
+                <%= link_to 'Completar perfil da empresa', new_company_profile_path, class: 'btn btn-outline-dark' %>
+              </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
