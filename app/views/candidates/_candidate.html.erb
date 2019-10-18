@@ -6,17 +6,17 @@
     <div class="details-container">
       <div class="card-body">
         <div class="row">
-          <div class="col-4">
+          <div class="col">
             <h3 class="card-title"><%= link_to candidate.name, candidate, class: 'text-reset' %></h3>
           </div>
-          <% if candidate.invited_positions(current_employee.company).any? %>
-            <div class="col-8">
-              <span class="badge badge-primary">Aguardando aceite de convite</span>
-            </div>
-          <% end %>
           <div class="spacer"></div>
           <div class="col text-right">
-            <p><%= "#{candidate.city}, #{candidate.state}" %></p>
+            <p>
+              <% if candidate.invited_positions(current_employee.company).any? %>
+                <span class="badge badge-info">Aguardando aceite de convite</span>
+              <% end %>
+              <%= "#{candidate.city}, #{candidate.state}" %>
+            </p>
           </div>
         </div>
         <p class="card-text">
