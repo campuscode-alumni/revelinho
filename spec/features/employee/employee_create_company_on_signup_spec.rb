@@ -6,9 +6,9 @@ feature 'employee create company on signup' do
 
     click_on 'Cadastro de funcionário'
 
-    fill_in 'Email', with: 'employee@company.com'
-    fill_in 'Password', with: '123456'
-    fill_in 'Password confirmation', with: '123456'
+    fill_in 'E-mail', with: 'employee@company.com'
+    fill_in 'Senha', with: '123456'
+    fill_in 'Confirme sua senha', with: '123456'
 
     click_on 'Sign up'
     expect(current_path).to eq(edit_company_path(Company.last))
