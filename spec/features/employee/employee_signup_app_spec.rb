@@ -28,7 +28,8 @@ feature 'Employee signup app' do
 
     click_on 'Sign up'
 
-    expect(page).to have_content('Não foi possível salvar o funcionário: 2 erros.')
+    expect(page).to have_content('Não foi possível salvar o '\
+                                 'funcionário: 2 erros.')
   end
 
   scenario 'and logout' do
