@@ -106,3 +106,26 @@ CandidateProfile.create!(
   github_profile_url: 'patricia.poke',
   candidate_id: patricia.id
 )
+
+acme_company = Company.create!(
+  name: 'Acme Corp',
+  address: 'Acome street 80',
+  url_domain: 'acme.com',
+  status: :pending
+)
+
+ruby_position = Position.create!(
+  title: 'Desenvolvedor',
+  industry: 'TI',
+  description: 'Desenvolvedor Ruby',
+  salary: '3000.00',
+  position_type: 'full_time',
+  company_id: acme_company.id
+)
+
+Invite.create!(
+  message: 'We want you!',
+  status: :pending,
+  position: ruby_position,
+  candidade_id: patricia.id
+)

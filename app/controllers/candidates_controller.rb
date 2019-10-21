@@ -1,5 +1,5 @@
 class CandidatesController < ApplicationController
-  before_action :authenticate_candidate!, only: [:invites]
+  before_action :authenticate_candidate!, only: %i[invites dashboard]
   before_action :candidate, only: [:show]
   before_action :invite, only: %i[accept_invite reject_invite]
   before_action :own_invite, only: %i[accept_invite reject_invite]
@@ -31,7 +31,9 @@ class CandidatesController < ApplicationController
     redirect_to candidate
   end
 
-  def dashboard; end
+  def dashboard
+    @dashboard = CandidateDashboardDecorator.decorate(current_candidate)
+  end
 
   def invites
     @invites = current_candidate.invites.pending
