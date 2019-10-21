@@ -16,6 +16,8 @@ feature 'candidate send message' do
     fill_in 'Mensagem', with: 'Olá, meu nome é João'
     click_on('Enviar')
 
-    expect(invite.messages.first.text).to eq 'Olá, meu nome é João'
+    message = invite.messages.first
+    expect(message.text).to eq 'Olá, meu nome é João'
+    expect(message.sendable).to eq candidate
   end
 end

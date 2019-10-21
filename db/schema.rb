@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_18_193434) do
+ActiveRecord::Schema.define(version: 2019_10_21_120956) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -120,7 +120,10 @@ ActiveRecord::Schema.define(version: 2019_10_18_193434) do
   create_table "messages", force: :cascade do |t|
     t.integer "selection_process_id", null: false
     t.text "text"
+    t.string "sendable_type"
+    t.integer "sendable_id"
     t.index ["selection_process_id"], name: "index_messages_on_selection_process_id"
+    t.index ["sendable_type", "sendable_id"], name: "index_messages_on_sendable_type_and_sendable_id"
   end
 
   create_table "positions", force: :cascade do |t|

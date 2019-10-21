@@ -5,9 +5,9 @@ class SelectionProcessesController < ApplicationController
 
   def send_message
     message = Message.new(params.permit(:text))
-
+    message.sendable = current
     flash[:notice] = 'Não foi possivel enviar mensagem' unless
-     @selection_process.messages << message
+    @selection_process.messages << message
 
     redirect_to selection_process_candidates_path(@selection_process)
   end

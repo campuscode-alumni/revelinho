@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
                address city state country zip_code]
     )
   end
+
+  def current
+    current_candidate || current_employee
+  end
 end
