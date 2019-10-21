@@ -4,9 +4,7 @@ feature 'candidate send message' do
   scenario 'successfully' do
     candidate = create(:candidate, status: :published)
     position = create(:position, :with_company)
-    invite = create(:invite, candidate: candidate,
-                             position: position,
-                             status: :pending)
+    create(:invite, candidate: candidate, position: position, status: :pending)
 
     login_as(candidate, scope: :candidate)
     visit invites_candidates_path
