@@ -1,7 +1,7 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_candidate!, only: [:invites]
-  before_action :set_candidate, only: [:show]
-  before_action :set_invite, only: %i[accept_invite reject_invite]
+  before_action :candidate, only: [:show]
+  before_action :invite, only: %i[accept_invite reject_invite]
   before_action :own_invite, only: %i[accept_invite reject_invite]
 
   def index
@@ -50,12 +50,12 @@ class CandidatesController < ApplicationController
 
   private
 
-  def set_candidate
-    @candidate = Candidate.find(params[:id])
+  def candidate
+    @candidate ||= Candidate.find(params[:id])
   end
 
-  def set_invite
-    @invite = Invite.find(params[:id])
+  def invite
+    @invite ||= Invite.find(params[:id])
   end
 
   def own_invite
