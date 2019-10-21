@@ -16,8 +16,24 @@ feature 'candidate send message' do
     fill_in 'Mensagem', with: 'Olá, meu nome é João'
     click_on('Enviar')
 
-    message = invite.messages.first
-    expect(message.text).to eq 'Olá, meu nome é João'
-    expect(message.sendable).to eq candidate
+    expect(page).to have_css('h4', text: candidate.email)
+    expect(page).to have_content('Olá, meu nome é João')
+  end
+
+  scenario 'and validate empty field' do
+    candidate = create(:candidate, status: :published)
+    position = create(:position, :with_company, title: 'Desenvolvedor')
+    invite = create(:invite, candidate: candidate,
+                             position: position, status: :accepted)
+    invite.create_selection_process
+
+    login_as(candidate, scope: :candidate)
+    visit selection_process_candidates_path(invite.selection_process)
+
+    fill_in 'Mensagem', with: ''
+    click_on('Enviar')
+
+    expect(page).to have_content('Não foi possivel enviar mensagem.'\
+                                 ' Tente novamente')
   end
 end
