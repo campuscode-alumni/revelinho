@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def current_user
+    user = current_employee || current_candidate
+    UserPresenter.new(user.decorate)
+  end
+
   protected
 
   def after_sign_in_path_for(resource)
