@@ -3,6 +3,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: %i[edit update show]
   before_action :own_company, only: %i[edit update show]
   before_action :employee_pending, except: %i[edit update]
+  before_action :company_profile, only: %i[show]
 
   def index; end
 
@@ -17,13 +18,15 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def show
-    @company_profile = @company.company_profile
-  end
+  def show; end
 
   def dashboard; end
 
   private
+
+  def company_profile
+    @company_profile = @company.company_profile
+  end
 
   def set_company
     @company = Company.find(params[:id])
