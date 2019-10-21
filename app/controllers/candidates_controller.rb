@@ -2,7 +2,7 @@ class CandidatesController < ApplicationController
   before_action :authenticate_candidate!, only: [:invites]
   before_action :set_candidate, only: [:show]
   before_action :set_invite, only: %i[accept_invite reject_invite]
-  before_action :own_invite, only: %i[accept_invite reject_invite]
+  before_action :owner_invite, only: %i[accept_invite reject_invite]
 
   def index
     @candidates = Candidate.published
@@ -60,8 +60,8 @@ class CandidatesController < ApplicationController
     @invite = Invite.find(params[:id])
   end
 
-  def own_invite
+  def owner_invite
     return redirect_to invites_candidates_path unless
-     current_candidate.invites.where(id: @invite.id).any?
+     current_candidate.invites.where(id: @invite.id, status: :pending).any?
   end
 end
