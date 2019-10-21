@@ -7,15 +7,16 @@
         </small>
       </h1>
     </div>
-  
+  </div>
+
   <% if @company.company_profile %>
     <% if @company_profile.logo.attached? %>
       <div class="image-wrapper">
-        <%= image_tag @company_profile.logo, class: 'image img-thumbnail', style: "border-radius: 0"  %>
+        <%= image_tag @company_profile.logo, class: 'image img-thumbnail', style: "border-radius: 0" %>
       </div>
     <% else %>
       <div class="image-wrapper">
-        <img src="https://github.com/identicons/jasonlong.png" class="image" alt="<%=  %>%">
+        <img src="https://github.com/identicons/jasonlong.png",  class="image" alt="<%=  %>">
       </div>
     <% end %>
     <div class="candidate p-2">

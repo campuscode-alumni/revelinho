@@ -74,4 +74,39 @@ feature 'Employee tries to complete company profile' do
     expect(page).not_to have_content other_company.name
     expect(page).not_to have_content other_company.address
   end
+
+  scenario 'and it is unique' do
+    company = create(:company)
+    employee = create(:employee, company: company)
+
+    company_profile = build(:company_profile)
+
+    login_as(employee, scope: :employee)
+
+    visit dashboard_companies_path
+    click_on 'Completar perfil da empresa'
+
+    fill_in 'Descrição da empresa', with: company_profile.full_description
+    fill_in 'Benefícios', with: company_profile.benefits
+    fill_in 'Número de funcionários', with: company_profile.employees_number
+    fill_in 'Site da empresa', with: company_profile.website
+    fill_in 'Telefone', with: company_profile.phone
+    fill_in 'Missão', with: company_profile.mission
+    fill_in 'Categoria', with: company_profile.category
+    fill_in 'Atrativos', with: company_profile.attractives
+    attach_file('Logo', Rails.root.join('spec',
+                                        'support',
+                                        'images',
+                                        'gatinho.jpg'))
+
+    click_on 'Atualizar'
+
+    visit new_company_profile_path
+
+    fill_in 'Descrição da empresa', with: 'Descrição atualizada'
+    click_on 'Atualizar'
+
+    expect(CompanyProfile.count).to eq 1
+    expect(page).to have_content 'Descrição atualizada'
+  end
 end

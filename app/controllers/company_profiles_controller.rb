@@ -1,14 +1,12 @@
 class CompanyProfilesController < ApplicationController
   before_action :authenticate_employee!, only: %i[new create]
-  before_action :create_current_employee, only: %i[create]
 
   def new
     @company_profile = CompanyProfile.new
   end
 
   def create
-    return unless current_employee.company.company_profile.save
-
+    current_employee.company.build_company_profile(company_profile_params).save
     redirect_to current_employee.company,
                 notice: I18n.t('company_profile.create.success')
   end

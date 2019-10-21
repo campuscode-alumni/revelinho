@@ -17,3 +17,4 @@ pt-BR:
   company_profile:
     create:
       success: O perfil da empresa foi atualizado com sucesso.
+      failed: Erro ao criar o perfil da companhia. Tente novamente.
