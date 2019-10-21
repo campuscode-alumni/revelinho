@@ -9,6 +9,8 @@ feature 'Candidate completes personal profile' do
     visit root_path
     click_on 'Concluir perfil'
 
+    attach_file('Adicione uma foto ao seu perfil',
+                Rails.root.join('spec', 'support', 'candidate_avatar.jpeg'))
     fill_in 'Experiência Profissional', with: candidate_profile.work_experience
     fill_in 'Formação', with: candidate_profile.education
     fill_in 'Linguagens de Programação',
@@ -31,6 +33,8 @@ feature 'Candidate completes personal profile' do
     expect(page).to have_content(candidate_profile.linkedin_profile_url)
     expect(page).to have_content(candidate_profile.github_profile_url)
     expect(page).to have_content(candidate_profile.english_proficiency)
+    expect(page).to have_css('img[src*="candidate_avatar.jpeg"]')
+    candidate.reload
     expect(candidate).to be_published
   end
 

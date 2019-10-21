@@ -4,40 +4,49 @@
     <title>Revelinho</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav class='navbar navbar-expand-lg py-3'>
+    <nav class='navbar navbar-expand-lg navbar-light bg-light py-3 border-bottom'>
       <%= link_to image_tag('revelinho.svg', size: '250x50'), root_path %>
-      <div class='collapse navbar-collapse' id='navbarNav'>
-        <ul class='navbar-nav font-weight-bold ml-auto'>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
           <% if candidate_signed_in? %>
-            <li class='nav-item'>
-              <%= link_to 'Logout', destroy_candidate_session_path, method: :delete, class: 'btn btn-secondary' %>
-            </li>
+          <li class='nav-item'>
+            <%= link_to 'Logout', destroy_candidate_session_path, method: :delete, class: 'nav-link p-3' %>
+          </li>
           <% elsif employee_signed_in? %>
-            <li class='nav-item'>
-              <%= link_to 'Logout', destroy_employee_session_path, method: :delete, class: 'btn btn-secondary' %>
-            </li>
+          <li class='nav-item'>
+            <%= link_to 'Logout', destroy_employee_session_path, method: :delete, class: 'nav-link p-3' %>
+          </li>
           <% else %>
-              <%= link_to 'Login de funcionário', new_employee_session_path, class: 'btn btn-dark mx-2' %>
-              <%= link_to 'Login de candidato', new_candidate_session_path, class: 'btn btn-dark mx-2' %>
+          <li class='nav-item'>
+            <%= link_to 'Login de funcionário', new_employee_session_path, class: 'nav-link p-3' %>
+          </li>
+          <li class='nav-item'>
+            <%= link_to 'Login de candidato', new_candidate_session_path, class: 'nav-link p-3' %>
+          </li>
           <% end %>
         </ul>
+      </div>
     </nav>
-    <hr class="my-0">
     <% if notice.present? %>
-      <div class='alert alert-primary' role='alert'>
-        <%= notice %>
-      </div>
+    <div class='alert alert-primary' role='alert'>
+      <%= notice %>
+    </div>
     <% end %>
+    
     <% if alert.present? %>
-      <div class='alert alert-danger' role='alert'>
-        <%= alert %>
-      </div>
+    <div class='alert alert-danger' role='alert'>
+      <%= alert %>
+    </div>
     <% end %>
     <% if flash[:success].present? %>
       <div class='alert alert-success' role='alert'>

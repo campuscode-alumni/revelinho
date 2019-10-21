@@ -23,12 +23,10 @@ class Candidate < ApplicationRecord
   enum status: { hidden: 0, published: 10 }
 
   def invited_positions(company)
-    positions.where(company_id: company.id)
+    positions.where(company: company)
   end
 
   def uninvited_positions(company)
-    company.positions.reject do |position|
-      invited_positions(company).find_by(id: position.id).present?
-    end
+    company.positions.where.not(id: positions.ids)
   end
 end

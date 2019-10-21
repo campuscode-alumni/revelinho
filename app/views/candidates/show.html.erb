@@ -1,4 +1,4 @@
-<div class="container-fluid candidate-page p-0">
+<div class="candidate-page p-0">
   <div class="row candidate-header m-0">
     <div class="col-3 col-md-3 col-sm-2 col-xs-1 spacer"></div>
     <div class="col">
@@ -9,7 +9,11 @@
         <div class="image-wrapper">
           <div class="row">
             <div class="col offset-1">
+              <% if @candidate.candidate_profile.avatar.attached? %>
+                <%= image_tag @candidate.candidate_profile.avatar, class: 'image img-thumbnail', style: "border-radius: 0" %>
+              <% else %>
               <img src="https://github.com/identicons/jasonlong.png" class="image" alt="<%= @candidate.name %>%">
+              <% end %>
             </div>
           </div>
         </div>
@@ -87,8 +91,13 @@
                 <div class="form-group">
                   <%= f.text_field(:message, placeholder: 'Mensagem para o candidato', name: 'invite-message', class: 'form-control') %>
                 </div>
-                <div class="form-group text-right">
-                  <%= f.submit('Convidar', class: 'btn btn-primary') %>
+                <div class="form-group d-flex justify-content-between">
+                  <% if @candidate.uninvited_positions(current_employee.company).empty? %>
+                    <%= link_to 'Adicionar posição', new_position_path %>
+                    <%= f.submit('Convidar', class: 'btn btn-primary', id: 'invite-button', disabled: true) %>
+                  <% else %>
+                    <%= f.submit('Convidar', class: 'btn btn-primary ml-auto', id: 'invite-button') %>
+                  <% end %>
                 </div>
               <% end %>
             </div>

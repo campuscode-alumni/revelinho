@@ -32,6 +32,9 @@ module Revelinho
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    # Devise default locale
+    config.i18n.default_locale = :'pt-BR'
+
     I18n.available_locales = [:en, :'pt-BR']
 
     I18n.default_locale = :'pt-BR'

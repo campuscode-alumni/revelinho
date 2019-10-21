@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  rescue_from ActionController::UnpermittedParameters, with: :forbidden
 
   protected
 
@@ -17,5 +18,11 @@ class ApplicationController < ActionController::Base
       keys: %i[name cpf birthday occupation phone educational_level
                address city state country zip_code]
     )
+  end
+
+  private
+
+  def forbidden
+    redirect_to root_path
   end
 end
