@@ -59,6 +59,6 @@ feature 'Employee signup app' do
 
     expect(Company.count).to eq 1
     expect(current_path).to eq(dashboard_companies_path)
-    expect(page).to have_content('Revelo')
+    expect(page).to have_content company.name
   end
 end

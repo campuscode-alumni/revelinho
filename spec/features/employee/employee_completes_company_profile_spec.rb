@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Employee tries to complete company profile' do
   scenario 'successfully' do
-    company = create(:company, status: :active)
+    company = create(:company)
     employee = create(:employee, company: company)
 
     company_profile = build(:company_profile)
@@ -35,8 +35,8 @@ feature 'Employee tries to complete company profile' do
                                  'sucesso.'
   end
 
-  scenario 'unsuccessfully' do
-    company = create(:company, status: :active)
+  scenario 'and inserts blank data' do
+    company = create(:company)
     employee = create(:employee, company: company)
 
     login_as(employee, scope: :employee)
@@ -60,7 +60,7 @@ feature 'Employee tries to complete company profile' do
   end
 
   scenario 'and must be member of company' do
-    company = create(:company, status: :active)
+    company = create(:company)
     other_company = create(:company, status: :active, name: 'Avelo',
                                      address: 'Avenida Brigadeiro Beijinho')
     employee = create(:employee, company: company)
