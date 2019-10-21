@@ -21,12 +21,4 @@ class Candidate < ApplicationRecord
             :birthday, presence: true
 
   enum status: { hidden: 0, published: 10 }
-
-  def invited_positions(company)
-    positions.where(company: company)
-  end
-
-  def uninvited_positions(company)
-    company.positions.where.not(id: positions.ids)
-  end
 end

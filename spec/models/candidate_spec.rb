@@ -10,7 +10,7 @@ describe Candidate do
       position_uninvited = create(:position, company: company)
       create(:invite, candidate: candidate, position: position)
 
-      invited_positions = candidate.invited_positions(company)
+      invited_positions = candidate.invited_positions
 
       expect(invited_positions.count).to eq 1
       expect(invited_positions).to include position
@@ -27,7 +27,7 @@ describe Candidate do
       position_uninvited = create(:position, company: company)
       create(:invite, candidate: candidate, position: position)
 
-      uninvited_positions = candidate.uninvited_positions(company)
+      uninvited_positions = candidate.uninvited_positions
 
       expect(uninvited_positions.count).to eq 1
       expect(uninvited_positions).not_to include position

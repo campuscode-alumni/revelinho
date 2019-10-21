@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from ActionController::UnpermittedParameters, with: :forbidden
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   protected
 
@@ -24,5 +25,9 @@ class ApplicationController < ActionController::Base
 
   def forbidden
     redirect_to root_path
+  end
+
+  def not_found
+    render file: Rails.root.join('public', '404'), status: :not_found
   end
 end

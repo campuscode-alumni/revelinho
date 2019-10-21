@@ -12,9 +12,7 @@
           <div class="spacer"></div>
           <div class="col text-right">
             <p>
-              <% if candidate.invited_positions(current_employee.company).any? %>
-                <span class="badge badge-info">Aguardando aceite de convite</span>
-              <% end %>
+              <%= candidate.awaiting_invites_badge %>
               <%= "#{candidate.city}, #{candidate.state}" %>
             </p>
           </div>

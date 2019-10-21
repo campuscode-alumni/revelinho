@@ -1,11 +1,13 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_employee!, only: %i[invite]
   before_action :set_candidate, only: %i[show invite]
+  before_action :set_candidates_list, only: %i[index]
+  before_action :decorate_list, only: %i[index]
+  before_action :decorate, only: %i[show]
   before_action :invite_params, only: %i[invite]
   before_action :authorize_employee, only: %i[invite]
 
   def index
-    @candidates = Candidate.published
     msg = 'Não há candidatos cadastrados até agora'
     flash[:notice] = msg if @candidates.empty?
   end
@@ -17,7 +19,7 @@ class CandidatesController < ApplicationController
     @notes = CandidateNote.includes(employee: :company).where(
       employees: { company: current_employee.company }
     )
-    @positions = @candidate.uninvited_positions(current_employee.company)
+    @positions = @candidate.uninvited_positions
   end
 
   def add_comment
@@ -46,6 +48,24 @@ class CandidatesController < ApplicationController
 
   private
 
+  def set_candidate
+    @candidate = Candidate.find(params[:id])
+  end
+
+  def set_candidates_list
+    @candidates = Candidate.published
+  end
+
+  def decorate_list
+    @candidates = EmployeeCandidatePresenter.decorate_collection(
+      @candidates, current_employee
+    )
+  end
+
+  def decorate
+    @candidate = EmployeeCandidatePresenter.new(@candidate, current_employee)
+  end
+
   def authorize_employee
     return unless current_employee.company.id != @position.company.id
 
@@ -56,10 +76,8 @@ class CandidatesController < ApplicationController
 
   def invite_params
     @invite_params = params.permit(:position_id, :message)
-    @position = Position.find(@invite_params[:position_id])
-  end
-
-  def set_candidate
-    @candidate = Candidate.find(params[:id])
+    @position = current_employee.company.positions.find(
+      @invite_params[:position_id]
+    )
   end
 end

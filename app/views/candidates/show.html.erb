@@ -83,29 +83,13 @@
           <div class="container-fluid employee-comments p-0">
             <div class="header px-3">Convidar</div>
             <div class="make-invite p-2">
-              <%= form_with url: invite_candidate_path(@candidate), method: 'post' do |f| %>
-                <div class="form-group">
-                  <%= f.label :position_id, 'Posição' %>
-                  <%= f.collection_select :position_id, @positions, :id, :title, {}, class: 'custom-select'  %>
-                </div>
-                <div class="form-group">
-                  <%= f.text_field(:message, placeholder: 'Mensagem para o candidato', name: 'invite-message', class: 'form-control') %>
-                </div>
-                <div class="form-group d-flex justify-content-between">
-                  <% if @candidate.uninvited_positions(current_employee.company).empty? %>
-                    <%= link_to 'Adicionar posição', new_position_path %>
-                    <%= f.submit('Convidar', class: 'btn btn-primary', id: 'invite-button', disabled: true) %>
-                  <% else %>
-                    <%= f.submit('Convidar', class: 'btn btn-primary ml-auto', id: 'invite-button') %>
-                  <% end %>
-                </div>
-              <% end %>
+              <%= render partial: 'invitation', locals: { candidate: @candidate, no_invitable_positions: @candidate.no_invitable_positions? } %>
             </div>
             <div class="current-invites px-2 pt-2 border-top">
-              <% if @candidate.invited_positions(current_employee.company).any? %>
+              <% if @candidate.invited_positions.any? %>
                 Candidato convidado para:
                 <ul>
-                <% @candidate.invited_positions(current_employee.company).each do |position| %>
+                <% @candidate.invited_positions.each do |position| %>
                   <li><%= position.title %></li>
                 <% end %>
                 </ul>
