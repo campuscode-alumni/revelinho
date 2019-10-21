@@ -62,6 +62,6 @@ class CandidatesController < ApplicationController
 
   def own_invite
     return redirect_to invites_candidates_path unless
-     current_candidate.invites.include? @invite
+     current_candidate.invites.where(id: @invite.id).any?
   end
 end

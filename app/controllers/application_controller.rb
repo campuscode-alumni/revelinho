@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  def current
+  def current_user
     current_candidate || current_employee
   end
 end
