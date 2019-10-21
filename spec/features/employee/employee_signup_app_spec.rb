@@ -45,7 +45,7 @@ feature 'Employee signup app' do
 
   scenario 'and see your company dashboard' do
     company = create(:company, name: 'Revelo', address: 'Av. Paulista',
-                               url_domain: 'revelo.com.br', status: :active)
+                               url_domain: 'revelo.com.br')
 
     visit root_path
 
@@ -58,7 +58,7 @@ feature 'Employee signup app' do
     click_on 'Sign up'
 
     expect(Company.count).to eq 1
-    expect(current_path).to eq(company_path(company))
-    expect(page).to have_css('h1', text: 'Revelo')
+    expect(current_path).to eq(dashboard_companies_path)
+    expect(page).to have_content('Revelo')
   end
 end

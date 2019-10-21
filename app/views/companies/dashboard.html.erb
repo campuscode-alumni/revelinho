@@ -5,8 +5,10 @@
         <h2>
             <%= "Seja bem vindo ao portal da empresa #{current_employee.company.name}!" %>
         </h2>
+        <%= link_to 'Criar vaga', new_position_path, class: 'btn btn-outline-dark' %>
+        <%= link_to 'Candidatos disponíveis', candidates_path, class: 'btn btn-outline-dark' %>
         <% unless current_employee.company.company_profile %>
-          <div class="container mt-5">
+          <div class="container mt-5 text-center">
               <p>Só falta completar seu perfil :)</p>
               <div class="row justify-content-center">
                 <%= link_to 'Completar perfil da empresa', new_company_profile_path, class: 'btn btn-outline-dark' %>

@@ -78,6 +78,6 @@ feature 'Candidates list' do
     click_on 'Gustavo'
     click_on 'Voltar'
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(dashboard_companies_path)
   end
 end
