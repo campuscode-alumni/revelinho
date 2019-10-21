@@ -7,11 +7,11 @@ feature 'Employee creates position' do
 
     login_as(employee, scope: :employee)
     visit root_path
-    click_on 'Criar vaga'
+    click_on 'Criar posição'
 
     fill_in 'Título', with: 'Desenvolvedor Ruby'
     fill_in 'Área', with: 'Desenvolvimento'
-    fill_in 'Descrição', with: 'Vaga que exige conhecimentos em HTTP, CSS, '\
+    fill_in 'Descrição', with: 'Posição que exige conhecimentos em HTTP, CSS, '\
                                'JavaScript e Ruby on Rails'
     select 'CLT', from: 'Tipo'
     fill_in 'De:', with: '2000'
@@ -21,8 +21,8 @@ feature 'Employee creates position' do
     expect(page).to have_content('Desenvolvedor Ruby')
     expect(page).to have_content('Revelo')
     expect(page).to have_content('Desenvolvimento')
-    expect(page).to have_content('Vaga que exige conhecimentos em HTTP, CSS, '\
-                                 'JavaScript e Ruby on Rails')
+    expect(page).to have_content('Posição que exige conhecimentos '\
+                                 'em HTTP, CSS, JavaScript e Ruby on Rails')
     expect(page).to have_content('Salário de: 2000')
     expect(page).to have_content('até: 4000')
   end
@@ -30,7 +30,7 @@ feature 'Employee creates position' do
   scenario 'and must be logged in' do
     visit root_path
 
-    expect(page).not_to have_link('Criar vaga')
+    expect(page).not_to have_link('Criar posição')
   end
 
   scenario 'and must fill all fields' do
@@ -39,7 +39,7 @@ feature 'Employee creates position' do
 
     login_as(employee, scope: :employee)
     visit root_path
-    click_on 'Criar vaga'
+    click_on 'Criar posição'
 
     fill_in 'Título', with: ''
     fill_in 'Área', with: ''

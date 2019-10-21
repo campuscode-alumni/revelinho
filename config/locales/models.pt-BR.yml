@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      position: "Vaga"
+      position: "Posição"
     attributes:
       position:
         title: "Título"
