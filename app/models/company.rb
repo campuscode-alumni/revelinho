@@ -5,4 +5,6 @@ class Company < ApplicationRecord
   validates :name, :address, presence: true, on: :update
 
   enum status: { pending: 0, active: 10 }
+
+  validates :name, :address, presence: true, on: :update
 end

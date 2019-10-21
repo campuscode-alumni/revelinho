@@ -9,10 +9,12 @@ class CompaniesController < ApplicationController
   def edit; end
 
   def update
-    return unless @company.update(company_params)
-
-    @company.active!
-    redirect_to company_path(@company)
+    if @company.update(company_params)
+      @company.active!
+      redirect_to company_path(@company)
+    else
+      render :edit
+    end
   end
 
   def show
