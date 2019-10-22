@@ -1,13 +1,18 @@
-class EmployeeCandidatePresenter < Draper::Decorator
-  delegate_all
-  include Draper::LazyHelpers
-
+class EmployeeCandidatePresenter < SimpleDelegator
+  include Rails.application.routes.url_helpers
   attr_reader :candidate, :employee
+
+  # delegate :name, :id, to: :candidate
+  delegate :content_tag, :link_to, to: :h
 
   def initialize(candidate, employee)
     @candidate = candidate
     @employee = employee
     super(candidate)
+  end
+
+  def self.decorate_collection(candidates, employee)
+    candidates.map { |candidate| new(candidate, employee) }
   end
 
   def invited_positions
@@ -22,6 +27,11 @@ class EmployeeCandidatePresenter < Draper::Decorator
     uninvited_positions.empty?
   end
 
+  def method_missing(m, *args, &block)
+    super
+    @candidate.send(m, *args, &block)
+  end
+
   def awaiting_invites_badge
     return '' if invited_positions.empty?
 
@@ -30,5 +40,11 @@ class EmployeeCandidatePresenter < Draper::Decorator
       'Aguardando aceite de convite',
       class: 'badge badge-info'
     )
+  end
+
+  private
+
+  def h
+    ApplicationController.helpers
   end
 end

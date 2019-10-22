@@ -8,6 +8,6 @@
   </div>
   <div class="form-group d-flex justify-content-between">
     <%= link_to 'Adicionar posição', new_position_path %>
-    <%= form.submit('Convidar', class: 'btn btn-primary ml-auto', id: 'invite-button', disabled: no_invitable_positions) %>
+    <%= f.submit('Convidar', class: 'btn btn-primary ml-auto', id: 'invite-button', disabled: no_invitable_positions) %>
   </div>
 <% end %>

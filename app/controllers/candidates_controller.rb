@@ -19,7 +19,7 @@ class CandidatesController < ApplicationController
     @notes = CandidateNote.includes(employee: :company).where(
       employees: { company: current_employee.company }
     )
-    @positions = @candidate.uninvited_positions
+    @positions = @employee_candidate_presenter.uninvited_positions
   end
 
   def add_comment
@@ -57,13 +57,15 @@ class CandidatesController < ApplicationController
   end
 
   def decorate_list
-    @candidates = EmployeeCandidatePresenter.decorate_collection(
-      @candidates, current_employee
-    )
+    @employee_candidate_presenters =
+      EmployeeCandidatePresenter.decorate_collection(
+        @candidates, current_employee
+      )
   end
 
   def decorate
-    @candidate = EmployeeCandidatePresenter.new(@candidate, current_employee)
+    @employee_candidate_presenter =
+      EmployeeCandidatePresenter.new(@candidate, current_employee)
   end
 
   def authorize_employee

@@ -83,13 +83,13 @@
           <div class="container-fluid employee-comments p-0">
             <div class="header px-3">Convidar</div>
             <div class="make-invite p-2">
-              <%= render partial: 'invitation', locals: { candidate: @candidate, no_invitable_positions: @candidate.no_invitable_positions? } %>
+              <%= render partial: 'invite', locals: { candidate: @candidate, no_invitable_positions: @employee_candidate_presenter.no_invitable_positions? } %>
             </div>
             <div class="current-invites px-2 pt-2 border-top">
-              <% if @candidate.invited_positions.any? %>
+              <% if @employee_candidate_presenter.invited_positions.any? %>
                 Candidato convidado para:
                 <ul>
-                <% @candidate.invited_positions.each do |position| %>
+                <% @employee_candidate_presenter.invited_positions.each do |position| %>
                   <li><%= position.title %></li>
                 <% end %>
                 </ul>
