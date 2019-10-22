@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_140542) do
+ActiveRecord::Schema.define(version: 2019_10_21_120956) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -106,6 +106,26 @@ ActiveRecord::Schema.define(version: 2019_10_17_140542) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "invites", force: :cascade do |t|
+    t.string "message"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "position_id"
+    t.integer "candidate_id"
+    t.index ["candidate_id"], name: "index_invites_on_candidate_id"
+    t.index ["position_id"], name: "index_invites_on_position_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "selection_process_id", null: false
+    t.text "text"
+    t.string "sendable_type"
+    t.integer "sendable_id"
+    t.index ["selection_process_id"], name: "index_messages_on_selection_process_id"
+    t.index ["sendable_type", "sendable_id"], name: "index_messages_on_sendable_type_and_sendable_id"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "title"
     t.string "industry"
@@ -118,10 +138,21 @@ ActiveRecord::Schema.define(version: 2019_10_17_140542) do
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
 
+  create_table "selection_processes", force: :cascade do |t|
+    t.integer "invite_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invite_id"], name: "index_selection_processes_on_invite_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "candidate_notes", "candidates"
   add_foreign_key "candidate_notes", "employees"
   add_foreign_key "candidate_profiles", "candidates"
   add_foreign_key "employees", "companies"
+  add_foreign_key "invites", "candidates"
+  add_foreign_key "invites", "positions"
+  add_foreign_key "messages", "selection_processes"
   add_foreign_key "positions", "companies"
+  add_foreign_key "selection_processes", "invites"
 end
