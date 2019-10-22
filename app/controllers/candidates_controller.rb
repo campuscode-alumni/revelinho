@@ -1,7 +1,6 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_employee!, only: %i[invite]
   before_action :authenticate_candidate!, only: [:invites]
-  before_action :authorize_employee, only: %i[invite]
 
   before_action :set_candidate, only: %i[show invite]
   before_action :set_candidates_list, only: %i[index]
@@ -12,6 +11,8 @@ class CandidatesController < ApplicationController
 
   before_action :invite_params, only: %i[invite]
   before_action :owner_invite, only: %i[accept_invite reject_invite]
+
+  before_action :authorize_employee, only: %i[invite]
 
   def index
     msg = 'Não há candidatos cadastrados até agora'
@@ -92,7 +93,7 @@ class CandidatesController < ApplicationController
   end
 
   def authorize_employee
-    return unless current_employee.company.id != @position.company.id
+    return if current_employee.company.id == @position.company.id
 
     raise ActionController::UnpermittedParameters.new(
       status: 'Employee unauthorized'
