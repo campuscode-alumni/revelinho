@@ -6,7 +6,7 @@ class CompanyProfilesController < ApplicationController
   end
 
   def create
-    current_employee.company.build_company_profile(company_profile_params).save
+    create_current_employee.save
     redirect_to current_employee.company,
                 notice: I18n.t('company_profile.create.success')
   end
@@ -14,8 +14,7 @@ class CompanyProfilesController < ApplicationController
   private
 
   def create_current_employee
-    current_employee.company.company_profile =
-      CompanyProfile.new(company_profile_params)
+    current_employee.company.build_company_profile(company_profile_params)
   end
 
   def company_profile_params
