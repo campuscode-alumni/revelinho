@@ -38,8 +38,9 @@ class CandidatesController < ApplicationController
   end
 
   def accept_invite
+    @invite.selection_process = SelectionProcess.new
     return redirect_to invites_candidates_path unless
-     SelectionProcess.create(invite: @invite)
+      @invite.selection_process.save
 
     @invite.accepted!
 
