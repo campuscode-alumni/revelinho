@@ -3,7 +3,7 @@ require 'rails_helper'
 describe EmployeeCandidatePresenter do
   context '#awaiting_invites_badge' do
     it 'show pending invites' do
-      company = create(:company, :active)
+      company = create(:company)
       candidate = create(:candidate)
       employee = create(:employee, company: company)
       create(:candidate_profile, candidate: candidate)
@@ -18,7 +18,7 @@ describe EmployeeCandidatePresenter do
     end
 
     it 'is blank where there are no invites' do
-      company = create(:company, :active)
+      company = create(:company)
       candidate = create(:candidate)
       employee = create(:employee, company: company)
       create(:candidate_profile, candidate: candidate)
@@ -31,7 +31,7 @@ describe EmployeeCandidatePresenter do
 
   context '#invited_positions' do
     it 'has to show invited positions' do
-      company = create(:company, :active, url_domain: 'revelo.com.br')
+      company = create(:company, url_domain: 'revelo.com.br')
       employee = create(:employee, company: company)
       candidate = create(:candidate)
       create(:candidate_profile, candidate: candidate)
@@ -51,7 +51,7 @@ describe EmployeeCandidatePresenter do
 
   context '#uninvited_positions' do
     it 'has to show uninvited positions' do
-      company = create(:company, :active, url_domain: 'revelo.com.br')
+      company = create(:company, url_domain: 'revelo.com.br')
       employee = create(:employee, company: company)
       candidate = create(:candidate)
       create(:candidate_profile, candidate: candidate)

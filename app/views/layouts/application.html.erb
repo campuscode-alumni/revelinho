@@ -26,6 +26,7 @@
           <li class='nav-item'>
             <%= link_to 'Logout', destroy_employee_session_path, method: :delete, class: 'nav-link p-3' %>
           </li>
+
           <% else %>
           <li class='nav-item'>
             <%= link_to 'Login de funcionário', new_employee_session_path, class: 'nav-link p-3' %>

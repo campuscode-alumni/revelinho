@@ -92,6 +92,21 @@ ActiveRecord::Schema.define(version: 2019_10_21_120956) do
     t.integer "status", default: 0
   end
 
+  create_table "company_profiles", force: :cascade do |t|
+    t.string "full_description"
+    t.string "benefits"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
+    t.integer "employees_number"
+    t.string "website"
+    t.string "phone"
+    t.text "mission"
+    t.string "category"
+    t.text "attractives"
+    t.index ["company_id"], name: "index_company_profiles_on_company_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -150,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_120956) do
   add_foreign_key "candidate_notes", "candidates"
   add_foreign_key "candidate_notes", "employees"
   add_foreign_key "candidate_profiles", "candidates"
+  add_foreign_key "company_profiles", "companies"
   add_foreign_key "employees", "companies"
   add_foreign_key "invites", "candidates"
   add_foreign_key "invites", "positions"
