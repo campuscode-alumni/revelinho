@@ -20,7 +20,10 @@ class CompaniesController < ApplicationController
 
   def show; end
 
-  def dashboard; end
+  def dashboard
+    @company_link = CompanyProfilePresenter.new(current_employee.company)
+                                           .company_profile_link
+  end
 
   private
 
