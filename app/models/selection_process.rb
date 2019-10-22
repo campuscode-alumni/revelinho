@@ -4,4 +4,5 @@ class SelectionProcess < ApplicationRecord
   delegate :company, to: :position
 
   has_many :messages, dependent: :destroy
+  has_many :interviews, dependent: :destroy
 end
