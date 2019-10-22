@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Candidate cannot modify anothers invite' do
   it 'accept throught post path' do
-    position = create(:position, :with_company)
+    position = create(:position)
     candidate = create(:candidate, status: :published)
     create(:candidate_profile, candidate: candidate)
     invite = create(:invite, candidate: candidate,
@@ -19,7 +19,7 @@ describe 'Candidate cannot modify anothers invite' do
   end
 
   it 'reject throught post path' do
-    position = create(:position, :with_company)
+    position = create(:position)
     candidate = create(:candidate, status: :published)
     create(:candidate_profile, candidate: candidate)
     invite = create(:invite, candidate: candidate,
