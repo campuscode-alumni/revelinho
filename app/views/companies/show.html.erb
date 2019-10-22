@@ -1,2 +1,90 @@
-<h1><%= @company.name %></h1>
-<h4>Endereço: <%= @company.address %></h4>
+<div class="container-fluid candidate-page p-0">
+  <div class="container-fluid candidate-header">
+    <div class="row name-wrapper justify-content-center">
+      <h1 class="name text-center"><%= @company.name %><br>
+        <small>
+          <%= @company.address %>
+        </small>
+      </h1>
+    </div>
+  </div>
+
+  <% if @company.company_profile %>
+    <% if @company_profile.logo.attached? %>
+      <div class="image-wrapper">
+        <%= image_tag @company_profile.logo, class: 'image img-thumbnail rounded mx-auto d-block', width:'200px' %>
+      </div>
+    <% else %>
+      <div class="image-wrapper">
+        <img src="https://github.com/identicons/jasonlong.png", class= 'image img-thumbnail rounded mx-auto d-block', style= "width:200px" alt="<%=  %>">
+      </div>
+    <% end %>
+    <div class="candidate p-2">
+      <div class="candidate p-2">
+        <div class="container-fluid">
+          <% if @company_profile.full_description %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Descrição da empresa</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.full_description %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.benefits %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Benefícios</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.benefits %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.employees_number %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Número de funcionários</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.employees_number %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.website %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Site da empresa</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.website %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.phone %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Telefone</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.phone %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.mission %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Missão</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.mission %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.category %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Categoria</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.category %></div>
+            </div>
+          <% end %>
+          <% if @company_profile.attractives %>
+            <div class="row justify-content-center text-wrapper">
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Atrativos</div>
+              <div class="spacer"></div>
+              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.attractives %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+        <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary' %>
+    </div>
+  </div>
+</div>

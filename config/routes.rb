@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  root 'home#index'
   devise_for :employees
   devise_for :candidates
 
+  root to: 'home#index'
+
+  resources :companies, only: %i[index edit update show] do
+    get 'dashboard', on: :collection
+  end
+  resources :company_profiles, only: %i[new create edit update]
   resources :candidates, only: %i[index show] do
     member do
       post 'add-comment', to: 'candidates#add_comment', as: :add_comment
@@ -22,5 +27,6 @@ Rails.application.routes.draw do
 
   resources :positions, only: %i[new create show]
   resources :candidate_profiles, only: %i[new create edit update]
-  resources :companies, only: %i[edit update show]
+
+  get 'my_company', to: 'company#my_company'
 end

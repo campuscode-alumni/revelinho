@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Invites' do
   scenario 'Employee invites candidate to position' do
-    company = create(:company, :active, url_domain: 'revelo.com.br')
+    company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
@@ -26,7 +26,7 @@ feature 'Invites' do
   end
 
   scenario 'Employee sees invited candidates in candidates list' do
-    company = create(:company, :active, url_domain: 'revelo.com.br')
+    company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
@@ -49,7 +49,7 @@ feature 'Invites' do
   end
 
   scenario 'Employee sees existing invite in candidate page' do
-    company = create(:company, :active, url_domain: 'revelo.com.br')
+    company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
@@ -71,7 +71,7 @@ feature 'Invites' do
   end
 
   scenario 'Employee only invite candidate once per position' do
-    company = create(:company, :active, url_domain: 'revelo.com.br')
+    company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
@@ -98,8 +98,8 @@ feature 'Invites' do
   end
 
   scenario 'Employee can only invite candidates to his company\'s positons' do
-    company_contractor = create(:company, :active, url_domain: 'revelo.com.br')
-    company_other = create(:company, :active, url_domain: 'jobs.com.br')
+    company_contractor = create(:company, url_domain: 'revelo.com.br')
+    company_other = create(:company, url_domain: 'jobs.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company_contractor)
     candidate = create(:candidate, name: 'Gustavo')
@@ -124,7 +124,7 @@ feature 'Invites' do
   end
 
   scenario 'Employee invites candidate to second position' do
-    company = create(:company, :active, url_domain: 'revelo.com.br')
+    company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
@@ -157,7 +157,7 @@ feature 'Invites' do
 
   scenario 'Employee sees position link when there are none ' \
   'to invite a candidate to' do
-    company = create(:company, :active, url_domain: 'revelo.com.br')
+    company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')

@@ -6,7 +6,7 @@ feature 'Employee creates position' do
     employee = create(:employee, company: company)
 
     login_as(employee, scope: :employee)
-    visit root_path
+    visit dashboard_companies_path
     click_on 'Criar posição'
 
     fill_in 'Título', with: 'Desenvolvedor Ruby'
@@ -28,7 +28,7 @@ feature 'Employee creates position' do
   end
 
   scenario 'and must be logged in' do
-    visit root_path
+    visit dashboard_companies_path
 
     expect(page).not_to have_link('Criar posição')
   end
@@ -38,7 +38,7 @@ feature 'Employee creates position' do
     employee = create(:employee, company: company)
 
     login_as(employee, scope: :employee)
-    visit root_path
+    visit dashboard_companies_path
     click_on 'Criar posição'
 
     fill_in 'Título', with: ''
