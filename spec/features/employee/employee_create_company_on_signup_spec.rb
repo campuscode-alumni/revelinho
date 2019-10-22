@@ -15,7 +15,8 @@ feature 'employee create company on signup' do
   end
 
   scenario 'and update company after' do
-    company = create(:company)
+    company_profile = create(:company_profile)
+    company = create(:company, company_profile: company_profile)
     employee = create(:employee, company: company)
 
     login_as(employee, scope: :employee)
@@ -27,6 +28,22 @@ feature 'employee create company on signup' do
     click_on 'Salvar'
 
     expect(current_path).to eq(company_path(employee.company))
-    expect(page).to have_content('Endereço: Av. Paulista, 1234')
+    expect(page).to have_content('Av. Paulista, 1234')
+  end
+
+  scenario 'and validates company update' do
+    company = create(:company)
+    employee = create(:employee, company: company)
+
+    login_as(employee, scope: :employee)
+    visit edit_company_path(employee.company)
+
+    fill_in 'Nome', with: ''
+    fill_in 'Endereço', with: ''
+
+    click_on 'Salvar'
+
+    expect(page).to have_content('Nome não pode ficar em branco')
+    expect(page).to have_content('Endereço não pode ficar em branco')
   end
 end

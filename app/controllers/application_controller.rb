@@ -1,11 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_presenter
+  rescue_from ActionController::UnpermittedParameters, with: :forbidden
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   protected
 
   def after_sign_in_path_for(resource)
     return dashboard_candidates_path unless resource.is_a? Employee
-    return company_path(resource.company) unless resource.company.pending?
+    return dashboard_companies_path unless resource.company.pending?
 
     flash[:notice] = 'Preencha os dados corretamente'
     edit_company_path(resource.company)
@@ -17,5 +20,23 @@ class ApplicationController < ActionController::Base
       keys: %i[name cpf birthday occupation phone educational_level
                address city state country zip_code]
     )
+  end
+
+  private
+
+  def set_presenter
+    @application_presenter = ApplicationPresenter.new(self)
+  end
+
+  def forbidden
+    redirect_to root_path
+  end
+
+  def not_found
+    render file: Rails.root.join('public', '404'), status: :not_found
+  end
+
+  def current_user
+    current_candidate || current_employee
   end
 end

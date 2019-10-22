@@ -3,8 +3,11 @@ class Employee < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   belongs_to :company, optional: true
-  has_many :candidate_notes, dependent: :destroy
+  has_many :candidate_notes, dependent: :nullify
+  has_many :messages, as: :sendable, dependent: :nullify
+
   after_create :set_company
 
   private

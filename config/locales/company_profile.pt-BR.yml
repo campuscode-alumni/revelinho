@@ -1,0 +1,23 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      company_profile: Perfil da companhia
+    attributes:
+      company_profile:
+        full_description: Descrição da empresa
+        benefits: Benefícios
+        employees_number: Número de funcionário
+        website: Site da empresa
+        phone: Telefone
+        mission: Missão
+        category: Categoria
+        attractives: Atrativos
+        logo: Logo
+  company_profile:
+    create:
+      success: O perfil da empresa foi atualizado com sucesso.
+      failed: Erro ao criar o perfil da companhia. Tente novamente.
+    update:
+      success: O perfil da empresa foi atualizado com sucesso.
+      failed: Erro ao atualizar o perfil da companhia. Tente novamente.

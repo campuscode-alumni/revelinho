@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_18_125607) do
+ActiveRecord::Schema.define(version: 2019_10_21_120956) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,21 @@ ActiveRecord::Schema.define(version: 2019_10_18_125607) do
     t.integer "status", default: 0
   end
 
+  create_table "company_profiles", force: :cascade do |t|
+    t.string "full_description"
+    t.string "benefits"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
+    t.integer "employees_number"
+    t.string "website"
+    t.string "phone"
+    t.text "mission"
+    t.string "category"
+    t.text "attractives"
+    t.index ["company_id"], name: "index_company_profiles_on_company_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -107,25 +122,35 @@ ActiveRecord::Schema.define(version: 2019_10_18_125607) do
   end
 
   create_table "invites", force: :cascade do |t|
+    t.integer "position_id", null: false
+    t.integer "candidate_id", null: false
     t.string "message"
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "position_id"
-    t.integer "candidate_id"
     t.index ["candidate_id"], name: "index_invites_on_candidate_id"
     t.index ["position_id"], name: "index_invites_on_position_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "selection_process_id", null: false
+    t.text "text"
+    t.string "sendable_type"
+    t.integer "sendable_id"
+    t.index ["selection_process_id"], name: "index_messages_on_selection_process_id"
+    t.index ["sendable_type", "sendable_id"], name: "index_messages_on_sendable_type_and_sendable_id"
   end
 
   create_table "positions", force: :cascade do |t|
     t.string "title"
     t.string "industry"
     t.text "description"
-    t.decimal "salary"
     t.integer "position_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
+    t.integer "salary_from"
+    t.integer "salary_to"
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
 
@@ -140,9 +165,11 @@ ActiveRecord::Schema.define(version: 2019_10_18_125607) do
   add_foreign_key "candidate_notes", "candidates"
   add_foreign_key "candidate_notes", "employees"
   add_foreign_key "candidate_profiles", "candidates"
+  add_foreign_key "company_profiles", "companies"
   add_foreign_key "employees", "companies"
   add_foreign_key "invites", "candidates"
   add_foreign_key "invites", "positions"
+  add_foreign_key "messages", "selection_processes"
   add_foreign_key "positions", "companies"
   add_foreign_key "selection_processes", "invites"
 end

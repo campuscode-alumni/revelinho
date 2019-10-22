@@ -1,6 +1,8 @@
 class Candidate < ApplicationRecord
   has_one :candidate_profile, dependent: :destroy
-  has_many :invites, dependent: :destroy
+  has_many :invites, dependent: :nullify
+  has_many :positions, through: :invites
+  has_many :messages, as: :sendable, dependent: :nullify
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

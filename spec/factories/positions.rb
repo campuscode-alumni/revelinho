@@ -3,11 +3,9 @@ FactoryBot.define do
     title { 'Desenvolvedor' }
     industry { 'TI' }
     description { 'Desenvolvedor Ruby' }
-    salary { '3000.00' }
-    position_type { 'full_time' }
-
-    trait :with_company do
-      company
-    end
+    salary_from { 4500 }
+    salary_to { 5500 }
+    position_type { :full_time }
+    company
   end
 end
