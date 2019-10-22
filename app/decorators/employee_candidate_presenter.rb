@@ -27,11 +27,6 @@ class EmployeeCandidatePresenter < SimpleDelegator
     uninvited_positions.empty?
   end
 
-  def method_missing(m, *args, &block)
-    super
-    @candidate.send(m, *args, &block)
-  end
-
   def awaiting_invites_badge
     return '' if invited_positions.empty?
 
