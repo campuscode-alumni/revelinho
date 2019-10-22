@@ -2,9 +2,9 @@ class CompaniesController < ApplicationController
   before_action :authenticate_employee!, only: %i[index edit update show
                                                   dashboard]
   before_action :set_company, only: %i[edit update show]
+  before_action :set_company_profile, only: %i[show]
   before_action :own_company, only: %i[edit update show]
   before_action :employee_pending, except: %i[edit update]
-  before_action :company_profile, only: %i[show]
 
   def index; end
 
@@ -28,7 +28,7 @@ class CompaniesController < ApplicationController
 
   private
 
-  def company_profile
+  def set_company_profile
     @company_profile = @company.company_profile
   end
 
