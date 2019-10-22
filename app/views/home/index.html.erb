@@ -1,6 +1,6 @@
 <% if employee_signed_in?%>
   <p>Usuário <%= current_employee.email %> logado com sucesso.</p>
-  <%= link_to 'Criar vaga', new_position_path %>
+  <%= link_to 'Criar posição', new_position_path %>
   <%= link_to 'Candidatos disponíveis', candidates_path %>
 <% elsif candidate_signed_in? %>
   <%= link_to 'Concluir perfil', new_candidate_profile_path %>

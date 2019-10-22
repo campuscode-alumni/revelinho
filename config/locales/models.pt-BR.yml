@@ -1,14 +1,15 @@
 pt-BR:
   activerecord:
     models:
-      position: Vaga
+      position: Posição
       company: Empresa
     attributes:
       position:
         title: Título
         industry: Área
         description: Descrição
-        salary: Salário
+        salary_from: Salário de
+        salary_to: Salário até
         position_type: Tipo
       company:
         name: Nome
