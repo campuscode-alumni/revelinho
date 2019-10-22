@@ -1,18 +1,24 @@
 pt-BR:
   activerecord:
     models:
-      position: "Posição"
+      position: Posição
+      company: Empresa
     attributes:
       position:
-        title: "Título"
-        industry: "Área"
-        description: "Descrição"
-        salary_from: "Salário de"
-        salary_to: "Salário até"
-        position_type: "Tipo"
+        title: Título
+        industry: Área
+        description: Descrição
+        salary_from: Salário de
+        salary_to: Salário até
+        position_type: Tipo
+      company:
+        name: Nome
+        address: Endereço
   # Humanização de keys dos Enums
   position_type:
-    full_time: "CLT"
-    part_time: "Meio Período"
-    internship: "Estágio"
-    contractor: "PJ"
+    full_time: CLT
+    part_time: Meio Período
+    internship: Estágio
+    contractor: PJ
+
+

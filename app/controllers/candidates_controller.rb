@@ -1,11 +1,17 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_employee!, only: %i[invite]
+  before_action :authenticate_candidate!, only: [:invites]
+  before_action :authorize_employee, only: %i[invite]
+
   before_action :set_candidate, only: %i[show invite]
   before_action :set_candidates_list, only: %i[index]
+  before_action :set_invite, only: %i[accept_invite reject_invite]
+
   before_action :decorate_list, only: %i[index]
   before_action :decorate, only: %i[show]
+
   before_action :invite_params, only: %i[invite]
-  before_action :authorize_employee, only: %i[invite]
+  before_action :owner_invite, only: %i[accept_invite reject_invite]
 
   def index
     msg = 'Não há candidatos cadastrados até agora'
@@ -46,6 +52,23 @@ class CandidatesController < ApplicationController
     end
   end
 
+  def invites
+    @invites = current_candidate.invites.pending
+  end
+
+  def accept_invite
+    return redirect_to invites_candidates_path unless
+     SelectionProcess.create(invite: @invite)
+
+    @invite.accepted!
+
+    redirect_to selection_process_candidates_path(@invite.selection_process)
+  end
+
+  def reject_invite
+    @invite.rejected!
+  end
+
   private
 
   def set_candidate
@@ -81,5 +104,14 @@ class CandidatesController < ApplicationController
     @position = current_employee.company.positions.find(
       @invite_params[:position_id]
     )
+  end
+
+  def set_invite
+    @invite = Invite.find(params[:id])
+  end
+
+  def owner_invite
+    return redirect_to invites_candidates_path unless
+     current_candidate.invites.where(id: @invite.id, status: :pending).any?
   end
 end
