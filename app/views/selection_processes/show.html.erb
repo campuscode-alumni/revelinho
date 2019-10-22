@@ -1,20 +1,34 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-8 offset-md-2">
-      <h1><%= @selection_process.company.name %></h1>
-      <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
-        <div class="form-group">
-          <%= f.text_area :text, class: 'form-control', rows: "4", placeholder: 'Escreva a sua mensagem' %>
-        </div>      
-        <%= f.submit 'Enviar', class: 'btn btn-primary' %>
-      <% end %>
-    </div>
-    <div class="jumbotron col-12">
+    <div class="col-12 col-md-8 offset-md-2">
       <div class="row">
-        <% @selection_process.messages.each do |message| %>
-          <div class="col-12 mb-3">
+        <div class="col-12 col-md-6">
+          <%= @selection_process.company.name %>
+          
+        </div>
+        <div class="col-12 col-md-6">
+          <%= @selection_process.position.title %>
+          <p>Salário: <%= number_to_currency(@selection_process.position.salary_from) %> à <%= number_to_currency(@selection_process.position.salary_to) %></p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="jumbotron pt-3">
+      <div class="row">
+        <div class="col-12 col-md-8 offset-md-2 mb-4">
+          <div class="card card-body">
+              <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
+              <div class="form-group">
+                <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
+              </div>      
+              <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
+            <% end %>
+          </div>
+        </div>
+        <% @selection_process.messages.order(id: :desc).each do |message| %>
+          <div class="col-12 col-md-8 offset-md-2 mb-3">
             <div class="card card-body">
-              <h4><%= message.sendable.email %></h4>
+              <h5><%= message.sendable.email %></h5>
               <p><%= message.text %></p>
             </div>
           </div>          
