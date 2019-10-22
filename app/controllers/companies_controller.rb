@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
-  before_action :authenticate_employee!, only: %i[index edit update show]
+  before_action :authenticate_employee!, only: %i[index edit update show
+                                                  dashboard]
   before_action :set_company, only: %i[edit update show]
   before_action :own_company, only: %i[edit update show]
   before_action :employee_pending, except: %i[edit update]

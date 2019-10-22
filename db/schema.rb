@@ -122,12 +122,12 @@ ActiveRecord::Schema.define(version: 2019_10_21_120956) do
   end
 
   create_table "invites", force: :cascade do |t|
+    t.integer "position_id", null: false
+    t.integer "candidate_id", null: false
     t.string "message"
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "position_id"
-    t.integer "candidate_id"
     t.index ["candidate_id"], name: "index_invites_on_candidate_id"
     t.index ["position_id"], name: "index_invites_on_position_id"
   end
@@ -145,11 +145,12 @@ ActiveRecord::Schema.define(version: 2019_10_21_120956) do
     t.string "title"
     t.string "industry"
     t.text "description"
-    t.decimal "salary"
     t.integer "position_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
+    t.integer "salary_from"
+    t.integer "salary_to"
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
 

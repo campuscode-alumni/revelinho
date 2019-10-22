@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'candidate send message' do
   scenario 'successfully' do
     candidate = create(:candidate, status: :published)
-    position = create(:position, :with_company)
+    position = create(:position)
     create(:invite, candidate: candidate, position: position, status: :pending)
 
     login_as(candidate, scope: :candidate)
@@ -20,7 +20,7 @@ feature 'candidate send message' do
 
   scenario 'and validate empty field' do
     candidate = create(:candidate, status: :published)
-    position = create(:position, :with_company, title: 'Desenvolvedor')
+    position = create(:position, title: 'Desenvolvedor')
     invite = create(:invite, candidate: candidate,
                              position: position, status: :accepted)
     invite.create_selection_process

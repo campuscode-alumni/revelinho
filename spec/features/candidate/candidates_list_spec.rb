@@ -11,7 +11,7 @@ feature 'Candidates list' do
     employee = create(:employee, company: company)
 
     login_as employee, scope: :employee
-    visit root_path
+    visit dashboard_companies_path
     click_on 'Candidatos disponíveis'
 
     expect(page).to have_css('.candidate', count: 3)
@@ -27,7 +27,7 @@ feature 'Candidates list' do
     employee = create(:employee)
 
     login_as employee, scope: :employee
-    visit root_path
+    visit dashboard_companies_path
     click_on 'Candidatos disponíveis'
 
     expect(page).to have_css('.candidate', count: 1)
@@ -39,7 +39,7 @@ feature 'Candidates list' do
     employee = create(:employee)
 
     login_as employee, scope: :employee
-    visit root_path
+    visit dashboard_companies_path
     click_on 'Candidatos disponíveis'
 
     expect(page).to have_css('.candidate', count: 0)
@@ -55,7 +55,7 @@ feature 'Candidates list' do
     employee = create(:employee)
 
     login_as employee, scope: :employee
-    visit root_path
+    visit dashboard_companies_path
     click_on 'Candidatos disponíveis'
     click_on 'Gustavo'
 
@@ -73,7 +73,7 @@ feature 'Candidates list' do
     employee = create(:employee)
 
     login_as employee, scope: :employee
-    visit root_path
+    visit dashboard_companies_path
     click_on 'Candidatos disponíveis'
     click_on 'Gustavo'
     click_on 'Voltar'
