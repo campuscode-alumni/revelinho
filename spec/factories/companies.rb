@@ -4,5 +4,9 @@ FactoryBot.define do
     address { 'Acme Street 80' }
     url_domain { 'acme.com' }
     status { 'pending' }
+
+    trait :active do
+      status { :active }
+    end
   end
 end

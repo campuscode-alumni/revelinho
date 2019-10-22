@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :invite do
-    message { 'We want YOU!' }
+    message { 'Olá, ser humano. Venha fazer parte do nosso time' }
     status { 0 }
     candidate
     position

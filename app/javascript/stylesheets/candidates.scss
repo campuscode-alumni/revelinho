@@ -25,7 +25,7 @@
   $image-height: 8em;
 
   .candidate-header {
-    background-color: $red;
+    background-color: $dark;
     width: 100%;
 
     .spacer {
@@ -109,7 +109,7 @@
 
       .header {
         height: $header-height;
-        background-color: $secondary;
+        background-color: $red;
         display: flex;
         align-items: center;
         color: $white;

@@ -5,7 +5,7 @@ describe Message do
     context '#create_message' do
       it 'has to create message with sendable' do
         current_candidate = create(:candidate, status: :published)
-        position = create(:position, :with_company)
+        position = create(:position)
         invite = Invite.create(candidate: current_candidate, position: position,
                                status: :accepted)
 
