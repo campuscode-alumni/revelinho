@@ -1,4 +1,4 @@
-<div class="container-fluid candidate-page p-0">
+<div class="candidate-page p-0">
   <div class="row candidate-header m-0">
     <div class="col-3 col-md-3 col-sm-2 col-xs-1 spacer"></div>
     <div class="col">
@@ -79,9 +79,18 @@
       </div>
 
       <% if employee_signed_in? %>
-        <div class="col-md-3 col-lg-3 col-xl-3 col-xs-12 col-sm-12 employee-notes border border-secondary p-0 rounded">
+        <section class="col-md-3 col-lg-3 col-xl-3 col-xs-12 col-sm-12 employee-notes border border-danger p-0 rounded">
           <div class="container-fluid employee-comments p-0">
-            <div class="header px-3">Comentários</div>
+            <h6 class="header px-2">Convidar</h6>
+            <div class="make-invite p-2">
+              <%= render partial: 'invite', locals: { candidate: @candidate, no_invitable_positions: @employee_candidate_presenter.no_invitable_positions? } %>
+            </div>
+            <div class="current-invites px-2 pt-2 border-top">
+              <%= @employee_candidate_presenter.invited_positions_card %>
+            </div>
+          </div>
+          <div class="container-fluid employee-comments p-0">
+            <h6 class="header px-2">Comentários</h6>
             <div class="comments">
               <%= render partial: 'candidate_notes/candidate_note', collection: @notes %>
             </div>
@@ -89,7 +98,7 @@
               <%= render partial: 'candidate_notes/form', locals: {candidate: @candidate} %>
             </div>
           </div>
-        </div>
+        </section>
       <% end %>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<%= form_with url: candidate_add_comment_path(candidate), method: 'post' do %>
+<%= form_with url: add_comment_candidate_path(candidate), method: 'post' do %>
   <div class="form-group">
     <%= text_field_tag(:comment, nil, placeholder: 'Novo comentário', class: 'form-control') %>
   </div>
