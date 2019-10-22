@@ -41,7 +41,7 @@ class CandidatesController < ApplicationController
       "#{@position.title}"
       redirect_to candidates_path
     else
-      flash[:alert] = 'Erro ao tentar convidar candidato'
+      flash[:danger] = 'Erro ao tentar convidar candidato'
       redirect_to @candidate
     end
   end

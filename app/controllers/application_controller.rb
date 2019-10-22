@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_presenter
   rescue_from ActionController::UnpermittedParameters, with: :forbidden
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_presenter
+    @application_presenter = ApplicationPresenter.new(self)
+  end
 
   def forbidden
     redirect_to root_path

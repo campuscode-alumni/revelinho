@@ -37,22 +37,8 @@
         </ul>
       </div>
     </nav>
-    <% if notice.present? %>
-    <div class='alert alert-primary' role='alert'>
-      <%= notice %>
-    </div>
-    <% end %>
-    
-    <% if alert.present? %>
-    <div class='alert alert-danger' role='alert'>
-      <%= alert %>
-    </div>
-    <% end %>
-    <% if flash[:success].present? %>
-      <div class='alert alert-success' role='alert'>
-        <%= flash[:success] %>
-      </div>
-    <% end %>
+
+    <%= @application_presenter.flash_alerts %>
 
     <%= yield %>
   </body>
