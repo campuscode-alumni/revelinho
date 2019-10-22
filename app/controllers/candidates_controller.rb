@@ -18,7 +18,7 @@ class CandidatesController < ApplicationController
 
     @notes = CandidateNote.includes(employee: :company).where(
       employees: { company: current_employee.company }
-    )
+    ).decorate
     @positions = @employee_candidate_presenter.uninvited_positions
   end
 

@@ -1,5 +1,6 @@
 class EmployeeCandidatePresenter < SimpleDelegator
   include Rails.application.routes.url_helpers
+  include ActionView::Helpers::OutputSafetyHelper
   attr_reader :candidate, :employee
 
   # delegate :name, :id, to: :candidate
@@ -35,6 +36,15 @@ class EmployeeCandidatePresenter < SimpleDelegator
       'Aguardando aceite de convite',
       class: 'badge badge-info'
     )
+  end
+
+  def invited_positions_card
+    return '' unless invited_positions.any?
+
+    content_tag(:p, 'Candidato convidado para:') +
+      content_tag(:ul) do
+        safe_join(invited_positions.map { |p| content_tag(:li, p.title) })
+      end
   end
 
   private
