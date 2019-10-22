@@ -2,8 +2,8 @@ class CandidatesController < ApplicationController
   before_action :authenticate_candidate!, only: %i[invites dashboard]
   before_action :authenticate_employee!, only: %i[invite]
   before_action :candidate, only: %i[show invite]
-  before_action :invite, only: %i[accept_invite reject_invite]
-  before_action :candidates_list, only: %i[index]
+  before_action :set_invite, only: %i[accept_invite reject_invite]
+  before_action :set_candidates_list, only: %i[index]
   before_action :decorate_list, only: %i[index]
   before_action :decorate, only: %i[show]
   before_action :invite_params, only: %i[invite]
@@ -75,12 +75,12 @@ class CandidatesController < ApplicationController
     @candidate ||= Candidate.find(params[:id])
   end
 
-  def invite
-    @invite ||= Invite.find(params[:id])
+  def set_invite
+    @invite = Invite.find(params[:id])
   end
 
-  def candidates_list
-    @candidates ||= Candidate.published
+  def set_candidates_list
+    @candidates = Candidate.published
   end
 
   def decorate_list
