@@ -7,7 +7,7 @@ class Employee < ApplicationRecord
   belongs_to :company, optional: true
   has_many :candidate_notes, dependent: :nullify
   has_many :messages, as: :sendable, dependent: :nullify
-
+  has_many :interview_feedbacks, dependent: :nullify
   after_create :set_company
 
   private
