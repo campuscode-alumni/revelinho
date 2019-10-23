@@ -178,12 +178,13 @@ feature 'Invites' do
     create(:position, title: 'Engenheiro de Software Pleno',
                       company: company)
     create(:candidate_profile, candidate: candidate)
-    allow_any_instance_of(Invite).to receive(:save).and_return(false)
-    # invite_double = double('invites')
-    # allow(Candidate).to receive(:find).and_return(candidate)
-    # allow(candidate).to receive(:invites).and_return(invite_double)
-    # allow(invite_double).to receive(:new).and_return(invite_double)
-    # allow(invite_double).to receive(:save).and_return(false)
+
+    # allow_any_instance_of(Invite).to receive(:save).and_return(false)
+    invite_double = double('invites')
+    allow(Candidate).to receive(:find).and_return(candidate)
+    allow(candidate).to receive(:invites).and_return(invite_double)
+    allow(invite_double).to receive(:new).and_return(invite_double)
+    allow(invite_double).to receive(:save).and_return(false)
 
     login_as(employee, scope: :employee)
     visit candidate_path(candidate)
