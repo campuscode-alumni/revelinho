@@ -13,7 +13,7 @@ class CompaniesController < ApplicationController
   def update
     if @company.update(company_params)
       @company.active!
-      redirect_to company_path(@company)
+      redirect_to dashboard_companies_path
     else
       render :edit
     end
