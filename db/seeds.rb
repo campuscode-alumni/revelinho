@@ -111,3 +111,41 @@ Employee.create!(
   email: 'timbo@empresa.com.br',
   password: '123456'
 )
+
+company = Company.create!(
+  name: 'Empresa',
+  address: 'Avenida Paulista, 2520',
+  url_domain: 'empresa.com.br',
+  status: :active
+)
+
+dev_ruby = Position.create!(
+  title: 'Desenvolvedor ruby',
+  industry: 'T.I',
+  description: 'Desenvolvedor com 2 anos de experiencia',
+  salary_from: '3500.00',
+  salary_to: '3800.00',
+  position_type: :full_time,
+  company: company
+)
+
+Invite.create!(
+  message: 'Gostariamos que fizesse parte da nossa equipe!',
+  position: dev_ruby,
+  candidate: rafael,
+  status: :pending
+)
+
+Invite.create!(
+  message: 'Gostariamos que fizesse parte da nossa equipe!',
+  position: dev_ruby,
+  candidate: patricia,
+  status: :accepted
+)
+
+Invite.create!(
+  message: 'Gostariamos que fizesse parte da nossa equipe!',
+  position: dev_ruby,
+  candidate: gustavo,
+  status: :rejected
+)
