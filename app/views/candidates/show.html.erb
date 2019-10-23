@@ -83,7 +83,7 @@
           <div class="container-fluid employee-comments p-0">
             <h6 class="header px-2">Convidar</h6>
             <div class="make-invite p-2">
-              <%= render partial: 'invite', locals: { candidate: @candidate, no_invitable_positions: @employee_candidate_presenter.no_invitable_positions? } %>
+              <%= render partial: 'invite_form', locals: { candidate: @candidate, no_invitable_positions: @employee_candidate_presenter.no_invitable_positions? } %>
             </div>
             <div class="current-invites px-2 pt-2 border-top">
               <%= @employee_candidate_presenter.invited_positions_card %>

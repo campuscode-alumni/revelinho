@@ -1,24 +1,17 @@
 <div class="container-fluid">
-    <%= link_to 'Convites', invites_candidates_path, id: 'my-pending-invites' %>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="jumbotron">
-                <h2>
-                    <%= "Olá #{current_candidate.name}!" %>
-                </h2>
-                <% if current_candidate.published? %>
-                <p>
-                    Seu perfil está ativo. Aguarde o contato das empresas interessadas.
-                </p>
-                <%= link_to 'Editar Perfil', edit_candidate_profile_path(current_candidate.candidate_profile), class: "btn btn-primary btn-large" %>
-                <% else %>
-                <p>
-                    Seu perfil ainda não está ativo. Complete seu perfil e fique visível para as empresas.
-                </p>
-                <%= link_to 'Concluir perfil', new_candidate_profile_path, class: "btn btn-primary btn-large" %>
-                <% end %>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron">
+        <h2>
+          <%= @dashboard.header_text %>
+        </h2>
+        <%= @dashboard.info_header_text %>
+      </div>
     </div>
+  </div>
+  <article class="container">
+    <div class="row">
+      <%= @dashboard.card_render %>
+    </div>
+  </article>
 </div>
