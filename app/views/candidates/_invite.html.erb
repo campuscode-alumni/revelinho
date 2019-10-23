@@ -17,8 +17,9 @@
     <p><span>Regime de Contratação:</span> <%= t(:"position_type.#{invite.position.position_type}") %></p>
     </div>
     <div class="col-md-3 d-flex align-items-end flex-wrap align-content-end">
-    <%= link_to 'Rejeitar', reject_invites_candidate_path(invite), method: :post, class: 'btn btn-danger flex-grow-1 m-3' %>
-    <%= link_to 'Aceitar convite', accept_invites_candidate_path(invite), method: :post, class: 'btn btn-success flex-grow-1 m-3' %>
+      <%= @invite_presenter.invite_accepted(invite) %>
+      <%= @invite_presenter.invite_rejected(invite) %>
+      <%= @invite_presenter.invite_pending(invite) %>
     </div>
   </div>
   </section>
