@@ -1,0 +1,9 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      invite: Convite
+    attributes:
+      invite:
+        message: Mensagem
+        status: Estatus
