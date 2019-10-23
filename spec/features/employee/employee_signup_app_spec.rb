@@ -6,9 +6,9 @@ feature 'Employee signup app' do
 
     click_on 'Cadastro de funcionário'
 
-    fill_in 'Email', with: 'employee@company.com'
-    fill_in 'Password', with: '123456'
-    fill_in 'Password confirmation', with: '123456'
+    fill_in 'E-mail', with: 'employee@company.com'
+    fill_in 'Senha', with: '123456'
+    fill_in 'Confirme sua senha', with: '123456'
 
     click_on 'Sign up'
 
@@ -22,13 +22,14 @@ feature 'Employee signup app' do
 
     click_on 'Cadastro de funcionário'
 
-    fill_in 'Email', with: ''
-    fill_in 'Password', with: ''
-    fill_in 'Password confirmation', with: ''
+    fill_in 'E-mail', with: ''
+    fill_in 'Senha', with: ''
+    fill_in 'Confirme sua senha', with: ''
 
     click_on 'Sign up'
 
-    expect(page).to have_content('Não foi possível salvar o employee: 2 erros.')
+    expect(page).to have_content('Não foi possível salvar o '\
+                                 'funcionário: 2 erros.')
   end
 
   scenario 'and logout' do
@@ -45,20 +46,20 @@ feature 'Employee signup app' do
 
   scenario 'and see your company dashboard' do
     company = create(:company, name: 'Revelo', address: 'Av. Paulista',
-                               url_domain: 'revelo.com.br', status: :active)
+                               url_domain: 'revelo.com.br')
 
     visit root_path
 
     click_on 'Cadastro de funcionário'
 
-    fill_in 'Email', with: 'joao.silva@revelo.com.br'
-    fill_in 'Password', with: '123456'
-    fill_in 'Password confirmation', with: '123456'
+    fill_in 'E-mail', with: 'joao.silva@revelo.com.br'
+    fill_in 'Senha', with: '123456'
+    fill_in 'Confirme sua senha', with: '123456'
 
     click_on 'Sign up'
 
     expect(Company.count).to eq 1
-    expect(current_path).to eq(company_path(company))
-    expect(page).to have_css('h1', text: 'Revelo')
+    expect(current_path).to eq(dashboard_companies_path)
+    expect(page).to have_content company.name
   end
 end

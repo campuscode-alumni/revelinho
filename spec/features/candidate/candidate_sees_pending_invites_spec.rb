@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'candidate sees pending invites' do
   scenario 'successfully' do
-    position = create(:position)
+    position = create(:position, salary_from: 4500, salary_to: 5500)
     candidate = create(:candidate, status: :published)
     create(:candidate_profile, candidate: candidate)
     invite = create(:invite, candidate: candidate,
@@ -17,11 +17,11 @@ feature 'candidate sees pending invites' do
     expect(page).to have_link 'Aceitar'
     expect(page).to have_link 'Rejeitar'
     expect(page).to have_content invite.position.title
-    expect(page).to have_content invite.position.salary_from
-    expect(page).to have_content invite.position.salary_to
+    expect(page).to have_content 'R$ 4.500,00'
+    expect(page).to have_content 'R$ 5.500,00'
     expect(page).to have_content invite.position.industry
     expect(page).to have_content invite.position.description
-    expect(page).to have_content invite.position.position_type
+    expect(page).to have_content 'CLT'
   end
 
   scenario 'and accept invite successfully' do

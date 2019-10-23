@@ -9,5 +9,9 @@ FactoryBot.define do
     linkedin_profile_url { 'https://www.linkedin.com/in/candidate' }
     github_profile_url { 'https://github.com/candidate' }
     candidate { nil }
+
+    trait :with_candidate do
+      candidate
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_120956) do
+ActiveRecord::Schema.define(version: 2019_10_22_194112) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,21 @@ ActiveRecord::Schema.define(version: 2019_10_21_120956) do
     t.integer "status", default: 0
   end
 
+  create_table "company_profiles", force: :cascade do |t|
+    t.string "full_description"
+    t.string "benefits"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
+    t.integer "employees_number"
+    t.string "website"
+    t.string "phone"
+    t.text "mission"
+    t.string "category"
+    t.text "attractives"
+    t.index ["company_id"], name: "index_company_profiles_on_company_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -104,6 +119,16 @@ ActiveRecord::Schema.define(version: 2019_10_21_120956) do
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
+  end
+
+  create_table "interviews", force: :cascade do |t|
+    t.datetime "datetime"
+    t.integer "format", default: 0
+    t.string "address"
+    t.integer "selection_process_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["selection_process_id"], name: "index_interviews_on_selection_process_id"
   end
 
   create_table "invites", force: :cascade do |t|
@@ -150,7 +175,9 @@ ActiveRecord::Schema.define(version: 2019_10_21_120956) do
   add_foreign_key "candidate_notes", "candidates"
   add_foreign_key "candidate_notes", "employees"
   add_foreign_key "candidate_profiles", "candidates"
+  add_foreign_key "company_profiles", "companies"
   add_foreign_key "employees", "companies"
+  add_foreign_key "interviews", "selection_processes"
   add_foreign_key "invites", "candidates"
   add_foreign_key "invites", "positions"
   add_foreign_key "messages", "selection_processes"
