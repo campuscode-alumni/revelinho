@@ -52,7 +52,7 @@ class CandidatesController < ApplicationController
   end
 
   def invites
-    @invites = current_candidate.invites.pending
+    @invites = current_candidate.invites
   end
 
   def accept_invite
