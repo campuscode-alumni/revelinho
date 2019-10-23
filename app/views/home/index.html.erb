@@ -1,16 +1,8 @@
-<% if employee_signed_in?%>
-  <p>Usuário <%= current_employee.email %> logado com sucesso.</p>
-  <%= link_to 'Criar posição', new_position_path %>
-  <%= link_to 'Candidatos disponíveis', candidates_path %>
-<% elsif candidate_signed_in? %>
-  <%= link_to 'Concluir perfil', new_candidate_profile_path %>
-<% else %>
-  <div class="row">
-    <div class="jumbotron border border-dark m-auto p-4">
-      <h3>Primeira vez aqui?</h3>
-      <p>Faça seu cadastro:</p>
-      <%= link_to 'Cadastro de funcionário', new_employee_registration_path, class: 'btn btn-dark' %>
-      <%= link_to 'Cadastro de candidato', new_candidate_registration_path, class: 'btn btn-dark' %>
-    </div>
+<div class="row">
+  <div class="jumbotron border border-dark m-auto p-4">
+    <h3>Primeira vez aqui?</h3>
+    <p>Faça seu cadastro:</p>
+    <%= link_to 'Cadastro de funcionário', new_employee_registration_path, class: 'btn btn-dark' %>
+    <%= link_to 'Cadastro de candidato', new_candidate_registration_path, class: 'btn btn-dark' %>
   </div>
-<% end %>
+</div>
