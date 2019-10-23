@@ -169,4 +169,33 @@ feature 'Invites' do
     expect(page).to have_link('Adicionar posição', href: new_position_path)
     expect(page).to have_button('Convidar', disabled: true)
   end
+
+  scenario 'Employee fails to invite candidate to position' do
+    company = create(:company, url_domain: 'revelo.com.br')
+    employee = create(:employee, email: 'renata@revelo.com.br',
+                                 company: company)
+    candidate = create(:candidate, name: 'Gustavo')
+    create(:position, title: 'Engenheiro de Software Pleno',
+                      company: company)
+    create(:candidate_profile, candidate: candidate)
+
+    # allow_any_instance_of(Invite).to receive(:save).and_return(false)
+    invite_double = double('invites')
+    allow(Candidate).to receive(:find).and_return(candidate)
+    allow(candidate).to receive(:invites).and_return(invite_double)
+    allow(invite_double).to receive(:new).and_return(invite_double)
+    allow(invite_double).to receive(:save).and_return(false)
+
+    login_as(employee, scope: :employee)
+    visit candidate_path(candidate)
+    select 'Engenheiro de Software Pleno', from: 'Posição'
+    fill_in 'invite-message', with: 'Olá, ser humano. ' \
+    'Venha fazer parte do nosso time'
+
+    click_on 'Convidar'
+
+    expect(page).to have_content('Erro ao tentar convidar candidato')
+    expect(Invite.count).to eq(0)
+    expect(current_path).to eq(candidate_path(candidate))
+  end
 end
