@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <section class="row">
     <div class="col-12 col-8 offset-md-2">
       <h1><%= @selection_process.company.name %></h1>
       <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
@@ -22,5 +22,9 @@
         <% end %>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section class="row interviews">
+    <%= render @interviews %>
+  </section>
 </div>

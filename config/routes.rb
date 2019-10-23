@@ -12,17 +12,20 @@ Rails.application.routes.draw do
     member do
       post 'add-comment', to: 'candidates#add_comment', as: :add_comment
       post 'invite', to: 'candidates#invite'
+      post 'invites/accept/:id', to: 'candidates#accept_invite', as: :accept_invites
+      post 'invites/reject/:id', to: 'candidates#reject_invite', as: :reject_invites
     end
 
     collection do
       get 'dashboard'
       get 'invites'
+      get 'invites/select_process/:id', to: 'selection_processes#show', as: :selection_process
+      post 'invites/select_process/:id', to: 'selection_processes#send_message', as: :send_message
     end
+  end
 
-    post 'invites/accept/:id', to: 'candidates#accept_invite', on: :member, as: :accept_invites
-    post 'invites/reject/:id', to: 'candidates#reject_invite', on: :member, as: :reject_invites
-    get 'invites/select_process/:id', to: 'selection_processes#show', on: :collection, as: :selection_process
-    post 'invites/select_process/:id', to: 'selection_processes#send_message', on: :collection, as: :send_message
+  resources :selection_processes, only: %i[show send_message] do
+    resources :interviews, only: %i[new create]
   end
 
   resources :positions, only: %i[new create show]

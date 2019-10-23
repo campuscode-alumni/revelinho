@@ -1,0 +1,5 @@
+<div class="interview">
+  <p><%= I18n.localize(interview.datetime, format: :long) %></p>
+  <p><%= interview.address %></p>
+  <p><%= I18n.t(:"format.#{interview.format}") %></p>
+</div>

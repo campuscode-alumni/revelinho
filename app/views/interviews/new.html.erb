@@ -1,0 +1,39 @@
+<section class="container p-5"> 
+  <h3 class= "py-3">Agendamento de Entrevista</h3>
+
+  <%= form_with url: selection_process_interviews_path(@selection_process), method: 'post' do |form| %>
+    <div class="card">
+      <h5 class="card-header">
+        <%= @candidate.name %> - <%= @position.title %>
+      </h5>
+      <div class="card-body">
+          <div class="form-group row">
+            <%= form.label :date, 'Data/Hora', class: 'col-sm-2 col-form-label' %>
+            <div class="row col align-items-center">              
+              <%= form.text_field :date, id: 'date-field', class: 'col form-control datepicker', placeholder: 'DD/MM/YYYY', data: {provide: "datepicker", 'date-autoclose': 'true'} %>              
+              <%= form.select :hour, 0..24, {}, id: 'hour-field', class: 'col form-control', placeholder: 'hh' %>:
+              <%= form.select :minutes, 0..60, {}, id: 'minutes-field', class: 'col form-control', placeholder: 'mm' %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <%= form.label :address, 'Endereço', class: 'col-sm-2 col-form-label' %>
+            <div class="row col">
+              <%= form.text_field(:address, class: 'form-control') %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <%= form.label :format, 'Formato', class: 'col-sm-2 col-form-label' %>
+            <div class="row col">
+              <%= form.select :format, Interview.formats.map { |k, v| [ I18n.t(:"format.#{k}"), k] }, {}, class: "form-control"  %>
+            </div>
+          </div>          
+      </div>
+      <div class="card-footer">
+        <div class="form-group text-right">
+          <%= link_to('Cancelar', @candidate, class: 'btn btn-outline-secondary') %>
+          <%= form.submit('Agendar', class: 'btn btn-primary') %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>

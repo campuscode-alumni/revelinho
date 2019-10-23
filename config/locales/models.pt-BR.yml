@@ -20,5 +20,7 @@ pt-BR:
     part_time: Meio Período
     internship: Estágio
     contractor: PJ
-
+  format:
+    online: Online
+    face_to_face: Presencial
 

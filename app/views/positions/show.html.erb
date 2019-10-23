@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div class="row">
+	<section class="row">
 		<div class="col-md-12">
 			<div class="page-header">
 				<h1>
@@ -13,5 +13,8 @@
                 <li>até: <%= @position.salary_to %></li>           
             </ul>
 		</div>
-	</div>
+	</section>
+	<section class="row justify-content-center">
+			<%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary' %>
+	</section>
 </div>

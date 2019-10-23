@@ -1,7 +1,9 @@
 class SelectionProcessesController < ApplicationController
   before_action :set_selection_process, only: %i[show send_message]
 
-  def show; end
+  def show
+    @interviews = @selection_process.interviews
+  end
 
   def send_message
     message = @selection_process.messages.create(params.permit(:text)) do |m|
