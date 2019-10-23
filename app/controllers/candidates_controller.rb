@@ -1,17 +1,13 @@
 class CandidatesController < ApplicationController
+  before_action :authenticate_candidate!, only: %i[invites dashboard]
   before_action :authenticate_employee!, only: %i[invite]
-  before_action :authenticate_candidate!, only: [:invites]
-
-  before_action :set_candidate, only: %i[show invite]
-  before_action :set_candidates_list, only: %i[index]
+  before_action :candidate, only: %i[show invite]
   before_action :set_invite, only: %i[accept_invite reject_invite]
-
+  before_action :set_candidates_list, only: %i[index]
   before_action :decorate_list, only: %i[index]
   before_action :decorate, only: %i[show]
-
   before_action :invite_params, only: %i[invite]
   before_action :owner_invite, only: %i[accept_invite reject_invite]
-
   before_action :authorize_employee, only: %i[invite]
 
   def index
@@ -39,7 +35,9 @@ class CandidatesController < ApplicationController
     redirect_to candidate
   end
 
-  def dashboard; end
+  def dashboard
+    @dashboard = CandidateDashboardDecorator.decorate(current_candidate)
+  end
 
   def invite
     invite = @candidate.invites.new(@invite_params)
@@ -73,8 +71,12 @@ class CandidatesController < ApplicationController
 
   private
 
-  def set_candidate
-    @candidate = Candidate.find(params[:id])
+  def candidate
+    @candidate ||= Candidate.find(params[:id])
+  end
+
+  def set_invite
+    @invite = Invite.find(params[:id])
   end
 
   def set_candidates_list
@@ -106,10 +108,6 @@ class CandidatesController < ApplicationController
     @position = current_employee.company.positions.find(
       @invite_params[:position_id]
     )
-  end
-
-  def set_invite
-    @invite = Invite.find(params[:id])
   end
 
   def owner_invite
