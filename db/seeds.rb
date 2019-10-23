@@ -23,15 +23,13 @@ Candidate.all.each do |candidate|
     linkedin_profile_url: 'candidate',
     github_profile_url: 'candidate',
     candidate: candidate
-  )  
+  )
 end
-                  
 
 company = Company.create!(name: 'Revelo', url_domain: 'revelo.com.br', status: :active)
-company_profile = CompanyProfile.create!(company: company, full_description: 'Emprega pessoas e faz uns serviços', benefits: 'vt e vr',
+company.company_profile = CompanyProfile.create!(company: company, full_description: 'Emprega pessoas e faz uns serviços', benefits: 'vt e vr',
                                          employees_number: '100-500', website: 'revelo.com.br', phone: '11 3030-3030',
                                          mission: 'Empregar pessoas', category: 'RH', attractives: 'Ambiente informal e as vezes tem fruta')
-# company_profile.logo.attach(io: File.open("#{Rails.root}/spec/support/images/gatinho.jpg"), filename: "gatinho.jpg")
 
 Employee.create!(email: "joao.silva@revelo.com.br",
                  password: '123456', company: company)
@@ -49,4 +47,6 @@ Message.create!(sendable: Candidate.first, selection_process: selection_process,
 Message.create!(sendable: Employee.first, selection_process: selection_process,
                 text: 'Olá! Adoramos o seu perfil, '\
                       'podemos marcar uma entrevista?')
+
+company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 
