@@ -5,6 +5,7 @@ feature 'candidate send message' do
     candidate = create(:candidate, status: :published)
     create(:candidate_profile, candidate: candidate)
     position = create(:position)
+    position.company.company_profile = create(:company_profile)
     create(:invite, candidate: candidate, position: position, status: :pending)
 
     login_as(candidate, scope: :candidate)
@@ -24,6 +25,7 @@ feature 'candidate send message' do
     candidate = create(:candidate, status: :published)
     create(:candidate_profile, candidate: candidate)
     position = create(:position, title: 'Desenvolvedor')
+    position.company.company_profile = create(:company_profile)
     invite = create(:invite, candidate: candidate,
                              position: position, status: :accepted)
     invite.create_selection_process

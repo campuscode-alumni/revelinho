@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'candidate sees pending invites' do
   scenario 'successfully' do
     position = create(:position, salary_from: 4500, salary_to: 5500)
+    position.company.company_profile = create(:company_profile)
+
     candidate = create(:candidate, status: :published)
     create(:candidate_profile, candidate: candidate)
     invite = create(:invite, candidate: candidate,
@@ -27,6 +29,7 @@ feature 'candidate sees pending invites' do
   scenario 'and accept invite successfully' do
     candidate = create(:candidate, status: :published)
     position = create(:position)
+    position.company.company_profile = create(:company_profile)
     invite = create(:invite, candidate: candidate,
                              position: position,
                              status: :pending)
@@ -58,6 +61,7 @@ feature 'candidate sees pending invites' do
   scenario 'and rejects invite successfully' do
     candidate = create(:candidate, status: :published)
     position = create(:position)
+    position.company.company_profile = create(:company_profile)
     invite = create(:invite, candidate: candidate,
                              position: position,
                              status: :pending)

@@ -2,33 +2,33 @@
   <div class="col-12 col-md-10 offset-md-1 mb-3 pt-3 pb-3">
     <div class="row">
       <div class="col-12 col-md-6">
-        <% if @selection_process.company_profile && @selection_process.company_profile.logo.attached? %>
-          <%= link_to image_tag(@selection_process.company_profile.logo, class: 'avatar-process float-left mr-2'), company_path(@selection_process.company) %>
-        <% end %>
+        <%= @selection_process.logo_process %>
         <h3><%= @selection_process.company.name %></h3>
         <p></p>
       </div>
       <div class="col-12 col-md-6 text-right">
         <h3><%= @selection_process.position.title %></h3>
-        <p class="mb-0">Regime de contratação: <%= I18n.t("activerecord.attributes.position.position_type.#{@selection_process.position.position_type}") %>
-        <br>Salário: <%= number_to_currency(@selection_process.position.salary_from) %> à <%= number_to_currency(@selection_process.position.salary_to) %></p>
+        <%= @selection_process.contract_type %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-md-10 offset-md-1 mb-5">
-      <div class="card card-body mb-0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1 mb-5">
+        <div class="card card-body mb-0">
           <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
-          <div class="form-group">
-            <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
-          </div>      
-          <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
-        <% end %>
+            <div class="form-group">
+              <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
+            </div>      
+            <%= link_to 'Voltar', :back, class: 'btn btn-info float-left' %>
+            <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
+          <% end %>
+        </div>
       </div>
+      <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
     </div>
-    <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
   </div>
 </div>
-
+  
+  

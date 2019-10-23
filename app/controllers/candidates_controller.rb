@@ -52,8 +52,7 @@ class CandidatesController < ApplicationController
   end
 
   def invites
-    @invites = current_candidate.invites
-    @links = InviteDecorator.decorate(@invites)
+    @invites = current_candidate.invites.decorate
   end
 
   def accept_invite

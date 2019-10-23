@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'employee send message' do
   scenario 'successfully' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
+    company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
     employee = create(:employee, company: company)
     position = create(:position, company: company)
@@ -25,6 +26,7 @@ feature 'employee send message' do
 
   scenario 'and validate empty field' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
+    company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
     employee = create(:employee, company: company)
     position = create(:position, company: company)

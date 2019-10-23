@@ -18,7 +18,7 @@ class SelectionProcessesController < ApplicationController
   private
 
   def set_selection_process
-    @selection_process = SelectionProcess.find(params[:id])
+    @selection_process = SelectionProcess.find(params[:id]).decorate
   end
 
   def authenticate_user
