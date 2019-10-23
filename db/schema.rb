@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_174139) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "accepted_or_rejected_at"
+    t.date "accepted_or_rejected_at"
     t.index ["candidate_id"], name: "index_invites_on_candidate_id"
     t.index ["position_id"], name: "index_invites_on_position_id"
   end

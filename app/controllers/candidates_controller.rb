@@ -1,4 +1,5 @@
 class CandidatesController < ApplicationController
+  require "time"
   before_action :authenticate_candidate!, only: %i[invites dashboard]
   before_action :authenticate_employee!, only: %i[invite]
   before_action :candidate, only: %i[show invite]
@@ -57,6 +58,7 @@ class CandidatesController < ApplicationController
   end
 
   def accept_invite
+    @invite.accepted_or_rejected_at = Date.current
     @invite.selection_process = SelectionProcess.new
     return redirect_to invites_candidates_path unless
       @invite.selection_process.save
