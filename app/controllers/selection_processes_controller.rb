@@ -18,7 +18,9 @@ class SelectionProcessesController < ApplicationController
   private
 
   def decorate_interview
-    @interviews = InterviewDecorator.decorate(@selection_process.interviews)
+    @interviews = InterviewDecorator.decorate_collection(
+      @selection_process.interviews
+    )
   end
 
   def set_selection_process

@@ -1,10 +1,9 @@
-<div class="card p-2">
-  <header>Você tem um novo convite para entrevista</header>
-  <p>Dia <%= interview.datetime %></p>
-  <p><%= interview.format %></p>
+<div class="border-top p-2">
+  <p><%= interview.format_datetime %></p>
   <address>Endereço: <%= interview.address %></address>
+  <p>Formato: <%= interview.format %></p>
   <section class="row d-flex justify-content-around">
-    <%= link_to 'Recusar', root_path, class: 'btn btn-danger' %>
-    <%= link_to 'Aceitar', root_path, class: 'btn btn-success' %>
+    <%= link_to 'Recusar', reject_invites_candidate_path(interview), class: 'btn btn-danger', method: :post %>
+    <%= link_to 'Aceitar', accept_invites_candidate_path(interview), class: 'btn btn-success', method: :post %>
   </section>
 </div>

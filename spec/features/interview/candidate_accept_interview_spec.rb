@@ -17,11 +17,11 @@ feature 'candidate accept interview' do
     login_as(candidate, scope: :candidate)
     visit selection_process_candidates_path(selection_process)
 
-    expect(page).to have_content('Você tem um novo convite para entrevista')
+    expect(page).to have_content('Entrevistas')
     expect(page).to have_content('Dia 26/10/2019 às 17:00')
-    expect(page).to have_content('Local: Av. Paulista, 2000')
+    expect(page).to have_content('Endereço: Av. Paulista, 2000')
     expect(page).to have_content('Formato: presencial')
-    expect(page).to have_button('Aceitar')
-    expect(page).to have_button('Recusar')
+    expect(page).to have_link('Aceitar')
+    expect(page).to have_link('Recusar')
   end
 end

@@ -1,7 +1,13 @@
-<div class="container-fluid">
+<div class="container-fluid bg-light">
+  <h1><%= @selection_process.company.name %></h1>
   <div class="row">
+    <section class="col-3 card px-0">
+    <header class="text-center p-1">
+      <h4>Entrevistas</h4>
+    </header>
+    <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
+  </section>
     <div class="col-8">
-      <h1><%= @selection_process.company.name %></h1>
       <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
         <div class="form-group">
           <%= f.label :text, "Mensagem:" %>
@@ -22,11 +28,5 @@
         <% end %>
       </div>
     </div>
-    <section class="col-4">
-      <header>
-        <h4>Entrevistas</h4>
-      </header>
-      <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
-    </section>
   </div>
 </div>
