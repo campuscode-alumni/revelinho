@@ -10,6 +10,8 @@ class Employee < ApplicationRecord
 
   after_create :set_company
 
+  validates :name, presence: true
+
   private
 
   def get_company(email)
