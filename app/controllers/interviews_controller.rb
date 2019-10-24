@@ -7,8 +7,8 @@ class InterviewsController < ApplicationController
   end
 
   def create
-    interview_params = params.permit(%i[date hour minutes address format
-                                        selection_process_id])
+    interview_params = params.permit(:date, :hour, :minutes, :address, :format,
+                                        :selection_process_id)
     interview = Interview.new(interview_params)
     datetime_text = interview_params[:date] + ' ' + interview_params[:hour] + ':' + interview_params[:minutes]
     interview.datetime = DateTime.parse(datetime_text)

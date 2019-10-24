@@ -1,5 +1,19 @@
-<div class="interview">
-  <p><%= I18n.localize(interview.datetime, format: :long) %></p>
-  <p><%= interview.address %></p>
-  <p><%= I18n.t(:"format.#{interview.format}") %></p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card interview">
+				<h5 class="card-header">
+					<%= I18n.localize(interview.datetime, format: :long) %>
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						<%= interview.address %>
+					</p>
+				</div>
+				<div class="card-footer">
+					<%= I18n.t(:"format.#{interview.format}") %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

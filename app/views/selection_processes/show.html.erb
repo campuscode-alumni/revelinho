@@ -1,30 +1,46 @@
 <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-8">
+          <h1><%= @selection_process.company.name %></h1>
+          <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
+            <div class="form-group">
+              <%= f.label :text, "Mensagem:" %>
+              <%= f.text_field :text, class: 'form-control' %>
+            </div>      
+            <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+        <div class="card card-body">
+          <div class="row">
+            <% @selection_process.messages.each do |message| %>
+              <div class="col-12 mb-3">
+                <div class="jumbotron">
+                  <h4><%= message.sendable.email %></h4>
+                  <p><%= message.text %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+				</div>
+				<div class="col-md-4">
+            <section class="row interviews">
+              <%= render @interviews %>
+            </section>
+          </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container-fluid">
   <section class="row">
     <div class="col-12 col-8 offset-md-2">
-      <h1><%= @selection_process.company.name %></h1>
-      <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
-        <div class="form-group">
-          <%= f.label :text, "Mensagem:" %>
-          <%= f.text_field :text, class: 'form-control' %>
-        </div>      
-        <%= f.submit 'Enviar', class: 'btn btn-primary' %>
-      <% end %>
-    </div>
-    <div class="card card-body">
-      <div class="row">
-        <% @selection_process.messages.each do |message| %>
-          <div class="col-12 mb-3">
-            <div class="jumbotron">
-              <h4><%= message.sendable.email %></h4>
-              <p><%= message.text %></p>
-            </div>
-          </div>          
-        <% end %>
-      </div>
+      
     </div>
   </section>
+  </div>
 
-  <section class="row interviews">
-    <%= render @interviews %>
-  </section>
-</div>
