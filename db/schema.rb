@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_194112) do
+ActiveRecord::Schema.define(version: 2019_10_24_135907) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_194112) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
+    t.string "name"
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
@@ -138,7 +139,9 @@ ActiveRecord::Schema.define(version: 2019_10_22_194112) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "employee_id"
     t.index ["candidate_id"], name: "index_invites_on_candidate_id"
+    t.index ["employee_id"], name: "index_invites_on_employee_id"
     t.index ["position_id"], name: "index_invites_on_position_id"
   end
 
@@ -179,6 +182,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_194112) do
   add_foreign_key "employees", "companies"
   add_foreign_key "interviews", "selection_processes"
   add_foreign_key "invites", "candidates"
+  add_foreign_key "invites", "employees"
   add_foreign_key "invites", "positions"
   add_foreign_key "messages", "selection_processes"
   add_foreign_key "positions", "companies"

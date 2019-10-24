@@ -4,5 +4,6 @@ FactoryBot.define do
     status { 0 }
     candidate
     position
+    employee
   end
 end

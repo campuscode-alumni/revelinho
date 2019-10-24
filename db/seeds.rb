@@ -31,7 +31,7 @@ company.company_profile = CompanyProfile.create!(company: company, full_descript
                                          employees_number: '100-500', website: 'revelo.com.br', phone: '11 3030-3030',
                                          mission: 'Empregar pessoas', category: 'RH', attractives: 'Ambiente informal e as vezes tem fruta')
 
-Employee.create!(email: "joao.silva@revelo.com.br",
+Employee.create!(email: "joao.silva@revelo.com.br", name: 'João Silva',
                  password: '123456', company: company)
 
 company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
@@ -39,7 +39,7 @@ company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
                  salary_from: 2000.00, salary_to: 3000.00, position_type: 'full_time')
 
 Invite.create!(candidate: Candidate.last, position: Position.last,
-               status: :accepted)
+               status: :accepted, employee: Employee.last)
 selection_process = Invite.last.create_selection_process
 
 Message.create!(sendable: Candidate.first, selection_process: selection_process,
