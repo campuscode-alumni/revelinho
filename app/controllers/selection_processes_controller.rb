@@ -1,5 +1,6 @@
 class SelectionProcessesController < ApplicationController
   before_action :set_selection_process, only: %i[show send_message]
+  before_action :authenticate_users!, only: %i[show send_message]
 
   def show; end
 
@@ -17,6 +18,6 @@ class SelectionProcessesController < ApplicationController
   private
 
   def set_selection_process
-    @selection_process = SelectionProcess.find(params[:id])
+    @selection_process = SelectionProcess.find(params[:id]).decorate
   end
 end
