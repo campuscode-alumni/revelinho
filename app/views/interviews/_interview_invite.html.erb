@@ -3,7 +3,7 @@
   <p>Dia <%= interview.datetime %></p>
   <p><%= interview.format %></p>
   <address>Endereço: <%= interview.address %></address>
-  <section class="row">
+  <section class="row d-flex justify-content-around">
     <%= link_to 'Aceitar', root_path, class: 'btn btn-danger' %>
     <%= link_to 'Rejeitar', root_path, class: 'btn btn-success' %>
   </section>

@@ -1,5 +1,6 @@
 class SelectionProcessesController < ApplicationController
   before_action :set_selection_process, only: %i[show send_message]
+  before_action :decorate_interview, only: %i[show]
 
   def show; end
 
@@ -15,6 +16,10 @@ class SelectionProcessesController < ApplicationController
   end
 
   private
+
+  def decorate_interview
+    @interviews = InterviewDecorator.decorate(@selection_process.interviews)
+  end
 
   def set_selection_process
     @selection_process = SelectionProcess.find(params[:id])
