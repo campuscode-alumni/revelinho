@@ -1,3 +1,11 @@
 <div class="container-fluid candidates-list">
   <%= render partial: 'candidate', collection: @employee_candidate_presenters, as: :candidate %>
 </div>
+
+<div id="candidate">
+  <candidate-card></candidate-card>
+</div>
+
+<% content_for :javascript do %>
+  <%= javascript_pack_tag 'candidates' %>
+<% end %>

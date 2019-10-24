@@ -12,6 +12,11 @@ class CandidatesController < ApplicationController
   def index
     msg = 'Não há candidatos cadastrados até agora'
     flash[:notice] = msg if @candidates.empty?
+
+    respond_to do |format|
+      format.json { render json: @candidates }
+      format.html
+    end
   end
 
   def show

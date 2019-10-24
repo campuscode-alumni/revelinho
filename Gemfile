@@ -34,6 +34,8 @@ gem 'draper'
 
 group :test do
   gem 'simplecov', require: false
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development, :test do

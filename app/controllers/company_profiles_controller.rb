@@ -11,14 +11,21 @@ class CompanyProfilesController < ApplicationController
     create_current_employee.save
     redirect_to current_employee.company,
                 notice: I18n.t('company_profile.create.success')
+    respond_to do |format|
+      format.html { byebug }
+      format.js { byebug  }
+    end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     current_employee.company.company_profile.update(company_profile_params)
-    redirect_to current_employee.company,
-                notice: I18n.t('company_profile.update.success')
+    respond_to do |format|
+      format.html { byebug }
+      format.js
+    end
   end
 
   private

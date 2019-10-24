@@ -17,7 +17,7 @@
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <% if candidate_signed_in? %>
@@ -44,5 +44,7 @@
     <%= @application_presenter.flash_alerts %>
 
     <%= yield %>
+
+    <%= yield :javascript %>
   </body>
 </html>
