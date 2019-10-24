@@ -16,10 +16,9 @@ feature 'Employee receive candidate feedback' do
     click_on 'Convites enviados'
 
     expect(page).to have_content invite.position.title
+    expect(page).to have_content candidate.name
     expect(page).to have_content 'R$ 4.500,00'
     expect(page).to have_content 'R$ 5.500,00'
-    expect(page).to have_content invite.position.industry
-    expect(page).to have_content invite.position.description
     expect(page).to have_content 'CLT'
     expect(page).to have_content 'Esse convite está pendente'
   end

@@ -1,7 +1,28 @@
 <div class="container mt-4">
   <h2 class="text-center">Esses são os seus convites até o momento :)</h2>
   <div class="mt-4">
-    <%= render partial: 'invite', collection: @company_invites %>
+    <% @company_invites.group_by(&:position).each do |position, invites| %>
+      <div class="invite-card">
+        <h2 class="text-center mt-4" style="font-size: 1.5rem">Posição: <%= position.title%></h2>
+          <% invites.each do |invite| %>
+            <section class="invites-info rounded px-4 py-3">
+              <div class="row">
+                <div class="col-md-9">
+                  <p><span>Nome do candidato:</span> <%= invite.candidate.name %></p>
+                  <p><span>Data do convite:</span> <%= l(invite.created_at.to_date, format: :long) %></p>
+                  <p><span>Faixa salarial:</span> <%= number_to_currency invite.position.salary_from %>-<%= number_to_currency invite.position.salary_to %> </p>
+                  <p><span>Regime de Contratação:</span> <%= t(:"position_type.#{invite.position.position_type}") %></p>
+                </div>
+                <div class="col-md-3 d-flex align-items-end flex-wrap align-content-end">
+                  <%= @invite_presenter.invite_accepted(invite) %>
+                  <%= @invite_presenter.invite_rejected(invite) %>
+                  <%= @invite_presenter.invite_pending_company(invite) %>
+                </div>
+              </div>
+             </section>
+            <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
 <div class="container mt-5">
