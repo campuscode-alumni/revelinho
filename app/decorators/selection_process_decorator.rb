@@ -2,7 +2,7 @@ class SelectionProcessDecorator < Draper::Decorator
   delegate_all
   include Draper::LazyHelpers
 
-  def contract_type
+  def contract_resume
     content_tag(:p, class: 'mb-0') do
       'Regime de contratação: ' +
         I18n.t('activerecord.attributes.position.position_type.' +
