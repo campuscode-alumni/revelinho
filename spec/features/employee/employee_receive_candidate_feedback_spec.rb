@@ -22,6 +22,5 @@ feature 'Employee receive candidate feedback' do
     expect(page).to have_content invite.position.description
     expect(page).to have_content 'CLT'
     expect(page).to have_content 'Esse convite está pendente'
-
   end
 end
