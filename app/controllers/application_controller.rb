@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_presenter
+  devise_group :users, contains: %i[candidate employee]
   rescue_from ActionController::UnpermittedParameters, with: :forbidden
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
