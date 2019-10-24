@@ -25,6 +25,11 @@ class CompaniesController < ApplicationController
                                            .company_profile_link
   end
 
+  def invites
+    @company_invites = current_employee.company.invites
+    @invite_presenter = InvitePresenter.new
+  end
+
   private
 
   def set_company_profile

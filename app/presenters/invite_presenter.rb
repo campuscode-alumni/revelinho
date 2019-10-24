@@ -25,6 +25,11 @@ class InvitePresenter < SimpleDelegator
     ''
   end
 
+  def invite_pending_company(invite)
+    return content_tag :p, 'Esse convite está pendente ' if invite.pending?
+    ''
+  end
+
   private
 
   def h

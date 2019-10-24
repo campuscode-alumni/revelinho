@@ -72,7 +72,7 @@ feature 'candidate sees pending invites' do
 
     invite.reload
 
-    expect(page).to have_content('Esse convite foi rejeitado')
+    expect(page).to have_content('Esse convite foi rejeitado ')
     expect(invite).to be_rejected
     expect(SelectionProcess.count).to eq 0
   end

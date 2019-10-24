@@ -70,6 +70,7 @@ class CandidatesController < ApplicationController
   end
 
   def reject_invite
+    @invite.accepted_or_rejected_at = Date.current
     @invite.rejected!
   end
 
