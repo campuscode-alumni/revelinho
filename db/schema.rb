@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_194112) do
+ActiveRecord::Schema.define(version: 2019_10_24_134534) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -155,12 +155,13 @@ ActiveRecord::Schema.define(version: 2019_10_22_194112) do
     t.string "title"
     t.string "industry"
     t.text "description"
-    t.integer "position_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
     t.integer "salary_from"
     t.integer "salary_to"
+    t.integer "office_hours"
+    t.integer "hiring_scheme"
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
 

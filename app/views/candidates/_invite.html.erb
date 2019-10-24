@@ -14,10 +14,11 @@
         <p><span>Faixa salarial:</span> <%= number_to_currency invite.position.salary_from %>-<%= number_to_currency invite.position.salary_to %> </p>
         <p><span>Área de atuação:</span> <%=invite.position.industry %></p>
         <p><span>Descrição do cargo:</span> <%=invite.position.description%></p>
-        <p><span>Regime de Contratação:</span> <%= t(:"position_type.#{invite.position.position_type}") %></p>
+        <p><span>Regime de contratação:</span> <%= t("activerecord.attributes.position.hiring_scheme.#{invite.position.hiring_scheme}") %></p>
+        <p><span>Horário de expediente:</span> <%= t("activerecord.attributes.position.office_hours.#{invite.position.office_hours}") %></p>
       </div>
       <div class="col-md-3 d-flex align-items-end flex-wrap align-content-end">
-        <%= invite.invite_links %>      
+        <%= invite.invite_links %>
       </div>
     </div>
   </section>
