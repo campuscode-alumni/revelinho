@@ -22,6 +22,6 @@ feature 'candidate accept interview' do
     expect(page).to have_content('Local: Av. Paulista, 2000')
     expect(page).to have_content('Formato: presencial')
     expect(page).to have_button('Aceitar')
-    expect(page).to have_button('Rejeitar')
+    expect(page).to have_button('Recusar')
   end
 end
