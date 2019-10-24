@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("bootstrap/dist/js/bootstrap")
 require("bootstrap-datepicker/dist/js/bootstrap-datepicker")
+require("mdbootstrap/js/mdb")
 
 $('.datepicker').datepicker();
 
