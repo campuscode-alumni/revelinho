@@ -29,10 +29,6 @@ class ApplicationController < ActionController::Base
     @application_presenter = ApplicationPresenter.new(self)
   end
 
-  def forbidden
-    redirect_to root_path
-  end
-
   def not_found
     render file: Rails.root.join('public', '404'), status: :not_found
   end
