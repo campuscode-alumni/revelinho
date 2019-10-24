@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-8 offset-md-2">
+    <div class="col-8 offset-md-2">
       <h1><%= @selection_process.company.name %></h1>
       <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
         <div class="form-group">
@@ -23,4 +23,10 @@
       </div>
     </div>
   </div>
+  <section class='row'>
+    <header>
+      <h4>Entrevistas</h4>
+    </header>
+    <%= render partial: '/interviews/interview_invite', collection: @selection_process.interviews, as: :interview %>
+  </section>
 </div>

@@ -1,0 +1,10 @@
+<div class="card p-2">
+  <header>Você tem um novo convite para entrevista</header>
+  <p>Dia <%= interview.datetime %></p>
+  <p><%= interview.format %></p>
+  <address>Endereço: <%= interview.address %></address>
+  <section class="row">
+    <%= link_to 'Aceitar', root_path, class: 'btn btn-danger' %>
+    <%= link_to 'Rejeitar', root_path, class: 'btn btn-success' %>
+  </section>
+</div>
