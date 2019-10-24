@@ -22,6 +22,8 @@ feature 'candidate sees pending invites' do
     expect(page).to have_content invite.position.industry
     expect(page).to have_content invite.position.description
     expect(page).to have_content 'CLT'
+    expect(page).to have_content 'Olá, ser humano. '\
+    'Venha fazer parte do nosso time'
   end
 
   scenario 'and accept invite successfully' do
