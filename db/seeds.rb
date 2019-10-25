@@ -36,7 +36,8 @@ Employee.create!(email: "joao.silva@revelo.com.br",
 
 company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
                  description: 'Desenvolvedor fullstack em Ruby',
-                 salary_from: 2000.00, salary_to: 3000.00, position_type: 'full_time')
+                 salary_from: 2000.00, salary_to: 3000.00, hiring_scheme: :clt,
+                 office_hours: :full_time)
 
 Invite.create!(candidate: Candidate.last, position: Position.last,
                status: :accepted)
