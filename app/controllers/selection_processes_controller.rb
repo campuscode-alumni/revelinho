@@ -1,6 +1,6 @@
 class SelectionProcessesController < ApplicationController
   before_action :set_selection_process, only: %i[show send_message]
-  before_action :authenticate_user, only: %i[show send_message]
+  before_action :authenticate_users!, only: %i[show send_message]
 
   def show; end
 
@@ -19,9 +19,5 @@ class SelectionProcessesController < ApplicationController
 
   def set_selection_process
     @selection_process = SelectionProcess.find(params[:id]).decorate
-  end
-
-  def authenticate_user
-    redirect_to root_path unless employee_signed_in? || candidate_signed_in?
   end
 end

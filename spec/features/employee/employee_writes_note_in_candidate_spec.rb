@@ -73,4 +73,20 @@ feature 'Employee comments candidate' do
       expect(page).to have_content('Precisamos contratar essa pessoa agora!')
     end
   end
+
+  scenario 'Note belongs only to correct candidate' do
+    candidate = create(:candidate)
+    another_candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
+    create(:candidate_profile, candidate: another_candidate)
+    gustavo = create(:employee, email: 'gustavo@empresa.com')
+
+    login_as gustavo, scope: :employee
+    visit candidate_path(candidate)
+    fill_in 'Novo comentário', with: 'Contrata el@'
+    click_on 'Postar'
+    visit candidate_path(another_candidate)
+
+    expect(page).not_to have_content('Contrata el@')
+  end
 end

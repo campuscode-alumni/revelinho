@@ -14,11 +14,6 @@ pt-BR:
       company:
         name: Nome
         address: Endereço
-  # Humanização de keys dos Enums
-  position_type:
-    full_time: CLT
-    part_time: Meio Período
-    internship: Estágio
-    contractor: PJ
+
 
 

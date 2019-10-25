@@ -158,12 +158,13 @@ ActiveRecord::Schema.define(version: 2019_10_24_135907) do
     t.string "title"
     t.string "industry"
     t.text "description"
-    t.integer "position_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
     t.integer "salary_from"
     t.integer "salary_to"
+    t.integer "office_hours"
+    t.integer "hiring_scheme"
     t.index ["company_id"], name: "index_positions_on_company_id"
   end
 
