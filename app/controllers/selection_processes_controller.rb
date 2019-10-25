@@ -3,7 +3,9 @@ class SelectionProcessesController < ApplicationController
   before_action :authenticate_users!, only: %i[show send_message]
   before_action :decorate_interview, only: %i[show]
 
-  def show; end
+  def show
+    @pending_interviews = @interviews.where(status: :pending)
+  end
 
   def send_message
     message = @selection_process.messages.create(params.permit(:text)) do |m|

@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'candidate accept interview' do
   scenario 'successfully' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
+    company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
