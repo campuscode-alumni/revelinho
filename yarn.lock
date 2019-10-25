@@ -1660,6 +1660,11 @@ cliui@^5.0.0:
     strip-ansi "^5.2.0"
     wrap-ansi "^5.1.0"
 
+clockpicker@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/clockpicker/-/clockpicker-0.0.7.tgz#32d02c3a6cb00a3b6ea6d1ec2c5fc147d7bec06e"
+  integrity sha1-MtAsOmywCjtuptHsLF/BR9e+wG4=
+
 clone-deep@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-4.0.1.tgz#c19fd9bdbbf85942b4fd979c84dcf7d5f07c2387"

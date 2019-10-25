@@ -9,13 +9,16 @@ require("@rails/activestorage").start()
 require("channels")
 require("bootstrap/dist/js/bootstrap")
 require("bootstrap-datepicker/dist/js/bootstrap-datepicker")
-require("mdbootstrap/js/mdb")
+
 
 $('.datepicker').datepicker();
 
+
 import 'bootstrap/dist/js/bootstrap';
-import 'bootstrap';
 import '../stylesheets/application';
+import 'bootstrap';
+import "clockpicker/dist/bootstrap-clockpicker.min"
+import "clockpicker/dist/jquery-clockpicker.min"
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

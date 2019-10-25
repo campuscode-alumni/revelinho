@@ -15,8 +15,9 @@ feature 'Employee schedules interview' do
     interview = build(:interview, date: DateTime.parse('25/11/2019'))
 
     login_as(employee, scope: :employee)
-    visit new_selection_process_interview_path(selection_process)
+    visit selection_process_path(selection_process)
 
+    click_on 'Agendar entrevista'
     click_on '+'
     fill_in 'date-field', with: '25/11/2019'
     select '10', from: 'time-from-field'
@@ -46,17 +47,20 @@ feature 'Employee schedules interview' do
     create(:candidate_profile, candidate: candidate)
     position = create(:position, title: 'Engenheiro de Software Pleno',
                                  company: company)
-    create(:invite, position: position, candidate: candidate, status: :accepted)
-    selection_process = create(:selection_process)
-    interview = build(:interview, date: DateTime.parse('25/11/2019 10:30'))
+    invite = create(:invite, position: position, candidate: candidate,
+                             status: :accepted)
+    selection_process = create(:selection_process, invite: invite)
 
     login_as(employee, scope: :employee)
-    visit new_selection_process_interview_path(selection_process)
+    visit selection_process_path(selection_process)
+
+    click_on 'Agendar entrevista'
+    click_on '+'
 
     fill_in 'date-field', with: ''
     fill_in 'Endereço', with: ''
-    select I18n.t(:"format.#{interview.format}"), from: 'Tipo de entrevista'
     click_on 'Agendar'
+    save_page
 
     expect(page).to have_content('Preencha todos os campos corretamente')
     expect(current_path).to eq(

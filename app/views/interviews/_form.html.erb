@@ -1,5 +1,5 @@
 <div class="modal fade" id="new-interview-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= form_with url: selection_process_interviews_path(@selection_process), method: 'post' do |form| %>
+  <%= form_with url: selection_process_interviews_path(@selection_process), method: 'post', local: true do |form| %>
     <div class="modal-dialog new-interview-modal" role="document">
       <div class="modal-content">
         <section class="modal-header">
@@ -19,8 +19,12 @@
                 <%= form.text_field :date, id: 'date-field', class: 'col form-control datepicker', placeholder: 'DD/MM/YYYY', data: {provide: "datepicker", 'date-autoclose': 'true'} %>              
                 <%= form.select :time_from, 0..24, {}, id: 'time-from-field', class: 'col form-control', placeholder: 'hh' %>:
                 <%= form.select :time_to, 0..24, {}, id: 'time-to-field', class: 'col form-control', placeholder: 'hh' %>
-                <input placeholder="Selected time" type="text" id="input_starttime" class="form-control timepicker">
-                <label for="input_starttime">Twelve hour clock</label>
+                <div class="input-group clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                    <input type="text" class="form-control" value="09:32">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
               </div>
             </div>
             <div class="form-group row">

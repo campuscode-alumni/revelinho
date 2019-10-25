@@ -10,16 +10,16 @@ class InterviewsController < ApplicationController
   def create
     interview_params = params.permit(:date, :time_to, :time_from, :address,
                                      :format, :selection_process_id)
-    interview = Interview.new(interview_params)
-    interview.time_from = interview_params[:time_from] + ':00'
-    interview.time_to = interview_params[:time_to] + ':00'
+    @interview = Interview.new(interview_params)
+    @interview.time_from = interview_params[:time_from] + ':00'
+    @interview.time_to = interview_params[:time_to] + ':00'
 
-    if interview.save
+    if @interview.save     
       flash[:notice] = 'Solicitação enviada. Aguardando confirmação do candidato'
       redirect_to selection_process_path(interview_params[:selection_process_id])
     else
       flash.now[:danger] = 'Preencha todos os campos corretamente'
-      render :new, params: {selection_process_id: interview_params[:selection_process_id]}
+      render :new
     end
   end
 
@@ -34,7 +34,7 @@ class InterviewsController < ApplicationController
   def authorize_employee!
     return if @selection_process.invite.position.company ==
               current_employee.company
-
+    
     render json: {}, status: :forbidden
   end
 end

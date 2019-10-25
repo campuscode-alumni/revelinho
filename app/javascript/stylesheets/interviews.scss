@@ -1,4 +1,12 @@
 
+.modal-interview-button {
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+  z-index: 99;
+  border-radius: 50%;
+}
+
 .new-interview-modal {
   min-width: 600px;
 }

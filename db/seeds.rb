@@ -111,3 +111,31 @@ Employee.create!(
   email: 'timbo@empresa.com.br',
   password: '123456'
 )
+
+Company.create!(
+  name: 'Empresa',
+  address: 'Av. Paulista, 572',
+  url_domain: 'empresa.com',
+  status: :active
+)
+
+Position.create!(
+  title: 'Desenvolvedor',
+  position_type: :full_time,
+  industry: 'TI',
+  description: 'Conhecimentos em RoR',
+  salary_to: 5000,
+  salary_from: 6000,
+  company_id: 1
+)
+
+Invite.create!(
+  message: 'Olá mundo!',
+  status: :accepted,
+  position_id: 1,
+  candidate_id: 1
+)
+
+SelectionProcess.create!(
+  invite_id: 1
+)
