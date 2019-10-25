@@ -8,7 +8,6 @@ class CandidatesController < ApplicationController
   before_action :decorate, only: %i[show]
   before_action :invite_params, only: %i[invite]
   before_action :owner_invite, only: %i[accept_invite reject_invite]
-  before_action :authorize_employee, only: %i[invite]
 
   def index
     msg = 'Não há candidatos cadastrados até agora'
@@ -19,8 +18,9 @@ class CandidatesController < ApplicationController
     return redirect_to candidates_path unless @candidate.published?
     return unless employee_signed_in?
 
-    @notes = CandidateNote.includes(employee: :company).where(
-      employees: { company: current_employee.company }
+    @notes = CandidateNote.includes(:employee).where(
+      employees: { company: current_employee.company },
+      candidate_id: @candidate.id
     ).decorate
     @positions = @employee_candidate_presenter.uninvited_positions
   end
@@ -93,14 +93,6 @@ class CandidatesController < ApplicationController
   def decorate
     @employee_candidate_presenter =
       EmployeeCandidatePresenter.new(@candidate, current_employee)
-  end
-
-  def authorize_employee
-    return if current_employee.company.id == @position.company.id
-
-    raise ActionController::UnpermittedParameters.new(
-      status: 'Employee unauthorized'
-    )
   end
 
   def invite_params
