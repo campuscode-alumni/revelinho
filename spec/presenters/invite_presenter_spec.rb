@@ -5,7 +5,7 @@ describe 'InviteHelper' do
     it 'has to present a message if invite is accepted' do
       invite = create(:invite, status: :accepted, accepted_or_rejected_at:
                       Date.current)
-      invite_link = InvitePresenter.new.invite_accepted(invite)
+      invite_link = InvitePresenter.new(invite).invite_accepted
 
       expect(invite_link).to include('Esse convite foi aceito')
     end
@@ -15,7 +15,7 @@ describe 'InviteHelper' do
     it 'has to present a message if invite is rejected' do
       invite = create(:invite, status: :rejected, accepted_or_rejected_at:
                       Date.current)
-      invite_link = InvitePresenter.new.invite_rejected(invite)
+      invite_link = InvitePresenter.new(invite).invite_rejected
 
       expect(invite_link).to include('Esse convite foi rejeitado ')
     end
@@ -24,7 +24,7 @@ describe 'InviteHelper' do
   context '#invite_pending' do
     it 'has to present accept/reject buttons if invite is pending' do
       invite = create(:invite, status: :pending)
-      invite_link = InvitePresenter.new.invite_pending(invite)
+      invite_link = InvitePresenter.new(invite).invite_pending
 
       expect(invite_link).to include('Rejeitar convite')
       expect(invite_link).to include('Aceitar convite')
@@ -34,7 +34,7 @@ describe 'InviteHelper' do
   context '#invite_pending_company' do
     it 'has to present a message if the invitation is pending' do
       invite = create(:invite, status: :pending)
-      invite_link = InvitePresenter.new.invite_pending_company(invite)
+      invite_link = InvitePresenter.new(invite).invite_pending_company
 
       expect(invite_link).to include('Esse convite está pendente')
     end

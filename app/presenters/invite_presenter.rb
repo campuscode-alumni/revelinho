@@ -3,38 +3,40 @@ class InvitePresenter < SimpleDelegator
 
   delegate :content_tag, :link_to, to: :h
 
-  def initialize; end
+  def self.decorate_collection(invites)
+    invites.map { |invite| new(invite) }
+  end
 
-  def invite_accepted(invite)
-    if invite.accepted?
+  def invite_accepted
+    if accepted?
       return content_tag :p, "Esse convite foi aceito em
-                         #{ I18n.l(invite.accepted_or_rejected_at,
+                         #{ I18n.l(accepted_or_rejected_at,
                                    format: :long) }"
     end
     ''
   end
 
-  def invite_rejected(invite)
-    if invite.rejected?
+  def invite_rejected
+    if rejected?
       return content_tag :p, 'Esse convite foi rejeitado em '\
-                        "#{ I18n.l(invite.accepted_or_rejected_at,
+                        "#{ I18n.l(accepted_or_rejected_at,
                                    format: :long) }"
     end
     ''
   end
 
-  def invite_pending(invite)
-    reject = link_to 'Rejeitar convite', reject_invites_candidate_path(invite),
+  def invite_pending
+    reject = link_to 'Rejeitar convite', reject_invites_candidate_path(self),
                      method: :post, class: 'btn btn-danger flex-grow-1 m-3'
-    accept = link_to 'Aceitar convite', accept_invites_candidate_path(invite),
+    accept = link_to 'Aceitar convite', accept_invites_candidate_path(self),
                      method: :post, class: 'btn btn-success flex-grow-1 m-3'
-    return reject + accept if invite.pending?
+    return reject + accept if pending?
 
     ''
   end
 
-  def invite_pending_company(invite)
-    return content_tag :p, 'Esse convite está pendente ' if invite.pending?
+  def invite_pending_company
+    return content_tag :p, 'Esse convite está pendente ' if pending?
   end
 
   private

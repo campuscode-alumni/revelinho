@@ -14,9 +14,9 @@
                   <p><span>Regime de Contratação:</span> <%= t(:"position_type.#{invite.position.position_type}") %></p>
                 </div>
                 <div class="col-md-3 d-flex align-items-end flex-wrap align-content-end">
-                  <%= @invite_presenter.invite_accepted(invite) %>
-                  <%= @invite_presenter.invite_rejected(invite) %>
-                  <%= @invite_presenter.invite_pending_company(invite) %>
+                  <%= invite.invite_accepted %>
+                  <%= invite.invite_rejected %>
+                  <%= invite.invite_pending_company %>
                 </div>
               </div>
              </section>

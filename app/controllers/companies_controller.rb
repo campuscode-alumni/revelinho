@@ -26,8 +26,7 @@ class CompaniesController < ApplicationController
   end
 
   def invites
-    @company_invites = current_employee.company.invites
-    @invite_presenter = InvitePresenter.new
+    @company_invites = InvitePresenter.decorate_collection(current_employee.company.invites)
   end
 
   private
