@@ -2,7 +2,7 @@
   <div class="col-12 col-md-10 offset-md-1 mb-3 pt-3 pb-3">
     <div class="row">
       <div class="col-12 col-md-6">
-        <%= @selection_process.logo_process %>
+        <%= link_to image_tag(@selection_process.company_profile.logo, class: 'avatar-process float-left mr-2'), company_path(@selection_process.company) %>
         <div class="float-left pl-2">
           <h5><b><%= @selection_process.company.name %></b></h5>
           <h6 class="lead-4">Seu contato principal é:</h6>

@@ -13,10 +13,4 @@ class SelectionProcessDecorator < Draper::Decorator
           " à #{number_to_currency(position.salary_to)}"
       end
   end
-
-  def logo_process
-    link_to image_tag(company_profile.logo,
-                      class: 'avatar-process float-left mr-2'),
-            company_path(company)
-  end
 end
