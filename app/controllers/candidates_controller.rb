@@ -1,5 +1,4 @@
 class CandidatesController < ApplicationController
-  require 'time'
   before_action :authenticate_candidate!, only: %i[invites dashboard]
   before_action :authenticate_employee!, only: %i[invite]
   before_action :candidate, only: %i[show invite]
