@@ -10,6 +10,11 @@ FactoryBot.define do
     category { 'RH' }
     attractives { 'Ambiente informal e as vezes tem fruta' }
 
+    logo do
+      fixture_file_upload(Rails.root.join('spec', 'support', 'images',
+                                          'gatinho.jpg'), 'image/jpg')
+    end
+
     trait :with_blank_field do
       benefits { nil }
       full_description { nil }

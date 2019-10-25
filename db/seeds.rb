@@ -1,113 +1,52 @@
-lucas = Candidate.create!(
-  name: 'Lucas',
-  email: 'lucas@candidato.com',
-  password: '123456',
-  cpf: '1234567890',
-  address: 'Rua Revelada, 10',
-  phone: '(11) 98238-2341',
-  occupation: 'full stack developer',
-  educational_level: 'mestrado concluído',
-  status: :published,
-  city: 'São Paulo',
-  state: 'São Paulo',
-  country: 'Brasil',
-  zip_code: '03141-030',
-  birthday: '12/04/1991'
-)
-rafael = Candidate.create!(
-  name: 'Rafael',
-  email: 'rafael@candidato.com',
-  password: '123456',
-  cpf: '1234567890',
-  address: 'Rua Revelada, 10',
-  phone: '(11) 98238-2341',
-  occupation: 'back-end node.js developer',
-  educational_level: 'graduação em andamento',
-  status: :published,
-  city: 'São Paulo',
-  state: 'São Paulo',
-  country: 'Brasil',
-  zip_code: '03141-030',
-  birthday: '12/04/1991'
-)
-gustavo = Candidate.create!(
-  name: 'Gustavo',
-  email: 'gustavo@candidato.com',
-  password: '123456',
-  cpf: '1234567890',
-  address: 'Rua Revelada, 10',
-  phone: '(11) 98238-2341',
-  occupation: 'web developer',
-  educational_level: 'graduação completa',
-  status: :published,
-  city: 'São Paulo',
-  state: 'São Paulo',
-  country: 'Brasil',
-  zip_code: '03141-030',
-  birthday: '12/04/1991'
-)
-patricia = Candidate.create!(
-  name: 'Patrícia',
-  email: 'patricia@candidato.com',
-  password: '123456',
-  cpf: '1234567890',
-  address: 'Rua Revelada, 10',
-  phone: '(11) 98238-8765',
-  occupation: 'dev ops guru',
-  educational_level: 'mestrado concluído',
-  status: :published,
-  city: 'São Paulo',
-  state: 'São Paulo',
-  country: 'Brasil',
-  zip_code: '03141-030',
-  birthday: '23/04/1991'
-)
-CandidateProfile.create!(
-  work_experience: 'Sou rubysta master',
-  education: 'mestrado concluído',
-  skills: 'Node, React, Rails',
-  coding_languages: 'Javascript, ruby',
-  english_proficiency: 'Fluente',
-  skype_username: 'lucas',
-  linkedin_profile_url: 'lucas',
-  github_profile_url: 'lucas',
-  candidate_id: lucas.id
-)
-CandidateProfile.create!(
-  work_experience: 'Sou rubysta master',
-  education: 'mestrado concluído',
-  skills: 'Node, React, Rails',
-  coding_languages: 'Javascript, ruby',
-  english_proficiency: 'Fluente',
-  skype_username: 'rafael',
-  linkedin_profile_url: 'rafael',
-  github_profile_url: 'rafael',
-  candidate_id: rafael.id
-)
-CandidateProfile.create!(
-  work_experience: 'Sou rubysta master',
-  education: 'mestrado concluído',
-  skills: 'Node, React, Rails',
-  coding_languages: 'Javascript, ruby',
-  english_proficiency: 'Fluente',
-  skype_username: 'gustavo',
-  linkedin_profile_url: 'gustavo',
-  github_profile_url: 'gustavo',
-  candidate_id: gustavo.id
-)
-CandidateProfile.create!(
-  work_experience: 'Sou rubysta master',
-  education: 'mestrado concluído',
-  skills: 'Node, React, Rails',
-  coding_languages: 'Javascript, ruby',
-  english_proficiency: 'Fluente',
-  skype_username: 'patricia.poke',
-  linkedin_profile_url: 'patricia.poke',
-  github_profile_url: 'patricia.poke',
-  candidate_id: patricia.id
-)
+Candidate.create!(email: 'paulo.antonio@candidato.com', password: '123456',
+                  name: 'Paulo antonio', cpf: '1234567890', status: :published,
+                  address: 'Rua Revelada, 10', phone: '(11) 98238-2341',
+                  occupation: 'full stack developer', city: 'São Paulo',
+                  state: 'São Paulo', country: 'Brasil', zip_code: '03141-030',
+                  birthday: '12/04/1991', educational_level: 'mestrado')
 
-Employee.create!(
-  email: 'timbo@empresa.com.br',
-  password: '123456'
-)
+Candidate.create!(email: 'jose.pedro@candidato.com', password: '123456',
+                  name: 'José Pedro', cpf: '1234567890', status: :published,
+                  address: 'Rua Revelada, 10', phone: '(11) 98238-2341',
+                  occupation: 'full stack developer', city: 'São Paulo',
+                  state: 'São Paulo', country: 'Brasil', zip_code: '03141-030',
+                  birthday: '12/04/1991', educational_level: 'mestrado')
+
+Candidate.all.each do |candidate|
+  CandidateProfile.create!(
+    work_experience: 'Sou rubysta master',
+    education: 'mestrado concluído',
+    skills: 'Node, React, Rails',
+    coding_languages: 'Javascript, ruby',
+    english_proficiency: 'Fluente',
+    skype_username: 'candidate',
+    linkedin_profile_url: 'candidate',
+    github_profile_url: 'candidate',
+    candidate: candidate
+  )
+end
+
+company = Company.create!(name: 'Revelo', url_domain: 'revelo.com.br', status: :active)
+company.company_profile = CompanyProfile.create!(company: company, full_description: 'Emprega pessoas e faz uns serviços', benefits: 'vt e vr',
+                                         employees_number: '100-500', website: 'revelo.com.br', phone: '11 3030-3030',
+                                         mission: 'Empregar pessoas', category: 'RH', attractives: 'Ambiente informal e as vezes tem fruta')
+
+Employee.create!(email: "joao.silva@revelo.com.br",
+                 password: '123456', company: company)
+
+company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
+                 description: 'Desenvolvedor fullstack em Ruby',
+                 salary_from: 2000.00, salary_to: 3000.00, position_type: 'full_time')
+
+Invite.create!(candidate: Candidate.last, position: Position.last,
+               status: :accepted)
+selection_process = Invite.last.create_selection_process
+
+Message.create!(sendable: Candidate.first, selection_process: selection_process,
+                text: 'Olá, obrigado pelo convite.')
+Message.create!(sendable: Employee.first, selection_process: selection_process,
+                text: 'Olá! Adoramos o seu perfil, '\
+                      'podemos marcar uma entrevista?')
+
+company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
+
