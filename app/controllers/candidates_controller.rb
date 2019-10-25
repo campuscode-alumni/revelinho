@@ -42,6 +42,7 @@ class CandidatesController < ApplicationController
 
   def invite
     invite = @candidate.invites.new(@invite_params)
+    byebug
     invite.employee = current_employee
     if invite.save
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \

@@ -19,7 +19,7 @@ feature 'candidate messages exchanges' do
       fill_in 'Escreva a sua mensagem', with: 'Olá, meu nome é João'
       click_on('Enviar')
 
-      expect(page).to have_css('h5', text: candidate.email)
+      expect(page).to have_css('h5', text: candidate.name)
       expect(page).to have_content('Olá, meu nome é João')
     end
 
