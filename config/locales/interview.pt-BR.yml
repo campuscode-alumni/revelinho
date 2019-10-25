@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      interview: Entrevista
+    attributes:
+      interview:
+        format: Formato
+        address: Endereço
+  status:
+    pending: Pendente
+    scheduled: Agendada
+    done: Realizada
+    absent: Ausente
+    rejected: Cancelada
+  format:
+    online: Online
+    face_to_face: Presencial

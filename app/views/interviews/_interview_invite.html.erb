@@ -1,10 +1,11 @@
 <div class="border-top p-3">
-  <p><b><%= interview.format_datetime %></b></p>
-  <address>Endereço: <%= interview.address %></address>
-  <p>Formato: <%= interview.format %></p>
-  <p>Status: <%= interview.status %></p>
+  <%= interview.interview_status_badge%>
+  <p>
+    <b><%= interview.format_datetime %></b><br/>
+    Endereço: <%= interview.address %><br/>
+    Formato: <%= I18n.t('format.'+interview.format) %><br/>
+  </p>
   <section class="row d-flex justify-content-around">
-    <%= link_to 'Recusar', reject_interview_candidate_path(interview), class: 'btn btn-danger', method: :post %>
-    <%= link_to 'Aceitar', accept_interview_candidate_path(interview), class: 'btn btn-success', method: :post %>
+  <%= interview.decision_buttons %>
   </section>
 </div>
