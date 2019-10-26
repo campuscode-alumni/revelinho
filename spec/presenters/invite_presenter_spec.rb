@@ -29,6 +29,13 @@ describe 'InviteHelper' do
       expect(invite_link).to include('Rejeitar convite')
       expect(invite_link).to include('Aceitar convite')
     end
+
+    it 'not has to present accept/reject buttons unless invite is pending' do
+      invite = create(:invite, status: :accepted)
+      invite_link = InvitePresenter.new.invite_pending(invite)
+
+      expect(invite_link).to eq ''
+    end
   end
 
   context '#invite_pending_company' do

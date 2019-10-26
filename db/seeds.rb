@@ -39,7 +39,7 @@ company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
                  salary_from: 2000.00, salary_to: 3000.00, position_type: 'full_time')
 
 Invite.create!(candidate: Candidate.last, position: Position.last,
-               status: :accepted)
+               status: :accepted, accepted_or_rejected_at: Date.today)
 selection_process = Invite.last.create_selection_process
 
 Message.create!(sendable: Candidate.first, selection_process: selection_process,
@@ -49,46 +49,3 @@ Message.create!(sendable: Employee.first, selection_process: selection_process,
                       'podemos marcar uma entrevista?')
 
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
-
-Employee.create!(
-  email: 'timbo@empresa.com.br',
-  password: '123456'
-)
-
-company = Company.create!(
-  name: 'Empresa',
-  address: 'Avenida Paulista, 2520',
-  url_domain: 'empresa.com.br',
-  status: :active
-)
-
-dev_ruby = Position.create!(
-  title: 'Desenvolvedor ruby',
-  industry: 'T.I',
-  description: 'Desenvolvedor com 2 anos de experiencia',
-  salary_from: '3500.00',
-  salary_to: '3800.00',
-  position_type: :full_time,
-  company: company
-)
-
-Invite.create!(
-  message: 'Gostariamos que fizesse parte da nossa equipe!',
-  position: dev_ruby,
-  candidate: rafael,
-  status: :pending
-)
-
-Invite.create!(
-  message: 'Gostariamos que fizesse parte da nossa equipe!',
-  position: dev_ruby,
-  candidate: patricia,
-  status: :accepted
-)
-
-Invite.create!(
-  message: 'Gostariamos que fizesse parte da nossa equipe!',
-  position: dev_ruby,
-  candidate: gustavo,
-  status: :rejected
-)

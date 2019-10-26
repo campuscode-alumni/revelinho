@@ -3,9 +3,8 @@ class InviteDecorator < Draper::Decorator
   include Draper::LazyHelpers
 
   def invite_links
-    return link_process unless invite.pending?
-
-    links_invite_choice
+    return links_invite_choice if invite.pending?
+    return link_process if invite.accepted?
   end
 
   private
