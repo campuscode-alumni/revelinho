@@ -41,17 +41,17 @@ class CandidatesController < ApplicationController
   end
 
   def invite
-    invite = @candidate.invites.new(@invite_params)
-    byebug
-    invite.employee = current_employee
+    invite = @candidate.invites.new(@invite_params) do |i|
+      i.employee = current_employee
+    end
+
     if invite.save
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \
       "#{@position.title}"
-      redirect_to candidates_path
-    else
-      flash[:danger] = 'Erro ao tentar convidar candidato'
-      redirect_to @candidate
+      return redirect_to candidates_path
     end
+    flash[:danger] = 'Erro ao tentar convidar candidato'
+    redirect_to @candidate
   end
 
   def invites
