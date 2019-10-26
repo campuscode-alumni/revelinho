@@ -7,6 +7,10 @@ class InviteDecorator < Draper::Decorator
     return link_process if invite.accepted?
   end
 
+  def date
+    l(invite.created_at.to_date, format: :long)
+  end
+
   private
 
   def links_invite_choice

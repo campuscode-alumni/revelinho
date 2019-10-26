@@ -15,11 +15,10 @@ class InvitePresenter < SimpleDelegator
   end
 
   def invite_rejected(invite)
-    if invite.rejected?
-      return content_tag :p, 'Esse convite foi rejeitado em '\
-                        "#{ I18n.l(invite.accepted_or_rejected_at,
-                                   format: :long) }"
-    end
+    message = content_tag :p, 'Esse convite foi rejeitado em '\
+      "#{I18n.l(invite.accepted_or_rejected_at, format: :long)}"
+    return message if invite.rejected?
+
     ''
   end
 
