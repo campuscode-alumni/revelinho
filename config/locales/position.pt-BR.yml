@@ -1,0 +1,17 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      position: Posição
+    attributes:
+      position:
+        title: Título
+        industry: Área
+        description: Descrição
+        position_type:
+          full_time: Integral
+          part_time: Meio Período
+          internship: Estágio
+          contractor: Contratante
+        salary_from: Salário de
+        salary_to: Salário até

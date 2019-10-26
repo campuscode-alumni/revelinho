@@ -53,7 +53,7 @@ class CandidatesController < ApplicationController
   end
 
   def invites
-    @invites = current_candidate.invites
+    @invites = current_candidate.invites.decorate
     @invite_presenter = InvitePresenter.new
   end
 
@@ -71,6 +71,8 @@ class CandidatesController < ApplicationController
   def reject_invite
     @invite.accepted_or_rejected_at = Date.current
     @invite.rejected!
+
+    redirect_to invites_candidates_path
   end
 
   private

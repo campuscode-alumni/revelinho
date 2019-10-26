@@ -14,6 +14,15 @@
  *= require_self
  */
 
+ body {
+   background-color: #f5f7fb !important;
+ }
+
+ .avatar-process {
+   max-width: 100px;
+   max-height: 100px;
+ }
+
  a:hover.link-defaut-color{
   text-decoration: none !important;
 }
