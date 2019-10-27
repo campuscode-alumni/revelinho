@@ -26,6 +26,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'draper'
 gem 'bootstrap-datepicker-rails'
 
+gem 'selenium-webdriver'
+gem 'webdrivers'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
