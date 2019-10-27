@@ -5,6 +5,7 @@ class Offer < ApplicationRecord
   belongs_to :message
 
   delegate :candidate, to: :selection_process
+  delegate :position, to: :selection_process
 
   enum hiring_scheme: { clt: 0, contractor: 5, internship: 10 }
   enum status: { pending: 0, accepted: 5, canceled: 10 }
