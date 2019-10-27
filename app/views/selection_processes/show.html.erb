@@ -6,35 +6,50 @@
         <div class="float-left pl-2">
           <h5><b><%= @selection_process.company.name %></b></h5>
           <h6 class="lead-4">Seu contato principal é:</h6>
-
+          
           <p class="mb-0"><small><%= @selection_process.employee.name %></small></p>
           <p class="mb-0"><small>Telefone: <%= @selection_process.company_profile.phone %></small></p>
           <p class="mb-0"><small>Email: <%= @selection_process.employee.email %></small></p>
         </div>
       </div>
-      <div class="col-12 col-md-6 text-right">
-        <h3><%= @selection_process.position.title %></h3>
-        <%= @selection_process.contract_resume %>
+      <div class="col-12 col-md-6 text-md-right">
+        <div class="float-md-right">
+          <h3><%= @selection_process.position.title %></h3>
+          <%= @selection_process.contract_resume %>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 col-md-10 offset-md-1 mb-5">
-        <div class="card card-body mb-0">
-          <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
+</div>
+
+<div class="col-12 col-md-10 offset-md-1">
+  <div class="row">
+    <div class="col-12 col-md-4 h-100">
+      <div class="card card-body">
+        <% if @selection_process.offers.pending.any? %>
+          <div class="alert alert-success">
+            Proposta realizada! Aguardando retorno do candidato.
+          </div>
+        <% end %>
+        <%= link_to 'Quero contrata-lo!', new_candidate_offer_path(@selection_process.candidate.id, @selection_process), class: 'btn btn-success btn-lg' %>
+      </div>
+    </div>
+    <div class="col-12 col-md-8 h-100">
+      <div class="row">
+        <div class="col-12 mb-5">
+          <div class="card card-body mb-0">
+            <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
             <div class="form-group">
               <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
             </div>      
             <%= link_to 'Voltar', invites_candidates_path, class: 'btn btn-info float-left' %>
             <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
+        <%= render partial: 'messages', collection: @selection_process.messages_show, as: :message %>
       </div>
-      <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
     </div>
   </div>
 </div>
-  
-  
+

@@ -10,5 +10,4 @@ class Offer < ApplicationRecord
   enum status: { pending: 0, accepted: 5, canceled: 10 }
 
   validates :salary, :hiring_scheme, :start_date, :message, presence: true
-
 end
