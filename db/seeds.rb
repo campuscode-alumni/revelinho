@@ -48,6 +48,13 @@ Message.create!(sendable: Candidate.first, selection_process: selection_process,
 Message.create!(sendable: Employee.first, selection_process: selection_process,
                 text: 'Olá! Adoramos o seu perfil, '\
                       'podemos marcar uma entrevista?')
+offer_message = Message.create!(sendable: Candidate.first,
+                                selection_process: selection_process,
+                                text: 'Venha fazer parte da nossa equipe!')
+
+offer = Offer.create!(salary: 2500.00, selection_process: selection_process,
+                      hiring_scheme: :clt, status: :pending,
+                      start_date: Date.current)
 
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 
