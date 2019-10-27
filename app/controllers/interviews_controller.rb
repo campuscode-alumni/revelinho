@@ -3,12 +3,14 @@ class InterviewsController < ApplicationController
   before_action :authenticate_candidate!, only: %i[accept reject]
 
   def accept
-    @interview.scheduled!
+    return unless @interview.pending? && @interview.scheduled!
+
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 
   def reject
-    @interview.canceled!
+    return unless @interview.pending? && @interview.canceled!
+
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 

@@ -4,8 +4,9 @@ class InterviewDecorator < Draper::Decorator
   delegate_all
 
   def format_datetime
-    'Dia ' + interview.datetime.strftime('%d/%m/%Y') +
-      ' às ' + interview.datetime.strftime('%R')
+    date = interview.datetime.strftime('%d/%m/%Y')
+    time = interview.datetime.strftime('%R')
+    I18n.t('activerecord.attributes.interview.datetime', date: date, time: time)
   end
 
   def decision_buttons
@@ -16,11 +17,14 @@ class InterviewDecorator < Draper::Decorator
 
   def interview_status_badge
     if interview.pending?
-      content_tag(:span, 'Aguardando resposta', class: 'badge badge-warning')
+      content_tag(:span, I18n.t('status_badge.pending'),
+                  class: 'badge badge-warning')
     elsif interview.scheduled?
-      content_tag(:span, 'Entrevista agendada', class: 'badge badge-primary')
+      content_tag(:span, I18n.t('status_badge.scheduled'),
+                  class: 'badge badge-primary')
     elsif interview.canceled?
-      content_tag(:span, 'Entrevista cancelada', class: 'badge badge-danger')
+      content_tag(:span, I18n.t('status_badge.rejected'),
+                  class: 'badge badge-danger')
     end
   end
 
