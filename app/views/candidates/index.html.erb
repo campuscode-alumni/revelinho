@@ -1,28 +1,29 @@
 <div class="container-fluid candidates-list">
   <%#= render partial: 'candidate', collection: @employee_candidate_presenters, as: :candidate %>
-</div>
 
-<div id="candidate">
-  <div class="col-sm-12 text-right">
-    <span v-on:click="toggleCard(false)" :disable="showCard == false"><i class="fas fa-list-ul"></i></span>
-    <span v-on:click="toggleCard(true)" :disable="showCard == true"><i class="fas fa-th"></i></span>
+  <div id="candidate">
+    <div class="col-sm-12 text-right">
+      <span v-on:click="toggleCard(false)" :disable="showCard == false"><i class="fas fa-list-ul"></i></span>
+      <span v-on:click="toggleCard(true)" :disable="showCard == true"><i class="fas fa-th"></i></span>
+    </div>
+    <div class="row">
+      <candidate-card
+         v-for="(candidate, index) in candidates"
+         :key="index"
+         :candidate="candidate"
+         v-if="showCard"
+         >
+      </candidate-card>
+        <candidate-list
+         v-for="(candidate, index) in candidates"
+         :key="index"
+         :candidate="candidate"
+         v-if="!showCard"
+         >
+        </candidate-list>
+    </div>
   </div>
-  <div class="row">
-    <candidate-card
-       v-for="(candidate, index) in candidates"
-       :key="index"
-       :candidate="candidate"
-       v-if="showCard"
-       >
-    </candidate-card>
-    <candidate-list
-       v-for="(candidate, index) in candidates"
-       :key="index"
-       :candidate="candidate"
-       v-if="!showCard"
-       >
-    </candidate-list>
-  </div>
+
 </div>
 
 <% content_for :javascript do %>

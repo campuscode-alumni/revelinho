@@ -19,7 +19,8 @@
               <div class="spacer"></div>
               <div class="col text-right">
                 <p>
-                {{candidate.address}}
+                {{ candidate.awaiting_invites_badge }}
+                {{ location }}
                 </p>
               </div>
             </div>
@@ -38,12 +39,9 @@
 <script>
 export default {
   props: ['candidate'],
-  data: {
-
-  },
   computed: {
-    address: function(){
-      return this.candidate.city + ' ' + this.candidate.state
+    location: function(){
+      return this.candidate.city + ', ' + this.candidate.state
     }
   }
 }
