@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_10_26_195313) do
     t.integer "selection_process_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
     t.index ["selection_process_id"], name: "index_interviews_on_selection_process_id"
   end
 

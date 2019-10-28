@@ -32,6 +32,11 @@
           </div>
         <% end %>
         <%= link_to 'Quero contrata-lo!', new_candidate_offer_path(@selection_process.candidate.id, @selection_process), class: 'btn btn-success btn-lg' %>
+        <hr>
+        <header class="text-center">
+          <h3 class="my-2">Entrevistas</h3>
+        </header>
+        <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
       </div>
     </div>
     <div class="col-12 col-md-8 h-100">
@@ -52,4 +57,3 @@
     </div>
   </div>
 </div>
-
