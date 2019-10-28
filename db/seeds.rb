@@ -31,7 +31,7 @@ company.company_profile = CompanyProfile.create!(company: company, full_descript
                                          employees_number: '100-500', website: 'revelo.com.br', phone: '11 3030-3030',
                                          mission: 'Empregar pessoas', category: 'RH', attractives: 'Ambiente informal e as vezes tem fruta')
 
-Employee.create!(email: "joao.silva@revelo.com.br",
+employee = Employee.create!(email: "joao.silva@revelo.com.br",
                  password: '123456', company: company)
 
 company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
@@ -49,5 +49,5 @@ Message.create!(sendable: Employee.first, selection_process: selection_process,
                 text: 'Olá! Adoramos o seu perfil, '\
                       'podemos marcar uma entrevista?')
 
+employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
-

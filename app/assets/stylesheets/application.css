@@ -18,10 +18,15 @@
    background-color: #f5f7fb !important;
  }
 
- .avatar-process {
+ .avatar-100 {
    max-width: 100px;
    max-height: 100px;
  }
+
+ .avatar-50 {
+  max-width: 50px;
+  max-height: 50px;
+}
 
  a:hover.link-defaut-color{
   text-decoration: none !important;

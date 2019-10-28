@@ -8,7 +8,7 @@ class SelectionProcessDecorator < Draper::Decorator
 
   def logo_process
     link_to image_tag(company_profile.logo,
-                      class: 'avatar-process float-left mr-2'),
+                      class: 'avatar-100 float-left mr-2'),
             company_path(company)
   end
 

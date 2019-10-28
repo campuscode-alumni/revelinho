@@ -26,7 +26,7 @@
           <% end %>
         </div>
       </div>
-      <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
+      <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc).decorate, as: :message %>
     </div>
   </div>
 </div>
