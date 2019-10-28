@@ -52,7 +52,8 @@ class CandidatesController < ApplicationController
   end
 
   def invites
-    @invite_presenter = InvitePresenter.decorate_collection(current_candidate.invites)
+    @invite_presenter =
+      InvitePresenter.decorate_collection(current_candidate.invites)
   end
 
   def accept_invite

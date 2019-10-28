@@ -101,12 +101,12 @@ feature 'Employee tries to complete company profile' do
 
     click_on 'Atualizar'
 
-    expect {
-    visit new_company_profile_path
+    expect do
+      visit new_company_profile_path
 
-    fill_in 'Descrição da empresa', with: 'Descrição atualizada'
-    click_on 'Atualizar'
-    }.to raise_error(ActiveRecord::RecordNotSaved)
+      fill_in 'Descrição da empresa', with: 'Descrição atualizada'
+      click_on 'Atualizar'
+    end.to raise_error(ActiveRecord::RecordNotSaved)
 
     expect(CompanyProfile.count).to eq 1
   end

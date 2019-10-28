@@ -22,7 +22,6 @@ class InvitePresenter < SimpleDelegator
     end
   end
 
-
   def invite_links_company
     if accepted?
       invite_accepted
@@ -40,7 +39,7 @@ class InvitePresenter < SimpleDelegator
   end
 
   def invite_rejected
-    message = content_tag :p, 'Esse convite foi rejeitado em '\
+    content_tag :p, 'Esse convite foi rejeitado em '\
       "#{I18n.l(accepted_or_rejected_at, format: :long)}"
   end
 
@@ -59,7 +58,4 @@ class InvitePresenter < SimpleDelegator
   def h
     ApplicationController.helpers
   end
-
-  private
-
 end
