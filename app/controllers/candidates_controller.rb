@@ -1,6 +1,7 @@
 class CandidatesController < ApplicationController
+  before_action :redirect_candidate_dashboard, only: [:index]
   before_action :authenticate_candidate!, only: %i[invites dashboard]
-  before_action :authenticate_employee!, only: %i[invite]
+  before_action :authenticate_employee!, only: %i[invite index]
   before_action :candidate, only: %i[show invite]
   before_action :set_invite, only: %i[accept_invite reject_invite]
   before_action :set_candidates_list, only: %i[index]
@@ -40,15 +41,17 @@ class CandidatesController < ApplicationController
   end
 
   def invite
-    invite = @candidate.invites.new(@invite_params)
+    invite = @candidate.invites.new(@invite_params) do |i|
+      i.employee = current_employee
+    end
+
     if invite.save
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \
       "#{@position.title}"
-      redirect_to candidates_path
-    else
-      flash[:danger] = 'Erro ao tentar convidar candidato'
-      redirect_to @candidate
+      return redirect_to candidates_path
     end
+    flash[:danger] = 'Erro ao tentar convidar candidato'
+    redirect_to @candidate
   end
 
   def invites
@@ -105,5 +108,9 @@ class CandidatesController < ApplicationController
   def owner_invite
     return redirect_to invites_candidates_path unless
      current_candidate.invites.where(id: @invite.id, status: :pending).any?
+  end
+
+  def redirect_candidate_dashboard
+    redirect_to dashboard_candidates_path if candidate_signed_in?
   end
 end
