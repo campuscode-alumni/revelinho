@@ -26,18 +26,16 @@ gem 'jbuilder', '~> 2.7'
 gem 'draper'
 gem 'bootstrap-datepicker-rails'
 
-gem 'selenium-webdriver'
-gem 'webdrivers'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'draper'
 
 group :test do
   gem 'simplecov', require: false
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development, :test do

@@ -1,5 +1,5 @@
 <div id="interview-form">
-  <interview-form></interview-form>
+  <interview-form formats_json="<%= @formats_json %>" create_url="<%= @post_url %>"></interview-form>
 </div>
 
 <% content_for :javascript do %>
@@ -45,7 +45,7 @@
             <div class="form-group row">
               <%= form.label :format, 'Tipo de entrevista', class: 'col-sm-2 col-form-label' %>
               <div class="row col">
-                <%= form.select :format, Interview.formats.map { |k, v| [ I18n.t(:"format.#{k}"), k] }, {}, class: "form-control"  %>
+                <%= form.select :format, Interview.formats.map { |k, v| [I18n.t(:"format.#{k}"), k] }, {}, class: "form-control"  %>
               </div>
             </div>
           </div>

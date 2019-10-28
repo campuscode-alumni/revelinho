@@ -11,5 +11,5 @@ $(document).ready(() => {
 })
 
 import 'bootstrap/dist/js/bootstrap';
-import '../stylesheets/application';
 import 'bootstrap';
+import '../stylesheets/application';
