@@ -5,7 +5,7 @@ class CreatePositions < ActiveRecord::Migration[6.0]
       t.string :industry
       t.text :description
       t.decimal :salary
-      t.integer :hiring_scheme
+      t.integer :position_type
 
       t.timestamps
     end

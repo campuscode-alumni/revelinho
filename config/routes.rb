@@ -19,12 +19,11 @@ Rails.application.routes.draw do
     collection do
       get 'dashboard'
       get 'invites'
-      get 'invites/select_process/:id', to: 'selection_processes#show', as: :selection_process
-      post 'invites/select_process/:id', to: 'selection_processes#send_message', as: :send_message
     end
   end
-
-  resources :selection_processes, only: %i[show send_message] do
+  
+  resources :selection_processes, only: %i[show] do
+    post 'selection_process/:id', to: 'selection_processes#send_message', as: :send_message
     resources :interviews, only: %i[new create]
   end
 

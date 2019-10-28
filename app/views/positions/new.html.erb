@@ -34,8 +34,13 @@
         </div>
 
         <div class="col">
-          <%= f.label :hiring_scheme, 'Tipo' %>
-          <%= f.select :hiring_scheme, Position.hiring_schemes.map { |k, v| [ I18n.t(:"hiring_scheme.#{k}"), k] }, {}, class: "form-control"  %>
+          <%= f.label :hiring_scheme, 'Regime' %>
+          <%= f.select :hiring_scheme, Position.hiring_schemes.map { |k, v| [ I18n.t("activerecord.attributes.position.hiring_scheme.#{k}"), k] }, class: "form-control" %>
+        </div>
+
+        <div class="col">
+          <%= f.label :office_hours, 'Expediente' %>
+          <%= f.select :office_hours, Position.office_hours.map { |k, v| [ I18n.t("activerecord.attributes.position.office_hours.#{k}"), k] }, class: "form-control" %>
         </div>
       </div>
       <%= f.submit 'Enviar', class: "mt-2 form-control btn btn-primary" %>

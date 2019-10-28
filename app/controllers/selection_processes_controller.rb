@@ -1,7 +1,9 @@
 class SelectionProcessesController < ApplicationController
   before_action :set_selection_process, only: %i[show send_message]
+  before_action :authenticate_users!, only: %i[show send_message]
 
   def show
+    @selection_process.decorate
     @interviews = @selection_process.interviews
   end
 
@@ -13,12 +15,12 @@ class SelectionProcessesController < ApplicationController
     flash[:notice] = 'Não foi possivel enviar mensagem. Tente novamente' if
      message.errors.any?
 
-    redirect_to selection_process_candidates_path(@selection_process)
+    redirect_to selection_process_path(@selection_process)
   end
 
   private
 
   def set_selection_process
-    @selection_process = SelectionProcess.find(params[:id])
+    @selection_process = SelectionProcess.find(params[:id]).decorate
   end
 end

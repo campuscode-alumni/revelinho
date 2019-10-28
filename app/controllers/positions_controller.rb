@@ -23,7 +23,7 @@ class PositionsController < ApplicationController
 
   def position_params
     params.require(:position).permit(:title, :industry, :salary_from,
-                                     :salary_to, :hiring_scheme,
-                                     :description)
+                                     :salary_to, :office_hours,
+                                     :hiring_scheme, :description)
   end
 end

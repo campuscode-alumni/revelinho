@@ -8,7 +8,7 @@ import InterviewForm from '../components/InterviewForm.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  new Vue({
+  const interview = new Vue({
     el: 'interview-form',
     components: {
       InterviewForm
