@@ -12,7 +12,7 @@ class MessageDecorator < Draper::Decorator
 
   def avatar_img
     image_tag(message.sendable.avatar,
-              class: 'avatar-50 float-left mr-3 auto')
+              class: 'avatar-50 mr-3')
   end
 
   def img_place_holder
