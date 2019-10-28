@@ -4,7 +4,7 @@ class CandidatesController < ApplicationController
   before_action :candidate, only: %i[show invite]
   before_action :set_invite, only: %i[accept_invite reject_invite]
   before_action :set_candidates_list, only: %i[index]
-  before_action :decorate_list, only: %i[index]
+  # before_action :decorate_list, only: %i[index]
   before_action :decorate, only: %i[show]
   before_action :invite_params, only: %i[invite]
   before_action :owner_invite, only: %i[accept_invite reject_invite]
@@ -12,7 +12,6 @@ class CandidatesController < ApplicationController
   def index
     msg = 'Não há candidatos cadastrados até agora'
     flash[:notice] = msg if @candidates.empty?
-
     respond_to do |format|
       format.html
       format.json { render json: @candidates }

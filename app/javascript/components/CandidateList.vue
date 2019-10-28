@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-4">
+  <div class="col-sm-12">
     <div class="candidate card my-3 rounded-lg" :id="'candidate-' + candidate.id">
       <div class="row no-gutters">
         <div class="image-container col-sm-4 col-md-4 col-lg-3 col-xl-2 rounded-left py-3">
@@ -19,7 +19,7 @@
               <div class="spacer"></div>
               <div class="col text-right">
                 <p>
-                {{candidate.address}}
+                {{candidate.city}} {{candidate.state}}
                 </p>
               </div>
             </div>
@@ -37,15 +37,7 @@
 
 <script>
 export default {
-  props: ['candidate'],
-  data: {
-
-  },
-  computed: {
-    address: function(){
-      return this.candidate.city + ' ' + this.candidate.state
-    }
-  }
+  props: ['candidate']
 }
 </script>
 
