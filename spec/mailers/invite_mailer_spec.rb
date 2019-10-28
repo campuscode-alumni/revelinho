@@ -60,7 +60,7 @@ describe InviteMailer do
       )
 
       mail = InviteMailer.notify_candidate(invite.id)
-      expect(mail.body).to include 'Revelo te convidou para a vaga de ' \
+      expect(mail.body).to include 'Revelo te convidou para a posição de ' \
                                    'Engenheiro de Software Pleno'
       expect(mail.body).to include invites_candidates_url
     end
