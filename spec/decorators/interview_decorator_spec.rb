@@ -17,7 +17,45 @@ describe InterviewDecorator do
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process).decorate
 
-      expect(interview.format_datetime).to eq 'Dia 26/10/2019 às 17:00'
+      expect(interview.formatting_datetime).to eq 'Dia 26/10/2019 às 17:00'
+    end
+  end
+  context '#interview_address' do
+    it 'shows address correctly' do
+      company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
+      company.company_profile = create(:company_profile)
+      candidate = create(:candidate, status: :published)
+      create(:employee, email: 'joao@revelo.com.br', company: company)
+      position = create(:position, company: company)
+      invite = create(:invite, candidate: candidate, position: position,
+                               status: :pending)
+      selection_process = invite.create_selection_process
+      interview = create(:interview,
+                         datetime: '2019-10-26 17:00:00',
+                         format: :face_to_face,
+                         address: 'Av. Paulista, 2000',
+                         selection_process: selection_process).decorate
+
+      expect(interview.interview_address).to eq 'Endereço: Av. Paulista, 2000'
+    end
+  end
+  context '#interview_address' do
+    it 'shows address correctly' do
+      company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
+      company.company_profile = create(:company_profile)
+      candidate = create(:candidate, status: :published)
+      create(:employee, email: 'joao@revelo.com.br', company: company)
+      position = create(:position, company: company)
+      invite = create(:invite, candidate: candidate, position: position,
+                               status: :pending)
+      selection_process = invite.create_selection_process
+      interview = create(:interview,
+                         datetime: '2019-10-26 17:00:00',
+                         format: :face_to_face,
+                         address: 'Av. Paulista, 2000',
+                         selection_process: selection_process).decorate
+
+      expect(interview.interview_format).to eq 'Formato: Presencial'
     end
   end
   context '#decision_buttons' do
@@ -78,6 +116,9 @@ describe InterviewDecorator do
       expect(interview.interview_status_badge).to(
         include 'Aguardando resposta'
       )
+      expect(interview.interview_status_badge).not_to(
+        include('Entrevista agendada', 'Entrevista cancelada')
+      )
     end
     it 'shows scheduled_badge correctly' do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
@@ -98,6 +139,9 @@ describe InterviewDecorator do
       expect(interview.interview_status_badge).to(
         include 'Entrevista agendada'
       )
+      expect(interview.interview_status_badge).not_to(
+        include('Aguardando resposta', 'Entrevista cancelada')
+      )
     end
     it 'shows canceled_badge correctly' do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
@@ -117,6 +161,9 @@ describe InterviewDecorator do
 
       expect(interview.interview_status_badge).to(
         include 'Entrevista cancelada'
+      )
+      expect(interview.interview_status_badge).not_to(
+        include('Entrevista agendada', 'Aguardando resposta')
       )
     end
   end

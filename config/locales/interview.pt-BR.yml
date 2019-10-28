@@ -5,7 +5,7 @@ pt-BR:
     attributes:
       interview:
         format: Formato
-        address: Endereço
+        address: "Endereço: %{address}"
         datetime: Dia %{date} às %{time}
     status:
       pending: Pendente
@@ -20,5 +20,5 @@ pt-BR:
     absent: Candidato faltou
     rejected: Entrevista cancelada
   format:
-    online: Online
-    face_to_face: Presencial
+    online: 'Formato: Online'
+    face_to_face: 'Formato: Presencial'
