@@ -1,23 +1,29 @@
-<%= form_with(url: candidate_offers_path(@candidate, @selection_process), model: Offer.new, method: 'post') do |f| %>
-  <div class="form-group">
-    <%= f.label :salary, 'Salário' %>
-    <%= f.text_field :salary, class: 'form-control'  %>
-  </div>
+<%= render partial: 'selection_processes/header', locals: { selection_process: @selection_process } %>
 
-  <div class="form-group">
-    <%= f.label :hiring_scheme, 'Regime de contratação' %>
-    <%= f.select :hiring_scheme, Offer.hiring_schemes.map { |k, v| [ I18n.t("activerecord.attributes.offer.hiring_scheme.#{k}"), k] }, {}, class: "form-control" %>
+<div class="col-12 col-md-10 offset-md-1">
+  <div class="card card-body">
+    <%= form_with(url: candidate_offers_path(@candidate, @selection_process), model: Offer.new, method: 'post') do |f| %>
+      <div class="form-group">
+        <%= f.label :salary, 'Salário' %>
+        <%= f.text_field :salary, class: 'form-control'  %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :hiring_scheme, 'Regime de contratação' %>
+        <%= f.select :hiring_scheme, Offer.hiring_schemes.map { |k, v| [ I18n.t("activerecord.attributes.offer.hiring_scheme.#{k}"), k] }, {}, class: "form-control" %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :start_date, 'Data de início' %>
+        <%= f.text_field :start_date, class: 'form-control'  %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :message, 'Mensagem' %>
+        <%= f.text_area :message, class: 'form-control', rows: '4'  %>
+      </div>
+  
+      <%= f.submit 'Enviar proposta', class: 'btn btn-success btn-lg' %>
+    <% end %>
   </div>
-
-  <div class="form-group">
-    <%= f.label :start_date, 'Data de início' %>
-    <%= f.text_field :start_date, class: 'form-control'  %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :message, 'Mensagem' %>
-    <%= f.text_area :message, class: 'form-control', rows: '4'  %>
-  </div>
-
-  <%= f.submit 'Enviar proposta', class: 'btn btn-success btn-lg' %>
-<% end %>
+</div>
