@@ -61,4 +61,31 @@ feature 'employee send offer to candidate' do
                                      'do candidato.')
     expect(selection_process.offers.count).to eq 0
   end
+
+  scenario 'and can not send an offer if has another pending' do
+    selection_process = create(:selection_process)
+    create(:company_profile, company: selection_process.company)
+    message = create(:message, text: 'Venha fazer parte da nossa equipe',
+                               sendable: selection_process.employee,
+                               selection_process: selection_process)
+    create(:offer, selection_process: selection_process,
+                   message: message, status: :pending)
+
+    login_as(selection_process.employee, scope: :employee)
+
+    visit selection_process_candidates_path(selection_process)
+    click_on 'Quero contrata-lo!'
+
+    fill_in 'Salário', with: '2.500,00'
+    select 'CLT', from: 'Regime de contratação'
+    fill_in 'Data de início', with: '11/11/2019'
+    fill_in 'Mensagem', with: 'Venha fazer parte do nosso time!'
+    click_on('Enviar proposta')
+
+    selection_process.reload
+
+    expect(selection_process.offers.count).to eq 1
+    expect(page).to have_content('Aguarde o retorno do candidato para poder'\
+                                 ' realizar uma nova proposta')
+  end
 end

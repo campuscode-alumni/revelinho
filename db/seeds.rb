@@ -54,8 +54,8 @@ offer_message = Message.create!(sendable: Candidate.first,
 
 offer = Offer.create!(salary: 2500.00, selection_process: selection_process,
                       hiring_scheme: :clt, status: :pending,
-                      start_date: Date.current)
-
+                      start_date: Date.current, employee: Employee.last,
+                      message: offer_message)
 
 Interview.create!(datetime: '2019-10-26 17:00:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process)
 Interview.create!(datetime: '2019-08-30 07:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
