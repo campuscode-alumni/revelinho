@@ -14,8 +14,8 @@ class CandidatesController < ApplicationController
     flash[:notice] = msg if @candidates.empty?
 
     respond_to do |format|
-      format.json { render json: @candidates }
       format.html
+      format.json { render json: @candidates }
     end
   end
 

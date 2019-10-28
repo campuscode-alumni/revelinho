@@ -1,24 +1,19 @@
 import Vue from 'vue/dist/vue.esm'
-import CandidateCard from '../components/CandidateCard.vue'
-import { CandidateClient } from './candidates/candidates_client'
+import { CandidatesClient } from './candidates/candidates_client'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const client = new CandidateClient();
+  const candidates_client  = new CandidatesClient()
 
   const candidate = new Vue({
     el: '#candidate',
     data: {
       candidates: []
     },
-    components: {
-      CandidateCard
-    },
     created: function() {
       let that = this;
 
-      client.search(function(candidates) {
-        console.log(candidates);
-        that.candidates = candidates
+      candidates_client.search(function(c) {
+        that.candidates = c;
       });
     }
   })

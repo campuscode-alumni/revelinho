@@ -1,10 +1,10 @@
-export class CandidateClient {
+export class CandidatesClient {
   search(callback) {
     $.ajax({
       url: '/candidates',
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
-      dateType: 'json',
+      dataType: 'json',
       success: (res) => {
         callback(res);
       }
