@@ -24,7 +24,5 @@ class Candidate < ApplicationRecord
 
   enum status: { hidden: 0, published: 10 }
 
-  def avatar
-    self.candidate_profile.avatar
-  end
+  delegate :avatar, to: :candidate_profile
 end
