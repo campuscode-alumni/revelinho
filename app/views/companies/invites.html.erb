@@ -11,12 +11,10 @@
                   <p><span>Nome do candidato:</span> <%= invite.candidate.name %></p>
                   <p><span>Data do convite:</span> <%= l(invite.created_at.to_date, format: :long) %></p>
                   <p><span>Faixa salarial:</span> <%= number_to_currency invite.position.salary_from %>-<%= number_to_currency invite.position.salary_to %> </p>
-                  <p><span>Regime de Contratação:</span> <%= t(:"position_type.#{invite.position.position_type}") %></p>
+                  <p><span>Regime de Contratação:</span> <%= t("activerecord.attributes.position.hiring_scheme.#{invite.position.hiring_scheme}") %></p>
                 </div>
                 <div class="col-md-3 d-flex align-items-end flex-wrap align-content-end">
-                  <%= invite.invite_accepted %>
-                  <%= invite.invite_rejected %>
-                  <%= invite.invite_pending_company %>
+                  <%= invite.invite_links_company %>
                 </div>
               </div>
              </section>

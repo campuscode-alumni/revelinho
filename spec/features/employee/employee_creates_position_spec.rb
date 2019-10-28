@@ -13,7 +13,8 @@ feature 'Employee creates position' do
     fill_in 'Área', with: 'Desenvolvimento'
     fill_in 'Descrição', with: 'Posição que exige conhecimentos em HTTP, CSS, '\
                                'JavaScript e Ruby on Rails'
-    select 'CLT', from: 'Tipo'
+    select 'CLT', from: 'Regime'
+    select 'Integral', from: 'Expediente'
     fill_in 'De:', with: '2000'
     fill_in 'Até:', with: '4000'
     click_on 'Enviar'

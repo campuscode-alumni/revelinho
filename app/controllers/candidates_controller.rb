@@ -69,6 +69,8 @@ class CandidatesController < ApplicationController
   def reject_invite
     @invite.accepted_or_rejected_at = Date.current
     @invite.rejected!
+
+    redirect_to invites_candidates_path
   end
 
   private
