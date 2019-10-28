@@ -1,4 +1,11 @@
 <h1><%= @company.name %> te convidou para a posição de <%= @position.title %>.</h1>
-<h4>Veja a descrição do cargo:</h4>
-<p><%= @position.description %></p>
+<p>
+  Olá <%=@invite.candidate.name%>, <br>
+  Estamos felizes de avisar que a empresa <%= @company.name %> te convidou para uma posição de <%= @position.title %>.<br>
+  Para ver mais detalhes sobre o convite clique abaixo:
+</p>
 <%= link_to 'Ver detalhes', invites_candidates_url %>
+
+Atenciosamente,
+
+Equipe Revelinho
