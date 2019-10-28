@@ -85,12 +85,15 @@
           url: this.create_url,
           token: authToken
         }, (res, error) => {
-          if (error) {
-            console.log(error)
-          } else {
-            console.log('DEU CERTO')
-          }
+          this.notifyUser(error ? 'error' : 'success')
         })
+      },
+      notifyUser(type) {
+        this.$notification[type]({
+          message: 'Sucesso',
+          description:
+            'Entrevista salva',
+        });
       }
     }
   }

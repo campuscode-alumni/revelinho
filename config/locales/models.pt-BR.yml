@@ -10,12 +10,12 @@ pt-BR:
         description: Descrição
         salary_from: Salário de
         salary_to: Salário até
-        position_type: Tipo
+        hiring_scheme: Tipo
       company:
         name: Nome
         address: Endereço
   # Humanização de keys dos Enums
-  position_type:
+  hiring_scheme:
     full_time: CLT
     part_time: Meio Período
     internship: Estágio

@@ -121,7 +121,7 @@ Company.create!(
 
 Position.create!(
   title: 'Desenvolvedor',
-  position_type: :full_time,
+  hiring_scheme: :full_time,
   industry: 'TI',
   description: 'Conhecimentos em RoR',
   salary_to: 5000,

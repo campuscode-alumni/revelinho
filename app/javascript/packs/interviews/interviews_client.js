@@ -16,7 +16,6 @@ export class InterviewClient {
       url,
       method: 'POST',
       dateType: 'json',
-      // headers: { 'X-CSRF-Token': token },
       data: {
         interview,
         authenticity_token: token

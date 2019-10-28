@@ -5,7 +5,7 @@ FactoryBot.define do
     description { 'Desenvolvedor Ruby' }
     salary_from { 4500 }
     salary_to { 5500 }
-    position_type { :full_time }
+    hiring_scheme { :full_time }
     company
   end
 end

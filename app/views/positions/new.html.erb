@@ -34,8 +34,8 @@
         </div>
 
         <div class="col">
-          <%= f.label :position_type, 'Tipo' %>
-          <%= f.select :position_type, Position.position_types.map { |k, v| [ I18n.t(:"position_type.#{k}"), k] }, {}, class: "form-control"  %>
+          <%= f.label :hiring_scheme, 'Tipo' %>
+          <%= f.select :hiring_scheme, Position.hiring_schemes.map { |k, v| [ I18n.t(:"hiring_scheme.#{k}"), k] }, {}, class: "form-control"  %>
         </div>
       </div>
       <%= f.submit 'Enviar', class: "mt-2 form-control btn btn-primary" %>

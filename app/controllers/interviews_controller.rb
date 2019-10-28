@@ -14,15 +14,14 @@ class InterviewsController < ApplicationController
 
   def create
     @interview = Interview.new(@interview_params)
-
-    if @interview.save
-      flash[:notice] = 'Solicitação enviada. Aguardando confirmação do candidato'
-      redirect_to selection_process_path(
-        @interview_params[:selection_process_id]
-      )
-    else
-      flash.now[:danger] = 'Preencha todos os campos corretamente'
-      render :new
+    respond_to do |format|
+      if @interview.save
+        format.json { render json: @interview, status: :created }
+      else
+        format.json do
+          render json: @interview.errors, status: :unprocessable_entity
+        end
+      end
     end
   end
 
@@ -37,14 +36,14 @@ class InterviewsController < ApplicationController
   def parametize_create
     @interview_params = params.require(:interview).permit(:date, :time_to,
                                                           :time_from, :address,
-                                                          :format,
-                                                          :selection_process_id)
+                                                          :format)
+    @interview_params[:selection_process_id] = params[:selection_process_id]
   end
 
   def authorize_employee!
     return if @selection_process.invite.position.company ==
               current_employee.company
-    
+
     render json: {}, status: :forbidden
   end
 end
