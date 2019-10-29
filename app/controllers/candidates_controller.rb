@@ -41,16 +41,12 @@ class CandidatesController < ApplicationController
   end
 
   def invite
-    invite = @candidate.invites.new(@invite_params) do |i|
+    @invite = @candidate.invites.new(@invite_params) do |i|
       i.employee = current_employee
     end
 
-    if invite.save
-      InviteMailer.notify_candidate(invite.id).deliver_now
-      flash[:success] = "#{@candidate.name} convidado com sucesso para " \
-      "#{@position.title}"
-      return redirect_to candidates_path
-    end
+    return save_invite(@invite) if @invite.save
+
     flash[:danger] = 'Erro ao tentar convidar candidato'
     redirect_to @candidate
   end
@@ -74,6 +70,13 @@ class CandidatesController < ApplicationController
   end
 
   private
+
+  def save_invite(invite)
+    InviteMailer.notify_candidate(invite.id).deliver_now
+    flash[:success] = "#{@candidate.name} convidado com sucesso para " \
+    "#{@position.title}"
+    redirect_to candidates_path
+  end
 
   def candidate
     @candidate ||= Candidate.find(params[:id])
