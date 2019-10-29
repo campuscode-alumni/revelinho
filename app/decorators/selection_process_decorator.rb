@@ -11,12 +11,26 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def offers_menu
-    return unless employee_signed_in?
-
-    btn_offer + msg_offer
+    return menu_employee if employee_signed_in?
+    return menu_candidate if offers.pending.any?
   end
 
   private
+
+  def menu_employee
+    btn_offer + msg_offer
+  end
+
+  def menu_candidate
+    content_tag :div, class: 'alert alert-info' do
+      content_tag(:h4, 'PROPOSTA RECEBIDA! \o/') +
+        content_tag(:small, 'Parabéns! Você recebeu uma proposta. Agora avalie'\
+                            ' e veja se atende as suas expectativas') +
+        link_to('Ver proposta', candidate_offer_path(candidate.id, id,
+                                                     offers.pending.first.id),
+                class: 'btn btn-info btn-lg btn-block mt-2')
+    end
+  end
 
   def btn_offer
     link_to 'Quero contrata-lo!', new_candidate_offer_path(candidate.id, id),
