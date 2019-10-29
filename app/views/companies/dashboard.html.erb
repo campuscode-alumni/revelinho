@@ -6,6 +6,7 @@
             <%= "Seja bem vindo ao portal da empresa #{current_employee.company.name}!" %>
         </h2>
         <%= link_to 'Criar posição', new_position_path, class: 'btn btn-outline-dark' %>
+        <%= link_to 'Convites enviados', invites_companies_path, class: 'btn btn-outline-dark' %>
         <%= link_to 'Candidatos disponíveis', candidates_path, class: 'btn btn-outline-dark' %>
         <%= @company_link %>
       </div>

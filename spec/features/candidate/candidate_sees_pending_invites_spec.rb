@@ -39,9 +39,11 @@ feature 'candidate sees pending invites' do
     visit invites_candidates_path
 
     click_link('Aceitar')
+    visit invites_candidates_path
 
     invite.reload
 
+    expect(page).to have_content('Esse convite foi aceito')
     expect(invite).to be_accepted
     expect(invite.selection_process).to eq SelectionProcess.last
   end
@@ -74,6 +76,7 @@ feature 'candidate sees pending invites' do
 
     invite.reload
 
+    expect(page).to have_content('Esse convite foi rejeitado')
     expect(invite).to be_rejected
     expect(SelectionProcess.count).to eq 0
   end
