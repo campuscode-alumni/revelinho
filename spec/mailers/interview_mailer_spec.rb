@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EmployeeMailer, type: :mailer do
+RSpec.describe InterviewMailer, type: :mailer do
   describe '#interview_accepted' do
     it 'should send with proper subject' do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
@@ -16,7 +16,7 @@ RSpec.describe EmployeeMailer, type: :mailer do
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process)
 
-      mail = EmployeeMailer.interview_accepted(interview.id)
+      mail = InterviewMailer.interview_accepted(interview.id)
       expect(mail.subject).to(
         eq 'O candidato John Doe aceitou o convite para a entrevista.'
       )
@@ -35,7 +35,7 @@ RSpec.describe EmployeeMailer, type: :mailer do
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process)
 
-      mail = EmployeeMailer.interview_accepted(interview.id)
+      mail = InterviewMailer.interview_accepted(interview.id)
       expect(mail.to).to(
         include 'joao@revelo.com.br'
       )
@@ -54,7 +54,7 @@ RSpec.describe EmployeeMailer, type: :mailer do
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process)
 
-      mail = EmployeeMailer.interview_accepted(interview.id)
+      mail = InterviewMailer.interview_accepted(interview.id)
       expect(mail.body).to include(
         'John Doe aceitou o convite para a entrevista'\
         'do dia 2019-10-26 17:00:00, em Av. Paulista, 2000, presencial'\

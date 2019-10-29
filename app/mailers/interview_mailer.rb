@@ -1,4 +1,4 @@
-class EmployeeMailer < ApplicationMailer
+class InterviewMailer < ApplicationMailer
   def interview_accepted(id)
     @interview = Interview.find(id)
     @selection_process = @interview.selection_process
@@ -9,7 +9,6 @@ class EmployeeMailer < ApplicationMailer
          "do dia #{@interview.datetime}, em #{@interview.address}, "\
          "#{@interview.format}. A entrevista é referente a vaga de: "\
          "#{invite.position.title}. Para acessar clique no link abaixo:"\
-         "#{selection_process_candidates_path(@selection_process)}"
-    )
+         "#{selection_process_candidates_path(@selection_process)}")
   end
 end
