@@ -5,6 +5,7 @@ class Invite < ApplicationRecord
 
   delegate :messages, to: :selection_process
   delegate :company, to: :position
+  delegate :company_profile, to: :company
 
   enum status: { pending: 0, rejected: 5, accepted: 10 }
 end

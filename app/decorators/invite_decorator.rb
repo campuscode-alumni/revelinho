@@ -3,9 +3,15 @@ class InviteDecorator < Draper::Decorator
   include Draper::LazyHelpers
 
   def invite_links
-    return link_process unless invite.pending?
+    return link_process unless pending?
 
     links_invite_choice
+  end
+
+  def logo
+    return company_profile.logo if company_profile.logo.attached?
+
+    'https://github.com/identicons/jasonlong.png'
   end
 
   private
