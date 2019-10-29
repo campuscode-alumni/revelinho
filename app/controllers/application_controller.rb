@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    render file: Rails.root.join('public', '404'), status: :not_found
+    render file: 'public/404', status: :not_found
   end
 
   def current_user

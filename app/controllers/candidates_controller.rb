@@ -46,6 +46,7 @@ class CandidatesController < ApplicationController
     end
 
     if invite.save
+      InviteMailer.notify_candidate(invite.id).deliver_now
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \
       "#{@position.title}"
       return redirect_to candidates_path
