@@ -9,6 +9,7 @@ class CandidatesController < ApplicationController
   before_action :decorate, only: %i[show]
   before_action :invite_params, only: %i[invite]
   before_action :owner_invite, only: %i[accept_invite reject_invite]
+  before_action :new_invite, only: %i[invite]
 
   def index
     msg = 'Não há candidatos cadastrados até agora'
@@ -41,15 +42,12 @@ class CandidatesController < ApplicationController
   end
 
   def invite
-    invite = @candidate.invites.new(@invite_params)
-    byebug
-    invite.employee = current_employee
-    if invite.save
+    if @invite.save
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \
       "#{@position.title}"
       redirect_to candidates_path
     else
-      flash[:danger] = 'Erro ao tentar convidar candidato'
+      flash[:danger] = I18n.t('invite.candidate.error')
       redirect_to @candidate
     end
   end
@@ -73,6 +71,12 @@ class CandidatesController < ApplicationController
   end
 
   private
+
+  def new_invite
+    @invite = @candidate.invites.new(@invite_params) do |inv|
+      inv.employee = current_employee
+    end
+  end
 
   def candidate
     @candidate ||= Candidate.find(params[:id])
