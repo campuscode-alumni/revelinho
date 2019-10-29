@@ -31,8 +31,8 @@
             <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
           <% end %>
         </div>
-        <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
       </div>
+      <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc).decorate, as: :message %>
     </div>
   </div>
 </div>
