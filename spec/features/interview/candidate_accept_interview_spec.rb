@@ -19,7 +19,7 @@ feature 'candidate see interview invite' do
     visit selection_process_candidates_path(selection_process)
 
     expect(page).to have_content('Entrevistas')
-    expect(page).to have_content('Dia 26/10/2019 às 17:00')
+    expect(page).to have_content('26 de outubro de 2019, 17:00')
     expect(page).to have_content('Endereço: Av. Paulista, 2000')
     expect(page).to have_content('Formato: Presencial')
     expect(page).to have_content('Aguardando resposta')
