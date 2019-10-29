@@ -37,13 +37,4 @@ describe 'InviteHelper' do
       expect(invite_link).to_not include('Aceitar convite')
     end
   end
-
-  context '#invite_pending_company' do
-    it 'has to present a message if the invitation is pending' do
-      invite = create(:invite, status: :pending)
-      invite_link = InvitePresenter.new(invite).invite_pending_company
-
-      expect(invite_link).to include('Esse convite está pendente')
-    end
-  end
 end

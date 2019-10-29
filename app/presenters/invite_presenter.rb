@@ -32,6 +32,8 @@ class InvitePresenter < SimpleDelegator
     end
   end
 
+  private
+
   def invite_accepted
     content_tag :p, "Esse convite foi aceito em
                         #{ I18n.l(accepted_or_rejected_at,
