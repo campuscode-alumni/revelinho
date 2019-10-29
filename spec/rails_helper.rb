@@ -47,8 +47,6 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.include Rails.application.routes.url_helpers
-
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :decorators
   config.include Warden::Test::Helpers, type: :decorators
