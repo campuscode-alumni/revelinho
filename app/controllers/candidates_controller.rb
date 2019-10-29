@@ -1,6 +1,6 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_candidate!, only: %i[invites dashboard]
-  before_action :authenticate_employee!, only: %i[invite]
+  before_action :authenticate_employee!, only: %i[invite index]
   before_action :candidate, only: %i[show invite]
   before_action :set_invite, only: %i[accept_invite reject_invite]
   before_action :set_candidates_list, only: %i[index]
