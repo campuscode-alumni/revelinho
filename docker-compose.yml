@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: rails server -b 0.0.0.0
+    container_name: revelinho
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/revelinho
+    tty: true
+    stdin_open: true
+    links:
+      - db
+  db:
+    image: postgres:12.0
+    ports:
+      - 5432:5432
+    volumes:
+      - revelinho-data:/var/lib/postgresql/data
+volumes:
+  revelinho-data:
