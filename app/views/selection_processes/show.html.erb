@@ -13,10 +13,16 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid px-5">
     <div class="row">
-      <div class="col-12 col-md-10 offset-md-1 mb-5">
-        <div class="card card-body mb-0">
+      <section class="col-md-3 card align-self-start px-0">
+        <header class="text-center">
+          <h3 class="my-2">Entrevistas</h3>
+        </header>
+        <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
+      </section>
+      <div class="col-md-9 mb-5">
+        <div class="card card-body">
           <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
             <div class="form-group">
               <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
@@ -25,10 +31,13 @@
             <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
           <% end %>
         </div>
+        <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
       </div>
+<<<<<<< HEAD
       <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc).decorate, as: :message %>
+=======
+>>>>>>> master
     </div>
   </div>
 </div>
-  
   

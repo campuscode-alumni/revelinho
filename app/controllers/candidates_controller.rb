@@ -42,6 +42,7 @@ class CandidatesController < ApplicationController
   def invite
     invite = @candidate.invites.new(@invite_params)
     if invite.save
+      InviteMailer.notify_candidate(invite.id).deliver_now
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \
       "#{@position.title}"
       redirect_to candidates_path
@@ -52,10 +53,13 @@ class CandidatesController < ApplicationController
   end
 
   def invites
-    @invites = current_candidate.invites.decorate
+    @invite_presenter =
+      InvitePresenter.decorate_collection(current_candidate.invites,
+                                          current_candidate)
   end
 
   def accept_invite
+    @invite.accepted_or_rejected_at = Date.current
     @invite.selection_process = SelectionProcess.new
     return redirect_to invites_candidates_path unless
       @invite.selection_process.save
@@ -66,7 +70,10 @@ class CandidatesController < ApplicationController
   end
 
   def reject_invite
+    @invite.accepted_or_rejected_at = Date.current
     @invite.rejected!
+
+    redirect_to invites_candidates_path
   end
 
   private

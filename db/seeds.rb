@@ -40,7 +40,7 @@ company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
                  office_hours: :full_time)
 
 Invite.create!(candidate: Candidate.last, position: Position.last,
-               status: :accepted)
+               status: :accepted, accepted_or_rejected_at: Date.today)
 selection_process = Invite.last.create_selection_process
 
 Message.create!(sendable: Candidate.first, selection_process: selection_process,
@@ -50,4 +50,10 @@ Message.create!(sendable: Employee.first, selection_process: selection_process,
                       'podemos marcar uma entrevista?')
 
 employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
+
+Interview.create!(datetime: '2019-10-26 17:00:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process)
+Interview.create!(datetime: '2019-08-30 07:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
+Interview.create!(datetime: '2019-07-26 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :canceled)
+Interview.create!(datetime: '2019-10-20 17:00:00', format: :online, address: 'skype', selection_process: selection_process)
+
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
