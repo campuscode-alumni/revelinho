@@ -33,10 +33,7 @@
         </div>
         <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
       </div>
-<<<<<<< HEAD
       <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc).decorate, as: :message %>
-=======
->>>>>>> master
     </div>
   </div>
 </div>
