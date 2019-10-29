@@ -11,7 +11,7 @@ feature 'Employee signup app' do
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'
 
-    click_on 'Cadastrar-se'
+    click_on 'Inscrever-se'
 
     employee = Employee.last
 
@@ -28,7 +28,7 @@ feature 'Employee signup app' do
     fill_in 'Senha', with: ''
     fill_in 'Confirme sua senha', with: ''
 
-    click_on 'Cadastrar-se'
+    click_on 'Inscrever-se'
 
     expect(page).to have_content('Não foi possível salvar o '\
                                  'funcionário: 3 erros.')
@@ -59,7 +59,7 @@ feature 'Employee signup app' do
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'
 
-    click_on 'Cadastrar-se'
+    click_on 'Inscrever-se'
 
     expect(Company.count).to eq 1
     expect(current_path).to eq(dashboard_companies_path)
