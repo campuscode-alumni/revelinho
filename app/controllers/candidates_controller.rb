@@ -42,6 +42,7 @@ class CandidatesController < ApplicationController
   def invite
     invite = @candidate.invites.new(@invite_params)
     if invite.save
+      InviteMailer.notify_candidate(invite.id).deliver_now
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \
       "#{@position.title}"
       redirect_to candidates_path
