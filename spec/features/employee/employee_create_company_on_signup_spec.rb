@@ -11,7 +11,7 @@ feature 'employee create company on signup' do
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'
 
-    click_on 'Cadastrar-se'
+    click_on 'Inscrever-se'
     expect(current_path).to eq(edit_company_path(Company.last))
   end
 
