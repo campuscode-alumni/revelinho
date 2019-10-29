@@ -3,33 +3,22 @@ class InvitePresenter < SimpleDelegator
 
   delegate :content_tag, :link_to, to: :h
 
-  def initialize(invite)
+  def initialize(invite, user)
     @invite = invite
+    @user = user
     super(invite)
   end
 
-  def self.decorate_collection(invites)
-    invites.map { |invite| new(invite) }
+  def self.decorate_collection(invites, user)
+    invites.map { |invite| new(invite, user) }
   end
 
   def invite_links
-    if accepted?
-      invite_accepted
-    elsif rejected?
-      invite_rejected
-    else
-      invite_pending
-    end
-  end
+    return invite_accepted if accepted?
+    return invite_rejected if rejected?
+    return invite_pending if @user.is_a? Candidate
 
-  def invite_links_company
-    if accepted?
-      invite_accepted
-    elsif rejected?
-      invite_rejected
-    else
-      invite_pending_company
-    end
+    invite_pending_company
   end
 
   private
