@@ -1,29 +1,37 @@
 <template>
   <div id="app">
-    <a-button type="primary" @click="showModal" shape="circle" icon="plus"></a-button>
+    <a-button type="primary" @click="showModal" shape="circle" icon="plus" :style="showModalButtonStyle"></a-button>
 
     <a-modal
       title="Agendar Entrevista"
       :visible="visible"
-      @ok="handleOk"
-      :confirmLoading="confirmLoading"
+      @ok="handleSubmit"
+      :confirmLoading="loading"
       @cancel="handleCancel"
     >
-      <a-form :form="form" @submit="handleSubmit">
-        <a-form-item label="Data" :label-col="{ span: 5 }" :wrapper-col="{ span: 3 }">
+      <a-form :form="form">
+        <a-form-item label="Data" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-date-picker @change="onChangeDate" :format="dateFormat"/>
         </a-form-item>
-        <a-form-item label="Horário" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
-          <a-time-picker @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat"></a-time-picker>
-          <a-time-picker @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat"></a-time-picker>
+
+        <a-form-item label="Horário" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
+          <a-form-item :style="{ display: 'inline-block', marginRight: '2em' }">
+            <a-time-picker @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat"></a-time-picker>
+          </a-form-item>
+
+          <a-form-item :style="{ display: 'inline-block' }">
+            <a-time-picker @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat"></a-time-picker>
+          </a-form-item>
         </a-form-item>
-        <a-form-item label="Endereço" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
+
+        <a-form-item label="Endereço" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-input
-            v-model="address"
+            v-model="interview.address"
           />
         </a-form-item>
-        <a-form-item label="Tipo de entrevista" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
-          <a-radio-group v-model="format">
+
+        <a-form-item label="Tipo de entrevista" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
+          <a-radio-group v-model="interview.format">
             <a-radio-button
               v-for="format in formats"
               :key="format.value"
@@ -32,11 +40,6 @@
               {{ format.name }}
             </a-radio-button>
           </a-radio-group>
-        </a-form-item>
-        <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-          <a-button type="primary" html-type="submit">
-            Submit
-          </a-button>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -52,17 +55,31 @@
   export default {
     data() {
       return {
-        date: '',
-        time_from: '',
-        time_to: '',
-        address: '',
-        format: '',
+        initialInterview: {
+          date: '',
+          time_from: '',
+          time_to: '',
+          address: '',
+          format: '',
+        },
+        interview: {},
         dateFormat: 'DD/MM/YYYY',
         timeFormat: 'HH:mm',
         form: this.$form.createForm(this, { name: 'new-interview' }),
-        ModalText: 'Content of the modal',
         visible: false,
-        confirmLoading: false
+        loading: false,
+        controlStyle: {
+          label: { span: 7 },
+          wrapper: { span: 17, marginBottom: 0 },
+          item: { marginBottom: '8px' }
+        },
+        showModalButtonStyle: {
+          position: 'absolute',
+          right: '2em',
+          bottom: '2em'
+        },
+        errorMessage: 'Erro ao salvar entrevista',
+        successMessage: 'Entrevista salva com sucesso'
       };
     },
     props: {
@@ -78,48 +95,47 @@
       showModal() {
         this.visible = true;
       },
-      handleOk(e) {
-        this.ModalText = 'The modal will be closed after two seconds';
-        this.confirmLoading = true;
-        setTimeout(() => {
-          this.visible = false;
-          this.confirmLoading = false;
-        }, 2000);
-      },
-      handleCancel(e) {
-        console.log('Clicked cancel button');
-        this.visible = false;
-      },
       onChangeDate(date, dateString) {
-        this.date = dateString
+        this.interview.date = dateString
       },
       onChangeTimeFrom(time, timeString) {
-        this.time_from = timeString
+        this.interview.time_from = timeString
       },
       onChangeTimeTo(time, timeString) {
-        this.time_to = timeString
+        this.interview.time_to = timeString
+      },
+      handleCancel() {
+        this.visible = false
       },
       handleSubmit(e) {
-        e.preventDefault()
+        this.loading = true
         client.create({
-          date: this.date,
-          time_from: this.time_from,
-          time_to: this.time_to,
-          address: this.address,
-          format: this.format
+          ...this.interview
         }, {
           url: this.create_url,
           token: authToken
-        }, (res, error) => {
-          this.notifyUser(error ? 'error' : 'success')
-        })
+        }, this.submitCallback)
       },
-      notifyUser(type) {
-        this.$notification[type]({
+      submitCallback(res, error) {
+        this.loading = false;
+        if (error) {
+          this.notifyUserError()
+        } else {
+          this.visible = false;
+          this.notifyUserSuccess()
+        }
+      },
+      notifyUserSuccess() {
+        this.$notification['success']({
           message: 'Sucesso',
-          description:
-            'Entrevista salva',
+          description: 'Entrevista salva',
         });
+      },
+      notifyUserError() {
+        this.$notification['error']({
+          message: 'Erro',
+          description: 'Erro ao salvar entrevista'
+        })
       }
     }
   }
