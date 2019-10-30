@@ -1,5 +1,10 @@
 
- .avatar-process {
+ .avatar-100 {
   max-width: 100px;
   max-height: 100px;
-}
+ }
+  .avatar-50 {
+  max-width: 50px;
+  max-height: 50px;
+ }
+ 
