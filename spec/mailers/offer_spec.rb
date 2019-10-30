@@ -24,8 +24,8 @@ describe OfferMailer, type: :mailer do
                      selection_process: invite.selection_process)
 
       mail = OfferMailer.notify_candidate(Offer.last.id)
-      expect(mail.subject).to eq 'José, você recebeu uma proposta para posição'\
-                                 ' de Desenvolvedor na Revelo'
+      expect(mail.subject).to eq 'Você recebeu uma proposta para a posição'\
+                                 ' Desenvolvedor'
     end
 
     it 'should send to candidate email' do
