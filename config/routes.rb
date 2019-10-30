@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :companies, only: %i[index edit update show] do
     get 'dashboard', on: :collection
+    get 'invites', on: :collection
   end
   resources :company_profiles, only: %i[new create edit update]
   resources :candidates, only: %i[index show] do

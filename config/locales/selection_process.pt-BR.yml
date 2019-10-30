@@ -1,0 +1,9 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      selection_process:
+        singular: Processo de Seleção
+        plural: Processos de Seleção
+    attributes:
+      selection_process:

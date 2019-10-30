@@ -1,0 +1,14 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      interview:
+        singular: Entrevista
+        plural: Entrevistas
+    attributes:
+      interview:
+        date: Data
+        time_from: Horário de início
+        time_to: Horário de fim
+        address: Endereço
+        format: Tipo de entrevista

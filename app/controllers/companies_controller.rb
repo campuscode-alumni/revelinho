@@ -3,6 +3,8 @@ class CompaniesController < ApplicationController
                                                   dashboard]
   before_action :set_company, only: %i[edit update show]
   before_action :set_company_profile, only: %i[show]
+  before_action :set_current_company, only: %i[edit update show
+                                               dashboard invites]
   before_action :own_company, only: %i[edit update show]
   before_action :employee_pending, except: %i[edit update]
 
@@ -22,11 +24,19 @@ class CompaniesController < ApplicationController
   def show; end
 
   def dashboard
-    @company_link = CompanyProfilePresenter.new(current_employee.company)
-                                           .company_profile_link
+    @dashboard = CompanyProfileDecorator.decorate(@current_company)
+  end
+
+  def invites
+    @invites = Invite.includes(:position)
+                     .where(positions: { company: @current_company }).pending
   end
 
   private
+
+  def set_current_company
+    @current_company = current_employee.company
+  end
 
   def set_company_profile
     @company_profile = @company.company_profile
@@ -41,8 +51,8 @@ class CompaniesController < ApplicationController
   end
 
   def own_company
-    redirect_to company_path(current_employee.company) unless
-    current_employee.company == @company
+    redirect_to company_path(@current_company) unless
+    @current_company == @company
   end
 
   def employee_pending

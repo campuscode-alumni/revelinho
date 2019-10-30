@@ -13,7 +13,7 @@ Candidate.create!(email: 'jose.pedro@candidato.com', password: '123456',
                   birthday: '12/04/1991', educational_level: 'mestrado')
 
 Candidate.all.each do |candidate|
-  CandidateProfile.create!(
+  profile = CandidateProfile.create!(
     work_experience: 'Sou rubysta master',
     education: 'mestrado concluído',
     skills: 'Node, React, Rails',
@@ -24,6 +24,10 @@ Candidate.all.each do |candidate|
     github_profile_url: 'candidate',
     candidate: candidate
   )
+  profile.avatar.attach(io: File.open(Rails.root.join('spec', 'support',
+                                                      'images',
+                                                      'gatinho.jpg')),
+                        filename: 'gatinho.jpg')
 end
 
 company = Company.create!(name: 'Revelo', url_domain: 'revelo.com.br', status: :active)
