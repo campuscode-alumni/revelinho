@@ -98,9 +98,8 @@ class CandidatesController < ApplicationController
 
   def decorate_list
     @employee_candidate_presenters =
-      EmployeeCandidatePresenter.decorate_collection(
-        @candidates, current_employee
-      )
+      EmployeeCandidatePresenter
+      .decorate_collection(@candidates, current_employee)
   end
 
   def decorate
@@ -110,9 +109,8 @@ class CandidatesController < ApplicationController
 
   def invite_params
     @invite_params = params.permit(:position_id, :message)
-    @position = current_employee.company.positions.find(
-      @invite_params[:position_id]
-    )
+    @position = current_employee
+                .company.positions.find(@invite_params[:position_id])
   end
 
   def owner_invite

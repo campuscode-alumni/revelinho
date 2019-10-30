@@ -31,8 +31,8 @@ company.company_profile = CompanyProfile.create!(company: company, full_descript
                                          employees_number: '100-500', website: 'revelo.com.br', phone: '11 3030-3030',
                                          mission: 'Empregar pessoas', category: 'RH', attractives: 'Ambiente informal e as vezes tem fruta')
 
-employee = Employee.create!(email: "joao.silva@revelo.com.br",
-                 password: '123456', company: company)
+employee = Employee.create!(name: 'João Silva', email: "joao.silva@revelo.com.br",
+                            password: '123456', company: company)
 
 company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
                  description: 'Desenvolvedor fullstack em Ruby',
@@ -41,7 +41,7 @@ company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
 
 Invite.create!(candidate: Candidate.last, position: Position.last,
                status: :accepted, accepted_or_rejected_at: Date.today,
-               employee: Employee.last)
+               employee: employee)
 
 selection_process = Invite.last.create_selection_process
 
