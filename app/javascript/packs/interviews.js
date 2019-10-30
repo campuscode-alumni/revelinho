@@ -4,13 +4,15 @@ import 'ant-design-vue/dist/antd.css'
 
 Vue.use(Antd);
 
-import InterviewForm from '../components/InterviewForm.vue'
+import InterviewForm from '../components/interviews/InterviewForm.vue'
+import InterviewCalendar from '../components/interviews/InterviewCalendar.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const interview = new Vue({
-    el: 'interview-form',
+    el: '#interviews',
     components: {
+      InterviewCalendar,
       InterviewForm
     }
   })

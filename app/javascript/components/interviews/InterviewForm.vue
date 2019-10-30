@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import { InterviewClient } from '../packs/interviews/interviews_client'
+  import { InterviewClient } from '../../packs/interviews/interviews_client'
 
   const client = new InterviewClient()
   const authToken = $('meta[name=csrf-token]').attr('content')
