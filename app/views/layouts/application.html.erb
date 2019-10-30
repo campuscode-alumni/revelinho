@@ -44,7 +44,9 @@
     <%= @application_presenter.flash_alerts %>
 
     <%= yield %>
-
+    <% content_for :javascript do %>
+      <%= javascript_pack_tag 'interview_form' %>
+    <% end %>
     <%= yield :javascript %>
 
   </body>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a-button type="primary" @click="showModal" shape="circle" icon="plus" :style="showModalButtonStyle"></a-button>
+    <a-button id="interview-modal-button" type="primary" @click="showModal" shape="circle" icon="plus" :style="showModalButtonStyle"></a-button>
 
     <a-modal
       title="Agendar Entrevista"
@@ -11,31 +11,33 @@
     >
       <a-form :form="form">
         <a-form-item label="Data" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
-          <a-date-picker @change="onChangeDate" :format="dateFormat"/>
+          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat"/>
         </a-form-item>
 
         <a-form-item label="Horário" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-form-item :style="{ display: 'inline-block', marginRight: '2em' }">
-            <a-time-picker @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat"></a-time-picker>
+            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat"></a-time-picker>
           </a-form-item>
 
           <a-form-item :style="{ display: 'inline-block' }">
-            <a-time-picker @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat"></a-time-picker>
+            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat"></a-time-picker>
           </a-form-item>
         </a-form-item>
 
         <a-form-item label="Endereço" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-input
+            id="address-field"
             v-model="interview.address"
           />
         </a-form-item>
 
         <a-form-item label="Tipo de entrevista" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
-          <a-radio-group v-model="interview.format">
+          <a-radio-group v-model="interview.format" >
             <a-radio-button
               v-for="format in formats"
               :key="format.value"
               :value="format.value"
+              :id="format.value"
             >
               {{ format.name }}
             </a-radio-button>

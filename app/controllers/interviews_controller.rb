@@ -5,7 +5,7 @@ class InterviewsController < ApplicationController
   before_action :authorize_employee!, only: %i[create]
 
   def new
-    @formats_json = { formats: Interview.formats.map do |value, i|
+    @formats_json = { formats: Interview.formats.map do |value, _i|
       { name: I18n.t(:"format.#{value}"),
         value: value }
     end }.to_json

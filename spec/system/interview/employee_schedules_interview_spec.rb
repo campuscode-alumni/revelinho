@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Employee schedules interview' do
   scenario 'successfully', :js do
     company = create(:company, url_domain: 'revelo.com.br')
+    create(:company_profile, company: company)
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
@@ -18,29 +19,32 @@ feature 'Employee schedules interview' do
     visit selection_process_path(selection_process)
 
     click_on 'Agendar entrevista'
-    click_on '+'
-    fill_in 'date-field', with: '25/11/2019'
-    select '10', from: 'time-from-field'
-    select '11', from: 'time-to-field'
-    fill_in 'Endereço', with: interview.address
-    select I18n.t(:"format.#{interview.format}"), from: 'Tipo de entrevista'
-    click_on 'Agendar'
+    click_on 'interview-modal-button'    
+    
+    
+    find(:css, '#date-field > div > input').set('25/11/2019')
+    
+    within '#time-from-field' do
+ 
+      find('input').fill_in with: "10:00"
 
-    expect(current_path).to eq(selection_process_path(selection_process))
-    expect(page).to have_content('Solicitação enviada')
-    expect(page).to have_content('Aguardando confirmação do candidato')
-    within '.interviews' do
-      expect(page).to have_content('25 de novembro de 2019')
-      expect(page).to have_content('10:00')
-      expect(page).to have_content('11:00')
-      expect(page).to have_content(interview.address)
-      expect(page).to have_content(I18n.t(:"format.#{interview.format}"))
     end
+    within '#time-to-field' do
+      find('input').fill_in with: "11:00"
+    end
+    fill_in 'address-field', with: interview.address
+
+    find('label', text: 'Online').click
+
+    click_on 'OK'
+
+    expect(page).to have_content('Sucesso')
     expect(Interview.count).to eq(1)
   end
 
-  scenario 'validates empty field' do
+  scenario 'validates empty field', :js do
     company = create(:company, url_domain: 'revelo.com.br')
+    create(:company_profile, company: company)
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
@@ -55,23 +59,20 @@ feature 'Employee schedules interview' do
     visit selection_process_path(selection_process)
 
     click_on 'Agendar entrevista'
-    click_on '+'
+    click_on 'interview-modal-button'
 
-    fill_in 'date-field', with: ''
-    fill_in 'Endereço', with: ''
-    click_on 'Agendar'
-    save_page
+    fill_in 'address-field', with: ''
 
-    expect(page).to have_content('Preencha todos os campos corretamente')
-    expect(current_path).to eq(
-      selection_process_interviews_path(selection_process)
-    )
+    click_on 'OK'
+
+    expect(page).to have_content('Erro ao salvar entrevista')
+    expect(Interview.count).to eq(0)
   end
 
   scenario 'must be logged in' do
     company = create(:company, url_domain: 'revelo.com.br')
-    employee = create(:employee, email: 'renata@revelo.com.br',
-                                 company: company)
+    create(:employee, email: 'renata@revelo.com.br',
+                      company: company)
     candidate = create(:candidate, name: 'Gustavo')
     create(:candidate_profile, candidate: candidate)
     position = create(:position, title: 'Engenheiro de Software Pleno',

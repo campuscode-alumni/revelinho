@@ -3,10 +3,10 @@ class InterviewDecorator < Draper::Decorator
   include Draper::LazyHelpers
 
   def time_from_localized
-    I18n.localize(Time.parse(time_from, Time.now), format: :short)
+    I18n.localize(Time.zone.parse(time_from, Time.zone.now), format: :short)
   end
 
   def time_to_localized
-    I18n.localize(Time.parse(time_to, Time.now), format: :short)
+    I18n.localize(Time.zone.parse(time_to, Time.zone.now), format: :short)
   end
 end
