@@ -31,7 +31,7 @@ company.company_profile = CompanyProfile.create!(company: company, full_descript
                                          employees_number: '100-500', website: 'revelo.com.br', phone: '11 3030-3030',
                                          mission: 'Empregar pessoas', category: 'RH', attractives: 'Ambiente informal e as vezes tem fruta')
 
-Employee.create!(email: "joao.silva@revelo.com.br", name: 'João Silva',
+employee = Employee.create!(email: "joao.silva@revelo.com.br",
                  password: '123456', company: company)
 
 company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
@@ -40,7 +40,9 @@ company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
                  office_hours: :full_time)
 
 Invite.create!(candidate: Candidate.last, position: Position.last,
-               status: :accepted, employee: Employee.last)
+               status: :accepted, accepted_or_rejected_at: Date.today,
+               employee: Employee.last)
+
 selection_process = Invite.last.create_selection_process
 
 Message.create!(sendable: Candidate.first, selection_process: selection_process,
@@ -50,4 +52,9 @@ Message.create!(sendable: Employee.first, selection_process: selection_process,
                       'podemos marcar uma entrevista?')
 
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
+employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 
+Interview.create!(datetime: '2019-10-26 17:00:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process)
+Interview.create!(datetime: '2019-08-30 07:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
+Interview.create!(datetime: '2019-07-26 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :canceled)
+Interview.create!(datetime: '2019-10-20 17:00:00', format: :online, address: 'skype', selection_process: selection_process)
