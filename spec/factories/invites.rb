@@ -5,5 +5,6 @@ FactoryBot.define do
     accepted_or_rejected_at { Date.current }
     candidate
     position
+    employee
   end
 end

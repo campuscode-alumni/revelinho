@@ -6,6 +6,7 @@ feature 'employee create company on signup' do
 
     click_on 'Cadastro de funcionário'
 
+    fill_in 'Nome', with: 'João Silva'
     fill_in 'E-mail', with: 'employee@company.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'

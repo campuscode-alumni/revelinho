@@ -19,7 +19,7 @@ feature 'employee send message' do
     fill_in 'Escreva a sua mensagem', with: 'Podemos agendar uma entrevista?'
     click_on('Enviar')
 
-    expect(page).to have_css('h5', text: employee.email)
+    expect(page).to have_css('h5', text: employee.name)
     expect(page).to have_content('Seja bem vindo!')
     expect(page).to have_content('Podemos agendar uma entrevista?')
   end

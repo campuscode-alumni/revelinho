@@ -1,6 +1,7 @@
 class CandidatesController < ApplicationController
+  before_action :redirect_candidate_dashboard, only: [:index]
   before_action :authenticate_candidate!, only: %i[invites dashboard]
-  before_action :authenticate_employee!, only: %i[invite]
+  before_action :authenticate_employee!, only: %i[invite index]
   before_action :candidate, only: %i[show invite]
   before_action :set_invite, only: %i[accept_invite reject_invite]
   before_action :set_candidates_list, only: %i[index]
@@ -8,6 +9,7 @@ class CandidatesController < ApplicationController
   before_action :decorate, only: %i[show]
   before_action :invite_params, only: %i[invite]
   before_action :owner_invite, only: %i[accept_invite reject_invite]
+  before_action :new_invite, only: %i[invite]
 
   def index
     msg = 'Não há candidatos cadastrados até agora'
@@ -40,16 +42,14 @@ class CandidatesController < ApplicationController
   end
 
   def invite
-    invite = @candidate.invites.new(@invite_params)
-    if invite.save
-      InviteMailer.notify_candidate(invite.id).deliver_now
+    if @invite.save
+      InviteMailer.notify_candidate(@invite.id)
       flash[:success] = "#{@candidate.name} convidado com sucesso para " \
       "#{@position.title}"
-      redirect_to candidates_path
-    else
-      flash[:danger] = 'Erro ao tentar convidar candidato'
-      redirect_to @candidate
+      return redirect_to candidates_path
     end
+    flash[:danger] = I18n.t('invite.candidate.error')
+    redirect_to @candidate
   end
 
   def invites
@@ -78,6 +78,12 @@ class CandidatesController < ApplicationController
 
   private
 
+  def new_invite
+    @invite = @candidate.invites.new(@invite_params) do |inv|
+      inv.employee = current_employee
+    end
+  end
+
   def candidate
     @candidate ||= Candidate.find(params[:id])
   end
@@ -92,9 +98,8 @@ class CandidatesController < ApplicationController
 
   def decorate_list
     @employee_candidate_presenters =
-      EmployeeCandidatePresenter.decorate_collection(
-        @candidates, current_employee
-      )
+      EmployeeCandidatePresenter
+      .decorate_collection(@candidates, current_employee)
   end
 
   def decorate
@@ -104,13 +109,16 @@ class CandidatesController < ApplicationController
 
   def invite_params
     @invite_params = params.permit(:position_id, :message)
-    @position = current_employee.company.positions.find(
-      @invite_params[:position_id]
-    )
+    @position = current_employee
+                .company.positions.find(@invite_params[:position_id])
   end
 
   def owner_invite
     return redirect_to invites_candidates_path unless
      current_candidate.invites.where(id: @invite.id, status: :pending).any?
+  end
+
+  def redirect_candidate_dashboard
+    redirect_to dashboard_candidates_path if candidate_signed_in?
   end
 end
