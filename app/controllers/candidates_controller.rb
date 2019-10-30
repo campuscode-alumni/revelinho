@@ -41,11 +41,11 @@ class CandidatesController < ApplicationController
   end
 
   def invite
-    @invite = @candidate.invites.new(@invite_params) do |i|
+    @invite = @candidate.invites.build(@invite_params) do |i|
       i.employee = current_employee
     end
 
-    return save_invite(@invite) if @invite.save
+    return send_email_notification(@invite) if @invite.save
 
     flash[:danger] = I18n.t('invite.candidate.error')
     redirect_to @candidate
@@ -77,7 +77,7 @@ class CandidatesController < ApplicationController
 
   private
 
-  def save_invite(invite)
+  def send_email_notification(invite)
     InviteMailer.notify_candidate(invite.id).deliver_now
     flash[:success] = I18n.t('invite.candidate.success',
                              candidate: @candidate.name,
