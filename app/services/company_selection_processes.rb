@@ -3,10 +3,15 @@ class CompanySelectionProcesses
 
   def initialize(company)
     @selection_processes = SelectionProcess
-                           .where(company: company)
+                           .joins(invite: { position: [:company] })
+                           .where(positions: { company_id: company.id })
   end
 
   def all
     @selection_processes
+  end
+
+  def presenter
+    CompanySelectionProcessesPresenter.new(@company)
   end
 end

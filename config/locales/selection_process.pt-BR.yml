@@ -1,9 +1,11 @@
 ---
 pt-BR:
-  activerecord:
-    models:
-      selection_process:
-        singular: Processo de Seleção
-        plural: Processos de Seleção
+  selection_process:
+    singular: Processo de Seleção
+    plural: Processos de Seleção
     attributes:
-      selection_process:
+    messages:
+      empty: Ainda não há entrevistas
+      click_here: Clique aqui
+      to_schedule_interviews: para começar a agendá-las
+      see_details: Ver detalhes

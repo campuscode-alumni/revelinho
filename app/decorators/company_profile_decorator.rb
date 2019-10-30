@@ -39,7 +39,7 @@ class CompanyProfileDecorator < Draper::Decorator
 
   def selection_processes_card_locals
     { icon: 'fa-edit',
-      title: I18n.t('activerecord.models.selection_process.plural'),
+      title: I18n.t('selection_process.plural'),
       count: CompanySelectionProcesses.new(@company).all.count,
       id: 'selection-processes-card',
       path: 'selection_processes' }
