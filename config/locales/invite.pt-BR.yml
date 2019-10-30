@@ -10,3 +10,4 @@ pt-BR:
   invite: 
     candidate:
       error: Erro ao tentar convidar candidato
+      success: "%{candidate} convidado com sucesso para %{position}"

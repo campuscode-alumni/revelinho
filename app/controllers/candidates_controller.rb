@@ -79,8 +79,9 @@ class CandidatesController < ApplicationController
 
   def save_invite(invite)
     InviteMailer.notify_candidate(invite.id).deliver_now
-    flash[:success] = "#{@candidate.name} convidado com sucesso para " \
-    "#{@position.title}"
+    flash[:success] = I18n.t('invite.candidate.success',
+                             candidate: @candidate.name,
+                             position: @position.title)
     redirect_to candidates_path
   end
 
