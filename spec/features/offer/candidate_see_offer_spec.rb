@@ -30,6 +30,24 @@ feature 'candidate see offer' do
   end
 
   scenario 'and accept offer' do
+    candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
+    invite = create(:invite, candidate: candidate, status: :accepted)
+    selection_process = create(:selection_process, invite: invite)
+    create(:company_profile, company: selection_process.company)
+    message = create(:message, selection_process: selection_process,
+                               sendable: selection_process.employee,
+                               text: 'Venha fazer parte da nossa equipe!')
+    offer = create(:offer, selection_process: selection_process,
+                           message: message, status: :pending,
+                           employee: selection_process.employee)
+
+    login_as(candidate, scope: :candidate)
+
+    visit candidate_offer_path(candidate, selection_process, offer)
+    click_on 'Aceitar Oferta'
+
+    expect(page).to have_content('Oferta aceita!')
   end
 
   scenario 'and reject offer' do

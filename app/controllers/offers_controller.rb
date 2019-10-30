@@ -1,8 +1,9 @@
 class OffersController < ApplicationController
-  before_action :set_candidate, only: %i[new create]
-  before_action :set_selection_process, only: %i[new create]
+  before_action :set_candidate, only: %i[new create show]
+  before_action :set_selection_process, only: %i[new create show]
   before_action :new_offer, only: %i[create]
   before_action :authenticate_employee!, only: %i[new create]
+  before_action :authenticate_users!, onlye: [:show]
 
   def new; end
 
@@ -15,6 +16,10 @@ class OffersController < ApplicationController
     end
 
     render :new
+  end
+
+  def show
+    
   end
 
   private
