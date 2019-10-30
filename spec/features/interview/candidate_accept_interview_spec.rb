@@ -53,6 +53,9 @@ feature 'candidate see interview invite' do
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
     expect(mailer_spy).to have_received(:interview_accepted).with(interview.id)
+    within '.card-interview' do
+      expect(page).to have_content('Nova entrevista agendada')
+    end
   end
 
   scenario 'and reject' do
