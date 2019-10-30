@@ -1,22 +1,22 @@
- na <%= @offer.position.company.name %>
-
-<%= link_to 'Ver detalhes', selection_process_candidates_url(@offer.selection_process) %>
-
-
-# a empresa, a descrição da posição e um link adequado para que o
-# candidato acesse a plataforma e veja a proposta.
-
 <h1><%= @offer.candidate.name %>, você recebeu uma proposta para posição de <%= @offer.position.title%>.</h1>
 <p>
-  Olá <%=@offer.candidate.name%>, <br>
-  Estamos felizes de avisar que a empresa <%= @company.name %> te convidou para uma posição de <%= @position.title %>.<br>
-  Para ver mais detalhes sobre o convite clique abaixo:
+  Olá <%= @offer.candidate.name %>, <br>
+  Nós da <%= @offer.position.company.name %> estamos felizes em lhe informar que você passou no processo seletivo, parabéns!
+  Para prosseguirmos, precisamos que aceite a proposta abaixo.
+  Descrição da posição:
+    Titulo: <%= @offer.position.title%>
+    Remuneração: <%= number_to_currency @offer.salary %>
+    Data de inicio: <%= I18n.localize @offer.start_date %>
+    Modalidade de trabalho: <%= @offer.hiring_scheme %>
+    Empresa: <%= @offer.position.company.name %>
 </p>
-<%= link_to 'Ver detalhes', invites_candidates_url %>
+
+<%= link_to 'Aceitar proposta', selection_process_candidates_url(@offer.selection_process) %>
+
+<p>
+Estamos ansiosos para ter você aqui!
 
 Atenciosamente,
 
 Equipe Revelinho
-
-'Você recebeu uma proposta para a posição ' +
-              @offer.position.title
+</p>
