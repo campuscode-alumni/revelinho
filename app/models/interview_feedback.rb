@@ -1,0 +1,2 @@
+class InterviewFeedback < ApplicationRecord
+end
