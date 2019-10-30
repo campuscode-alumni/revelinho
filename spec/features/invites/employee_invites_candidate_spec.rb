@@ -189,7 +189,7 @@ feature 'Invites' do
     invite_double = double('invites')
     allow(Candidate).to receive(:find).and_return(candidate)
     allow(candidate).to receive(:invites).and_return(invite_double)
-    allow(invite_double).to receive(:new).and_return(invite_double)
+    allow(invite_double).to receive(:build).and_return(invite_double)
     allow(invite_double).to receive(:save).and_return(false)
 
     login_as(employee, scope: :employee)

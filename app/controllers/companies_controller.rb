@@ -1,6 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :authenticate_employee!, only: %i[index edit update show
-                                                  dashboard]
+  before_action :authenticate_employee!, only: %i[index edit update dashboard]
   before_action :set_company, only: %i[edit update show]
   before_action :set_company_profile, only: %i[show]
   before_action :set_current_company, only: %i[edit update show
@@ -28,15 +27,16 @@ class CompaniesController < ApplicationController
     @dashboard = CompanyProfileDecorator.decorate(@current_company)
   end
 
-  def invites
-    @company_invites_presenter = CompanyInvitesPresenter.new(@current_company)
-    @invites = @company_invites_presenter.invites
-  end
-
   def selection_processes
     @selection_processes_presenter = CompanySelectionProcessesPresenter
                                      .new(@current_company)
     @selection_processes = @selection_processes_presenter.selection_processes
+  end
+
+  def invites
+    @invites = InvitePresenter
+               .decorate_collection(current_employee.company.invites,
+                                    current_employee)
   end
 
   private

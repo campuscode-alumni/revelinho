@@ -1,0 +1,12 @@
+<h1><%= @invite.candidate.name %> aceitou o convite para a entrevista.</h1>
+<p>
+  Entrevista marcada para <%= @interview.date %>, das <%= @interview.time_from %> às <%= @interview.time_to %> em <%= @interview.address %>, 
+  <%= I18n.t('activerecord.attributes.interview.format.' + @interview.format) %>. 
+  A entrevista é referente a posição de: <%= @invite.position.title %>.<br/>
+  Para acessar clique no link abaixo: <br/>
+  <%= link_to 'Ver detalhes', selection_process_candidates_url(@selection_process) %>
+
+  Atenciosamente,
+
+  Equipe Revelinho
+<p>

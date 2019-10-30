@@ -1,4 +1,3 @@
----
 pt-BR:
   activerecord:
     models:
@@ -7,8 +6,22 @@ pt-BR:
         plural: Entrevistas
     attributes:
       interview:
-        date: Data
-        time_from: Horário de início
-        time_to: Horário de fim
-        address: Endereço
         format: Tipo de entrevista
+        address: "Endereço: %{address}"
+        datetime: Dia %{date} às %{time}
+        status:
+          pending: Pendente
+          scheduled: Agendada
+          done: Realizada
+          absent: Ausente
+          rejected: Cancelada
+        format:
+          online: 'Formato: Online'
+          face_to_face: 'Formato: Presencial'
+  interview:
+    status_badge:
+      pending: Aguardando resposta
+      scheduled: Entrevista agendada
+      done: Entrevista realizada
+      absent: Candidato faltou
+      rejected: Entrevista cancelada

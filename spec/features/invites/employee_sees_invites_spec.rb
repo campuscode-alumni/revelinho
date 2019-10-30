@@ -44,18 +44,7 @@ feature 'Invites from dashboard page' do
     expect(page).not_to have_content('Ainda não há convites')
     within '.invite-card' do
       expect(page).to have_content('Gustavo')
-      expect(page).to have_link('Ver perfil', href: candidate_path(candidate))
       expect(page).to have_content(position.title)
     end
-  end
-
-  scenario 'Employee sees no invites warning in invites page' do
-    employee = create(:employee)
-
-    login_as(employee, scope: :employee)
-    visit root_path
-    click_on 'invites-card'
-
-    expect(page).to have_content('Ainda não há convites')
   end
 end
