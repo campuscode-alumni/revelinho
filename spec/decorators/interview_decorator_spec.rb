@@ -17,7 +17,7 @@ describe InterviewDecorator do
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process).decorate
 
-      expect(interview.formatting_datetime).to eq 'Dia 26/10/2019 às 17:00'
+      expect(interview.formatting_datetime).to eq '26 de outubro de 2019, 17:00'
     end
   end
   context '#interview_address' do

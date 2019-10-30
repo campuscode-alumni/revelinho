@@ -9,6 +9,9 @@ feature 'Invites' do
     create(:candidate_profile, candidate: candidate)
     create(:position, title: 'Engenheiro de Software Pleno',
                       company: company)
+    mail = double
+    allow(InviteMailer).to receive(:notify_candidate).and_return(mail)
+    allow(mail).to receive(:deliver_now)
 
     login_as(employee, scope: :employee)
     visit candidate_path(candidate)
@@ -19,6 +22,9 @@ feature 'Invites' do
     click_on 'Convidar'
 
     candidate.reload
+
+    invite_id = candidate.invites.last.id
+    expect(InviteMailer).to have_received(:notify_candidate).with(invite_id)
     expect(page).to have_content('Gustavo convidado com sucesso para ' \
     'Engenheiro de Software Pleno')
     expect(candidate.invites.count).to eq(1)
@@ -181,7 +187,6 @@ feature 'Invites' do
 
     # allow_any_instance_of(Invite).to receive(:save).and_return(false)
     invite_double = double('invites')
-
     allow(Candidate).to receive(:find).and_return(candidate)
     allow(candidate).to receive(:invites).and_return(invite_double)
     allow(invite_double).to receive(:new).and_return(invite_double)

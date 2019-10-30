@@ -7,7 +7,7 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def messages_show
-    messages.order(id: :desc)
+    messages.order(id: :desc).decorate
   end
 
   def offers_menu
