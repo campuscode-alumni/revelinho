@@ -7,3 +7,6 @@ pt-BR:
       invite:
         message: Mensagem
         status: Estatus
+  invite: 
+    candidate:
+      error: Erro ao tentar convidar candidato
