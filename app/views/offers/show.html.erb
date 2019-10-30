@@ -1,1 +1,13 @@
 <%= render partial: 'selection_processes/header', locals: { selection_process: @selection_process } %>
+<div class="col-12 col-md-8 offset-md-2">
+  <%= render partial: 'selection_processes/messages', collection: [@offer.message], as: :message %>
+  
+  <div class="card card-body">
+    <h4>Proposta</h4>
+    <p class="mb-0">Salário: <%= number_to_currency(@offer.salary) %></p>
+    <p class="mb-0">Regime de contratação: <%= I18n.t("activerecord.attributes.offer.hiring_scheme.#{@offer.hiring_scheme}") %></p>
+    <p>Data de início: <%= @offer.start_date %></p>
+  </div>
+</div>
+
+

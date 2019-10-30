@@ -1,9 +1,9 @@
 class OffersController < ApplicationController
-  before_action :set_candidate, only: %i[new create show]
-  before_action :set_selection_process, only: %i[new create show]
+  before_action :set_variables, only: %i[new create show accept reject]
+  before_action :set_offer, only: %i[show accept reject]
   before_action :new_offer, only: %i[create]
-  before_action :authenticate_employee!, only: %i[new create]
-  before_action :authenticate_users!, onlye: [:show]
+  before_action :authenticate_employee!, only: %i[new create show]
+  before_action :authenticate_candidate!, only: %i[accept reject]
 
   def new; end
 
@@ -18,9 +18,16 @@ class OffersController < ApplicationController
     render :new
   end
 
-  def show
+  def show; end
+
+  def accept
+    byebug
+  end
+
+  def reject
     
   end
+  
 
   private
 
@@ -28,12 +35,13 @@ class OffersController < ApplicationController
     params.require(:offer).permit(:salary, :hiring_scheme, :start_date)
   end
 
-  def set_candidate
+  def set_variables
     @candidate = Candidate.find(params[:candidate_id])
+    @selection_process = SelectionProcess.find(params[:selection_process_id])
   end
 
-  def set_selection_process
-    @selection_process = SelectionProcess.find(params[:selection_process_id])
+  def set_offer
+    @offer = Offer.find(params[:id])
   end
 
   def new_offer

@@ -17,19 +17,42 @@ class SelectionProcessDecorator < Draper::Decorator
 
   private
 
+  def accept_btn
+    link_to('Aceitar proposta',
+            accept_candidate_offer_path(candidate.id, id,
+                                        offers.pending.first.id),
+            class: 'btn btn-success btn-lg mt-2 mr-3', method: 'post')
+  end
+
+  def reject_btn
+    link_to('Rejeitar proposta',
+            reject_candidate_offer_path(candidate.id, id,
+                                        offers.pending.first.id),
+            class: 'btn btn-danger btn-lg mt-2', method: 'post')
+  end
+
   def menu_employee
     btn_offer + msg_offer
   end
 
   def menu_candidate
-    content_tag :div, class: 'alert alert-info' do
+    content_tag :div, class: 'card card-body' do
       content_tag(:h4, 'PROPOSTA RECEBIDA! \o/') +
-        content_tag(:small, 'Parabéns! Você recebeu uma proposta. Agora avalie'\
+        content_tag(:p, 'Parabéns! Você recebeu uma proposta. Agora avalie'\
                             ' e veja se atende as suas expectativas') +
-        link_to('Ver proposta', candidate_offer_path(candidate.id, id,
-                                                     offers.pending.first.id),
-                class: 'btn btn-info btn-lg btn-block mt-2')
+        content_tag(:p, offer_description(offers.pending.first)) +
+        content_tag(:div, (accept_btn + reject_btn), class: 'text-center')
     end
+  end
+
+  def offer_description(offer)
+    content_tag(:p, "Salário: #{number_to_currency(offer.salary)}",
+                class: 'mb-0') +
+      content_tag(:p, "Regime de contratação: #{I18n.t('activerecord.attribute'\
+                      "s.offer.hiring_scheme.#{offer.hiring_scheme}")}",
+                  class: 'mb-0') +
+      content_tag(:p, "Data de início: #{offer.decorate.format_date}",
+                  class: 'mb-0')
   end
 
   def btn_offer

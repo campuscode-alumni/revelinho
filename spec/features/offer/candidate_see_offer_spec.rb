@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'candidate see offer' do
-  scenario 'succesfully' do
+  scenario 'on selection process' do
     candidate = create(:candidate)
     create(:candidate_profile, candidate: candidate)
     invite = create(:invite, candidate: candidate, status: :accepted)
@@ -11,7 +11,8 @@ feature 'candidate see offer' do
                                sendable: selection_process.employee,
                                text: 'Venha fazer parte da nossa equipe!')
     create(:offer, selection_process: selection_process, message: message,
-                   employee: selection_process.employee, status: :pending)
+                   employee: selection_process.employee, status: :pending,
+                   start_date: '30-10-2019')
 
     login_as(selection_process.candidate, scope: :candidate)
 
@@ -23,8 +24,12 @@ feature 'candidate see offer' do
     expect(page).to have_content('Parabéns! Você recebeu uma proposta. Agora'\
                                  ' avalie e veja se atende as suas'\
                                  ' expectativas')
-    expect(page).to have_content('Venha fazer parte da nossa equipe!')
-    expect(page).to have_link('Ver proposta')
+    expect(page).to have_content('Regime de contratação: CLT')
+    expect(page).to have_content('Salário: R$ 3.500,00')
+    expect(page).to have_content('Data de início: 30/10/2019')
+
+    expect(page).to have_link('Aceitar')
+    expect(page).to have_link('Rejeitar')
 
     expect(page).not_to have_link('Quero contrata-lo')
   end
@@ -44,10 +49,11 @@ feature 'candidate see offer' do
 
     login_as(candidate, scope: :candidate)
 
-    visit candidate_offer_path(candidate, selection_process, offer)
+    visit selection_process_candidates_path(selection_process)
     click_on 'Aceitar Oferta'
 
     expect(page).to have_content('Oferta aceita!')
+    expect(offer.status).to be_accepted
   end
 
   scenario 'and reject offer' do
