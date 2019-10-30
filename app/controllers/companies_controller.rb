@@ -28,8 +28,12 @@ class CompaniesController < ApplicationController
   end
 
   def invites
-    @invites = Invite.includes(:position)
-                     .where(positions: { company: @current_company }).pending
+    @company_invites_presenter = CompanyInvitesPresenter.new(@current_company)
+    @invites = @company_invites_presenter.invites
+  end
+
+  def selection_processes
+    @selection_processes = CompanySelectionProcesses.new(@current_company).all
   end
 
   private

@@ -29,14 +29,10 @@ class CompanyProfileDecorator < Draper::Decorator
 
   private
 
-  def invites_by_company(company)
-    Invite.includes(:position).where(positions: { company: company })
-  end
-
   def invites_card_locals
     { icon: 'fa-edit',
       title: I18n.t('activerecord.models.invite').pluralize,
-      count: invites_by_company(@company).pending.count,
+      count: CompanyInvites.new(@company).invites.pending.count,
       id: 'invites-card',
       path: 'invites' }
   end
@@ -44,7 +40,7 @@ class CompanyProfileDecorator < Draper::Decorator
   def selection_processes_card_locals
     { icon: 'fa-edit',
       title: I18n.t('activerecord.models.selection_process.plural'),
-      count: invites_by_company(@company).accepted.count,
+      count: CompanySelectionProcesses.new(@company).all.count,
       id: 'selection-processes-card',
       path: 'selection_processes' }
   end
