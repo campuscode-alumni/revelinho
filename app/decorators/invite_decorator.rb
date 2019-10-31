@@ -11,7 +11,7 @@ class InviteDecorator < Draper::Decorator
   def logo
     return company_profile.logo if company_profile.logo.attached?
 
-    'https://github.com/identicons/jasonlong.png'
+    image_url('placeholder.png')
   end
 
   private

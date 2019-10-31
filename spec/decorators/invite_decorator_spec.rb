@@ -44,9 +44,7 @@ RSpec.describe InviteDecorator do
       position = create(:position, company: company)
       invite = create(:invite, status: :pending, position: position).decorate
 
-      expect(invite.logo).to(
-        eq 'https://github.com/identicons/jasonlong.png'
-      )
+      expect(invite.logo).to include 'placeholder'
     end
   end
 end
