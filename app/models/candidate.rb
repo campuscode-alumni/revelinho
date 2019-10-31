@@ -23,4 +23,6 @@ class Candidate < ApplicationRecord
             :birthday, presence: true
 
   enum status: { hidden: 0, published: 10 }
+
+  delegate :avatar, to: :candidate_profile
 end

@@ -19,5 +19,9 @@ FactoryBot.define do
     trait :hidden do
       status { :hidden }
     end
+
+    trait :with_candidate_profile do
+      candidate_profile
+    end
   end
 end
