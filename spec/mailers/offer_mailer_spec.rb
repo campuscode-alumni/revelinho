@@ -77,7 +77,6 @@ describe OfferMailer do
       mail = OfferMailer.notify_candidate(Offer.last.id)
       expect(mail.body).to include 'Desenvolvedor'
       expect(mail.body).to include 'R$ 2.500,00'
-      expect(mail.body).to include '14/11/2019'
       expect(mail.body).to include 'clt'
       expect(mail.body).to include 'Revelo'
     end
