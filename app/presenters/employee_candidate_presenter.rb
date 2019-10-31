@@ -1,4 +1,6 @@
-class EmployeeCandidatePresenter < ApplicationPresenter
+class EmployeeCandidatePresenter < SimpleDelegator
+  include ActionView::Helpers::OutputSafetyHelper
+
   attr_reader :candidate, :employee
 
   delegate :content_tag, :link_to, to: :h
@@ -42,5 +44,11 @@ class EmployeeCandidatePresenter < ApplicationPresenter
       content_tag(:ul) do
         safe_join(invited_positions.map { |p| content_tag(:li, p.title) })
       end
+  end
+
+  private
+
+  def h
+    ApplicationController.helpers
   end
 end

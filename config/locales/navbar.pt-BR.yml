@@ -1,5 +1,8 @@
 pt-BR:
   navbar:
+    title:
+      candidate: Candidato
+      company: Empresa
     candidates: Ver candidatos
     positions: Posições
     interviews: Entrevistas
@@ -7,3 +10,6 @@ pt-BR:
     sign_in:
       employee: Login funcionário
       candidate: Login candidato
+    see_company: Ver empresa
+    edit_company: Editar perfil
+    candidate_profile: Ver perfil

@@ -1,4 +1,4 @@
-class InvitePresenter < ApplicationPresenter
+class InvitePresenter < SimpleDelegator
   delegate :content_tag, :link_to, to: :h
 
   def initialize(invite, user)
@@ -42,5 +42,9 @@ class InvitePresenter < ApplicationPresenter
 
   def invite_pending_company
     content_tag :p, 'Esse convite está pendente '
+  end
+
+  def h
+    ApplicationController.helpers
   end
 end

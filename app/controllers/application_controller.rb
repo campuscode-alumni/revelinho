@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     candidate_signed_in? || employee_signed_in?
   end
 
+  def not_signed_in?
+    !signed_in?
+  end
+
   protected
 
   def after_sign_in_path_for(resource)
@@ -30,7 +34,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_presenter
-    @application_presenter = ApplicationPresenter.new(self)
+    @application_presenter = ApplicationPresenter.new(current_user)
+    @flash_alerts = ApplicationDecorator.new(self).flash_alerts
   end
 
   def not_found

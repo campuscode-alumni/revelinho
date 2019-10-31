@@ -1,4 +1,6 @@
-class CompanyProfilePresenter < ApplicationPresenter
+class CompanyProfilePresenter < SimpleDelegator
+  include Rails.application.routes.url_helpers
+
   delegate :content_tag, :link_to, to: :h
 
   def initialize(company)
@@ -22,5 +24,9 @@ class CompanyProfilePresenter < ApplicationPresenter
 
   def company_profile_complete?
     @company.company_profile.present?
+  end
+
+  def h
+    ApplicationController.helpers
   end
 end
