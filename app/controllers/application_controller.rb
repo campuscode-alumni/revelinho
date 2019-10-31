@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
+    return duplicated_login if candidate_signed_in? && employee_signed_in?
     return dashboard_candidates_path unless resource.is_a? Employee
     return dashboard_companies_path unless resource.company.pending?
 
@@ -44,5 +45,12 @@ class ApplicationController < ActionController::Base
 
   def current_user
     current_candidate || current_employee
+  end
+
+  def duplicated_login
+    sign_out current_candidate
+    sign_out current_employee
+    flash[:notice] = I18n.t('error_messages.duplicated_login')
+    root_path
   end
 end

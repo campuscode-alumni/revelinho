@@ -1,45 +1,31 @@
-<div class="col-12 bg-white">
-  <div class="col-12 col-md-10 offset-md-1 mb-3 pt-3 pb-3">
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <%= link_to image_tag(@selection_process.company_profile.logo, class: 'avatar-100 float-left mr-2'), company_path(@selection_process.company) %>
-        <div class="float-left pl-2">
-          <h5><b><%= @selection_process.company.name %></b></h5>
-          <h6 class="lead-4">Seu contato principal é:</h6>
+<%= render partial: 'header' %>
 
-          <p class="mb-0"><small><%= @selection_process.employee.name %></small></p>
-          <p class="mb-0"><small>Telefone: <%= @selection_process.company_profile.phone %></small></p>
-          <p class="mb-0"><small>Email: <%= @selection_process.employee.email %></small></p>
-        </div>
-      </div>
-      <div class="col-12 col-md-6 text-right">
-        <h3><%= @selection_process.position.title %></h3>
-        <%= @selection_process.contract_resume %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid px-5">
-    <div class="row">
-      <section class="col-md-3 card align-self-start px-0">
+<div class="col-12 col-md-10 offset-md-1">
+  <div class="row">
+    <div class="col-12 col-md-4 h-100">
+      <div class="card card-body">
+        <%= @selection_process.offers_menu %>
         <header class="text-center">
           <h3 class="my-2">Entrevistas</h3>
         </header>
-        <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
-      </section>
-      <div class="col-md-9 mb-5">
-        <div class="card card-body">
-          <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
+        <%= render partial: '/interviews/interview_invite', collection: @interviews.order(id: :desc), as: :interview %>
+      </div>
+    </div>
+    <div class="col-12 col-md-8 h-100">
+      <div class="row">
+        <div class="col-12 mb-5">
+          <div class="card card-body mb-0">
+            <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
             <div class="form-group">
               <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
             </div>      
             <%= link_to 'Voltar', invites_candidates_path, class: 'btn btn-info float-left' %>
             <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-        <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc).decorate, as: :message %>
+        <%= render partial: 'messages', collection: @selection_process.messages_show, as: :message %>
       </div>
     </div>
   </div>
 </div>
-  

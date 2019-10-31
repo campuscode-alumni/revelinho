@@ -1,0 +1,4 @@
+---
+pt-BR:
+  error_messages:
+    duplicated_login: 'Não é possível logar como candidato e funcionário ao mesmo tempo. Tente novamente.'

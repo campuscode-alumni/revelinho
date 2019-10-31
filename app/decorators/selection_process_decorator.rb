@@ -6,7 +6,29 @@ class SelectionProcessDecorator < Draper::Decorator
     p_print_hiring_scheme + p_print_office_hours + p_print_salary
   end
 
+  def messages_show
+    messages.order(id: :desc).decorate
+  end
+
+  def offers_menu
+    return '' unless employee_signed_in?
+
+    btn_offer + msg_offer
+  end
+
   private
+
+  def btn_offer
+    link_to 'Quero contrata-lo!', new_candidate_offer_path(candidate.id, id),
+            class: 'btn btn-info btn-lg mb-3'
+  end
+
+  def msg_offer
+    return unless offers.pending.any?
+
+    content_tag(:div, 'Proposta realizada! Aguardando retorno do candidato.',
+                class: 'alert alert-info')
+  end
 
   def p_print_hiring_scheme
     content_tag(:p, class: 'mb-0') do
