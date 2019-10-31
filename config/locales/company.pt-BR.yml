@@ -1,0 +1,12 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      company: Empresa
+    attributes:
+      company:
+        name: Nome
+        address: Endereço
+
+
+
