@@ -6,8 +6,8 @@ describe Message do
       it 'has to create message with sendable' do
         current_candidate = create(:candidate, status: :published)
         position = create(:position)
-        invite = Invite.create(candidate: current_candidate, position: position,
-                               status: :accepted)
+        invite = create(:invite, candidate: current_candidate,
+                                 position: position, status: :accepted)
 
         invite.create_selection_process
 
@@ -27,8 +27,8 @@ describe Message do
         current_employee = create(:employee)
         candidate = create(:candidate)
         position = create(:position, company: current_employee.company)
-        invite = Invite.create(candidate: candidate, position: position,
-                               status: :accepted)
+        invite = create(:invite, candidate: candidate, position: position,
+                                 status: :accepted)
 
         invite.create_selection_process
 

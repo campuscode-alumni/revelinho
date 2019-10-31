@@ -6,12 +6,6 @@ class SelectionProcessDecorator < Draper::Decorator
     p_print_hiring_scheme + p_print_office_hours + p_print_salary
   end
 
-  def logo_process
-    link_to image_tag(company_profile.logo,
-                      class: 'avatar-process float-left mr-2'),
-            company_path(company)
-  end
-
   private
 
   def p_print_hiring_scheme
