@@ -25,7 +25,7 @@
         <header class="text-center">
           <h3 class="my-2">Entrevistas</h3>
         </header>
-        <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
+        <%= render partial: '/interviews/interview_invite', collection: @interviews.order(id: :desc), as: :interview %>
       </section>
       <div class="col-md-9 mb-5">
         <div class="card card-body">

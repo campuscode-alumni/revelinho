@@ -27,14 +27,22 @@
   font-size: 26px;
 }
 
+.notification-card {
+  color: white;
+  font-size: large;
+  text-align: center;
+  padding: 5px !important;
+  margin-left: 200px;
+  margin-right: 200px;
+}
 .new_interview {
-  border-right: solid 20px #8b94eb !important;
+  background-color: #8b94eb !important;
 }
 
 .interview_accepted {
-  border-right: solid 20px #7fd1af !important;
+  background-color: #7fd1af !important;
 }
 
 .interview_rejected {
-  border-right: solid 20px #f08080 !important
+  background-color: #f08080 !important;
 }
