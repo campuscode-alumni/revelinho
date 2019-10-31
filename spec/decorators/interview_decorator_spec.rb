@@ -12,12 +12,15 @@ describe InterviewDecorator do
                                status: :pending)
       selection_process = invite.create_selection_process
       interview = create(:interview,
-                         datetime: '2019-10-26 17:00:00',
+                         date: '2019-10-26',
+                         time_from: '17:00',
+                         time_to: '18:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process).decorate
 
-      expect(interview.formatting_datetime).to eq '26 de outubro de 2019, 17:00'
+      expect(interview.formatting_datetime).to eq '26 de outubro de 2019, ' \
+        'das 17:00 às 18:00'
     end
   end
   context '#interview_address' do
@@ -31,7 +34,9 @@ describe InterviewDecorator do
                                status: :pending)
       selection_process = invite.create_selection_process
       interview = create(:interview,
-                         datetime: '2019-10-26 17:00:00',
+                         date: '2019-10-26',
+                         time_from: '17:00',
+                         time_to: '18:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process).decorate
@@ -50,7 +55,9 @@ describe InterviewDecorator do
                                status: :pending)
       selection_process = invite.create_selection_process
       interview = create(:interview,
-                         datetime: '2019-10-26 17:00:00',
+                         date: '2019-10-26',
+                         time_from: '17:00',
+                         time_to: '18:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process).decorate
@@ -69,7 +76,9 @@ describe InterviewDecorator do
                                status: :pending)
       selection_process = invite.create_selection_process
       interview = create(:interview,
-                         datetime: '2019-10-26 17:00:00',
+                         date: '2019-10-26',
+                         time_from: '17:00',
+                         time_to: '18:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
@@ -87,7 +96,9 @@ describe InterviewDecorator do
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending)
       selection_process = invite.create_selection_process
-      interview = create(:interview, datetime: '2019-10-26 17:00:00',
+      interview = create(:interview, date: '2019-10-26',
+                                     time_from: '17:00',
+                                     time_to: '18:00',
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process,
@@ -107,7 +118,9 @@ describe InterviewDecorator do
                                status: :pending)
       selection_process = invite.create_selection_process
       interview = create(:interview,
-                         datetime: '2019-10-26 17:00:00',
+                         date: '2019-10-26',
+                         time_from: '17:00',
+                         time_to: '18:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
@@ -130,7 +143,9 @@ describe InterviewDecorator do
                                status: :pending)
       selection_process = invite.create_selection_process
       interview = create(:interview,
-                         datetime: '2019-10-26 17:00:00',
+                         date: '2019-10-26',
+                         time_from: '17:00',
+                         time_to: '18:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
@@ -153,7 +168,9 @@ describe InterviewDecorator do
                                status: :pending)
       selection_process = invite.create_selection_process
       interview = create(:interview,
-                         datetime: '2019-10-26 17:00:00',
+                         date: '2019-10-26',
+                         time_from: '17:00',
+                         time_to: '18:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
