@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 feature 'Employee schedules interview' do
   scenario 'successfully', :js do
     company = create(:company, url_domain: 'revelo.com.br')
@@ -19,26 +20,24 @@ feature 'Employee schedules interview' do
     visit selection_process_path(selection_process)
 
     click_on 'Agendar entrevista'
-    click_on 'interview-modal-button'    
-    
-    
-    find(:css, '#date-field > div > input').set('25/11/2019')
-    
-    within '#time-from-field' do
- 
-      find('input').fill_in with: "10:00"
+    click_on 'interview-modal-button'
 
-    end
-    within '#time-to-field' do
-      find('input').fill_in with: "11:00"
-    end
+    find('#date-field > div > input').click
+    find('.ant-calendar-selected-day').click
+
+    find('#time-from-field > input').click
+    find('.ant-time-picker-panel-select-option-selected', match: :first).click
+
+    find('#time-to-field > input').click
+    find('.ant-time-picker-panel-select-option-selected', match: :first).click
+
     fill_in 'address-field', with: interview.address
 
     find('label', text: 'Online').click
 
     click_on 'OK'
 
-    expect(page).to have_content('Sucesso')
+    expect(page).to have_content('Entrevista salva')
     expect(Interview.count).to eq(1)
   end
 
