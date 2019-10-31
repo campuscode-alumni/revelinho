@@ -1,72 +1,76 @@
-<h2>Registrar</h2>
-<div class="layout-center">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render 'devise/shared/error_messages', resource: resource %>
-    <div class="card bg-light py-3 px-4 m-2 col-md-8">
-      <div class="form-group row">
-        <%= f.label :name, 'Nome' %> 
-        <%= f.text_field(:name, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :birthday, 'Data de Nascimento' %>
-        <%= f.date_field(:birthday, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :cpf, 'Cpf' %>
-        <%= f.text_field(:cpf, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :address, 'Endereço' %>
-        <%= f.text_field(:address, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :city, 'Cidade' %>
-        <%= f.text_field(:city, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :state, 'Estado' %>
-        <%= f.text_field(:state, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :country, 'País' %>
-        <%= f.text_field(:country, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :zip_code, 'CEP' %>
-        <%= f.text_field(:zip_code, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :phone, 'Telefone' %>
-        <%= f.telephone_field(:phone, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :occupation, 'Profissão' %>
-        <%= f.text_field(:occupation, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :educational_level, 'Nível de Escolaridade' %>
-        <%= f.text_field(:educational_level, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :email, 'Email' %>
-        <%= f.text_field(:email, {class: 'form-control'}) %>
-      </div>
-      <div class='field form-group row'>
-        <%= f.label :password, 'Senha'%>
-        <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
-        <% if @minimum_password_length %>
-          <em>(minimo de <%= @minimum_password_length %> caracteres)</em>
-        <% end %><br />
-      </div>
-      <div class="form-group row">
-        <%= f.label :password_confirmation, 'Confirmar Senha' %>
-        <%= f.password_field(:password_confirmation, {class: 'form-control'}) %>
-      </div>
-      <div class="actions form-group row justify-content-center">
-        <%= f.submit 'Registrar', {class: 'btn btn-primary'} %>
-      </div>
-    </div>
-  <% end %>
-</div>
+<div class="container flex-column justify-content-center">
+  <div class="row justify-content-center">
+    <h2 class=>Bem vindo! Registre seu perfil abaixo para começar:</h2>
+  </div>
+  <div class="row justify-content-center">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'col-md-8'}) do |f| %>
+        <%= render 'devise/shared/error_messages', resource: resource %>
+        <div class="card bg-light py-3 px-4 m-2">
+          <div class="form-group row">
+            <%= f.label :name, 'Nome' %>
+            <%= f.text_field(:name, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :birthday, 'Data de Nascimento' %>
+            <%= f.date_field(:birthday, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :cpf, 'Cpf' %>
+            <%= f.text_field(:cpf, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :address, 'Endereço' %>
+            <%= f.text_field(:address, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :city, 'Cidade' %>
+            <%= f.text_field(:city, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :state, 'Estado' %>
+            <%= f.text_field(:state, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :country, 'País' %>
+            <%= f.text_field(:country, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :zip_code, 'CEP' %>
+            <%= f.text_field(:zip_code, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :phone, 'Telefone' %>
+            <%= f.telephone_field(:phone, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :occupation, 'Profissão' %>
+            <%= f.text_field(:occupation, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :educational_level, 'Nível de Escolaridade' %>
+            <%= f.text_field(:educational_level, {class: 'form-control'}) %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :email, 'Email' %>
+            <%= f.text_field(:email, {class: 'form-control'}) %>
+          </div>
+          <div class='field form-group row'>
+            <%= f.label :password, 'Senha'%>
+            <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+            <% if @minimum_password_length %>
+              <em>(minimo de <%= @minimum_password_length %> caracteres)</em>
+            <% end %><br />
+          </div>
+          <div class="form-group row">
+            <%= f.label :password_confirmation, 'Confirmar Senha' %>
+            <%= f.password_field(:password_confirmation, {class: 'form-control'}) %>
+          </div>
+          <div class="actions form-group row justify-content-center">
+            <%= f.submit 'Registrar', {class: 'btn btn-primary'} %>
+          </div>
+        </div>
+      <% end %>
 
+  </div>
+</div>
 <%= render 'candidates/shared/links' %>
