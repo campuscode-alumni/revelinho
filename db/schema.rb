@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_141803) do
+ActiveRecord::Schema.define(version: 2019_10_26_195313) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -158,6 +158,21 @@ ActiveRecord::Schema.define(version: 2019_10_24_141803) do
     t.index ["sendable_type", "sendable_id"], name: "index_messages_on_sendable_type_and_sendable_id"
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.float "salary"
+    t.integer "hiring_scheme"
+    t.date "start_date"
+    t.integer "status", default: 0
+    t.integer "employee_id"
+    t.integer "selection_process_id"
+    t.integer "message_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_offers_on_employee_id"
+    t.index ["message_id"], name: "index_offers_on_message_id"
+    t.index ["selection_process_id"], name: "index_offers_on_selection_process_id"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "title"
     t.string "industry"
@@ -190,6 +205,9 @@ ActiveRecord::Schema.define(version: 2019_10_24_141803) do
   add_foreign_key "invites", "employees"
   add_foreign_key "invites", "positions"
   add_foreign_key "messages", "selection_processes"
+  add_foreign_key "offers", "employees"
+  add_foreign_key "offers", "messages"
+  add_foreign_key "offers", "selection_processes"
   add_foreign_key "positions", "companies"
   add_foreign_key "selection_processes", "invites"
 end

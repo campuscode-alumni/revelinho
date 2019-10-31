@@ -21,8 +21,7 @@ class CompaniesController < ApplicationController
   def show; end
 
   def dashboard
-    @company_link = CompanyProfilePresenter.new(current_employee.company)
-                                           .company_profile_link
+    @dashboard = CompanyProfileDecorator.decorate(current_employee.company)
   end
 
   def invites

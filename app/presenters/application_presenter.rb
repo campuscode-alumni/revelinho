@@ -29,7 +29,7 @@ class ApplicationPresenter < SimpleDelegator
 
     content_tag(:li, class: 'nav-items dropdown') do
       content_tag(:a, nav_user_title,
-                  class: 'nav-link dropdown-toggle p-2 text-uppercase small',
+                  class: 'nav-link dropdown-toggle p-2 text-uppercase',
                   href: '#', id: 'navbarDropdown', role: 'button',
                   data: { toggle: 'dropdown' },
                   aria: { haspopup: 'true', expanded: 'false' }) +
@@ -81,7 +81,7 @@ class ApplicationPresenter < SimpleDelegator
     content_tag(:li, class: 'nav-item') do
       link_to(text, path, method: method,
                           class: 'nav-link p-2 ' \
-                            'text-uppercase small')
+                            'text-uppercase')
     end
   end
 
