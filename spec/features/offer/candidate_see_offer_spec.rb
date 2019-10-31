@@ -73,5 +73,36 @@ feature 'candidate see offer' do
   end
 
   scenario 'and reject offer' do
+    candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
+    invite = create(:invite, candidate: candidate, status: :accepted)
+    selection_process = create(:selection_process, invite: invite)
+    create(:company_profile, company: selection_process.company)
+    message = create(:message, selection_process: selection_process,
+                               sendable: selection_process.employee,
+                               text: 'Venha fazer parte da nossa equipe!')
+    offer = create(:offer, selection_process: selection_process,
+                           message: message, status: :pending,
+                           employee: selection_process.employee)
+
+    mailer_spy = class_spy('OfferMailer')
+    stub_const('OfferMailer', mailer_spy)
+    mail = double
+    allow(mailer_spy).to receive(:notify_rejected).and_return(mail)
+    allow(mail).to receive(:deliver_now).and_return(nil)
+
+    login_as(candidate, scope: :candidate)
+
+    visit selection_process_candidates_path(selection_process)
+    click_on 'Rejeitar proposta'
+
+    offer.reload
+
+    offer_id = selection_process.offers.last.id
+    expect(mailer_spy).to have_received(:notify_rejected).with(offer_id)
+
+    expect(page).to have_content('Oferta rejeitada!')
+    expect(selection_process.messages.last.text).to eq 'Oferta rejeitada!'
+    expect(offer).to be_rejected
   end
 end
