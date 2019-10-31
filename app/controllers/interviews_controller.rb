@@ -6,6 +6,7 @@ class InterviewsController < ApplicationController
     return unless @interview.pending?
 
     @interview.scheduled!
+    InterviewMailer.interview_accepted(@interview.id).deliver_now
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 
