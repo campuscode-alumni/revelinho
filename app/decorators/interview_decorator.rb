@@ -4,9 +4,7 @@ class InterviewDecorator < Draper::Decorator
   delegate_all
 
   def formatting_datetime
-    date = interview.datetime.strftime('%d/%m/%Y')
-    time = interview.datetime.strftime('%R')
-    I18n.t('activerecord.attributes.interview.datetime', date: date, time: time)
+    I18n.l(interview.datetime, format: :long)
   end
 
   def interview_address
@@ -15,7 +13,7 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def interview_format
-    I18n.t('format.' + interview.format)
+    I18n.t('activerecord.attributes.interview.format.' + interview.format)
   end
 
   def decision_buttons
@@ -25,26 +23,27 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def interview_status_badge
-    return pending_badge if interview.pending?
     return scheduled_badge if interview.scheduled?
     return canceled_badge if interview.canceled?
+
+    pending_badge
   end
 
   private
 
   def pending_badge
-    content_tag(:span, I18n.t('status_badge.pending'),
-                class: 'badge badge-warning')
+    content_tag(:span, I18n.t('interview.status_badge.pending'),
+                class: 'badge badge-warning mb-2')
   end
 
   def scheduled_badge
-    content_tag(:span, I18n.t('status_badge.scheduled'),
-                class: 'badge badge-primary')
+    content_tag(:span, I18n.t('interview.status_badge.scheduled'),
+                class: 'badge badge-primary mb-2')
   end
 
   def canceled_badge
-    content_tag(:span, I18n.t('status_badge.rejected'),
-                class: 'badge badge-danger')
+    content_tag(:span, I18n.t('interview.status_badge.rejected'),
+                class: 'badge badge-danger mb-2')
   end
 
   def accept_button

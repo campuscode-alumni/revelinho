@@ -3,8 +3,8 @@ class OfferMailer < ApplicationMailer
     @offer = Offer.find(offer_id)
     @position = @offer.position
     @company = @offer.position.company
-    subject = "#{@offer.candidate.name}, você recebeu uma proposta para posiçã"\
-              "o de #{@offer.position.title} na #{@offer.position.company.name}"
+    subject = 'Você recebeu uma proposta para a posição ' +
+              @offer.position.title
 
     mail(to: @offer.candidate.email, subject: subject)
   end

@@ -101,12 +101,28 @@ feature 'Employee tries to complete company profile' do
 
     click_on 'Atualizar'
 
-    visit new_company_profile_path
+    expect do
+      visit new_company_profile_path
 
-    fill_in 'Descrição da empresa', with: 'Descrição atualizada'
-    click_on 'Atualizar'
+      fill_in 'Descrição da empresa', with: 'Descrição atualizada'
+      click_on 'Atualizar'
+    end.to raise_error(ActiveRecord::RecordNotSaved)
 
     expect(CompanyProfile.count).to eq 1
-    expect(page).to have_content 'Descrição atualizada'
+  end
+
+  scenario 'and cannot be already logged in as candidate' do
+    employee = create(:employee)
+    create(:candidate, email: 'teste@example.com', password: '123456')
+
+    login_as(employee, scope: :employee)
+
+    visit new_candidate_session_path
+    fill_in 'Email', with: 'teste@example.com'
+    fill_in 'Senha', with: '123456'
+    click_on 'Login'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content(I18n.t('error_messages.duplicated_login'))
   end
 end

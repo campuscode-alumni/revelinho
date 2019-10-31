@@ -15,22 +15,6 @@ describe 'employee has limited access' do
       expect(response.body).to include(company.name)
     end
 
-    it 'and not access other companies dashboard' do
-      other_company = create(:company, name: 'WeWork', address: 'Av. Paulista',
-                                       url_domain: 'wework.com.br')
-
-      company = create(:company, name: 'Revelo', address: 'Av. Paulista',
-                                 url_domain: 'revelo.com.br', status: :active)
-      employee = create(:employee, email: 'joao.silva@revelo.com.br',
-                                   company: company)
-
-      login_as(employee, scope: :employee)
-
-      get company_path(other_company)
-
-      expect(response).to redirect_to(company_path(company))
-    end
-
     it 'and can not edit other companies' do
       other_company = create(:company, name: 'WeWork', address: 'Av. Paulista',
                                        url_domain: 'wework.com.br')
