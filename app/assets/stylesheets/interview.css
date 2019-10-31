@@ -1,0 +1,14 @@
+.badge-new {
+  background-color: #7fd1af;
+  color: white;
+}
+
+.badge-rejected {
+  background-color: #f08080;
+  color: white;
+}
+
+.badge-pending {
+  background-color: #8b94eb;
+  color: white;
+}

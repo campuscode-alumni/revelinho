@@ -33,17 +33,17 @@ class InterviewDecorator < Draper::Decorator
 
   def pending_badge
     content_tag(:span, I18n.t('interview.status_badge.pending'),
-                class: 'badge badge-warning mb-2')
+                class: 'badge badge-pending mb-2')
   end
 
   def scheduled_badge
     content_tag(:span, I18n.t('interview.status_badge.scheduled'),
-                class: 'badge badge-primary mb-2')
+                class: 'badge badge-new mb-2')
   end
 
   def canceled_badge
     content_tag(:span, I18n.t('interview.status_badge.rejected'),
-                class: 'badge badge-danger mb-2')
+                class: 'badge badge-rejected mb-2')
   end
 
   def accept_button

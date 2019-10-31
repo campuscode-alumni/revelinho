@@ -28,11 +28,11 @@
 }
 
 .new_interview {
-  border-right: solid 20px #90a1e6 !important
+  border-right: solid 20px #8b94eb !important;
 }
 
 .interview_accepted {
-  border-right: solid 20px #7fd1af !important
+  border-right: solid 20px #7fd1af !important;
 }
 
 .interview_rejected {
