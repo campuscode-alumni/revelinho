@@ -10,7 +10,7 @@ class OffersController < ApplicationController
     return redirect_if_pending if pending_offer?
 
     offer = @selection_process.offers << @offer
-    unless offer.blank?
+    if offer.present?
       OfferMailer.notify_candidate(@offer.id).deliver_now
       return redirect_to selection_process_candidates_path(@selection_process)
     end

@@ -11,7 +11,7 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def offers_menu
-    return unless employee_signed_in?
+    return '' unless employee_signed_in?
 
     btn_offer + msg_offer
   end
