@@ -1,6 +1,7 @@
 class InterviewsController < ApplicationController
-  before_action :set_interview, only: %i[accept reject]
   before_action :authenticate_candidate!, only: %i[accept reject]
+  before_action :authenticate_employee!, only: %i[status]
+  before_action :interview, only: %i[accept reject status]
 
   def accept
     return unless @interview.pending?
@@ -17,9 +18,13 @@ class InterviewsController < ApplicationController
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 
+  def status
+    byebug
+  end
+
   private
 
-  def set_interview
-    @interview = Interview.find(params[:id])
+  def interview
+    @interview ||= Interview.find(params[:id])
   end
 end

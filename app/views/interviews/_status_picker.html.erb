@@ -1,0 +1,5 @@
+<%= form_with local: true, method: 'post', url: set_status_interview_path(interview) do |f| %>
+      <%= f.label :status, 'Adicionar a lista' %>
+      <%= f.collection_select :status, Interview.statuses, :status, :status %>
+      <%= f.submit 'Marcar' %>
+    <% end %>

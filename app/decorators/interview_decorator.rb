@@ -23,28 +23,17 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def interview_status_badge
-    return scheduled_badge if interview.scheduled?
-    return canceled_badge if interview.canceled?
+    badge_info = InterviewBadges.picker interview.status
+    content_tag(:span, badge_info[:content], class: badge_info[:class])
+  end
 
-    pending_badge
+  def status_footer
+    # TODO
+    # select field + button
+    # change interview content format
   end
 
   private
-
-  def pending_badge
-    content_tag(:span, I18n.t('interview.status_badge.pending'),
-                class: 'badge badge-warning mb-2')
-  end
-
-  def scheduled_badge
-    content_tag(:span, I18n.t('interview.status_badge.scheduled'),
-                class: 'badge badge-primary mb-2')
-  end
-
-  def canceled_badge
-    content_tag(:span, I18n.t('interview.status_badge.rejected'),
-                class: 'badge badge-danger mb-2')
-  end
 
   def accept_button
     link_to 'Aceitar', accept_interview_candidate_path(interview),

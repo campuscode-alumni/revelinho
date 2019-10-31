@@ -6,6 +6,10 @@
     <%= interview.interview_format %><br/>
   </p>
   <section class="row d-flex justify-content-around">
-  <%= interview.decision_buttons %>
+  <% if current_candidate %>
+    <%= interview.decision_buttons %>
+  <% elsif current_employee %>
+    <%= render partial: 'status_picker', locals: {interview: interview} %>
+  <% end %>
   </section>
 </div>
