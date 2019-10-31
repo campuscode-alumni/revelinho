@@ -36,10 +36,14 @@ feature 'candidate see interview invite' do
     invite = create(:invite, candidate: candidate, position: position,
                              status: :pending)
     selection_process = invite.create_selection_process
-    create(:interview, datetime: '2019-10-26 17:00:00',
-                       format: :face_to_face,
-                       address: 'Av. Paulista, 2000',
-                       selection_process: selection_process)
+    interview = create(:interview, datetime: '2019-10-26 17:00:00',
+                                   format: :face_to_face,
+                                   address: 'Av. Paulista, 2000',
+                                   selection_process: selection_process)
+    mailer_spy = class_spy('InterviewMailer')
+    stub_const('InterviewMailer', mailer_spy)
+    mail = double('mail', deliver_now: nil)
+    allow(mailer_spy).to receive(:interview_accepted).and_return(mail)
 
     login_as(candidate, scope: :candidate)
     visit selection_process_candidates_path(selection_process)
@@ -48,6 +52,7 @@ feature 'candidate see interview invite' do
     expect(page).to have_content('Entrevista agendada')
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
+    expect(mailer_spy).to have_received(:interview_accepted).with(interview.id)
   end
 
   scenario 'and reject' do
