@@ -77,7 +77,6 @@ feature 'Candidate completes personal profile' do
     expect(current_path).to eq new_candidate_session_path
   end
 
-
   scenario 'and profile is already published' do
     candidate = create(:candidate)
     create(:candidate_profile, candidate: candidate)
