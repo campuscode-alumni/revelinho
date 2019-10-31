@@ -26,3 +26,15 @@
 .order-card i {
   font-size: 26px;
 }
+
+.new_interview {
+  border-right: solid 20px #90a1e6 !important
+}
+
+.interview_accepted {
+  border-right: solid 20px #7fd1af !important
+}
+
+.interview_rejected {
+  border-right: solid 20px #f08080 !important
+}

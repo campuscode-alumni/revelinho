@@ -6,6 +6,10 @@ class InterviewsController < ApplicationController
     return unless @interview.pending?
 
     @interview.scheduled!
+    @interview.selection_process
+              .messages.create(text: I18n.t('interview.status_badge.scheduled'),
+                               sendable: current_candidate,
+                               message_type: :interview_accepted)
     InterviewMailer.interview_accepted(@interview.id).deliver_now
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
@@ -14,6 +18,10 @@ class InterviewsController < ApplicationController
     return unless @interview.pending?
 
     @interview.canceled!
+    @interview.selection_process
+              .messages.create(text: I18n.t('interview.status_badge.rejected'),
+                               sendable: current_candidate,
+                               message_type: :interview_rejected)
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 
