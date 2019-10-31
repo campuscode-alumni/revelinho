@@ -9,7 +9,6 @@ class CandidatesController < ApplicationController
   before_action :decorate, only: %i[show]
   before_action :invite_params, only: %i[invite]
   before_action :owner_invite, only: %i[accept_invite reject_invite]
-  before_action :new_invite, only: %i[invite]
 
   def index
     msg = 'Não há candidatos cadastrados até agora'
