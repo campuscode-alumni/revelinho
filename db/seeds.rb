@@ -26,8 +26,8 @@ Candidate.all.each do |candidate|
   )
   profile.avatar.attach(io: File.open(Rails.root.join('spec', 'support',
                                                       'images',
-                                                      'gatinho.jpg')),
-                        filename: 'gatinho.jpg')
+                                                      'user-default.png')),
+                        filename: 'user-default.png')
 end
 
 company = Company.create!(name: 'Revelo', url_domain: 'revelo.com.br', status: :active)
@@ -63,8 +63,8 @@ offer = Offer.create!(salary: 2500.00, selection_process: selection_process,
                       start_date: Date.current, employee: Employee.last,
                       message: offer_message)
 
-company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
-employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
+company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'logo-revelo.png')), filename: "logo-revelo.png")
+employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'user-default2.png')), filename: "user-default2.png")
 
 Interview.create!(date: '2019-10-26', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process)
 Interview.create!(date: '2019-08-30', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)

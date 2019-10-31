@@ -6,10 +6,7 @@
         <div class="float-left pl-2">
           <h5><b><%= @selection_process.company.name %></b></h5>
           <h6 class="lead-4">Seu contato principal é:</h6>
-          
-          <p class="mb-0"><small><%= @selection_process.employee.name %></small></p>
-          <p class="mb-0"><small>Telefone: <%= @selection_process.company_profile.phone %></small></p>
-          <p class="mb-0"><small>Email: <%= @selection_process.employee.email %></small></p>
+          <%= @selection_process.main_contact %>
         </div>
       </div>
       <div class="col-12 col-md-6 text-md-right">

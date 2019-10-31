@@ -16,7 +16,30 @@ class SelectionProcessDecorator < Draper::Decorator
     btn_offer + msg_offer
   end
 
+  def main_contact
+    return employee_main_contact unless candidate_signed_in?
+
+    candidate_main_contact
+  end
+
   private
+
+  def candidate_main_contact
+    content_tag(:p, content_tag(:small, employee.name), class: 'mb-0') +
+      content_tag(:p, content_tag(:small, "Telefone#{company_profile.phone}"),
+                  class: 'mb-0') +
+      content_tag(:p, content_tag(:small, "Email: #{employee.email}"),
+                  class: 'mb-0')
+  end
+
+  def employee_main_contact
+    content_tag(:p, content_tag(:small, candidate.name), class: 'mb-0') +
+      content_tag(:p, content_tag(:small, "Telefone: #{candidate.phone}"),
+                  class: 'mb-0') +
+      content_tag(:p, content_tag(:small, "Email: #{candidate.email}"),
+                  class: 'mb-0')
+  end
+  
 
   def btn_offer
     link_to 'Quero contrata-lo!', new_candidate_offer_path(candidate.id, id),
