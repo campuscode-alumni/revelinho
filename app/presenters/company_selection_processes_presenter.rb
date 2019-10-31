@@ -6,7 +6,7 @@ class CompanySelectionProcessesPresenter < SimpleDelegator
 
   def initialize(company)
     @company = company
-    @selection_processes = CompanySelectionProcesses.new(company).all
+    @selection_processes = CompanySelectionProcessesQuery.new(company).all
     super(company)
   end
 

@@ -28,9 +28,8 @@ class CompaniesController < ApplicationController
   end
 
   def selection_processes
-    @selection_processes_presenter = CompanySelectionProcessesPresenter
-                                     .new(@current_company)
-    @selection_processes = @selection_processes_presenter.selection_processes
+    @selection_processes = CompanySelectionProcessesQuery
+                           .new(@current_company).all
   end
 
   def invites

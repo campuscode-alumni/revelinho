@@ -6,7 +6,7 @@ class CompanyInvitesPresenter < SimpleDelegator
 
   def initialize(company)
     @company = company
-    @invites = CompanyInvites.new(company).invites
+    @invites = company.invites.all
     super(company)
   end
 
