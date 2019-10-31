@@ -6,12 +6,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-
 #footer {
   background: #273a50 !important;
   margin-top: auto;
