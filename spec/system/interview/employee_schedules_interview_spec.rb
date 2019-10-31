@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 feature 'Employee schedules interview' do
   scenario 'successfully', :js do
     company = create(:company, url_domain: 'revelo.com.br')
