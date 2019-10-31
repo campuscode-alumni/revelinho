@@ -12,7 +12,7 @@ feature 'candidate see offer' do
                                text: 'Venha fazer parte da nossa equipe!')
     create(:offer, selection_process: selection_process, message: message,
                    employee: selection_process.employee, status: :pending,
-                   start_date: '30-10-2019')
+                   start_date: '30-10-2019', salary: 3500.00)
 
     login_as(selection_process.candidate, scope: :candidate)
 
@@ -47,13 +47,29 @@ feature 'candidate see offer' do
                            message: message, status: :pending,
                            employee: selection_process.employee)
 
+    mailer_spy = class_spy('OfferMailer')
+    stub_const('OfferMailer', mailer_spy)
+    mail = double
+    allow(mailer_spy).to receive(:notify_accepted).and_return(mail)
+    allow(mail).to receive(:deliver_now).and_return(nil)
+
     login_as(candidate, scope: :candidate)
 
     visit selection_process_candidates_path(selection_process)
-    click_on 'Aceitar Oferta'
+    click_on 'Aceitar proposta'
+
+    offer_id = selection_process.offers.last.id
+    expect(mailer_spy).to have_received(:notify_accepted).with(offer_id)
+
+    offer.reload
 
     expect(page).to have_content('Oferta aceita!')
-    expect(offer.status).to be_accepted
+    expect(page).to have_content('Agora é só aguardar o contato de sua nova '\
+                                 'casa!')
+    expect(page).to have_content('Nós da Revelinho desejamos muito sucesso em '\
+                                 'sua carreira. :D')
+    expect(selection_process.messages.last.text).to eq 'Oferta aceita!'
+    expect(offer).to be_accepted
   end
 
   scenario 'and reject offer' do

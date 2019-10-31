@@ -13,6 +13,7 @@ class SelectionProcessDecorator < Draper::Decorator
   def offers_menu
     return menu_employee if employee_signed_in?
     return menu_candidate if offers.pending.any?
+    return menu_accepted if offers.accepted.any?
   end
 
   private
@@ -35,11 +36,20 @@ class SelectionProcessDecorator < Draper::Decorator
     btn_offer + msg_offer
   end
 
+  def menu_accepted
+    content_tag :div, class: 'card card-body bg-success text-white' do
+      content_tag(:h4, 'Oferta aceita!') +
+        content_tag(:p, 'Agora é só aguardar o contato de sua nova casa!') +
+        content_tag(:p, 'Nós da Revelinho desejamos muito sucesso em '\
+                        'sua carreira. :D')
+    end
+  end
+
   def menu_candidate
-    content_tag :div, class: 'card card-body' do
+    content_tag :div, class: 'card card-body text-center' do
       content_tag(:h4, 'PROPOSTA RECEBIDA! \o/') +
-        content_tag(:p, 'Parabéns! Você recebeu uma proposta. Agora avalie'\
-                            ' e veja se atende as suas expectativas') +
+        content_tag(:p, 'Parabéns! Você recebeu uma proposta. Agora avalie '\
+                        'e veja se atende as suas expectativas') +
         content_tag(:p, offer_description(offers.pending.first)) +
         content_tag(:div, (accept_btn + reject_btn), class: 'text-center')
     end
