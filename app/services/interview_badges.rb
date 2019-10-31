@@ -22,7 +22,7 @@ class InterviewBadges
 
   def self.absent_badge
     { content: I18n.t('interview.status_badge.absent'),
-      class: 'badge badge-danger mb-2'}
+      class: 'badge badge-secondary mb-2'}
   end
 
   def self.done_badge

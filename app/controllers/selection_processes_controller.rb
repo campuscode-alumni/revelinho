@@ -3,7 +3,9 @@ class SelectionProcessesController < ApplicationController
   before_action :authenticate_users!, only: %i[show send_message]
   before_action :decorate_interview, only: %i[show]
 
-  def show; end
+  def show
+    redirect_to dashboard_companies_path unless belongs_here?
+  end
 
   def send_message
     message = @selection_process.messages.create(params.permit(:text)) do |m|
@@ -19,12 +21,18 @@ class SelectionProcessesController < ApplicationController
   private
 
   def decorate_interview
+    user = current_candidate || current_employee
     @interviews = InterviewDecorator.decorate_collection(
-      @selection_process.interviews
+      @selection_process.interviews.order(id: :desc), user
     )
   end
 
   def set_selection_process
     @selection_process = SelectionProcess.find(params[:id]).decorate
+  end
+
+  def belongs_here?
+    current_candidate || (current_employee &&
+      @selection_process.company.name == current_employee.company.name)
   end
 end

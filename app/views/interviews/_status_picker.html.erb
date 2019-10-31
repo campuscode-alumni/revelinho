@@ -1,5 +1,5 @@
-<%= form_with local: true, method: 'post', url: set_status_interview_path(interview) do |f| %>
-      <%= f.label :status, 'Adicionar a lista' %>
-      <%= f.collection_select :status, Interview.statuses, :status, :status %>
+<%= form_with local: true, method: 'post', url: set_interview_status_candidate_path(interview) do |f| %>
+      <%= f.label :status, 'status',class:'sr-only' %>
+      <%= f.select :status, Interview.statuses.map { |k, v| [ I18n.t("activerecord.attributes.interview.status.#{k}"), k] }, class: "form-control" %>
       <%= f.submit 'Marcar' %>
     <% end %>

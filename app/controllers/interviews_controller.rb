@@ -19,7 +19,8 @@ class InterviewsController < ApplicationController
   end
 
   def status
-    byebug
+    @interview.send("#{params[:status]}!")
+    redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 
   private

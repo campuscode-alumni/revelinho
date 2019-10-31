@@ -58,8 +58,8 @@ describe InterviewDecorator do
       expect(interview.interview_format).to eq 'Formato: Presencial'
     end
   end
-  context '#decision_buttons' do
-    it 'shows decision buttons if invite is pending' do
+  context '#footer' do
+    it 'shows decision buttons if invite is pending and a it is a candidate' do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
       company.company_profile = create(:company_profile)
       candidate = create(:candidate, status: :published)
@@ -67,18 +67,19 @@ describe InterviewDecorator do
       position = create(:position, company: company)
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending)
+      login_as(candidate, scope: :candidate)
       selection_process = invite.create_selection_process
       interview = create(:interview,
                          datetime: '2019-10-26 17:00:00',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
-                         status: :pending).decorate
+                         status: :pending).decorate(candidate)
 
-      expect(interview.decision_buttons).to(include 'Aceitar')
-      expect(interview.decision_buttons).to(include 'Recusar')
+      expect(interview.footer).to(include 'Aceitar')
+      expect(interview.footer).to(include 'Recusar')
     end
-    it 'shows returns nothing buttons if invite is not pending' do
+    it 'do not shows buttons if invite is not pending and it is a candidate' do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
       company.company_profile = create(:company_profile)
       candidate = create(:candidate, status: :published)
@@ -86,14 +87,15 @@ describe InterviewDecorator do
       position = create(:position, company: company)
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending)
+      login_as(candidate, scope: :candidate)
       selection_process = invite.create_selection_process
       interview = create(:interview, datetime: '2019-10-26 17:00:00',
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process,
-                                     status: :scheduled).decorate
+                                     status: :scheduled).decorate(candidate)
 
-      expect(interview.decision_buttons).to eq ''
+      expect(interview.footer).to eq ''
     end
   end
   context '#interview_status_badge' do

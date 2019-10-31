@@ -12,7 +12,7 @@ pt-BR:
           scheduled: Agendada
           done: Realizada
           absent: Ausente
-          rejected: Cancelada
+          canceled: Cancelada
         format:
           online: 'Formato: Online'
           face_to_face: 'Formato: Presencial'

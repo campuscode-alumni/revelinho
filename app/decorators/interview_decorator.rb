@@ -1,7 +1,18 @@
 class InterviewDecorator < Draper::Decorator
   include Draper::LazyHelpers
+  attr_reader :interview, :user
 
   delegate_all
+
+  def initialize(interview, user)
+    @interview = interview
+    @user = user
+    super(interview)
+  end
+
+  def self.decorate_collection (interview, user)
+    interview.map { |interview| new(interview, user) }
+  end
 
   def formatting_datetime
     I18n.l(interview.datetime, format: :long)
@@ -16,32 +27,39 @@ class InterviewDecorator < Draper::Decorator
     I18n.t('activerecord.attributes.interview.format.' + interview.format)
   end
 
-  def decision_buttons
-    return '' unless interview.pending?
-
-    reject_button + accept_button
-  end
-
   def interview_status_badge
     badge_info = InterviewBadges.picker interview.status
     content_tag(:span, badge_info[:content], class: badge_info[:class])
   end
 
-  def status_footer
-    # TODO
-    # select field + button
-    # change interview content format
+  def footer
+    return decision_buttons if user.is_a? Candidate
+    
+    employee_footer
   end
 
   private
 
-  def accept_button
-    link_to 'Aceitar', accept_interview_candidate_path(interview),
-            class: 'btn btn-outline-success', method: :post
+  def decision_buttons
+    return '' unless interview.pending?
+    
+    render(partial: 'interviews/candidate_buttons',
+    locals: { interview: interview})
   end
 
-  def reject_button
-    link_to 'Recusar', reject_interview_candidate_path(interview),
-            class: 'btn btn-outline-danger', method: :post
+  def employee_footer
+    return feedback_button if interview.done?
+
+    status_picker
+  end
+
+  def feedback_button
+    link_to 'Ver feedbacks', interview_feedback_candidates_path,
+            class: 'btn btn-outline-primary'
+  end
+
+  def status_picker
+    render(partial: 'interviews/status_picker',
+    locals: { interview: interview})
   end
 end

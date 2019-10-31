@@ -1,9 +1,16 @@
 class SelectionProcessDecorator < Draper::Decorator
-  delegate_all
   include Draper::LazyHelpers
+
+  delegate_all
 
   def contract_resume
     p_print_hiring_scheme + p_print_office_hours + p_print_salary
+  end
+
+  def go_back_button (user)
+    return invites_candidates_path if user.is_a? Candidate
+
+    candidates_path
   end
 
   private

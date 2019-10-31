@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'candidate see interview invite' do
+feature 'candidate sees interview invite' do
   scenario 'successfully' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
@@ -8,7 +8,7 @@ feature 'candidate see interview invite' do
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
+                             status: :accepted)
     selection_process = invite.create_selection_process
     create(:interview, datetime: '2019-10-26 17:00:00',
                        format: :face_to_face,
@@ -28,14 +28,14 @@ feature 'candidate see interview invite' do
     expect(page).to have_link('Recusar')
   end
 
-  scenario 'and accept' do
+  scenario 'and accepts it' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
+                             status: :accepted)
     selection_process = invite.create_selection_process
     interview = create(:interview, datetime: '2019-10-26 17:00:00',
                                    status: :pending,
@@ -60,14 +60,14 @@ feature 'candidate see interview invite' do
     expect(mailer_spy).to have_received(:interview_accepted).with(interview.id)
   end
 
-  scenario 'and reject' do
+  scenario 'and rejects it' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
+                             status: :accepted)
     selection_process = invite.create_selection_process
     interview = create(:interview, datetime: '2019-10-26 17:00:00',
                                    status: :pending,
@@ -94,7 +94,7 @@ feature 'candidate see interview invite' do
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
+                             status: :accepted)
     selection_process = invite.create_selection_process
     interview = create(:interview, datetime: '2019-10-26 17:00:00',
                        format: :face_to_face,
@@ -115,7 +115,7 @@ feature 'candidate see interview invite' do
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
+                             status: :accepted)
     selection_process = invite.create_selection_process
     interview = create(:interview, datetime: '2019-10-26 17:00:00',
                        format: :face_to_face,

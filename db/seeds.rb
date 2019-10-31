@@ -54,7 +54,9 @@ Message.create!(sendable: Employee.first, selection_process: selection_process,
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 
-Interview.create!(datetime: '2019-10-26 17:00:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process)
-Interview.create!(datetime: '2019-08-30 07:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
-Interview.create!(datetime: '2019-07-26 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :canceled)
-Interview.create!(datetime: '2019-10-20 17:00:00', format: :online, address: 'skype', selection_process: selection_process)
+Interview.create!(datetime: '2019-08-26 17:00:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :absent)
+Interview.create!(datetime: '2019-08-30 07:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :canceled)
+Interview.create!(datetime: '2019-09-04 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
+Interview.create!(datetime: '2019-09-20 17:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
+Interview.create!(datetime: '2019-09-30 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :pending)
+Interview.create!(datetime: '2019-10-10 17:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :pending)

@@ -1,0 +1,5 @@
+<div class="container-fluid px-5">
+  <%= render partial: 'shared/input_field', locals: {input_destiny: send_feedback_candidates_path, go_back: selection_process_candidates_path, send_button_message:'Enviar Feedback'} %>
+  <div class="jumbotron">
+  <%= render partial: 'feedbacks', collection: @interview.interview_feedbacks, as: :feedback %></div>
+</div>
