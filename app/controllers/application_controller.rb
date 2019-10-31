@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(
       :sign_up,
       keys: %i[name cpf birthday occupation phone educational_level
-               address city state country zip_code]
+               address city state country zip_code avatar]
     )
   end
 
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    render file: Rails.root.join('public', '404'), status: :not_found
+    render file: 'public/404', status: :not_found
   end
 
   def current_user

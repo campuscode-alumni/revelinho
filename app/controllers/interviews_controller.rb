@@ -3,6 +3,8 @@ class InterviewsController < ApplicationController
   before_action :parametize, only: %i[new create]
   before_action :parametize_create, only: %i[create]
   before_action :authorize_employee!, only: %i[create]
+  before_action :set_interview, only: %i[accept reject]
+  before_action :authenticate_candidate!, only: %i[accept reject]
 
   def new
     @formats_json = { formats: Interview.formats.map do |value, _i|
@@ -25,6 +27,21 @@ class InterviewsController < ApplicationController
     end
   end
 
+  def accept
+    return unless @interview.pending?
+
+    @interview.scheduled!
+    InterviewMailer.interview_accepted(@interview.id).deliver_now
+    redirect_to selection_process_candidates_path(@interview.selection_process)
+  end
+
+  def reject
+    return unless @interview.pending?
+
+    @interview.canceled!
+    redirect_to selection_process_candidates_path(@interview.selection_process)
+  end
+
   private
 
   def parametize
@@ -45,5 +62,9 @@ class InterviewsController < ApplicationController
               current_employee.company
 
     render json: {}, status: :forbidden
+  end
+
+  def set_interview
+    @interview = Interview.find(params[:id])
   end
 end

@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :companies, only: %i[index edit update show] do
-    get 'dashboard', on: :collection
+    collection do
+      get 'dashboard'
+      get 'invites'
+    end
   end
   resources :company_profiles, only: %i[new create edit update]
   resources :candidates, only: %i[index show] do
@@ -20,6 +23,11 @@ Rails.application.routes.draw do
       get 'dashboard'
       get 'invites'
     end
+
+    get 'invites/select_process/:id', to: 'selection_processes#show', on: :collection, as: :selection_process
+    post 'invites/select_process/:id', to: 'selection_processes#send_message', on: :collection, as: :send_message
+    post 'interviews/accept/:id', to: 'interviews#accept', on: :member, as: :accept_interview
+    post 'interviews/reject/:id', to: 'interviews#reject', on: :member, as: :reject_interview
   end
   
   resources :selection_processes, only: %i[show] do

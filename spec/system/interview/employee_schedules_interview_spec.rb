@@ -16,12 +16,12 @@ feature 'Employee schedules interview' do
     interview = build(:interview, date: DateTime.parse('25/11/2019'))
 
     login_as(employee, scope: :employee)
-    visit selection_process_path(selection_process)
 
-    click_on 'Agendar entrevista'
+    visit new_selection_process_interview_path(selection_process)
     click_on 'interview-modal-button'
 
     find('#date-field > div > input').click
+    sleep(1)
     find('.ant-calendar-selected-day').click
 
     find('#time-from-field > input').click
@@ -35,6 +35,7 @@ feature 'Employee schedules interview' do
     find('label', text: 'Online').click
 
     click_on 'OK'
+    sleep(1)
 
     expect(page).to have_content('Entrevista salva')
     expect(Interview.count).to eq(1)
@@ -54,9 +55,7 @@ feature 'Employee schedules interview' do
     selection_process = create(:selection_process, invite: invite)
 
     login_as(employee, scope: :employee)
-    visit selection_process_path(selection_process)
-
-    click_on 'Agendar entrevista'
+    visit new_selection_process_interview_path(selection_process)
     click_on 'interview-modal-button'
 
     fill_in 'address-field', with: ''
