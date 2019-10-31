@@ -20,5 +20,4 @@ test:
 
 production:
   <<: *default
-  database: revelinho_production
   url: <%= ENV['DATABASE_URL'] %>
