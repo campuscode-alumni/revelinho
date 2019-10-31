@@ -123,7 +123,9 @@ ActiveRecord::Schema.define(version: 2019_10_24_141803) do
   end
 
   create_table "interviews", force: :cascade do |t|
-    t.datetime "datetime"
+    t.date "date"
+    t.string "time_from"
+    t.string "time_to"
     t.integer "format", default: 0
     t.string "address"
     t.integer "selection_process_id", null: false

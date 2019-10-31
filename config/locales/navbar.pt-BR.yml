@@ -1,0 +1,9 @@
+pt-BR:
+  navbar:
+    candidates: Ver candidatos
+    positions: Posições
+    interviews: Entrevistas
+    logout: Sair
+    sign_in:
+      employee: Login funcionário
+      candidate: Login candidato

@@ -1,9 +1,6 @@
-class EmployeeCandidatePresenter < SimpleDelegator
-  include Rails.application.routes.url_helpers
-  include ActionView::Helpers::OutputSafetyHelper
+class EmployeeCandidatePresenter < ApplicationPresenter
   attr_reader :candidate, :employee
 
-  # delegate :name, :id, to: :candidate
   delegate :content_tag, :link_to, to: :h
 
   def initialize(candidate, employee)
@@ -45,11 +42,5 @@ class EmployeeCandidatePresenter < SimpleDelegator
       content_tag(:ul) do
         safe_join(invited_positions.map { |p| content_tag(:li, p.title) })
       end
-  end
-
-  private
-
-  def h
-    ApplicationController.helpers
   end
 end
