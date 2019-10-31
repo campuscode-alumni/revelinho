@@ -80,4 +80,14 @@ feature 'Candidates list' do
 
     expect(current_path).to eq(dashboard_companies_path)
   end
+
+  scenario 'Candidate cannot see index showing profiles of other candidates' do
+    candidate = create(:candidate)
+    create(:candidate_profile, candidate: candidate)
+    login_as candidate, scope: :candidate
+
+    visit candidates_path
+
+    expect(current_path).to eq(dashboard_candidates_path)
+  end
 end
