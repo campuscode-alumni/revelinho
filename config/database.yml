@@ -3,13 +3,13 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: <%= ENV.fetch("DB_USER") { 'postgres' } %>
-  password: <%= ENV.fetch("DB_PASSWORD") { 'postgres' } %>
-  host: <%= ENV.fetch("DB_HOST") { 'db' } %>
 
 development:
   <<: *default
   database: revelinho_development
+  username: <%= ENV.fetch("DB_USER") { 'postgres' } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { 'postgres' } %>
+  host: <%= ENV.fetch("DB_HOST") { 'db' } %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,3 +21,4 @@ test:
 production:
   <<: *default
   database: revelinho_production
+  url: <%= ENV['DATABASE_URL'] %>
