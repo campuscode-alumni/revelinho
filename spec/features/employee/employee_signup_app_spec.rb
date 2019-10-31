@@ -6,6 +6,7 @@ feature 'Employee signup app' do
 
     click_on 'Cadastro de funcionário'
 
+    fill_in 'Nome', with: 'João Silva'
     fill_in 'E-mail', with: 'employee@company.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'
@@ -22,6 +23,7 @@ feature 'Employee signup app' do
 
     click_on 'Cadastro de funcionário'
 
+    fill_in 'Nome', with: ''
     fill_in 'E-mail', with: ''
     fill_in 'Senha', with: ''
     fill_in 'Confirme sua senha', with: ''
@@ -29,7 +31,7 @@ feature 'Employee signup app' do
     click_on 'Inscrever-se'
 
     expect(page).to have_content('Não foi possível salvar o '\
-                                 'funcionário: 2 erros.')
+                                 'funcionário: 3 erros.')
   end
 
   scenario 'and logout' do
@@ -52,6 +54,7 @@ feature 'Employee signup app' do
 
     click_on 'Cadastro de funcionário'
 
+    fill_in 'Nome', with: 'João Silva'
     fill_in 'E-mail', with: 'joao.silva@revelo.com.br'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'

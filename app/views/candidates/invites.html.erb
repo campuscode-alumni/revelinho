@@ -1,3 +1,11 @@
-<div class="container pt-3">
-  <%= render partial: 'invite', collection: @invites.decorate %>
+<div class="container mt-4">
+  <h2 class="text-center">Esses são os seus convites até o momento :)</h2>
+  <div class="mt-4">
+    <%= render partial: 'invite', collection: @invite_presenter %>
+  </div>
+</div>
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary' %>
+  </div>
 </div>

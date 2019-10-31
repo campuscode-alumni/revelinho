@@ -1,5 +1,6 @@
 class SelectionProcess < ApplicationRecord
   belongs_to :invite
+  delegate :employee, to: :invite
   delegate :position, to: :invite
   delegate :company, to: :position
   delegate :company_profile, to: :company
