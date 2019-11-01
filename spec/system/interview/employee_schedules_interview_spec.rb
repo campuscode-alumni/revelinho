@@ -22,7 +22,8 @@ feature 'Employee schedules interview' do
 
     find('#date-field > div > i > svg').click
     if has_css?('.ant-calendar-selected-day')
-      find('.ant-calendar-selected-day').click
+      select_day_input = find('.ant-calendar-selected-day')
+      select_day_input.click
     else
       find('#date-field > div > i > svg').click
       find('.ant-calendar-selected-day').click
