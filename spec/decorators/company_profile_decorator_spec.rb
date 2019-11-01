@@ -42,20 +42,5 @@ describe CompanyProfileDecorator do
       expect(card_render).to include('2')
       expect(card_render).to include('Convites')
     end
-
-    it 'shows pending interviews count' do
-      company = create(:company, url_domain: 'revelo.com.br')
-      candidate = create(:candidate)
-      create(:candidate_profile, candidate: candidate)
-      position = create(:position, company: company)
-      invite = create(:invite, position: position, candidate: candidate)
-      selection_process = create(:selection_process, invite: invite)
-      create(:interview, selection_process: selection_process)
-      create(:interview, selection_process: selection_process)
-      card_render = CompanyProfileDecorator.decorate(company).card_render
-
-      expect(card_render).to include('2')
-      expect(card_render).to include('Entrevistas')
-    end
   end
 end
