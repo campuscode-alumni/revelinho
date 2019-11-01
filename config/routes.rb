@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       get 'dashboard'
       get 'invites'
+      get 'selection_processes'
     end
   end
   resources :company_profiles, only: %i[new create edit update]
