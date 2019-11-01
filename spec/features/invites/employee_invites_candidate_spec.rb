@@ -58,8 +58,7 @@ feature 'Invites' do
     company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
-    candidate = create(:candidate, name: 'Gustavo')
-    create(:candidate_profile, candidate: candidate)
+    candidate = create(:candidate, :with_candidate_profile, name: 'Gustavo')
     position = create(:position, title: 'Engenheiro de Software Pleno',
                                  company: company)
     create(

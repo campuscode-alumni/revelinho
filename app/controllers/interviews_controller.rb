@@ -28,7 +28,7 @@ class InterviewsController < ApplicationController
   def message_accepted
     @interview.selection_process.messages
               .create(text: I18n.t('interview.status_badge.scheduled') +
-              ': ' + I18n.l(@interview.datetime, format: :long),
+              ': ' + I18n.l(@interview.date, format: :long),
                       sendable: current_candidate,
                       message_type: :interview_accepted)
   end
@@ -36,7 +36,7 @@ class InterviewsController < ApplicationController
   def message_rejected
     @interview.selection_process.messages
               .create(text: I18n.t('interview.status_badge.rejected') +
-              ': ' + I18n.l(@interview.datetime, format: :long),
+              ': ' + I18n.l(@interview.date, format: :long),
                       sendable: current_candidate,
                       message_type: :interview_rejected)
   end

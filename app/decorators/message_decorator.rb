@@ -11,12 +11,12 @@ class MessageDecorator < Draper::Decorator
   def message_sendable
     return '' unless chat?
 
-    content_tag(:div, image_tag(avatar, class: 'avatar-50 mr-3') +
-                content_tag(:h5, sendable.name, class: 'm-0'),
-                class: 'flex mb-3')
+    content_tag(:div, image_tag(avatar, class: 'avatar-50') +
+                content_tag(:h5, sendable.name),
+                class: 'flex')
   end
 
   def card_style
-    message_type + (chat? ? '' : ' notification-card my-4')
+    message_type + (chat? ? '' : ' notification-card')
   end
 end
