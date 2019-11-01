@@ -13,15 +13,15 @@ RSpec.describe CandidateDashboardDecorator do
   context '#info_header_text' do
     it 'has to show info header text when published' do
       candidate = create(:candidate, status: :published)
-      candidate_profile = create(:candidate_profile, candidate: candidate)
+      create(:candidate_profile, candidate: candidate)
       candidate_decorator = CandidateDashboardDecorator.new(candidate)
 
       expect(candidate_decorator.info_header_text).to(
-        eq '<p>Seu perfil está ativo. Aguarde o contato das empresas '\
-           'interessadas.</p><a class="btn btn-primary btn-large" href'\
-           "=\"/candidate_profiles/#{candidate_profile.id}/edit\">Editar"\
-           ' Perfil</a>'
+        include 'Seu perfil está ativo. Aguarde o contato das empresas '\
+           'interessadas.'
       )
+      expect(candidate_decorator.info_header_text).to(include 'Editar Perfil')
+      expect(candidate_decorator.info_header_text).to(include 'Ver seu perfil')
     end
 
     it 'has to show info header text when not published' do
