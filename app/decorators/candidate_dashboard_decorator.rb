@@ -23,7 +23,7 @@ class CandidateDashboardDecorator < Draper::Decorator
 
   def card_render
     if published?
-      render(partial: 'candidates/card',
+      render(partial: 'shared/dashboard_card_button',
              locals: card_locals('fa-envelope-open-text', Invite.name)) # +
     # render(partial: 'card',
     # locals: card_locals('fa-edit', SelectionProcess.name)) +
@@ -42,6 +42,7 @@ class CandidateDashboardDecorator < Draper::Decorator
     { icon: icon,
       title: title(class_name),
       count: count(class_name),
+      id: "#{class_name.pluralize.downcase}-card",
       path: path(class_name) }
   end
 

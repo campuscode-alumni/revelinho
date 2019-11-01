@@ -10,6 +10,11 @@ FactoryBot.define do
     github_profile_url { 'https://github.com/candidate' }
     candidate { nil }
 
+    avatar do
+      fixture_file_upload(Rails.root.join('spec', 'support', 'images',
+                                          'gatinho.jpg'), 'image/jpg')
+    end
+
     trait :with_candidate do
       candidate
     end

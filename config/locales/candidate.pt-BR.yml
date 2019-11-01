@@ -15,6 +15,7 @@ pt-BR:
         cpf: Cpf
         password: Senha
       candidate_profile:
+        avatar: Adicione uma foto ao seu perfil
         work_experience: Experiência Profissional
         education: Formação
         skills: Habilidades
