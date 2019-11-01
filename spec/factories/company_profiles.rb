@@ -26,5 +26,9 @@ FactoryBot.define do
       category { nil }
       attractives { nil }
     end
+
+    trait :without_logo do
+      logo { nil }
+    end
   end
 end

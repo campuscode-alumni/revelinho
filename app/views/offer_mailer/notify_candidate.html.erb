@@ -1,0 +1,22 @@
+<h1><%= @offer.candidate.name %>, você recebeu uma proposta para posição de <%= @offer.position.title%>.</h1>
+<p>
+  Olá <%= @offer.candidate.name %>, <br>
+  Nós da <%= @offer.position.company.name %> estamos felizes em lhe informar que você passou no processo seletivo, parabéns!
+  Para prosseguirmos, precisamos que aceite a proposta abaixo.
+  Descrição da posição:
+    Titulo: <%= @offer.position.title%>
+    Remuneração: <%= number_to_currency @offer.salary %>
+    Data de inicio: <%= I18n.localize @offer.start_date %>
+    Modalidade de trabalho: <%= @offer.hiring_scheme %>
+    Empresa: <%= @offer.position.company.name %>
+</p>
+
+<%= link_to 'Aceitar proposta', selection_process_candidates_url(@offer.selection_process) %>
+
+<p>
+Estamos ansiosos para ter você aqui!
+
+Atenciosamente,
+
+Equipe Revelinho
+</p>
