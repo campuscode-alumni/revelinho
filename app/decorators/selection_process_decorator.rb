@@ -17,27 +17,46 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def main_contact
-    return employee_main_contact unless candidate_signed_in?
+    return main_content(employee_data) if candidate_signed_in?
 
-    candidate_main_contact
+    main_content(candidate_data)
   end
 
   private
 
-  def candidate_main_contact
-    content_tag(:p, content_tag(:small, employee.name), class: 'mb-0') +
-      content_tag(:p, content_tag(:small, "Telefone: #{company_profile.phone}"),
-                  class: 'mb-0') +
-      content_tag(:p, content_tag(:small, "Email: #{employee.email}"),
-                  class: 'mb-0')
+  def employee_data
+    {
+      image: { avatar: company_profile.logo, path: candidate_path(candidate) },
+      title: company.name,
+      description: { name: employee.name, email: employee.email,
+                     phone: company_profile.phone }
+    }
   end
 
-  def employee_main_contact
-    content_tag(:p, content_tag(:small, candidate.name), class: 'mb-0') +
-      content_tag(:p, content_tag(:small, "Telefone: #{candidate.phone}"),
-                  class: 'mb-0') +
-      content_tag(:p, content_tag(:small, "Email: #{candidate.email}"),
-                  class: 'mb-0')
+  def candidate_data
+    {
+      image: { avatar: candidate.avatar, path: company_path(company) },
+      title: '',
+      description: { name: candidate.name, phone: candidate.phone,
+                     email: candidate.email }
+    }
+  end
+
+  def main_content(data)
+    link_to(image_tag(data[:image][:avatar],
+                      class: 'avatar-100 float-left mr-2'),
+            data[:image][:path]) +
+      content_tag(:div, class: 'float-left pl-2') do
+        content_tag(:h5, data[:title], class: 'main-title') +
+          content_tag(:h6, 'Seu contato principal é:', class: 'lead-4') +
+          description(data[:description])
+      end
+  end
+
+  def description(data)
+    content_tag(:p, content_tag(:small, data[:name])) +
+      content_tag(:p, content_tag(:small, "Telefone: #{data[:phone]}")) +
+      content_tag(:p, content_tag(:small, "Email: #{data[:email]}"))
   end
 
   def btn_offer
