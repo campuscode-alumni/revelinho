@@ -1,3 +1,4 @@
 <div class="container-fluid candidates-list">
+  <%= @candidates_presenter.no_candidates_message %>
   <%= render partial: 'candidate', collection: @employee_candidate_presenters, as: :candidate %>
 </div>

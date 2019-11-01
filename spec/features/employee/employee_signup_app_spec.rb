@@ -40,10 +40,10 @@ feature 'Employee signup app' do
     login_as(employee, scope: :employee)
     visit root_path
 
-    click_on 'Logout'
+    click_on 'Sair'
 
     expect(page).to have_link('Cadastro de funcionário')
-    expect(page).not_to have_link('Logout')
+    expect(page).not_to have_link('Sair')
   end
 
   scenario 'and see your company dashboard' do

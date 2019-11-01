@@ -40,8 +40,6 @@ class ApplicationPresenter < SimpleDelegator
   def nav_user_title
     return I18n.t('navbar.title.company') if logged_as_employee?
     return I18n.t('navbar.title.candidate') if logged_as_candidate?
-
-    ''
   end
 
   def nav_user_options_items
@@ -61,12 +59,16 @@ class ApplicationPresenter < SimpleDelegator
     [{ text: I18n.t('navbar.see_company'),
        path: company_path(user.company) },
      { text: I18n.t('navbar.edit_company'),
-       path: edit_company_profile_path(user.company) }]
+       path: edit_company_profile_path(user.company) },
+     { text: I18n.t('navbar.create_position'),
+       path: new_position_path }]
   end
 
   def nav_user_options_candidate
     [{ text: I18n.t('navbar.candidate_profile'),
-       path: candidate_path(user) }]
+       path: candidate_path(user) },
+     { text: I18n.t('navbar.edit_candidate'),
+       path: edit_candidate_profile_path(user) }]
   end
 
   def nav_sign_in
@@ -93,8 +95,6 @@ class ApplicationPresenter < SimpleDelegator
   def logout_path
     return destroy_candidate_session_path if logged_as_candidate?
     return destroy_employee_session_path if logged_as_employee?
-
-    root_path
   end
 
   def signed_in?

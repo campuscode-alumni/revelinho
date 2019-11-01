@@ -5,14 +5,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::UnpermittedParameters, with: :forbidden
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-  def signed_in?
-    candidate_signed_in? || employee_signed_in?
-  end
-
-  def not_signed_in?
-    !signed_in?
-  end
-
   protected
 
   def after_sign_in_path_for(resource)

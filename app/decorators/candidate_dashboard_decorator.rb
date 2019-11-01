@@ -12,8 +12,7 @@ class CandidateDashboardDecorator < Draper::Decorator
   def info_header_text
     if published?
       content_tag(:p, 'Seu perfil está ativo. Aguarde o contato das '\
-                      'empresas interessadas.') +
-        link_edit_profile
+                      'empresas interessadas.')
     else
       content_tag(:p, 'Seu perfil ainda não está ativo. Complete-o e '\
                       'fique visível para as empresas.') +
@@ -60,12 +59,6 @@ class CandidateDashboardDecorator < Draper::Decorator
 
   def title(class_name)
     I18n.t("activerecord.models.#{class_name.downcase}").pluralize
-  end
-
-  def link_edit_profile
-    link_to 'Editar Perfil',
-            edit_candidate_profile_path(candidate.candidate_profile),
-            class: 'btn btn-primary btn-large'
   end
 
   def link_finish_profile

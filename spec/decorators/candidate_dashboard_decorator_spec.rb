@@ -13,14 +13,14 @@ RSpec.describe CandidateDashboardDecorator do
   context '#info_header_text' do
     it 'has to show info header text when published' do
       candidate = create(:candidate, status: :published)
-      candidate_profile = create(:candidate_profile, candidate: candidate)
+      create(:candidate_profile, candidate: candidate)
       candidate_decorator = CandidateDashboardDecorator.new(candidate)
 
-      expect(candidate_decorator.info_header_text).to(
-        eq '<p>Seu perfil está ativo. Aguarde o contato das empresas '\
-           'interessadas.</p><a class="btn btn-primary btn-large" href'\
-           "=\"/candidate_profiles/#{candidate_profile.id}/edit\">Editar"\
-           ' Perfil</a>'
+      expect(candidate_decorator.info_header_text).to include(
+        'Seu perfil está ativo'
+      )
+      expect(candidate_decorator.info_header_text).to include(
+        'Aguarde o contato das empresas'
       )
     end
 
@@ -28,11 +28,14 @@ RSpec.describe CandidateDashboardDecorator do
       candidate = create(:candidate, status: :hidden)
       candidate_decorator = CandidateDashboardDecorator.new(candidate)
 
-      expect(candidate_decorator.info_header_text).to(
-        eq '<p>Seu perfil ainda não está ativo. Complete-o e fique visível '\
-           'para as empresas.</p><a class="btn btn-primary btn-large" href'\
-           '="/candidate_profiles/new">Concluir'\
-           ' perfil</a>'
+      expect(candidate_decorator.info_header_text).to include(
+        'Seu perfil ainda não está ativo'
+      )
+      expect(candidate_decorator.info_header_text).to include(
+        'Complete-o e fique visível'
+      )
+      expect(candidate_decorator.info_header_text).to include(
+        'href="/candidate_profiles/new"'
       )
     end
   end
