@@ -1,9 +1,9 @@
 class OffersController < ApplicationController
-  before_action :set_variables, only: %i[new create show accept]
-  before_action :set_offer, only: %i[show accept]
+  before_action :set_variables, only: %i[new create show accept reject]
+  before_action :set_offer, only: %i[show accept reject]
   before_action :new_offer, only: %i[create]
   before_action :authenticate_employee!, only: %i[new create show]
-  before_action :authenticate_candidate!, only: %i[accept]
+  before_action :authenticate_candidate!, only: %i[accept reject]
 
   def new; end
 
@@ -22,17 +22,24 @@ class OffersController < ApplicationController
   def show; end
 
   def accept
-    @offer.accepted!
+    action('accepted!', 'Oferta aceita!', 'notify_accepted')
+  end
 
-    message = Message.new(text: 'Oferta aceita!',
-                          sendable: current_candidate)
-    @offer.selection_process.messages << message
-
-    OfferMailer.notify_accepted(@offer.id).deliver_now
-    redirect_to selection_process_candidates_path(@selection_process)
+  def reject
+    action('rejected!', 'Oferta rejeitada!', 'notify_rejected')
   end
 
   private
+
+  def action(method, texto, notify)
+    @offer.send(method)
+
+    message = Message.new(text: texto, sendable: current_candidate)
+    @offer.selection_process.messages << message
+
+    OfferMailer.send(notify, @offer.id).deliver_now
+    redirect_to selection_process_candidates_path(@selection_process)
+  end
 
   def offer_params
     params.require(:offer).permit(:salary, :hiring_scheme, :start_date)

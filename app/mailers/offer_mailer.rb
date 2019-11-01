@@ -10,10 +10,18 @@ class OfferMailer < ApplicationMailer
   end
 
   def notify_accepted(offer_id)
-    offer = Offer.find(offer_id)
-    candidate = offer.position.candidate
-    subject = "O candidato #{candidate. name} aceitou a proposta!"
+    @offer = Offer.find(offer_id)
+    notify_employee("Proposta aceita para #{@offer.position.title}")
+  end
 
+  def notify_rejected(offer_id)
+    @offer = Offer.find(offer_id)
+    notify_employee("Proposta recusada para #{@offer.position.title}")
+  end
+
+  private
+
+  def notify_employee(subject)
     mail(to: @offer.employee.email, subject: subject)
   end
 end
