@@ -25,8 +25,8 @@ feature 'Employee schedules interview' do
       find('.ant-calendar-selected-day').click
     else
       find('#date-field > div > i > svg').click
+      find('.ant-calendar-selected-day').click
     end
-    find('.ant-calendar-selected-day').click
 
     find('#time-from-field > input').click
     find('.ant-time-picker-panel-select-option-selected', match: :first).click
