@@ -49,7 +49,7 @@ feature 'candidate see offer' do
 
     mailer_spy = class_spy('OfferMailer')
     stub_const('OfferMailer', mailer_spy)
-    mail = double
+    mail = double('mail')
     allow(mailer_spy).to receive(:notify_accepted).and_return(mail)
     allow(mail).to receive(:deliver_now).and_return(nil)
 
