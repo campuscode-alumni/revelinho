@@ -19,31 +19,36 @@
 
       <%= f.label :industry, 'Área' %>
       <%= f.text_field :industry, class: "form-control" %>
-      
+
       <%= f.label :description, 'Descrição' %>
       <%= f.text_area :description, class: "form-control" %>
+      <div class="form-group mt-4">
+      <p class="text-center"><strong>Faixa salarial</strong></p>
       <div class="form-row">
-        <p>Faixa salarial</p>
-        <div class="col-9">
+        <div class="col">
           <%= f.label :salary_from, 'De:' %>
           <%= f.number_field :salary_from, class: "form-control" %>
         </div>
-        <div class="col-9">
+        <div class="col">
           <%= f.label :salary_to, 'Até:' %>
           <%= f.number_field :salary_to, class: "form-control" %>
         </div>
+      </div>
+      <div class="form-group mt-4">
+        <p class="text-center"><strong>Condições</strong></p>
+        <div class="form-row">
+          <div class="col">
+            <%= f.label :hiring_scheme, 'Regime' %>
+            <%= f.select :hiring_scheme, Position.hiring_schemes.map { |k, v| [ I18n.t("activerecord.attributes.position.hiring_scheme.#{k}"), k] }, {}, class: "form-control" %>
+          </div>
 
-        <div class="col">
-          <%= f.label :hiring_scheme, 'Regime' %>
-          <%= f.select :hiring_scheme, Position.hiring_schemes.map { |k, v| [ I18n.t("activerecord.attributes.position.hiring_scheme.#{k}"), k] }, class: "form-control" %>
-        </div>
-
-        <div class="col">
-          <%= f.label :office_hours, 'Expediente' %>
-          <%= f.select :office_hours, Position.office_hours.map { |k, v| [ I18n.t("activerecord.attributes.position.office_hours.#{k}"), k] }, class: "form-control" %>
+          <div class="col">
+            <%= f.label :office_hours, 'Expediente' %>
+            <%= f.select :office_hours, Position.office_hours.map { |k, v| [ I18n.t("activerecord.attributes.position.office_hours.#{k}"), k] }, {}, class: "form-control" %>
+          </div>
         </div>
       </div>
-      <%= f.submit 'Enviar', class: "mt-2 form-control btn btn-primary" %>
+      <%= f.submit 'Enviar', class: "mt-4 form-control btn btn-primary" %>
     <% end %>
     </div>
   </div>

@@ -1,5 +1,8 @@
 body {
   background-color: #f5f7fb !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 a:hover.link-defaut-color{
