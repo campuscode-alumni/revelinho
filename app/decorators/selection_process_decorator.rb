@@ -26,7 +26,7 @@ class SelectionProcessDecorator < Draper::Decorator
 
   def candidate_main_contact
     content_tag(:p, content_tag(:small, employee.name), class: 'mb-0') +
-      content_tag(:p, content_tag(:small, "Telefone#{company_profile.phone}"),
+      content_tag(:p, content_tag(:small, "Telefone: #{company_profile.phone}"),
                   class: 'mb-0') +
       content_tag(:p, content_tag(:small, "Email: #{employee.email}"),
                   class: 'mb-0')
@@ -39,7 +39,6 @@ class SelectionProcessDecorator < Draper::Decorator
       content_tag(:p, content_tag(:small, "Email: #{candidate.email}"),
                   class: 'mb-0')
   end
-  
 
   def btn_offer
     link_to 'Quero contrata-lo!', new_candidate_offer_path(candidate.id, id),

@@ -15,7 +15,6 @@ feature 'employee send offer to candidate' do
 
     visit selection_process_candidates_path(selection_process)
     click_on 'Quero contrata-lo!'
-
     fill_in 'Salário', with: '2.500,00'
     select 'CLT', from: 'Regime de contratação'
     fill_in 'Data de início', with: '11/11/2019'
