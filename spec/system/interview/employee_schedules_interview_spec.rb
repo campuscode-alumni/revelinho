@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Employee schedules interview' do
-  scenario 'successfully', js:true do
+  scenario 'successfully', js: true do
     company = create(:company, url_domain: 'revelo.com.br')
     create(:company_profile, company: company)
     employee = create(:employee, email: 'renata@revelo.com.br',
@@ -34,7 +34,7 @@ feature 'Employee schedules interview' do
     find('label', text: 'Online').click
 
     click_on 'OK'
-   
+
     expect(page).to have_content('Entrevista salva')
     expect(Interview.count).to eq(1)
   end
