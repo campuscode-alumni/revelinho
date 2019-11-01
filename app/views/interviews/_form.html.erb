@@ -1,5 +1,4 @@
 <div id="interviews">
-  <interview-form formats_json="<%= @formats_json %>" create_url="<%= @post_url %>"></interview-form>
   <a-layout class="body">
     <interviews-sidebar></interviews-sidebar>
     <a-layout class="calendar">
@@ -8,4 +7,13 @@
       </a-layout-content>
     </a-layout>
   </a-layout>
+  <interview-form
+    formats_json="<%= @formats_json %>"
+    @create="create"
+    @show="formShow"
+    @close="formClose"
+    :loading="formLoading"
+    :visible="formVisible"
+    create-url="<%= @post_url %>"
+  ></interview-form>
 </div>

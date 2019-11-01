@@ -1,7 +1,6 @@
 <template>
   <div id="interviews-form">
     <a-button id="interview-modal-button" type="primary" @click="showModal" shape="circle" icon="plus" :style="showModalButtonStyle"></a-button>
-
     <a-modal
       title="Agendar Entrevista"
       :visible="visible"
@@ -49,11 +48,6 @@
 </template>
 
 <script>
-  import { InterviewClient } from '../../packs/interviews/interviews_client'
-
-  const client = new InterviewClient()
-  const authToken = $('meta[name=csrf-token]').attr('content')
-
   export default {
     data() {
       return {
@@ -68,8 +62,6 @@
         dateFormat: 'DD/MM/YYYY',
         timeFormat: 'HH:mm',
         form: this.$form.createForm(this, { name: 'new-interview' }),
-        visible: false,
-        loading: false,
         controlStyle: {
           label: { span: 7 },
           wrapper: { span: 17, marginBottom: 0 },
@@ -82,20 +74,25 @@
         },
         errorMessage: 'Erro ao salvar entrevista',
         successMessage: 'Entrevista salva com sucesso'
-      };
+      }
     },
     props: {
       formats_json: '',
-      create_url: ''
+      createUrl: '',
+      loading: false,
+      visible: false
     },
     computed: {
       formats: function() {
         return JSON.parse(this.formats_json || {}).formats
       }
     },
+    created() {
+      this.interview = this.initialInterview
+    },
     methods: {
       showModal() {
-        this.visible = true;
+        this.$emit('show')
       },
       onChangeDate(date, dateString) {
         this.interview.date = dateString
@@ -107,37 +104,20 @@
         this.interview.time_to = timeString
       },
       handleCancel() {
-        this.visible = false
+        this.$emit('close')
       },
-      handleSubmit(e) {
-        this.loading = true
-        client.create({
-          ...this.interview
-        }, {
-          url: this.create_url,
-          token: authToken
-        }, this.submitCallback)
-      },
-      submitCallback(res, error) {
-        this.loading = false;
-        if (error) {
-          this.notifyUserError()
-        } else {
-          this.visible = false;
-          this.notifyUserSuccess()
-        }
-      },
-      notifyUserSuccess() {
-        this.$notification['success']({
-          message: 'Sucesso',
-          description: 'Entrevista salva',
-        });
-      },
-      notifyUserError() {
-        this.$notification['error']({
-          message: 'Erro',
-          description: 'Erro ao salvar entrevista'
+      handleSubmit() {
+        this.$emit('create', {
+          interview: this.interview,
+          url: this.createUrl
         })
+      }
+    },
+    watch: {
+      visible: function(visible) {
+        if (visible) {
+          this.interview = this.initialInterview
+        }
       }
     }
   }
