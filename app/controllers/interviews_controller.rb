@@ -6,7 +6,7 @@ class InterviewsController < ApplicationController
     return unless @interview.pending?
 
     @interview.scheduled!
-    message_accepted
+    send_message('scheduled')
     InterviewMailer.interview_accepted(@interview.id).deliver_now
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
@@ -15,7 +15,7 @@ class InterviewsController < ApplicationController
     return unless @interview.pending?
 
     @interview.canceled!
-    message_rejected
+    send_message('canceled')
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 
@@ -25,19 +25,11 @@ class InterviewsController < ApplicationController
     @interview = Interview.find(params[:id])
   end
 
-  def message_accepted
+  def send_message(message_type)
     @interview.selection_process.messages
-              .create(text: I18n.t('interview.status_badge.scheduled') +
+              .create(text: I18n.t('interview.status_badge.' + message_type) +
               ': ' + I18n.l(@interview.date, format: :long),
                       sendable: current_candidate,
-                      message_type: :interview_accepted)
-  end
-
-  def message_rejected
-    @interview.selection_process.messages
-              .create(text: I18n.t('interview.status_badge.rejected') +
-              ': ' + I18n.l(@interview.date, format: :long),
-                      sendable: current_candidate,
-                      message_type: :interview_rejected)
+                      message_type: ('interview_' + message_type).to_sym)
   end
 end

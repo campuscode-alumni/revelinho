@@ -4,7 +4,7 @@ class Message < ApplicationRecord
 
   validates :text, presence: true
 
-  enum message_type: { chat: 0, new_interview: 5, interview_accepted: 10,
-                       interview_rejected: 15, new_offer: 20,
+  enum message_type: { chat: 0, new_interview: 5, interview_scheduled: 10,
+                       interview_canceled: 15, new_offer: 20,
                        offer_accepted: 25, offer_rejected: 30 }
 end

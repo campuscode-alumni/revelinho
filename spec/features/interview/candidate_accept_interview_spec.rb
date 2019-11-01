@@ -59,7 +59,7 @@ feature 'candidate see interview invite' do
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
     expect(mailer_spy).to have_received(:interview_accepted).with(interview.id)
-    within '.interview_accepted' do
+    within '.interview_scheduled' do
       expect(page).to have_content('Entrevista agendada: '\
         '26 de outubro de 2019')
     end
@@ -88,7 +88,7 @@ feature 'candidate see interview invite' do
     expect(page).to have_content('Entrevista cancelada')
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
-    within '.interview_rejected' do
+    within '.interview_canceled' do
       expect(page).to have_content('Entrevista cancelada: '\
         '26 de outubro de 2019')
     end

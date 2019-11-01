@@ -39,11 +39,11 @@ class InterviewDecorator < Draper::Decorator
 
   def scheduled_badge
     content_tag(:span, I18n.t('interview.status_badge.scheduled'),
-                class: 'badge badge-new mb-2')
+                class: 'badge badge-accepted mb-2')
   end
 
   def canceled_badge
-    content_tag(:span, I18n.t('interview.status_badge.rejected'),
+    content_tag(:span, I18n.t('interview.status_badge.canceled'),
                 class: 'badge badge-rejected mb-2')
   end
 

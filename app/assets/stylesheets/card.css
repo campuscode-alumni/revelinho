@@ -39,10 +39,10 @@
   background-color: #8b94eb !important;
 }
 
-.interview_accepted {
+.interview_scheduled {
   background-color: #7fd1af !important;
 }
 
-.interview_rejected {
+.interview_canceled {
   background-color: #f08080 !important;
 }
