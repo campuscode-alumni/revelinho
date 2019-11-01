@@ -17,11 +17,13 @@ describe 'Interviews' do
 
       login_as(employee, scope: :employee)
       post selection_process_interviews_path(selection_process), params: {
-        address: 'Rua 7',
-        format: :face_to_face,
-        date: Time.current,
-        time_from: '14:00',
-        time_to: '15:00'
+        interview: {
+          address: 'Rua 7',
+          format: :face_to_face,
+          date: Time.current,
+          time_from: '14:00',
+          time_to: '15:00'
+        }
       }
       expect(response).to have_http_status(:forbidden)
       expect(Interview.count).to eq 0

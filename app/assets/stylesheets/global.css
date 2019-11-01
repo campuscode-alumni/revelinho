@@ -1,0 +1,15 @@
+body {
+  background-color: #f5f7fb !important;
+}
+
+a:hover.link-defaut-color{
+ text-decoration: none !important;
+}
+
+.font-size-32 {
+ font-size: 32px;
+}
+
+.container, .container-fluid {
+  margin-top: 20px;
+}

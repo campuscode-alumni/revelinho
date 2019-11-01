@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_134534) do
+ActiveRecord::Schema.define(version: 2019_10_26_195313) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_134534) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
+    t.string "name"
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
@@ -130,6 +131,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_134534) do
     t.integer "selection_process_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
     t.index ["selection_process_id"], name: "index_interviews_on_selection_process_id"
   end
 
@@ -140,7 +142,10 @@ ActiveRecord::Schema.define(version: 2019_10_24_134534) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "accepted_or_rejected_at"
+    t.integer "employee_id"
     t.index ["candidate_id"], name: "index_invites_on_candidate_id"
+    t.index ["employee_id"], name: "index_invites_on_employee_id"
     t.index ["position_id"], name: "index_invites_on_position_id"
   end
 
@@ -151,6 +156,21 @@ ActiveRecord::Schema.define(version: 2019_10_24_134534) do
     t.integer "sendable_id"
     t.index ["selection_process_id"], name: "index_messages_on_selection_process_id"
     t.index ["sendable_type", "sendable_id"], name: "index_messages_on_sendable_type_and_sendable_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.float "salary"
+    t.integer "hiring_scheme"
+    t.date "start_date"
+    t.integer "status", default: 0
+    t.integer "employee_id"
+    t.integer "selection_process_id"
+    t.integer "message_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_offers_on_employee_id"
+    t.index ["message_id"], name: "index_offers_on_message_id"
+    t.index ["selection_process_id"], name: "index_offers_on_selection_process_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -182,8 +202,12 @@ ActiveRecord::Schema.define(version: 2019_10_24_134534) do
   add_foreign_key "employees", "companies"
   add_foreign_key "interviews", "selection_processes"
   add_foreign_key "invites", "candidates"
+  add_foreign_key "invites", "employees"
   add_foreign_key "invites", "positions"
   add_foreign_key "messages", "selection_processes"
+  add_foreign_key "offers", "employees"
+  add_foreign_key "offers", "messages"
+  add_foreign_key "offers", "selection_processes"
   add_foreign_key "positions", "companies"
   add_foreign_key "selection_processes", "invites"
 end

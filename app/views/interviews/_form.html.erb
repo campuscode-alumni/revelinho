@@ -1,8 +1,11 @@
 <div id="interviews">
-  <interview-calendar></interview-calendar>
   <interview-form formats_json="<%= @formats_json %>" create_url="<%= @post_url %>"></interview-form>
+  <a-layout class="body">
+    <interviews-sidebar></interviews-sidebar>
+    <a-layout class="calendar">
+      <a-layout-content>
+        <interviews-calendar :interviews="interviews"></interviews-calendar>
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
 </div>
-
-<% content_for :javascript do %>
-  <%= javascript_pack_tag 'interviews' %>
-<% end %>

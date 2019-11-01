@@ -1,36 +1,31 @@
-<div class="col-12 bg-white">
-  <section class="col-12 col-md-10 offset-md-1 mb-3 pt-3 pb-3">
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <%= @selection_process.logo_process %>
-        <h3><%= @selection_process.company.name %></h3>
-        <p></p>
-      </div>
-      <div class="col-12 col-md-6 text-right">
-        <h3><%= @selection_process.position.title %></h3>
-        <%= @selection_process.contract_resume %>
-        </div>
+<%= render partial: 'header' %>
+
+<div class="col-12 col-md-10 offset-md-1">
+  <div class="row">
+    <div class="col-12 col-md-4 h-100">
+      <div class="card card-body">
+        <%= @selection_process.offers_menu %>
+        <header class="text-center">
+          <h3 class="my-2">Entrevistas</h3>
+        </header>
+        <%= render partial: '/interviews/interview_invite', collection: @interviews.order(id: :desc), as: :interview %>
       </div>
     </div>
-  </section>
-  <div class="container">
-    <div class="row">
-      <section class="col-3">
-        <%= render @interviews %>
-        <%= @selection_process.schedule_interview_link %>
-      </section>
-      <section class="col-9">
-        <div class="card card-body mb-1">
-          <%= form_with(url: selection_process_send_message_path(@selection_process), method: 'post') do |f| %>
+    <div class="col-12 col-md-8 h-100">
+      <div class="row">
+        <div class="col-12 mb-5">
+          <div class="card card-body mb-0">
+            <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
             <div class="form-group">
               <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
             </div>      
             <%= link_to 'Voltar', invites_candidates_path, class: 'btn btn-info float-left' %>
             <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-        <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc), as: :message %>
-      </section>
+        <%= render partial: 'messages', collection: @selection_process.messages_show, as: :message %>
+      </div>
     </div>
   </div>
 </div>
