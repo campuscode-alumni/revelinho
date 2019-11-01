@@ -1,8 +1,9 @@
 class OffersController < ApplicationController
-  before_action :set_candidate, only: %i[new create]
-  before_action :set_selection_process, only: %i[new create]
+  before_action :set_variables, only: %i[new create show accept]
+  before_action :set_offer, only: %i[show accept]
   before_action :new_offer, only: %i[create]
-  before_action :authenticate_employee!, only: %i[new create]
+  before_action :authenticate_employee!, only: %i[new create show]
+  before_action :authenticate_candidate!, only: %i[accept]
 
   def new; end
 
@@ -18,18 +19,32 @@ class OffersController < ApplicationController
     render :new
   end
 
+  def show; end
+
+  def accept
+    @offer.accepted!
+
+    message = Message.new(text: 'Oferta aceita!',
+                          sendable: current_candidate)
+    @offer.selection_process.messages << message
+
+    OfferMailer.notify_accepted(@offer.id).deliver_now
+    redirect_to selection_process_candidates_path(@selection_process)
+  end
+
   private
 
   def offer_params
     params.require(:offer).permit(:salary, :hiring_scheme, :start_date)
   end
 
-  def set_candidate
+  def set_variables
     @candidate = Candidate.find(params[:candidate_id])
+    @selection_process = SelectionProcess.find(params[:selection_process_id])
   end
 
-  def set_selection_process
-    @selection_process = SelectionProcess.find(params[:selection_process_id])
+  def set_offer
+    @offer = Offer.find(params[:id])
   end
 
   def new_offer
