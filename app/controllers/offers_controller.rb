@@ -22,28 +22,24 @@ class OffersController < ApplicationController
   def show; end
 
   def accept
-    @offer.accepted!
-
-    message = Message.new(text: 'Oferta aceita!',
-                          sendable: current_candidate)
-    @offer.selection_process.messages << message
-
-    OfferMailer.notify_accepted(@offer.id).deliver_now
-    redirect_to selection_process_candidates_path(@selection_process)
+    action('accepted!', 'Oferta aceita!', 'notify_accepted')
   end
 
   def reject
-    @offer.rejected!
-
-    message = Message.new(text: 'Oferta rejeitada!',
-                          sendable: current_candidate)
-    @offer.selection_process.messages << message
-
-    OfferMailer.notify_rejected(@offer.id).deliver_now
-    redirect_to selection_process_candidates_path(@selection_process)
+    action('rejected!', 'Oferta rejeitada!', 'notify_rejected')
   end
 
   private
+
+  def action(method, texto, notify)
+    @offer.send(method)
+
+    message = Message.new(text: texto, sendable: current_candidate)
+    @offer.selection_process.messages << message
+
+    OfferMailer.send(notify, @offer.id).deliver_now
+    redirect_to selection_process_candidates_path(@selection_process)
+  end
 
   def offer_params
     params.require(:offer).permit(:salary, :hiring_scheme, :start_date)
