@@ -33,6 +33,18 @@ end
 company = Company.create!(name: 'Revelo', url_domain: 'revelo.com.br',
                           status: :active)
 
+CompanyProfile.create!(
+  company: company,
+  full_description: 'Emprega pessoas e faz uns serviços',
+  benefits: 'vt e vr',
+  employees_number: '100-500',
+  website: 'revelo.com.br',
+  phone: '11 3030-3030',
+  mission: 'Empregar pessoas',
+  category: 'RH',
+  attractives: 'Ambiente informal e as vezes tem fruta'
+)
+
 employee = Employee.create!(name: 'João Silva', email: "joao.silva@revelo.com.br",
                             password: '123456', company: company)
 

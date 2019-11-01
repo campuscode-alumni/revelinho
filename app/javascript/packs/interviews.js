@@ -7,14 +7,16 @@ Vue.use(Antd);
 Vue.use(TurbolinksAdapter)
 
 import InterviewForm from '../components/interviews/InterviewForm.vue'
-import InterviewCalendar from '../components/interviews/InterviewCalendar.vue'
+import InterviewsCalendar from '../components/interviews/InterviewsCalendar.vue'
+import InterviewsSidebar from '../components/interviews/InterviewsSidebar.vue'
 
 document.addEventListener('turbolinks:load', () => {
 
   const interview = new Vue({
     el: '#interviews',
     components: {
-      InterviewCalendar,
+      InterviewsCalendar,
+      InterviewsSidebar,
       InterviewForm
     }
   })

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="interviews-calendar">
     <a-calendar @select="onSelect">
       <ul class="events" slot="dateCellRender" slot-scope="value">
         <li v-for="item in getDayData(value)" :key="item.content" @click.stop="() => handleClickEvent(item)">

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="interviews-form">
     <a-button id="interview-modal-button" type="primary" @click="showModal" shape="circle" icon="plus" :style="showModalButtonStyle"></a-button>
 
     <a-modal
