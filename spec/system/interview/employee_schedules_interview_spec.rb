@@ -27,7 +27,7 @@ feature 'Employee schedules interview' do
     find('.ant-time-picker-panel-select-option-selected', match: :first).click
 
     find('#time-to-field > input').click
-    find('li', text: '12').click
+    find('li', text: '8').click
 
     fill_in 'address-field', with: interview.address
 
