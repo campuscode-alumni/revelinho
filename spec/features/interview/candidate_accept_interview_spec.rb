@@ -23,7 +23,7 @@ feature 'candidate see interview invite' do
     expect(page).to have_content('Entrevistas')
     expect(page).to have_content('26 de outubro de 2019, 17:00 - 17:30')
     expect(page).to have_content('Endereço: Av. Paulista, 2000')
-    expect(page).to have_content('Formato: Presencial')
+    expect(page).to have_content('Presencial')
     expect(page).to have_content('Aguardando resposta')
     expect(page).to have_link('Aceitar')
     expect(page).to have_link('Recusar')

@@ -21,7 +21,6 @@ feature 'Employee schedules interview' do
     click_on 'interview-modal-button'
 
     find('#date-field > div > input').click
-    sleep(1)
     find('.ant-calendar-selected-day').click
 
     find('#time-from-field > input').click
@@ -35,7 +34,6 @@ feature 'Employee schedules interview' do
     find('label', text: 'Online').click
 
     click_on 'OK'
-    sleep(1)
 
     expect(page).to have_content('Entrevista salva')
     expect(Interview.count).to eq(1)

@@ -1,0 +1,54 @@
+.selection-process-card {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  align-items: center;
+  
+  h2 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    opacity: .7;
+    margin-bottom: 0;
+    margin-top: 8px;
+  }
+  
+  span {
+    font-weight: bold;
+  }
+
+  .buttons {
+    bottom: 0;
+    right: 0;
+  }  
+  
+  .header {
+    display: flex;
+    
+    .content {
+      padding: 16px;
+    }
+
+    .avatar {
+      height: 100%;
+      width: 120px;
+      object-fit: cover;
+      margin-top: 20px;
+      margin-left: 15px;
+    }
+  }
+
+  .content {
+    margin: 20px;
+    background-color: #e9ecef;
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+}

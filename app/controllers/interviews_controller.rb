@@ -8,7 +8,7 @@ class InterviewsController < ApplicationController
 
   def new
     @formats_json = { formats: Interview.formats.map do |value, _i|
-      { name: I18n.t(:"format.#{value}"),
+      { name: I18n.t(:"activerecord.attributes.interview.format.#{value}"),
         value: value }
     end }.to_json
     @post_url = selection_process_interviews_path(@selection_process)

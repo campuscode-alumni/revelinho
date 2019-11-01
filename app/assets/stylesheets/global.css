@@ -9,3 +9,7 @@ a:hover.link-defaut-color{
 .font-size-32 {
  font-size: 32px;
 }
+
+.container, .container-fluid {
+  margin-top: 20px;
+}

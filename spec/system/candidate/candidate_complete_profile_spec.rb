@@ -88,4 +88,18 @@ feature 'Candidate completes personal profile' do
     expect(page).to have_link('Editar Perfil')
     expect(page).not_to have_link('Concluir perfil')
   end
+
+  scenario 'and cannot be already logged in as employee' do
+    candidate = create(:candidate)
+    login_as(candidate, scope: :candidate)
+    create(:employee, email: 'teste@example.com', password: '123456')
+
+    visit new_employee_session_path
+    fill_in 'Email', with: 'teste@example.com'
+    fill_in 'Senha', with: '123456'
+    click_on 'Login'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content(I18n.t('error_messages.duplicated_login'))
+  end
 end

@@ -64,15 +64,15 @@ RSpec.describe InterviewMailer, type: :mailer do
                                      selection_process: selection_process)
 
       mail = InterviewMailer.interview_accepted(interview.id)
+      expect(mail.body).to include('John Doe')
+      expect(mail.body).to include('Av. Paulista, 2000')
+      expect(mail.body).to include('Dev ruby')
+      expect(mail.body).to include('26 de outubro de 2019')
       expect(mail.body).to include(
-        'John Doe aceitou o convite para a entrevista.',
-        'Entrevista marcada para 26 de outubro de 2019, '\
-        '17:00 - 17:30, '\
-        'em Av. Paulista, 2000', 'Formato: Presencial.',
-        'A entrevista é referente a posição de: Dev ruby.',
-        'Para acessar clique no link abaixo: ',
         selection_process_candidates_url(selection_process).to_s
       )
+      expect(mail.body).to include('17:00')
+      expect(mail.body).to include('17:30')
     end
   end
 end

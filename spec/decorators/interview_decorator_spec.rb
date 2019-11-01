@@ -66,7 +66,7 @@ describe InterviewDecorator do
         selection_process: selection_process
       ).decorate
 
-      expect(interview.interview_format).to eq 'Formato: Presencial'
+      expect(interview.interview_format).to eq 'Presencial'
     end
   end
   context '#decision_buttons' do
