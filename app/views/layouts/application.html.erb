@@ -48,6 +48,7 @@
 
     <div class="mb-4">
       <%= yield %>
+      <%= yield :javascript %>
     </div>
 
     <section id="footer">
@@ -69,9 +70,5 @@
         </div>
       </div>
     </section>
-    <% content_for :javascript do %>
-      <%= javascript_pack_tag 'interview_form' %>
-    <% end %>
-    <%= yield :javascript %>
   </body>
 </html>

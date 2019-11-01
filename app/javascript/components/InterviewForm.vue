@@ -78,7 +78,7 @@
         showModalButtonStyle: {
           position: 'absolute',
           right: '2em',
-          bottom: '2em'
+          bottom: '14em'
         },
         errorMessage: 'Erro ao salvar entrevista',
         successMessage: 'Entrevista salva com sucesso'
