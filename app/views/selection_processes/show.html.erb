@@ -13,20 +13,16 @@
       </div>
     </div>
     <div class="col-12 col-md-8 h-100">
-      <div class="row">
-        <div class="col-12 mb-5">
-          <div class="card card-body mb-0">
-            <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
-            <div class="form-group">
-              <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
-            </div>      
-            <%= link_to 'Voltar', invites_candidates_path, class: 'btn btn-info float-left' %>
-            <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
-            <% end %>
-          </div>
-        </div>
-        <%= render partial: 'messages', collection: @selection_process.messages_show, as: :message %>
+      <div class="card card-body">
+        <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
+          <div class="form-group">
+            <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
+          </div>      
+          <%= link_to 'Voltar', invites_candidates_path, class: 'btn btn-info float-left' %>
+          <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
+        <% end %>
       </div>
+      <%= render partial: 'messages', collection: @selection_process.messages_show, as: :message %>
     </div>
   </div>
 </div>
