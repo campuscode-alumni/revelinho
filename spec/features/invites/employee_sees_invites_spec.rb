@@ -18,7 +18,7 @@ feature 'Invites from dashboard page' do
     create(:invite, status: :rejected, position: position,
                     candidate: candidate2)
     create(:invite, status: :accepted, position: position,
-                               candidate: candidate3)
+                    candidate: candidate3)
 
     login_as(employee, scope: :employee)
     visit root_path
