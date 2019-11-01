@@ -20,7 +20,7 @@ feature 'Employee schedules interview' do
     visit new_selection_process_interview_path(selection_process)
     click_on 'interview-modal-button'
 
-    find('#date-field > div > input').click
+    find('#date-field > div > i > svg').click
     find('.ant-calendar-selected-day', match: :first).click
 
     find('#time-from-field > input').click
