@@ -126,9 +126,10 @@ ActiveRecord::Schema.define(version: 2019_10_30_160401) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "interview_id"
+    t.string "employee_type"
     t.integer "employee_id"
     t.string "message"
-    t.index ["employee_id"], name: "index_interview_feedbacks_on_employee_id"
+    t.index ["employee_type", "employee_id"], name: "index_interview_feedbacks_on_employee_type_and_employee_id"
     t.index ["interview_id"], name: "index_interview_feedbacks_on_interview_id"
   end
 
@@ -193,7 +194,6 @@ ActiveRecord::Schema.define(version: 2019_10_30_160401) do
   add_foreign_key "candidate_profiles", "candidates"
   add_foreign_key "company_profiles", "companies"
   add_foreign_key "employees", "companies"
-  add_foreign_key "interview_feedbacks", "employees"
   add_foreign_key "interview_feedbacks", "interviews"
   add_foreign_key "interviews", "selection_processes"
   add_foreign_key "invites", "candidates"

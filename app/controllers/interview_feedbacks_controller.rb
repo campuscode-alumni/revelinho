@@ -1,10 +1,11 @@
 class InterviewFeedbacksController < ApplicationController
-  before_action :interview, only: %i[index send_feedback] 
-  def index
-  end
+  before_action :interview, only: %i[index send_feedback]
+  def index; end
 
   def send_feedback
-    feedback = @interview.interview_feedbacks.create(params.permit(:message)) do |m|
+    feedback = @interview.interview_feedbacks.create(
+      message: params[:text]
+    ) do |m|
       m.employee = current_employee
     end
 

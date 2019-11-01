@@ -1,5 +1,11 @@
-<%= form_with local: true, method: 'post', url: set_interview_status_candidate_path(interview) do |f| %>
-      <%= f.label :status, 'status',class:'sr-only' %>
-      <%= f.select :status, Interview.statuses.map { |k, v| [ I18n.t("activerecord.attributes.interview.status.#{k}"), k] }, class: "form-control" %>
-      <%= f.submit 'Marcar' %>
-    <% end %>
+<a class="btn btn-outline-secondary dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+  Marcar como
+</a>
+<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+  <%= interview.decorate.status_buttons %>
+  <%#= link_to 'Pendente', set_interview_status_candidate_path(interview,  status: :pending), class: "dropdown-item", method: :post %>
+  <%#= link_to 'Agendada', set_interview_status_candidate_path(interview, status: :scheduled), class: "dropdown-item", method: :post %>
+  <%#= link_to 'Realizada', set_interview_status_candidate_path(interview, status: :done), class: "dropdown-item", method: :post %>
+  <%#= link_to 'Ausente', set_interview_status_candidate_path(interview, status: :absent), class: "dropdown-item", method: :post %>
+  <%#= link_to 'Cancelada', set_interview_status_candidate_path(interview, status: :canceled), class: "dropdown-item", method: :post %>
+</div>

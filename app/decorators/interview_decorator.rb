@@ -10,8 +10,8 @@ class InterviewDecorator < Draper::Decorator
     super(interview)
   end
 
-  def self.decorate_collection (interview, user)
-    interview.map { |interview| new(interview, user) }
+  def self.decorate_collection(interview, user)
+    interview.map { |i| new(i, user) }
   end
 
   def formatting_datetime
@@ -34,32 +34,42 @@ class InterviewDecorator < Draper::Decorator
 
   def footer
     return decision_buttons if user.is_a? Candidate
-    
+
     employee_footer
+  end
+
+  def status_buttons
+    safe_join(Interview.statuses.map do |stats|
+      link_to(
+        I18n.t("activerecord.attributes.interview.status.#{stats[0]}"),
+        set_interview_status_candidate_path(interview, status: stats[0].to_sym),
+        class: 'dropdown-item', method: :post
+      )
+    end)
   end
 
   private
 
   def decision_buttons
     return '' unless interview.pending?
-    
+
     render(partial: 'interviews/candidate_buttons',
-    locals: { interview: interview})
+           locals: { interview: interview })
   end
 
   def employee_footer
-    return feedback_button if interview.done?
+    return status_picker + feedback_button if interview.done?
 
     status_picker
   end
 
   def feedback_button
-    link_to 'Ver feedbacks', interview_feedback_candidates_path,
-            class: 'btn btn-outline-primary'
+    link_to 'Ver feedbacks', interview_feedback_candidates_path(interview),
+            class: 'btn btn-info'
   end
 
   def status_picker
     render(partial: 'interviews/status_picker',
-    locals: { interview: interview})
+           locals: { interview: interview })
   end
 end

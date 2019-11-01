@@ -34,6 +34,10 @@ company.company_profile = CompanyProfile.create!(company: company, full_descript
 employee = Employee.create!(name: 'João Silva', email: "joao.silva@revelo.com.br",
                             password: '123456', company: company)
 
+another_employee = Employee.create!(name: 'John Doe', email: "john.doe@revelo.com.br",
+                                    password: '123456', company: company)
+
+
 company.positions.create!(title: 'Desenvolvedor', industry: 'Tecnologia',
                  description: 'Desenvolvedor fullstack em Ruby',
                  salary_from: 2000.00, salary_to: 3000.00, hiring_scheme: :clt,
@@ -53,10 +57,19 @@ Message.create!(sendable: Employee.first, selection_process: selection_process,
 
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
+another_employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
+
 
 Interview.create!(datetime: '2019-08-26 17:00:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :absent)
 Interview.create!(datetime: '2019-08-30 07:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :canceled)
-Interview.create!(datetime: '2019-09-04 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
+interview = Interview.create!(datetime: '2019-09-04 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
+another_interview = Interview.create!(datetime: '2019-09-06 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
 Interview.create!(datetime: '2019-09-20 17:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
 Interview.create!(datetime: '2019-09-30 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :pending)
 Interview.create!(datetime: '2019-10-10 17:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :pending)
+
+interview.interview_feedbacks << InterviewFeedback.create!(interview: interview, employee: employee, message: 'Foi uma ótima entrevista')
+interview.interview_feedbacks << InterviewFeedback.create!(interview: interview, employee: another_employee, message: 'Também achei')
+
+another_interview.interview_feedbacks << InterviewFeedback.create!(interview: another_interview, employee: employee, message: 'Não achei que o perfil se alinha')
+another_interview.interview_feedbacks << InterviewFeedback.create!(interview: another_interview, employee: another_employee, message: 'Talvez para a outra posição faça sentido')

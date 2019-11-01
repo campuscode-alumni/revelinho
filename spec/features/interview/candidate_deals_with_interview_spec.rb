@@ -97,15 +97,16 @@ feature 'candidate sees interview invite' do
                              status: :accepted)
     selection_process = invite.create_selection_process
     interview = create(:interview, datetime: '2019-10-26 17:00:00',
-                       format: :face_to_face,
-                       address: 'Av. Paulista, 2000',
-                       selection_process: selection_process)
+                                   format: :face_to_face,
+                                   status: :pending,
+                                   address: 'Av. Paulista, 2000',
+                                   selection_process: selection_process)
 
     login_as(candidate, scope: :candidate)
     visit selection_process_candidates_path(selection_process)
 
     expect(page).to have_content(interview.address)
-    expect(page).not_to have_link('Marcar')
+    expect(page).not_to have_link('Marcar como')
   end
 
   scenario 'and cannot see the feedback button' do
@@ -118,14 +119,16 @@ feature 'candidate sees interview invite' do
                              status: :accepted)
     selection_process = invite.create_selection_process
     interview = create(:interview, datetime: '2019-10-26 17:00:00',
-                       format: :face_to_face,
-                       address: 'Av. Paulista, 2000',
-                       selection_process: selection_process)
+                                   format: :face_to_face,
+                                   status: :done,
+                                   address: 'Av. Paulista, 2000',
+                                   selection_process: selection_process)
 
     login_as(candidate, scope: :candidate)
     visit selection_process_candidates_path(selection_process)
 
     expect(page).to have_content(interview.address)
+    expect(page).not_to have_link('Marcar como')
     expect(page).not_to have_link('Ver feedbacks')
   end
 end
