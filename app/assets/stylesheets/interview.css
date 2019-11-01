@@ -1,0 +1,15 @@
+.badge {
+  color: white;
+}
+
+.badge-scheduled {
+  background-color: #7fd1af;
+}
+
+.badge-canceled {
+  background-color: #f08080;
+}
+
+.badge-pending {
+  background-color: #8b94eb;
+}
