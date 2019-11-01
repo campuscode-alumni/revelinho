@@ -1,14 +1,15 @@
-.badge-accepted {
-  background-color: #7fd1af;
+.badge {
   color: white;
 }
 
-.badge-rejected {
+.badge-scheduled {
+  background-color: #7fd1af;
+}
+
+.badge-canceled {
   background-color: #f08080;
-  color: white;
 }
 
 .badge-pending {
   background-color: #8b94eb;
-  color: white;
 }

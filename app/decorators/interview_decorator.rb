@@ -24,27 +24,17 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def interview_status_badge
-    return scheduled_badge if interview.scheduled?
-    return canceled_badge if interview.canceled?
+    return badge('scheduled') if interview.scheduled?
+    return badge('canceled') if interview.canceled?
 
-    pending_badge
+    badge('pending')
   end
 
   private
 
-  def pending_badge
-    content_tag(:span, I18n.t('interview.status_badge.pending'),
-                class: 'badge badge-pending mb-2')
-  end
-
-  def scheduled_badge
-    content_tag(:span, I18n.t('interview.status_badge.scheduled'),
-                class: 'badge badge-accepted mb-2')
-  end
-
-  def canceled_badge
-    content_tag(:span, I18n.t('interview.status_badge.canceled'),
-                class: 'badge badge-rejected mb-2')
+  def badge(status)
+    content_tag(:span, I18n.t('interview.status_badge.' + status),
+                class: 'mb-2 badge badge-' + status)
   end
 
   def accept_button

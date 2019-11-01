@@ -26,10 +26,13 @@ class InterviewsController < ApplicationController
   end
 
   def send_message(message_type)
+    text = I18n.t('interview.status_badge.' + message_type) + ': ' +
+           I18n.l(@interview.date, format: :long)
+    message_type = ('interview_' + message_type).to_sym
+
     @interview.selection_process.messages
-              .create(text: I18n.t('interview.status_badge.' + message_type) +
-              ': ' + I18n.l(@interview.date, format: :long),
+              .create(text: text,
                       sendable: current_candidate,
-                      message_type: ('interview_' + message_type).to_sym)
+                      message_type: message_type)
   end
 end
