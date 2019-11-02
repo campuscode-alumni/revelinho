@@ -7,9 +7,9 @@ require("channels")
 require("turbolinks").start()
 
 $(document).ready(() => {
-  $('.datepicker').datepicker();
+  $('.datepicker').datepicker()
 })
 
-import 'bootstrap/dist/js/bootstrap';
-import 'bootstrap';
-import '../stylesheets/application';
+import 'bootstrap/dist/js/bootstrap'
+import 'bootstrap'
+import '../stylesheets/application'
