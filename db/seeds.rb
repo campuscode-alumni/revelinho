@@ -53,16 +53,16 @@ selection_process = Invite.last.create_selection_process
 
 Message.create!(sendable: c_jose, selection_process: selection_process,
                 text: 'Olá, obrigado pelo convite.')
-Message.create!(sendable: Employee.first, selection_process: selection_process,
+Message.create!(sendable: employee, selection_process: selection_process,
                 text: 'Olá! Adoramos o seu perfil, '\
                       'podemos marcar uma entrevista?')
-offer_message = Message.create!(sendable: Candidate.first,
+offer_message = Message.create!(sendable: employee,
                                 selection_process: selection_process,
                                 text: 'Venha fazer parte da nossa equipe!')
 
 offer = Offer.create!(salary: 2500.00, selection_process: selection_process,
                       hiring_scheme: :clt, status: :pending,
-                      start_date: Date.current, employee: Employee.last,
+                      start_date: Date.current, employee: employee,
                       message: offer_message)
 
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")

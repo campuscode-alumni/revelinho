@@ -32,7 +32,10 @@ Rails.application.routes.draw do
     post 'interviews/accept/:id', to: 'interviews#accept', on: :member, as: :accept_interview
     post 'interviews/reject/:id', to: 'interviews#reject', on: :member, as: :reject_interview
     
-    resources :offers, only: %i[new create], path: 'invites/selection_process/:selection_process_id/offers'
+    resources :offers, only: %i[new create show], path: 'invites/selection_process/:selection_process_id/offers' do
+      post 'accept', on: :member
+      post 'reject', on: :member
+    end
   end
   
   resources :selection_processes, only: %i[show] do

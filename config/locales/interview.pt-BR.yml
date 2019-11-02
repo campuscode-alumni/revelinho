@@ -14,7 +14,7 @@ pt-BR:
           scheduled: Agendada
           done: Realizada
           absent: Ausente
-          rejected: Cancelada
+          canceled: Cancelada
         format:
           online: Online
           face_to_face: Presencial
@@ -24,4 +24,4 @@ pt-BR:
       scheduled: Entrevista agendada
       done: Entrevista realizada
       absent: Candidato faltou
-      rejected: Entrevista cancelada
+      canceled: Entrevista cancelada

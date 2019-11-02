@@ -1,0 +1,11 @@
+<h1>PROPOSTA ACEITA!</h1>
+<p>
+  Olá <%= @offer.position.company.name %>, <br>
+  O candidato <%= @offer.candidate.name %> aceitou a proposta para <%= @offer.position.title %> <br>
+  Para ver mais detalhes clique abaixo:
+</p>
+<%= link_to 'Ver detalhes', selection_process_candidates_url(@offer.selection_process) %>
+
+Atenciosamente,
+
+Equipe Revelinho
