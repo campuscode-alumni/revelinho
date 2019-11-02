@@ -17,17 +17,20 @@
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
-    props: ['interviews'],
+    props: ['interviews', 'searchUrl'],
+    mounted() {
+      this.$emit('load', this.searchUrl)
+    },
     methods: {
-      getDayData(value) {
-        const interviewDate = value.format('DD/MM/YYYY')
-        const listData = this.interviews.filter(interview => interview.date === interviewDate)
-                                        .map(interview => ({
-                                          type: 'success',
-                                          content: interview.candidate.name + ' / ' + interview.position.title
-                                        }))
-        return listData || []
+      getDayData(calendarDate) {
+        return this.interviews.filter(interview => moment(interview.date, 'YYYY-MM-DD').isSame(calendarDate, 'day'))
+                              .map(interview => ({
+                                type: 'success',
+                                content: interview.candidate.name + ' / ' + interview.position.title
+                              })) || []
       },
       getMonthData(value) {
         if (value.month() === 8) {

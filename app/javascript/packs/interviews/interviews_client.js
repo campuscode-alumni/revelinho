@@ -1,14 +1,17 @@
 export class InterviewClient {
-  search(callback) {
+  search({url, token}, callback) {
     $.ajax({
-      url: '/candidates',
+      url,
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       dateType: 'json',
       success: res => {
-        callback(res);
+        callback(res)
+      },
+      error: (res, status, error) => {
+        callback(res, error)
       }
-    });
+    })
   }
 
   create(interview, {url, token}, callback) {

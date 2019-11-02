@@ -1,29 +1,36 @@
 class InterviewsController < ApplicationController
-  before_action :authenticate_employee!, only: %i[new create]
+  before_action :authenticate_employee!, only: %i[index new create]
   before_action :parametize, only: %i[new create]
   before_action :parametize_create, only: %i[create]
   before_action :authorize_employee!, only: %i[create]
   before_action :set_interview, only: %i[accept reject]
   before_action :authenticate_candidate!, only: %i[accept reject]
 
+  def index
+    if employee_signed_in?
+      render json: current_employee.company.interviews.to_json(
+        include: %i[candidate position]
+      )
+    else
+      render json: {}, status: :forbidden
+    end
+  end
+
   def new
     @formats_json = { formats: Interview.formats.map do |value, _i|
       { name: I18n.t(:"activerecord.attributes.interview.format.#{value}"),
         value: value }
     end }.to_json
-    @post_url = selection_process_interviews_path(@selection_process)
+    @url = selection_process_interviews_path(@selection_process)
   end
 
   def create
     @interview = Interview.new(@interview_params)
-    respond_to do |format|
-      if @interview.save
-        format.json { render json: @interview, status: :created }
-      else
-        format.json do
-          render json: @interview.errors, status: :unprocessable_entity
-        end
-      end
+    if @interview.save
+      render json: @interview.to_json(include: %i[candidate position]),
+             status: :created
+    else
+      render json: @interview.errors, status: :unprocessable_entity
     end
   end
 

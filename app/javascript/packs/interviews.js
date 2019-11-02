@@ -19,42 +19,10 @@ document.addEventListener('turbolinks:load', () => {
   const interview = new Vue({
     el: '#interviews',
     data: () => ({
+      loading: false,
+      interviews: [],
       formLoading: false,
-      formVisible: false,
-      interviews: [{
-        id: 1,
-        date: '12/11/2019',
-        time_from: '15:00',
-        time_to: '16:00',
-        position: {
-          title: 'Dev VueJS melhor carreira!'
-        },
-        candidate: {
-          name: 'Patrícia'
-        }
-      }, {
-        id: 2,
-        date: '13/11/2019',
-        time_from: '17:00',
-        time_to: '18:00',
-        position: {
-          title: 'Dev VueJS melhor carreira!'
-        },
-        candidate: {
-          name: 'Gustavo'
-        }
-      }, {
-        id: 2,
-        date: '13/11/2019',
-        time_from: '15:00',
-        time_to: '15:30',
-        position: {
-          title: 'Dev VueJS melhor carreira!'
-        },
-        candidate: {
-          name: 'Kelvin'
-        }
-      }]
+      formVisible: false
     }),
     components: {
       InterviewsCalendar,
@@ -62,7 +30,14 @@ document.addEventListener('turbolinks:load', () => {
       InterviewForm
     },
     methods: {
-      create: function({interview, url}) {
+      load(url) {
+        this.loading = true
+        client.search({
+          url,
+          token: authToken
+        }, this.handleLoaded)
+      },
+      create({interview, url}) {
         this.formLoading = true
         client.create({
           ...interview
@@ -74,12 +49,19 @@ document.addEventListener('turbolinks:load', () => {
       handleCreated(res, error) {
         this.formLoading = false
         if (error) {
-          this.notifyUserError()
+          this.notifyUserError('Erro ao salvar entrevista')
         } else {
           this.formVisible = false
           this.notifyUserSuccess()
           this.interviews.push(res)
-          console.log(this.interviews)
+        }
+      },
+      handleLoaded(res, error) {
+        this.loading = false
+        if (error) {
+          this.notifyUserError('Houve algum erro ao carregar suas entrevistas :(')
+        } else {
+          this.interviews = res
         }
       },
       notifyUserSuccess() {
@@ -88,10 +70,10 @@ document.addEventListener('turbolinks:load', () => {
           description: 'Entrevista salva',
         })
       },
-      notifyUserError() {
+      notifyUserError(message) {
         this.$notification['error']({
           message: 'Erro',
-          description: 'Erro ao salvar entrevista'
+          description: message
         })
       },
       formShow() {
