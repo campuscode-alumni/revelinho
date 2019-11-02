@@ -32,12 +32,12 @@ feature 'Employee schedules interview' do
     find('#time-from-field > input').click
     find('.ant-time-picker-panel-select-option-selected', match: :first).click
 
-    find('#time-to-field > input').click
-    find('li', text: '8', match: :first).click
+    find('label', text: 'Presencial').click
 
     fill_in 'address-field', with: interview.address
 
-    find('label', text: 'Online').click
+    find('#time-to-field > input').click
+    find('.ant-time-picker-panel-select-option-selected', match: :first).click
 
     click_on 'OK'
 

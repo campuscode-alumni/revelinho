@@ -68,7 +68,7 @@ RSpec.configure do |config|
     driven_by :selenium_chrome_headless
   end
 
-  Capybara.javascript_driver = :selenium_chrome
+  Capybara.javascript_driver = :selenium_chrome_headless
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
