@@ -2,9 +2,9 @@
   <div id="interviews-calendar">
     <a-calendar @select="onSelect">
       <ul class="events" slot="dateCellRender" slot-scope="value">
-        <li v-for="item in getDayData(value)" :key="item.content" @click.stop="() => handleClickEvent(item)">
-          <a-badge :status="item.type" :text="item.content" />
-        </li>
+        <template v-for="item in getDayData(value)" @click.stop="() => handleClickEvent(item)">
+          <a-badge :status="item.type" :text="item.content" :key="item.id"/>
+        </template>
       </ul>
       <template slot="monthCellRender" slot-scope="value">
         <div v-if="getMonthData(value)" class="notes-month">
@@ -28,6 +28,7 @@
       getDayData(calendarDate) {
         return this.interviews.filter(interview => moment(interview.date, 'YYYY-MM-DD').isSame(calendarDate, 'day'))
                               .map(interview => ({
+                                id: interview.id,
                                 type: 'success',
                                 content: interview.candidate.name + ' / ' + interview.position.title
                               })) || []
@@ -46,3 +47,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .events {
+    padding-left: 1em;
+  }
+</style>
