@@ -22,7 +22,8 @@ document.addEventListener('turbolinks:load', () => {
       loading: false,
       interviews: [],
       formLoading: false,
-      formVisible: false
+      formVisible: false,
+      formInterview: {}
     }),
     components: {
       InterviewsCalendar,
@@ -77,10 +78,15 @@ document.addEventListener('turbolinks:load', () => {
         })
       },
       formShow() {
-        this.formVisible = true;
+        this.formInterview = null
+        this.formVisible = true
       },
       formClose() {
-        this.formVisible = false;
+        this.formVisible = false
+      },
+      formEdit(id) {
+        this.formInterview = this.interviews.find(interview => interview.id === id)
+        this.formVisible = true
       }
     }
   })

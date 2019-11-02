@@ -10,16 +10,16 @@
     >
       <a-form :form="form">
         <a-form-item label="Data" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
-          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat"/>
+          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :value="setDate"/>
         </a-form-item>
 
         <a-form-item label="Horário" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-form-item :style="{ display: 'inline-block', marginRight: '2em' }">
-            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat"></a-time-picker>
+            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat" :value="setTimeFrom"></a-time-picker>
           </a-form-item>
 
           <a-form-item :style="{ display: 'inline-block' }">
-            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat"></a-time-picker>
+            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat" :value="setTimeTo"></a-time-picker>
           </a-form-item>
         </a-form-item>
 
@@ -48,6 +48,10 @@
 </template>
 
 <script>
+  import moment from 'moment'
+  import 'moment/locale/pt-br'
+  moment.locale('pt-br')
+
   export default {
     data() {
       return {
@@ -77,14 +81,24 @@
       }
     },
     props: {
+      setInterview: null,
       formats_json: '',
       createUrl: '',
       loading: false,
       visible: false
     },
     computed: {
-      formats: function() {
+      formats() {
         return JSON.parse(this.formats_json || {}).formats
+      },
+      setDate() {
+        return this.setInterview ? moment(this.setInterview.date, 'YYYY-MM-DD') : moment()
+      },
+      setTimeFrom() {
+        return this.setInterview ? moment(this.setInterview.time_from, 'HH:mm') : moment()
+      },
+      setTimeTo() {
+        return this.setInterview ? moment(this.setInterview.time_to, 'HH:mm') : moment()
       }
     },
     created() {
@@ -114,9 +128,9 @@
       }
     },
     watch: {
-      visible: function(visible) {
+      visible(visible) {
         if (visible) {
-          this.interview = this.initialInterview
+          this.interview = this.setInterview || this.initialInterview
         }
       }
     }

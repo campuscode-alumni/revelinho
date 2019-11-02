@@ -2,32 +2,55 @@
   <a-layout-sider
     breakpoint="lg"
     collapsedWidth="0"
-    @collapse="onCollapse"
-    @breakpoint="onBreakpoint"
     id="interviews-sidebar"
+    class="p-3"
   >
-    <div class="logo" />
-    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['4']">
+    <div class="title text-white">
+      <p class="title-helper">Agendando com</p>
+      <p class="title-name lead">{{ candidate.name }}</p>
+    </div>
+    <div class="title text-white">
+      <p class="title-helper">Para</p>
+      <p class="title-name lead">{{ position.title }}</p>
+    </div>
+    <a-divider class="divider"></a-divider>
+    <a-menu theme="dark" mode="inline">
       <a-menu-item key="1">
         <a-icon type="user" />
-        <span class="nav-text">nav 1</span>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <a-icon type="video-camera" />
-        <span class="nav-text">nav 2</span>
-      </a-menu-item>
-      <a-menu-item key="3">
-        <a-icon type="upload" />
-        <span class="nav-text">nav 3</span>
-      </a-menu-item>
-      <a-menu-item key="4">
-        <a-icon type="user" />
-        <span class="nav-text">nav 4</span>
+        <span class="nav-text">Ver candidato</span>
       </a-menu-item>
     </a-menu>
   </a-layout-sider>
 </template>
 
 <script>
-  export default {}
+  export default {
+    props: {
+      candidateJson: {},
+      positionJson: {}
+    },
+    computed: {
+      candidate() {
+        return JSON.parse(this.candidateJson || {})
+      },
+      position() {
+        return JSON.parse(this.positionJson || {})
+      }
+    }
+  }
 </script>
+
+<style scoped>
+  .title-helper {
+    margin-bottom: 0;
+  }
+
+  .title-name {
+    word-wrap: break-word;
+  }
+
+  .divider {
+    margin: 0;
+    background-color: #7c7c7c;
+  }
+</style>

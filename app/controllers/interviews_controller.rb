@@ -8,15 +8,15 @@ class InterviewsController < ApplicationController
 
   def index
     if employee_signed_in?
-      render json: current_employee.company.interviews.to_json(
-        include: %i[candidate position]
-      )
+      render json: current_employee.company.interviews
     else
       render json: {}, status: :forbidden
     end
   end
 
   def new
+    @candidate = @selection_process.candidate.to_json
+    @position = @selection_process.position.to_json
     @formats_json = { formats: Interview.formats.map do |value, _i|
       { name: I18n.t(:"activerecord.attributes.interview.format.#{value}"),
         value: value }
@@ -27,7 +27,7 @@ class InterviewsController < ApplicationController
   def create
     @interview = Interview.new(@interview_params)
     if @interview.save
-      render json: @interview.to_json(include: %i[candidate position]),
+      render json: @interview,
              status: :created
     else
       render json: @interview.errors, status: :unprocessable_entity

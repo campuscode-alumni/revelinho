@@ -2,22 +2,18 @@
   <div id="interviews-calendar">
     <a-calendar @select="onSelect">
       <ul class="events" slot="dateCellRender" slot-scope="value">
-        <template v-for="item in getDayData(value)" @click.stop="() => handleClickEvent(item)">
-          <a-badge :status="item.type" :text="item.content" :key="item.id"/>
-        </template>
-      </ul>
-      <template slot="monthCellRender" slot-scope="value">
-        <div v-if="getMonthData(value)" class="notes-month">
-          <section>{{getMonthData(value)}}</section>
-          <span>Backlog number</span>
+        <div v-for="item in getDayData(value)" :key="item.id" @click.stop="() => handleClickEvent(item)">
+          <a-badge :status="item.type" :text="item.content"/>
         </div>
-      </template>
+      </ul>
     </a-calendar>
   </div>
 </template>
 
 <script>
   import moment from 'moment'
+  import 'moment/locale/pt-br'
+  moment.locale('pt-br')
 
   export default {
     props: ['interviews', 'searchUrl'],
@@ -30,8 +26,9 @@
                               .map(interview => ({
                                 id: interview.id,
                                 type: 'success',
-                                content: interview.candidate.name + ' / ' + interview.position.title
-                              })) || []
+                                content: `${interview.time_from} às ${interview.time_to}`
+                              }))
+                              .sort(a => a.time_from).reverse() || []
       },
       getMonthData(value) {
         if (value.month() === 8) {
@@ -39,10 +36,10 @@
         }
       },
       onSelect(value) {
-        console.log(value)
+        this.$emit('clickDate', value)
       },
       handleClickEvent(item) {
-        console.log(item.content)
+        this.$emit('click-event', item.id)
       }
     }
   }

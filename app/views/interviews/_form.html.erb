@@ -1,12 +1,16 @@
 <div id="interviews">
   <a-layout class="body">
-    <interviews-sidebar></interviews-sidebar>
+    <interviews-sidebar
+      candidate-json="<%= @candidate %>"
+      position-json="<%= @position %>"
+    ></interviews-sidebar>
     <a-layout class="calendar">
       <a-layout-content>
         <interviews-calendar
           :interviews="interviews"
           search-url="<%= @url %>"
           @load="load"
+          @click-event="formEdit"
         ></interviews-calendar>
       </a-layout-content>
     </a-layout>
@@ -18,6 +22,7 @@
     @close="formClose"
     :loading="formLoading"
     :visible="formVisible"
+    :set-interview="formInterview"
     create-url="<%= @url %>"
   ></interview-form>
 </div>
