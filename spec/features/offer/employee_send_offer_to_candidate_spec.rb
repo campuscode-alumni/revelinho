@@ -4,6 +4,7 @@ feature 'employee send offer to candidate' do
   scenario 'succesfully' do
     selection_process = create(:selection_process)
     create(:company_profile, company: selection_process.company)
+    create(:candidate_profile, candidate: selection_process.candidate)
 
     mailer_spy = class_spy('OfferMailer')
     stub_const('OfferMailer', mailer_spy)
@@ -15,7 +16,6 @@ feature 'employee send offer to candidate' do
 
     visit selection_process_candidates_path(selection_process)
     click_on 'Quero contrata-lo!'
-
     fill_in 'Salário', with: '2.500,00'
     select 'CLT', from: 'Regime de contratação'
     fill_in 'Data de início', with: '11/11/2019'
@@ -35,6 +35,7 @@ feature 'employee send offer to candidate' do
   scenario 'with validate fields' do
     selection_process = create(:selection_process)
     create(:company_profile, company: selection_process.company)
+    create(:candidate_profile, candidate: selection_process.candidate)
 
     mailer_spy = class_spy('OfferMailer')
     stub_const('OfferMailer', mailer_spy)
@@ -64,6 +65,7 @@ feature 'employee send offer to candidate' do
 
   scenario 'and can not send an offer if has another pending' do
     selection_process = create(:selection_process)
+    create(:candidate_profile, candidate: selection_process.candidate)
     create(:company_profile, company: selection_process.company)
     message = create(:message, text: 'Venha fazer parte da nossa equipe',
                                sendable: selection_process.employee,

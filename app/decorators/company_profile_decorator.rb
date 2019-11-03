@@ -35,10 +35,18 @@ class CompanyProfileDecorator < Draper::Decorator
 
   private
 
+  def count
+    count_invite = 0
+    @company.positions.each do |position|
+      count_invite += position.invites.count
+    end
+    count_invite
+  end
+
   def invites_card_locals
     { icon: 'fa-edit',
       title: I18n.t('activerecord.models.invite').pluralize,
-      count: @company.invites.pending.count,
+      count: count,
       id: 'invites-card',
       path: 'invites' }
   end

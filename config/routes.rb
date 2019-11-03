@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get 'dashboard'
       get 'invites'
       get 'offers'
+      get 'my-profile'
     end
 
     get 'invites/select_process/:id', to: 'selection_processes#show', on: :collection, as: :selection_process
@@ -31,7 +32,7 @@ Rails.application.routes.draw do
 
     post 'interviews/accept/:id', to: 'interviews#accept', on: :member, as: :accept_interview
     post 'interviews/reject/:id', to: 'interviews#reject', on: :member, as: :reject_interview
-    
+
     resources :offers, only: %i[new create show], path: 'invites/selection_process/:selection_process_id/offers' do
       post 'accept', on: :member
       post 'reject', on: :member

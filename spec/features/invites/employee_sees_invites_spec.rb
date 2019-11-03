@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Invites from dashboard page' do
-  scenario 'Employee sees pending invites count' do
+  scenario 'Employee sees invites count' do
     company = create(:company, url_domain: 'revelo.com.br')
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
@@ -15,16 +15,16 @@ feature 'Invites from dashboard page' do
                                  company: company)
     create(:invite, position: position,
                     candidate: candidate1)
-    create(:invite, position: position,
+    create(:invite, status: :rejected, position: position,
                     candidate: candidate2)
-    create(:invite, :accepted, position: position,
-                               candidate: candidate3)
+    create(:invite, status: :accepted, position: position,
+                    candidate: candidate3)
 
     login_as(employee, scope: :employee)
     visit root_path
 
     within '#invites-card' do
-      expect(page).to have_content(2)
+      expect(page).to have_content(3)
     end
   end
 

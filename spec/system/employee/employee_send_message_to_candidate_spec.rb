@@ -5,6 +5,7 @@ feature 'employee send message' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
+    create(:candidate_profile, candidate: candidate)
     employee = create(:employee, company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
@@ -28,6 +29,7 @@ feature 'employee send message' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
+    create(:candidate_profile, candidate: candidate)
     employee = create(:employee, company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,

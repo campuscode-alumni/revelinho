@@ -1,0 +1,111 @@
+<div class="candidate-page p-0">
+  <div class="row candidate-header m-0">
+    <div class="col-3 col-md-3 col-sm-2 col-xs-1 spacer"></div>
+    <div class="col">
+      <div class="container-fluid content">
+        <div class="name-wrapper">
+          <h1 class="name"><%= candidate.name %></h1>
+        </div>
+        <div class="image-wrapper">
+          <div class="row">
+            <div class="col offset-1">
+              <% if candidate.candidate_profile.avatar.attached? %>
+                <%= image_tag candidate.candidate_profile.avatar, class: 'image img-thumbnail', style: "border-radius: 0" %>
+              <% else %>
+              <%= image_tag 'placeholder.png', class:"image", alt:candidate.name %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="candidate container-fluid px-2">
+    <div class="row" style="width: 100%">
+      <div class="col-9 content">
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">E-mail</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.email %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Cidade</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= "#{candidate.city}, #{candidate.state}" %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">País</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.country %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Nível Educacional</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.educational_level %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Experiência Profissional</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.work_experience %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Ocupação</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.occupation %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Formação</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.education %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Habilidades</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.skills %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Linguagens de Programação</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.coding_languages %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Nível de Inglês</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.english_proficiency %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Skype</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.skype_username %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">LinkedIn</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.linkedin_profile_url %></div>
+        </div>
+        <div class="row justify-content-center text-wrapper">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">GitHub</div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= candidate.candidate_profile.github_profile_url %></div>
+        </div>
+      </div>
+
+      <% if employee_signed_in? %>
+        <section class="col-md-3 col-lg-3 col-xl-3 col-xs-12 col-sm-12 employee-notes border border-danger p-0 rounded">
+          <div class="container-fluid employee-comments p-0">
+            <h6 class="header px-2">Convidar</h6>
+            <div class="make-invite p-2">
+              <%= render partial: 'invite_form', locals: { candidate: candidate, no_invitable_positions: @employee_candidate_presenter.no_invitable_positions? } %>
+            </div>
+            <div class="current-invites px-2 pt-2 border-top">
+              <%= @employee_candidate_presenter.invited_positions_card %>
+            </div>
+          </div>
+          <div class="container-fluid employee-comments p-0">
+            <h6 class="header px-2">Comentários</h6>
+            <div class="comments">
+              <%= render partial: 'candidate_notes/candidate_note', collection: @notes %>
+            </div>
+            <div class="new-comment px-2 py-3">
+              <%= render partial: 'candidate_notes/form', locals: {candidate: candidate} %>
+            </div>
+          </div>
+        </section>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+        <%= link_to 'Voltar', root_path, class: 'btn btn-outline-secondary' %>
+    </div>
+  </div>
+</div>

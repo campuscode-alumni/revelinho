@@ -9,3 +9,13 @@
   margin: 10px;
  }
  
+ .main-description p {
+  font-size: 13px !important;
+  margin-bottom: 0px;
+ }
+
+ .position-description p {
+  font-size: 13px !important;
+  margin-bottom: 0px;
+}
+
