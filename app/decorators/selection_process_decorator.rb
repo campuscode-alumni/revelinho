@@ -1,3 +1,4 @@
+# rubocop:disable ClassLength
 class SelectionProcessDecorator < Draper::Decorator
   delegate_all
   include Draper::LazyHelpers
@@ -136,3 +137,4 @@ class SelectionProcessDecorator < Draper::Decorator
                 class: 'alert alert-info')
   end
 end
+# rubocop:enable ClassLength
