@@ -16,6 +16,7 @@ class InterviewsController < ApplicationController
 
   def new
     @candidate = @selection_process.candidate.to_json
+    @candidate_path = candidate_path(@selection_process.candidate.id)
     @position = @selection_process.position.to_json
     @formats_json = { formats: Interview.formats.map do |value, _i|
       { name: I18n.t(:"interview.format.#{value}"),

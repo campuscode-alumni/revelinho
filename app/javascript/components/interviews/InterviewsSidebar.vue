@@ -14,7 +14,7 @@
       <p class="title-name lead">{{ position.title }}</p>
     </div>
     <a-divider class="divider"></a-divider>
-    <a-menu theme="dark" mode="inline">
+    <a-menu theme="dark" mode="inline" @click="selectMenu">
       <a-menu-item key="1">
         <a-icon type="user" />
         <span class="nav-text">Ver candidato</span>
@@ -27,7 +27,8 @@
   export default {
     props: {
       candidateJson: {},
-      positionJson: {}
+      positionJson: {},
+      candidateUrl: ''
     },
     computed: {
       candidate() {
@@ -35,6 +36,13 @@
       },
       position() {
         return JSON.parse(this.positionJson || {})
+      }
+    },
+    methods: {
+      selectMenu({key}) {
+        if (key === '1') {
+          window.location.href = this.candidateUrl
+        }
       }
     }
   }
