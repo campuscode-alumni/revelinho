@@ -1,8 +1,8 @@
 class InterviewsController < ApplicationController
   before_action :authenticate_employee!, only: %i[index new create]
-  before_action :parametize, only: %i[new create]
-  before_action :parametize_create, only: %i[create]
-  before_action :authorize_employee!, only: %i[create]
+  before_action :parametize, only: %i[new create update]
+  before_action :parametize_interview, only: %i[create update]
+  before_action :authorize_employee!, only: %i[create update]
   before_action :set_interview, only: %i[accept reject]
   before_action :authenticate_candidate!, only: %i[accept reject]
 
@@ -34,6 +34,15 @@ class InterviewsController < ApplicationController
     end
   end
 
+  def update
+    interview = Interview.find(params[:id])
+    if interview.update(@interview_params)
+      render json: interview, status: :ok
+    else
+      render json: interview.errors, status: :bad_request
+    end
+  end
+
   def accept
     return unless @interview.pending?
 
@@ -57,7 +66,7 @@ class InterviewsController < ApplicationController
     @candidate = @selection_process.invite.candidate
   end
 
-  def parametize_create
+  def parametize_interview
     @interview_params = params.require(:interview).permit(:date, :time_to,
                                                           :time_from, :address,
                                                           :format)

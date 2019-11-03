@@ -31,4 +31,22 @@ export class InterviewClient {
       }
     })
   }
+
+  update(interview, {url, token}, callback) {
+    $.ajax({
+      url,
+      method: 'PATCH',
+      dateType: 'json',
+      data: {
+        interview,
+        authenticity_token: token
+      },
+      success: res => {
+        callback(res)
+      },
+      error: (res, status, error) => {
+        callback(res, error)
+      }
+    })
+  }
 }

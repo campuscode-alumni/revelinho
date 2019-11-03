@@ -2,7 +2,7 @@
   <div id="interviews-form">
     <a-button id="interview-modal-button" type="primary" @click="showModal" shape="circle" icon="plus" :style="showModalButtonStyle"></a-button>
     <a-modal
-      title="Agendar Entrevista"
+      :title="title"
       :visible="visible"
       @ok="handleSubmit"
       :confirmLoading="loading"
@@ -10,16 +10,16 @@
     >
       <a-form :form="form">
         <a-form-item label="Data" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
-          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :value="setDate"/>
+          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :defaultValue="setDate"/>
         </a-form-item>
 
         <a-form-item label="Horário" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-form-item :style="{ display: 'inline-block', marginRight: '2em' }">
-            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat" :value="setTimeFrom"></a-time-picker>
+            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat" :defaultValue="setTimeFrom"></a-time-picker>
           </a-form-item>
 
           <a-form-item :style="{ display: 'inline-block' }">
-            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat" :value="setTimeTo"></a-time-picker>
+            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat" :defaultValue="setTimeTo"></a-time-picker>
           </a-form-item>
         </a-form-item>
 
@@ -56,9 +56,9 @@
     data() {
       return {
         initialInterview: {
-          date: '',
-          time_from: '',
-          time_to: '',
+          date: moment().format('DD/MM/YYYY'),
+          time_from: moment().format('HH:mm'),
+          time_to: moment().format('HH:mm'),
           address: '',
           format: '',
         },
@@ -88,6 +88,9 @@
       visible: false
     },
     computed: {
+      title() {
+        return this.setInterview ? 'Reagendar Entrevista' : 'Agendar Entrevista'
+      },
       formats() {
         return JSON.parse(this.formats_json || {}).formats
       },
@@ -100,9 +103,6 @@
       setTimeTo() {
         return this.setInterview ? moment(this.setInterview.time_to, 'HH:mm') : moment()
       }
-    },
-    created() {
-      this.interview = this.initialInterview
     },
     methods: {
       showModal() {
@@ -121,7 +121,8 @@
         this.$emit('close')
       },
       handleSubmit() {
-        this.$emit('create', {
+        const method = this.setInterview ? 'update' : 'create'
+        this.$emit(method, {
           interview: this.interview,
           url: this.createUrl
         })
@@ -130,7 +131,9 @@
     watch: {
       visible(visible) {
         if (visible) {
-          this.interview = this.setInterview || this.initialInterview
+          this.interview = this.setInterview ?
+            {...this.setInterview} :
+            {...this.initialInterview}
         }
       }
     }

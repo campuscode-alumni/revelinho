@@ -47,6 +47,15 @@ document.addEventListener('turbolinks:load', () => {
           token: authToken
         }, this.handleCreated)
       },
+      update({interview, url}) {
+        this.formLoading = true
+        client.update({
+          ...interview
+        }, {
+          url: url + `/${interview.id}`,
+          token: authToken
+        }, this.handleUpdated)
+      },
       handleCreated(res, error) {
         this.formLoading = false
         if (error) {
@@ -55,6 +64,17 @@ document.addEventListener('turbolinks:load', () => {
           this.formVisible = false
           this.notifyUserSuccess()
           this.interviews.push(res)
+        }
+      },
+      handleUpdated(res, error) {
+        this.formLoading = false
+        if (error) {
+          this.notifyUserError('Erro ao salvar entrevista')
+        } else {
+          this.formVisible = false
+          this.notifyUserSuccess()
+          this.interviews = this.interviews.map(interview =>
+            interview.id === res.id ? res : interview)
         }
       },
       handleLoaded(res, error) {
