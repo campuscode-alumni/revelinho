@@ -1,12 +1,12 @@
 <div class="col-12 bg-white">
   <div class="col-12 col-md-10 offset-md-1 mb-3 pt-3 pb-3">
     <div class="row">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 main-description">
         <%= @selection_process.decorate.main_contact %>
       </div>
       <div class="col-12 col-md-6 text-md-right">
-        <div class="float-md-right">
-          <h3><%= @selection_process.position.title %></h3>
+        <div class="float-md-right position-description">
+          <h5><%= @selection_process.position.title %></h5>
           <%= @selection_process.decorate.p_print_hiring_scheme  %>
           <%= @selection_process.decorate.p_print_office_hours %>
           <%= @selection_process.decorate.p_print_salary %>

@@ -105,9 +105,9 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def description(data)
-    content_tag(:p, content_tag(:small, data[:name])) +
-      content_tag(:p, content_tag(:small, "Telefone: #{data[:phone]}")) +
-      content_tag(:p, content_tag(:small, "Email: #{data[:email]}"))
+    content_tag(:p, data[:name]) +
+      content_tag(:p, "Telefone: #{data[:phone]}") +
+      content_tag(:p, "Email: #{data[:email]}")
   end
 
   def btn_offer
