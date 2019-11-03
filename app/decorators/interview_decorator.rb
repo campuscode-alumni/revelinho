@@ -20,7 +20,7 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def interview_format
-    I18n.t('activerecord.attributes.interview.format.' + interview.format)
+    I18n.t('interview.format.' + interview.format)
   end
 
   def decision_buttons
