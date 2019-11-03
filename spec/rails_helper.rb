@@ -60,8 +60,6 @@ RSpec.configure do |config|
 
   Capybara.server = :puma, { Silent: true }
 
-  Capybara.default_max_wait_time = 3
-
   config.before(:each, type: :system) do
     driven_by :rack_test
   end
