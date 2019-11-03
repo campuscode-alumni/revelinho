@@ -10,16 +10,16 @@
     >
       <a-form :form="form">
         <a-form-item label="Data" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
-          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :defaultValue="setDate"/>
+          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :value="date"/>
         </a-form-item>
 
         <a-form-item label="Horário" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-form-item :style="{ display: 'inline-block', marginRight: '2em' }">
-            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat" :defaultValue="setTimeFrom"></a-time-picker>
+            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat" :value="timeFrom"></a-time-picker>
           </a-form-item>
 
           <a-form-item :style="{ display: 'inline-block' }">
-            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat" :defaultValue="setTimeTo"></a-time-picker>
+            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat" :value="timeTo"></a-time-picker>
           </a-form-item>
         </a-form-item>
 
@@ -56,7 +56,7 @@
     data() {
       return {
         initialInterview: {
-          date: moment().format('DD/MM/YYYY'),
+          date: moment().format('YYYY-MM-DD'),
           time_from: moment().format('HH:mm'),
           time_to: moment().format('HH:mm'),
           address: '',
@@ -94,14 +94,14 @@
       formats() {
         return JSON.parse(this.formats_json || {}).formats
       },
-      setDate() {
-        return this.setInterview ? moment(this.setInterview.date, 'YYYY-MM-DD') : moment()
+      date() {
+        return moment(this.interview.date, 'YYYY-MM-DD')
       },
-      setTimeFrom() {
-        return this.setInterview ? moment(this.setInterview.time_from, 'HH:mm') : moment()
+      timeFrom() {
+        return moment(this.interview.time_from, 'HH:mm')
       },
-      setTimeTo() {
-        return this.setInterview ? moment(this.setInterview.time_to, 'HH:mm') : moment()
+      timeTo() {
+        return moment(this.interview.time_to, 'HH:mm')
       }
     },
     methods: {
@@ -109,7 +109,7 @@
         this.$emit('show')
       },
       onChangeDate(date, dateString) {
-        this.interview.date = dateString
+        this.interview.date = moment(date).format('YYYY-MM-DD')
       },
       onChangeTimeFrom(time, timeString) {
         this.interview.time_from = timeString
@@ -131,9 +131,11 @@
     watch: {
       visible(visible) {
         if (visible) {
-          this.interview = this.setInterview ?
-            {...this.setInterview} :
-            {...this.initialInterview}
+          if (this.setInterview) {
+            this.interview = {...this.setInterview}
+          } else {
+            this.interview = {...this.initialInterview}
+          }
         }
       }
     }
