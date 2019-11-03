@@ -1,5 +1,5 @@
 class InterviewsController < ApplicationController
-  before_action :authenticate_employee!, only: %i[index new create]
+  before_action :authenticate_employee!, only: %i[index new create update]
   before_action :parametize, only: %i[new create update]
   before_action :parametize_interview, only: %i[create update]
   before_action :authorize_employee!, only: %i[create update]
@@ -7,11 +7,7 @@ class InterviewsController < ApplicationController
   before_action :authenticate_candidate!, only: %i[accept reject]
 
   def index
-    if employee_signed_in?
-      render json: current_employee.company.interviews
-    else
-      render json: {}, status: :forbidden
-    end
+    render json: current_employee.company.interviews if employee_signed_in?
   end
 
   def new
