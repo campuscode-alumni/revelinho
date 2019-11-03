@@ -1,5 +1,9 @@
 class PositionsController < ApplicationController
-  before_action :authenticate_employee!, only: %i[new create]
+  before_action :authenticate_employee!, only: %i[index new create]
+
+  def index
+    @positions = current_employee.company.positions
+  end
 
   def new
     @position = Position.new
