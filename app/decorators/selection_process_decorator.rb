@@ -11,9 +11,9 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def offers_menu
-    return '' unless employee_signed_in?
-
-    btn_offer + msg_offer
+    return menu_employee if employee_signed_in?
+    return menu_candidate if offers.pending.any?
+    return menu_accepted if offers.accepted.any?
   end
 
   def logo_process
@@ -31,6 +31,53 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   private
+
+  def accept_btn
+    link_to('Aceitar proposta',
+            accept_candidate_offer_path(candidate.id, id,
+                                        offers.pending.first.id),
+            class: 'btn btn-success btn-lg mt-2 mr-3', method: 'post')
+  end
+
+  def reject_btn
+    link_to('Rejeitar proposta',
+            reject_candidate_offer_path(candidate.id, id,
+                                        offers.pending.first.id),
+            class: 'btn btn-danger btn-lg mt-2', method: 'post')
+  end
+
+  def menu_employee
+    btn_offer + msg_offer
+  end
+
+  def menu_accepted
+    content_tag :div, class: 'card card-body bg-success text-white' do
+      content_tag(:h4, 'Oferta aceita!') +
+        content_tag(:p, 'Agora é só aguardar o contato de sua nova casa!') +
+        content_tag(:p, 'Nós da Revelinho desejamos muito sucesso em '\
+                        'sua carreira. :D')
+    end
+  end
+
+  def menu_candidate
+    content_tag :div, class: 'card card-body text-center' do
+      content_tag(:h4, 'PROPOSTA RECEBIDA! \o/') +
+        content_tag(:p, 'Parabéns! Você recebeu uma proposta. Agora avalie '\
+                        'e veja se atende as suas expectativas') +
+        content_tag(:p, offer_description(offers.pending.first)) +
+        content_tag(:div, (accept_btn + reject_btn), class: 'text-center')
+    end
+  end
+
+  def offer_description(offer)
+    content_tag(:p, "Salário: #{number_to_currency(offer.salary)}",
+                class: 'mb-0') +
+      content_tag(:p, "Regime de contratação: #{I18n.t('activerecord.attribute'\
+                      "s.offer.hiring_scheme.#{offer.hiring_scheme}")}",
+                  class: 'mb-0') +
+      content_tag(:p, "Data de início: #{offer.decorate.format_date}",
+                  class: 'mb-0')
+  end
 
   def btn_offer
     link_to 'Quero contrata-lo!', new_candidate_offer_path(candidate.id, id),

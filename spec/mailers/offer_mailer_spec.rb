@@ -81,4 +81,40 @@ describe OfferMailer do
       expect(mail.body).to include 'Revelo'
     end
   end
+
+  describe '#notify_accept' do
+    it 'should send email to employee about accepted offer' do
+      candidate = create(:candidate, name: 'José Pedro',
+                                     email: 'jose.pedro@candidato.com')
+      employee = create(:employee, name: 'João Silva',
+                                   email: 'joao.silva@revelo.com.br')
+      invite = create(:invite, employee: employee, candidate: candidate)
+      selection_process = create(:selection_process, invite: invite)
+      offer = create(:offer, employee: employee,
+                             selection_process: selection_process)
+
+      mail = OfferMailer.notify_accepted(offer.id)
+      expect(mail.subject).to eq 'Proposta aceita para Desenvolvedor'
+      expect(mail.to).to include 'joao.silva@revelo.com.br'
+    end
+  end
+
+  describe '#notify_reject' do
+    it 'should send email to employee about rejected offer' do
+      candidate = create(:candidate, name: 'José Pedro',
+                                     email: 'jose.pedro@candidato.com')
+      employee = create(:employee, name: 'João Silva',
+                                   email: 'joao.silva@revelo.com.br')
+      position = create(:position, title: 'Desenvolvedor')
+      invite = create(:invite, employee: employee, candidate: candidate,
+                               position: position)
+      selection_process = create(:selection_process, invite: invite)
+      offer = create(:offer, employee: employee,
+                             selection_process: selection_process)
+
+      mail = OfferMailer.notify_rejected(offer.id)
+      expect(mail.subject).to eq 'Proposta recusada para Desenvolvedor'
+      expect(mail.to).to include 'joao.silva@revelo.com.br'
+    end
+  end
 end

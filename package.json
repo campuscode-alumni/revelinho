@@ -22,9 +22,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "deepmerge": "^4.2.1",
-    "fibers": "^4.0.2",
     "sass": "^1.23.1",
-    "sass-loader": "^8.0.0",
     "webpack-dev-server": "^3.8.2"
   }
 }

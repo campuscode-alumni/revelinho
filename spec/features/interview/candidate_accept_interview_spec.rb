@@ -32,7 +32,7 @@ feature 'candidate see interview invite' do
   scenario 'and accept' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
-    candidate = create(:candidate, status: :published)
+    candidate = create(:candidate, :with_candidate_profile, status: :published)
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
@@ -57,12 +57,16 @@ feature 'candidate see interview invite' do
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
     expect(mailer_spy).to have_received(:interview_accepted).with(interview.id)
+    within '.interview_scheduled' do
+      expect(page).to have_content('Entrevista agendada: '\
+        '26 de outubro de 2019')
+    end
   end
 
   scenario 'and reject' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
-    candidate = create(:candidate, status: :published)
+    candidate = create(:candidate, :with_candidate_profile, status: :published)
     create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
@@ -82,5 +86,9 @@ feature 'candidate see interview invite' do
     expect(page).to have_content('Entrevista cancelada')
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
+    within '.interview_canceled' do
+      expect(page).to have_content('Entrevista cancelada: '\
+        '26 de outubro de 2019')
+    end
   end
 end

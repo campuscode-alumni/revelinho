@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Employee schedules interview' do
-  scenario 'successfully', :js do
+  scenario 'successfully', js: true do
     company = create(:company, url_domain: 'revelo.com.br')
     create(:company_profile, company: company)
     employee = create(:employee, email: 'renata@revelo.com.br',
@@ -20,18 +20,24 @@ feature 'Employee schedules interview' do
     visit new_selection_process_interview_path(selection_process)
     click_on 'interview-modal-button'
 
-    find('#date-field > div > input').click
-    find('.ant-calendar-selected-day').click
+    find('#date-field > div > i > svg').click
+    if has_css?('.ant-calendar-selected-day')
+      select_day_input = find('.ant-calendar-selected-day')
+      select_day_input.click
+    else
+      find('#date-field > div > i > svg').click
+      find('.ant-calendar-selected-day').click
+    end
 
     find('#time-from-field > input').click
     find('.ant-time-picker-panel-select-option-selected', match: :first).click
 
-    find('#time-to-field > input').click
-    find('.ant-time-picker-panel-select-option-selected', match: :first).click
+    find('label', text: 'Presencial').click
 
     fill_in 'address-field', with: interview.address
 
-    find('label', text: 'Online').click
+    find('#time-to-field > input').click
+    find('.ant-time-picker-panel-select-option-selected', match: :first).click
 
     click_on 'OK'
 

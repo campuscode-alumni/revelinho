@@ -24,12 +24,8 @@ describe 'Interviews' do
       expect(response).to have_http_status(:ok)
       expect(json_interviews[0][:id]).to eq interview1.id
       expect(json_interviews[0][:date]).to eq '2019-11-05'
-      expect(json_interviews[0][:candidate][:name]).to eq candidate.name
-      expect(json_interviews[0][:position][:title]).to eq position.title
       expect(json_interviews[1][:id]).to eq interview2.id
       expect(json_interviews[1][:date]).to eq '2019-11-12'
-      expect(json_interviews[1][:candidate][:name]).to eq candidate.name
-      expect(json_interviews[1][:position][:title]).to eq position.title
       expect(response.content_type).to include 'application/json'
     end
 
