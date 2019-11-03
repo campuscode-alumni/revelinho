@@ -19,7 +19,7 @@ class InterviewBadges
 
   def self.canceled_badge
     {
-      content: I18n.t('interview.status_badge.rejected'),
+      content: I18n.t('interview.status_badge.canceled'),
       class: 'badge badge-danger mb-2'
     }
   end
