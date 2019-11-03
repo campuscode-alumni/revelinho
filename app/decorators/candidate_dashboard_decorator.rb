@@ -12,8 +12,7 @@ class CandidateDashboardDecorator < Draper::Decorator
   def info_header_text
     if published?
       content_tag(:p, 'Seu perfil está ativo. Aguarde o contato das '\
-                      'empresas interessadas.') +
-        link_edit_profile
+                      'empresas interessadas.')
     else
       content_tag(:p, 'Seu perfil ainda não está ativo. Complete-o e '\
                       'fique visível para as empresas.') +

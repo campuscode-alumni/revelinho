@@ -2,11 +2,12 @@ require 'rails_helper'
 
 feature 'Candidate edits personal profile' do
   scenario 'successfully' do
-    candidate = create(:candidate)
+    candidate = create(:candidate, name: 'José Pedro')
     create(:candidate_profile, candidate: candidate)
     login_as(candidate, scope: :candidate)
 
     visit dashboard_candidates_path
+    click_on 'José Pedro'
     click_on 'Editar Perfil'
 
     fill_in 'Experiência Profissional', with: 'Campus Code'
