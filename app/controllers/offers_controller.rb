@@ -22,19 +22,22 @@ class OffersController < ApplicationController
   def show; end
 
   def accept
-    action('accepted!', 'Oferta aceita!', 'notify_accepted')
+    action('accepted!', 'Oferta aceita!',
+           'notify_accepted', 'offer_accepted')
   end
 
   def reject
-    action('rejected!', 'Oferta rejeitada!', 'notify_rejected')
+    action('rejected!', 'Oferta rejeitada!',
+           'notify_rejected', 'offer_rejected')
   end
 
   private
 
-  def action(method, texto, notify)
+  def action(method, texto, notify, message_type)
     @offer.send(method)
 
-    message = Message.new(text: texto, sendable: current_candidate)
+    message = Message.new(text: texto, sendable: current_candidate,
+                          message_type: message_type.to_sym)
     @offer.selection_process.messages << message
 
     OfferMailer.send(notify, @offer.id).deliver_now
@@ -59,7 +62,8 @@ class OffersController < ApplicationController
       o.employee = current_employee
       o.message = Message.create(text: params[:offer][:message],
                                  sendable: current_employee,
-                                 selection_process: @selection_process)
+                                 selection_process: @selection_process,
+                                 message_type: :new_offer)
     end
   end
 

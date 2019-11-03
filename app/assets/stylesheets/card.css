@@ -35,8 +35,9 @@
   margin-left: 175px;
   margin-right: 175px;
 }
+
 .new_interview {
-  background-color: #8b94eb !important;
+  border-right: solid #8b94eb !important;
 }
 
 .interview_scheduled {
@@ -44,5 +45,17 @@
 }
 
 .interview_canceled {
+  background-color: #f08080 !important;
+}
+
+.new_offer {
+  border-right: 20px solid #8b94eb !important;
+}
+
+.offer_accepted {
+  background-color: #7fd1af !important;
+}
+
+.offer_rejected {
   background-color: #f08080 !important;
 }
