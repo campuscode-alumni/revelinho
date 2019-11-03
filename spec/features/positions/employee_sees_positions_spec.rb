@@ -44,8 +44,8 @@ feature 'Positions list' do
 
       within '.details' do
         expect(page).to have_content('Artista de commits')
-        expect(page).to have_content('3500')
-        expect(page).to have_content('5000')
+        expect(page).to have_content('R$ 3.500,00')
+        expect(page).to have_content('R$ 5.000,00')
         expect(page).to have_content('Tecnologia e serviços')
       end
     end

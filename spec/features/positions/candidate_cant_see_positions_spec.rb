@@ -7,6 +7,6 @@ feature 'Positions list' do
     login_as(candidate, scope: :candidate)
     visit(positions_path)
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).not_to eq(positions_path)
   end
 end
