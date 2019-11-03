@@ -1,10 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      interview: Entrevista
+      interview:
+        singular: Entrevista
+        plural: Entrevistas
     attributes:
       interview:
-        format: Formato
+        format: Tipo de entrevista
         address: "Endereço: %{address}"
         datetime: Dia %{date} às %{time}
         status:
@@ -22,4 +24,4 @@ pt-BR:
       scheduled: Entrevista agendada
       done: Entrevista realizada
       absent: Candidato faltou
-      rejected: Entrevista cancelada
+      canceled: Entrevista cancelada

@@ -110,4 +110,19 @@ feature 'Employee tries to complete company profile' do
 
     expect(CompanyProfile.count).to eq 1
   end
+
+  scenario 'and cannot be already logged in as candidate' do
+    employee = create(:employee)
+    create(:candidate, email: 'teste@example.com', password: '123456')
+
+    login_as(employee, scope: :employee)
+
+    visit new_candidate_session_path
+    fill_in 'Email', with: 'teste@example.com'
+    fill_in 'Senha', with: '123456'
+    click_on 'Login'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content(I18n.t('error_messages.duplicated_login'))
+  end
 end

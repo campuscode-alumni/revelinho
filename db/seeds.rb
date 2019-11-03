@@ -13,7 +13,7 @@ c_jose = Candidate.create!(email: 'jose.pedro@candidato.com', password: '123456'
                   birthday: '12/04/1991', educational_level: 'mestrado')
 
 Candidate.all.each do |candidate|
-  CandidateProfile.create!(
+  profile = CandidateProfile.create!(
     work_experience: 'Sou rubysta master',
     education: 'mestrado concluído',
     skills: 'Node, React, Rails',
@@ -24,6 +24,10 @@ Candidate.all.each do |candidate|
     github_profile_url: 'candidate',
     candidate: candidate
   )
+  profile.avatar.attach(io: File.open(Rails.root.join('spec', 'support',
+                                                      'images',
+                                                      'gatinho.jpg')),
+                        filename: 'gatinho.jpg')
 end
 
 company = Company.create!(name: 'Revelo', url_domain: 'revelo.com.br', status: :active)
@@ -51,22 +55,30 @@ selection_process = Invite.last.create_selection_process
 
 Message.create!(sendable: c_jose, selection_process: selection_process,
                 text: 'Olá, obrigado pelo convite.')
-Message.create!(sendable: Employee.first, selection_process: selection_process,
+Message.create!(sendable: employee, selection_process: selection_process,
                 text: 'Olá! Adoramos o seu perfil, '\
                       'podemos marcar uma entrevista?')
+offer_message = Message.create!(sendable: employee,
+                                selection_process: selection_process,
+                                text: 'Venha fazer parte da nossa equipe!')
+
+offer = Offer.create!(salary: 2500.00, selection_process: selection_process,
+                      hiring_scheme: :clt, status: :pending,
+                      start_date: Date.current, employee: employee,
+                      message: offer_message)
 
 company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 another_employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
 
 
-Interview.create!(datetime: '2019-08-26 17:00:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :absent)
-Interview.create!(datetime: '2019-08-30 07:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :canceled)
-interview = Interview.create!(datetime: '2019-09-04 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
-another_interview = Interview.create!(datetime: '2019-09-06 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
-Interview.create!(datetime: '2019-09-20 17:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
-Interview.create!(datetime: '2019-09-30 12:34:56', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :pending)
-Interview.create!(datetime: '2019-10-10 17:00:00', format: :online, address: 'skype', selection_process: selection_process, status: :pending)
+Interview.create!(date: '2019-08-26', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :absent)
+Interview.create!(date: '2019-08-30', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :canceled)
+interview = Interview.create!(date: '2019-09-04', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
+another_interview = Interview.create!(date: '2019-09-14', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
+Interview.create!(date: '2019-10-10', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
+Interview.create!(date: '2019-10-15', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :pending)
+Interview.create!(date: '2019-10-26', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :pending)
 
 interview.interview_feedbacks << InterviewFeedback.create!(interview: interview, employee: employee, message: 'Foi uma ótima entrevista')
 interview.interview_feedbacks << InterviewFeedback.create!(interview: interview, employee: another_employee, message: 'Também achei')

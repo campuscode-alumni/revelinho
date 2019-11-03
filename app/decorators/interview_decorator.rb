@@ -15,7 +15,8 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def formatting_datetime
-    I18n.l(interview.datetime, format: :long)
+    I18n.l(interview.date, format: :long) + ', das ' + interview.time_from +
+      ' às ' + interview.time_to
   end
 
   def interview_address

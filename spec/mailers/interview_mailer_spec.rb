@@ -12,7 +12,9 @@ RSpec.describe InterviewMailer, type: :mailer do
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending, employee: employee)
       selection_process = invite.create_selection_process
-      interview = create(:interview, datetime: '2019-10-26 17:00:00',
+      interview = create(:interview, date: '2019-10-26',
+                                     time_from: '17:00',
+                                     time_to: '18:00',
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process)
@@ -32,7 +34,9 @@ RSpec.describe InterviewMailer, type: :mailer do
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending, employee: employee)
       selection_process = invite.create_selection_process
-      interview = create(:interview, datetime: '2019-10-26 17:00:00',
+      interview = create(:interview, date: '2019-10-26',
+                                     time_from: '17:00',
+                                     time_to: '18:00',
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process)
@@ -52,20 +56,22 @@ RSpec.describe InterviewMailer, type: :mailer do
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending, employee: employee)
       selection_process = invite.create_selection_process
-      interview = create(:interview, datetime: '2019-10-26 17:00:00',
-                                     format: :face_to_face,
+      interview = create(:interview, date: '2019-10-26', time_from: '17:00',
+                                     time_to: '18:00', format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process)
 
       mail = InterviewMailer.interview_accepted(interview.id)
       expect(mail.body).to include(
         'John Doe aceitou o convite para a entrevista.',
-        'Entrevista marcada para 2019-10-26 17:00:00 UTC, '\
         'em Av. Paulista, 2000', 'Formato: Presencial.',
         'A entrevista é referente a posição de: Dev ruby.',
         'Para acessar clique no link abaixo: ',
         selection_process_candidates_url(selection_process).to_s
       )
+      expect(mail.body).to include('2019-10-26')
+      expect(mail.body).to include('17:00')
+      expect(mail.body).to include('18:00')
     end
   end
 end
