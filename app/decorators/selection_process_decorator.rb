@@ -33,20 +33,6 @@ class SelectionProcessDecorator < Draper::Decorator
       " à #{number_to_currency(position.salary_to)}", class: 'mb-0')
   end
 
-  def logo_process
-    link_to image_tag(company_profile.logo,
-                      class: 'avatar-process float-left mr-2'),
-            company_path(company)
-  end
-
-  def schedule_interview_link
-    return '' unless employee_signed_in?
-
-    link_to 'Agendar entrevista',
-            new_selection_process_interview_path(selection_process),
-            class: 'btn btn-primary'
-  end
-
   private
 
   def buttons
