@@ -2,18 +2,12 @@ class SelectionProcessDecorator < Draper::Decorator
   delegate_all
   include Draper::LazyHelpers
 
-  def contract_resume
-    p_print_hiring_scheme + p_print_office_hours + p_print_salary
-  end
-
-  def messages_show
-    messages.order(id: :desc).decorate
-  end
-
   def offers_menu
     return menu_employee if employee_signed_in?
     return menu_candidate if offers.pending.any?
     return menu_accepted if offers.accepted.any?
+
+    ''
   end
 
   def main_contact
@@ -22,20 +16,33 @@ class SelectionProcessDecorator < Draper::Decorator
     main_content(candidate_data)
   end
 
-  private
-
-  def accept_btn
-    link_to('Aceitar proposta',
-            accept_candidate_offer_path(candidate.id, id,
-                                        offers.pending.first.id),
-            class: 'btn btn-success btn-lg mt-2 mr-3', method: 'post')
+  def p_print_hiring_scheme
+    content_tag(:p, 'Regime de contratação: ' +
+      I18n.t('activerecord.attributes.position.hiring_scheme.' +
+      position.hiring_scheme), class: 'mb-0')
   end
 
-  def reject_btn
-    link_to('Rejeitar proposta',
-            reject_candidate_offer_path(candidate.id, id,
-                                        offers.pending.first.id),
-            class: 'btn btn-danger btn-lg mt-2', method: 'post')
+  def p_print_office_hours
+    content_tag(:p, 'Horário de expediente: ' +
+      I18n.t('activerecord.attributes.position.office_hours.' +
+      position.office_hours), class: 'mb-0')
+  end
+
+  def p_print_salary
+    content_tag(:p, "Salário: #{number_to_currency(position.salary_from)}"\
+      " à #{number_to_currency(position.salary_to)}", class: 'mb-0')
+  end
+
+  private
+
+  def buttons
+    btn('Aceitar proposta', 'accept_candidate_offer_path', 'success') +
+      btn('Rejeitar proposta', 'reject_candidate_offer_path', 'danger')
+  end
+
+  def btn(text, path, style)
+    link_to(text, send(path, candidate.id, id, offers.pending.first.id),
+            class: "btn btn-#{style} btn-lg mt-2 mr-3", method: 'post')
   end
 
   def menu_employee
@@ -57,7 +64,7 @@ class SelectionProcessDecorator < Draper::Decorator
         content_tag(:p, 'Parabéns! Você recebeu uma proposta. Agora avalie '\
                         'e veja se atende as suas expectativas') +
         content_tag(:p, offer_description(offers.pending.first)) +
-        content_tag(:div, (accept_btn + reject_btn), class: 'text-center')
+        content_tag(:div, buttons, class: 'text-center')
     end
   end
 
@@ -71,22 +78,19 @@ class SelectionProcessDecorator < Draper::Decorator
                   class: 'mb-0')
   end
 
+  def data(image, title, description)
+    { image: image, title: title, description: description }
+  end
+
   def employee_data
-    {
-      image: { avatar: company_profile.logo, path: candidate_path(candidate) },
-      title: company.name,
-      description: { name: employee.name, email: employee.email,
-                     phone: company_profile.phone }
-    }
+    data({ avatar: company_profile.logo, path: candidate_path(candidate) },
+         company.name, name: employee.name, email: employee.email,
+                       phone: company_profile.phone)
   end
 
   def candidate_data
-    {
-      image: { avatar: candidate.avatar, path: company_path(company) },
-      title: '',
-      description: { name: candidate.name, phone: candidate.phone,
-                     email: candidate.email }
-    }
+    data({ avatar: candidate.avatar, path: company_path(company) }, '',
+         name: candidate.name, phone: candidate.phone, email: candidate.email)
   end
 
   def main_content(data)
@@ -112,32 +116,9 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def msg_offer
-    return unless offers.pending.any?
+    return '' unless offers.pending.any?
 
     content_tag(:div, 'Proposta realizada! Aguardando retorno do candidato.',
                 class: 'alert alert-info')
-  end
-
-  def p_print_hiring_scheme
-    content_tag(:p, class: 'mb-0') do
-      'Regime de contratação: ' +
-        I18n.t('activerecord.attributes.position.hiring_scheme.' +
-        position.hiring_scheme)
-    end
-  end
-
-  def p_print_office_hours
-    content_tag(:p, class: 'mb-0') do
-      'Horário de expediente: ' +
-        I18n.t('activerecord.attributes.position.office_hours.' +
-        position.office_hours)
-    end
-  end
-
-  def p_print_salary
-    content_tag(:p, class: 'mb-0') do
-      "Salário: #{number_to_currency(position.salary_from)}"\
-        " à #{number_to_currency(position.salary_to)}"
-    end
   end
 end
