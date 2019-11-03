@@ -1,72 +1,100 @@
-<h2>Registrar</h2>
-<div class="layout-center">
+<div class="col-12 col-md-8 offset-md-2 mt-3">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render 'devise/shared/error_messages', resource: resource %>
-    <div class="card bg-light py-3 px-4 m-2 col-md-8">
-      <div class="form-group row">
-        <%= f.label :name, 'Nome' %>
-        <%= f.text_field(:name, class: 'form-control') %>
+  <%= render 'devise/shared/error_messages', resource: resource %>
+  <div class="card card-body bg-light">
+    <h2 class="text-center mb-4">Candidato</h2>
+    
+    <h5>Dados</h5>
+    <hr class="mt-0">
+    
+    <div class="form-group">
+      <%= f.label :name, 'Nome' %>
+      <%= f.text_field(:name, class: 'form-control') %>
+    </div>
+    
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <%= f.label :birthday, 'Data de Nascimento' %>
+          <%= f.date_field(:birthday, class: 'form-control') %>
+        </div>
       </div>
-      <div class="form-group row">
-        <%= f.label :birthday, 'Data de Nascimento' %>
-        <%= f.date_field(:birthday, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :cpf, 'Cpf' %>
-        <%= f.text_field(:cpf, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :address, 'Endereço' %>
-        <%= f.text_field(:address, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :city, 'Cidade' %>
-        <%= f.text_field(:city, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :state, 'Estado' %>
-        <%= f.text_field(:state, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :country, 'País' %>
-        <%= f.text_field(:country, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :zip_code, 'CEP' %>
-        <%= f.text_field(:zip_code, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :phone, 'Telefone' %>
-        <%= f.telephone_field(:phone, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :occupation, 'Profissão' %>
-        <%= f.text_field(:occupation, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :educational_level, 'Nível de Escolaridade' %>
-        <%= f.text_field(:educational_level, class: 'form-control') %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :email, 'Email' %>
-        <%= f.text_field(:email, class: 'form-control') %>
-      </div>
-      <div class='field form-group row'>
-        <%= f.label :password, 'Senha'%>
-        <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
-        <% if @minimum_password_length %>
-          <em>(mínimo de <%= @minimum_password_length %> caracteres)</em>
-        <% end %><br />
-      </div>
-      <div class="form-group row">
-        <%= f.label :password_confirmation, 'Confirmar Senha' %>
-        <%= f.password_field(:password_confirmation, class: 'form-control') %>
-      </div>
-      <div class="actions form-group row justify-content-center">
-        <%= f.submit 'Registrar', class: 'btn btn-primary' %>
+      
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <%= f.label :cpf, 'Cpf' %>
+          <%= f.text_field(:cpf, class: 'form-control') %>
+        </div>
       </div>
     </div>
+    
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <%= f.label :address, 'Endereço' %>
+          <%= f.text_field(:address, class: 'form-control') %>
+        </div>
+      </div>
+      
+      <div class="col-12 col-md-3">
+        <div class="form-group">
+          <%= f.label :city, 'Cidade' %>
+          <%= f.text_field(:city, class: 'form-control') %>
+        </div>
+      </div>
+      
+      <div class="col-12 col-md-3">
+        <div class="form-group">
+          <%= f.label :state, 'Estado' %>
+          <%= f.text_field(:state, class: 'form-control') %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :country, 'País' %>
+      <%= f.text_field(:country, class: 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= f.label :zip_code, 'CEP' %>
+      <%= f.text_field(:zip_code, class: 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone, 'Telefone' %>
+      <%= f.telephone_field(:phone, class: 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= f.label :occupation, 'Profissão' %>
+      <%= f.text_field(:occupation, class: 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= f.label :educational_level, 'Nível de Escolaridade' %>
+      <%= f.text_field(:educational_level, class: 'form-control') %>
+    </div>
+    
+    <h5 class="mt-4">Usuário de acesso</h5>
+    <hr class="mt-0">
+    
+    <div class="form-group">
+      <%= f.label :email, 'Email' %>
+      <%= f.text_field(:email, class: 'form-control') %>
+    </div>
+    <div class='field form-group'>
+      <%= f.label :password, 'Senha'%>
+      <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+      <% if @minimum_password_length %>
+      <em>(mínimo de <%= @minimum_password_length %> caracteres)</em>
+      <% end %><br />
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'Confirmar Senha' %>
+      <%= f.password_field(:password_confirmation, class: 'form-control') %>
+    </div>
+    <div class="actions form-group text-center">
+      <%= f.submit 'Registrar', class: 'btn btn-primary btn-block' %>
+      <%= render 'candidates/shared/links' %>
+    </div>
+  </div>
   <% end %>
 </div>
 
-<%= render 'candidates/shared/links' %>
