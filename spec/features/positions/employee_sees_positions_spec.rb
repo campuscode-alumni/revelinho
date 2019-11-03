@@ -14,8 +14,8 @@ feature 'Positions list' do
     login_as(employee, scope: :employee)
     visit(positions_path)
 
-    expect(page).to have_content('Suas posições')
-    expect(page).to have_link('Criar nova posição', href: new_position_path)
+    expect(page).to have_content('Posições de minha empresa')
+    expect(page).to have_link('Nova posição', href: new_position_path)
     expect(page).to have_css('.position', count: 3)
     expect(page).to have_content('Engenheiro de Software Pleno')
     expect(page).to have_content('Engenheiro de Software Sênior')

@@ -2,7 +2,7 @@ class PositionsController < ApplicationController
   before_action :authenticate_employee!, only: %i[index new create]
 
   def index
-    @positions = current_employee.company.positions
+    @positions = current_employee.company.positions.decorate
   end
 
   def new
