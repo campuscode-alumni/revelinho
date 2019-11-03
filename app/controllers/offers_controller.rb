@@ -57,7 +57,7 @@ class OffersController < ApplicationController
   def new_offer
     @offer = Offer.new(offer_params) do |o|
       o.employee = current_employee
-      o.message = Message.create(text: params[:message],
+      o.message = Message.create(text: params[:offer][:message],
                                  sendable: current_employee,
                                  selection_process: @selection_process)
     end

@@ -83,13 +83,13 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def employee_data
-    data({ avatar: company_profile.logo, path: candidate_path(candidate) },
+    data({ avatar: company_profile.logo, path: company_path(company) },
          company.name, name: employee.name, email: employee.email,
                        phone: company_profile.phone)
   end
 
   def candidate_data
-    data({ avatar: candidate.avatar, path: company_path(company) }, '',
+    data({ avatar: candidate.avatar, path:candidate_path(candidate) }, '',
          name: candidate.name, phone: candidate.phone, email: candidate.email)
   end
 
