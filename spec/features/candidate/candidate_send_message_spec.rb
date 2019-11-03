@@ -65,9 +65,9 @@ feature 'candidate messages exchanges' do
       click_on 'Convites'
       click_on 'Ver convite'
 
-      expect(page).to have_css('small', text: 'João Silva')
-      expect(page).to have_css('small', text: 'Telefone: 11 11111111')
-      expect(page).to have_css('small', text: 'Email: joao.silva@revelo.com.br')
+      expect(page).to have_css('p', text: 'João Silva')
+      expect(page).to have_css('p', text: 'Telefone: 11 11111111')
+      expect(page).to have_css('p', text: 'Email: joao.silva@revelo.com.br')
     end
   end
 end

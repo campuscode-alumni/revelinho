@@ -38,7 +38,7 @@ feature 'candidate sees pending invites' do
     login_as(candidate, scope: :candidate)
     visit invites_candidates_path
 
-    click_link('Aceitar')
+    click_link('Aceitar convite')
     visit invites_candidates_path
 
     invite.reload
