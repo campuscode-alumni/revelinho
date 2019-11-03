@@ -13,7 +13,7 @@ feature 'Employee receive candidate feedback' do
     login_as(employee, scope: :employee)
 
     visit dashboard_companies_path
-    click_on 'Convites enviados'
+    click_on 'Convites'
 
     expect(page).to have_content invite.position.title
     expect(page).to have_content candidate.name
@@ -35,7 +35,7 @@ feature 'Employee receive candidate feedback' do
     login_as(employee, scope: :employee)
 
     visit dashboard_companies_path
-    click_on 'Convites enviados'
+    click_on 'Convites'
 
     expect(page).to have_content invite.position.title
     expect(page).to have_content candidate.name
@@ -57,7 +57,7 @@ feature 'Employee receive candidate feedback' do
     login_as(employee, scope: :employee)
 
     visit dashboard_companies_path
-    click_on 'Convites enviados'
+    click_on 'Convites'
 
     expect(page).to have_content invite.position.title
     expect(page).to have_content candidate.name
