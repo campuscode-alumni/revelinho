@@ -11,8 +11,7 @@ class CandidatesController < ApplicationController
   before_action :owner_invite, only: %i[accept_invite reject_invite]
 
   def index
-    msg = 'Não há candidatos cadastrados até agora'
-    flash[:notice] = msg if @candidates.empty?
+    @candidates_presenter = CandidatesPresenter.new(@candidates)
   end
 
   def show
@@ -65,7 +64,7 @@ class CandidatesController < ApplicationController
 
     @invite.accepted!
 
-    redirect_to selection_process_candidates_path(@invite.selection_process)
+    redirect_to selection_process_path(@invite.selection_process)
   end
 
   def reject_invite

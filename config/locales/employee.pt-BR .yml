@@ -1,6 +1,9 @@
 ---
 pt-BR:
-  employee:
+  employee: 
+    title: 'Empresa'
+    sign_in:
+      text: 'Encontre a <br><span class="red-text">pessoa ideal</span><br>para sua empresa'
     confirmations:
       confirmed: A sua conta foi confirmada com sucesso.
       new:

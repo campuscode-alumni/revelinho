@@ -6,9 +6,9 @@ class CompanyProfileDecorator < Draper::Decorator
   end
 
   def company_profile_link
-    return link_to_edit_profile if company_profile_complete?
+    return link_to_complete_profile unless company_profile_complete?
 
-    link_to_complete_profile
+    ''
   end
 
   def card_render
@@ -16,12 +16,6 @@ class CompanyProfileDecorator < Draper::Decorator
            locals: invites_card_locals) +
       render(partial: 'shared/dashboard_card_button',
              locals: selection_processes_card_locals)
-  end
-
-  def link_to_edit_profile
-    link_to 'Editar perfil da empresa',
-            edit_company_profile_path(@company.company_profile),
-            class: 'btn btn-outline-dark'
   end
 
   def link_to_complete_profile

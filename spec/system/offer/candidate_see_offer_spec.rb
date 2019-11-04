@@ -27,6 +27,7 @@ feature 'candidate see offer' do
     expect(page).to have_content('Regime de contratação: CLT')
     expect(page).to have_content('Salário: R$ 3.500,00')
     expect(page).to have_content('Data de início: 30/10/2019')
+    expect(page).to have_content('Venha fazer parte da nossa equipe!')
 
     expect(page).to have_link('Aceitar')
     expect(page).to have_link('Rejeitar')

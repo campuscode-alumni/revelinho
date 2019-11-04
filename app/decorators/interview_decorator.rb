@@ -1,20 +1,18 @@
 class InterviewDecorator < Draper::Decorator
+  delegate_all
   include Draper::LazyHelpers
 
-  delegate_all
-
   def formatting_datetime
-    I18n.l(interview.date, format: :long) + ', das ' + interview.time_from +
-      ' às ' + interview.time_to
+    I18n.l(interview.date, format: :long) +
+      ", #{interview.time_from} - #{interview.time_to}"
   end
 
   def interview_address
-    I18n.t('activerecord.attributes.interview.address',
-           address: interview.address)
+    I18n.t('activerecord.attributes.interview.address') + interview.address
   end
 
   def interview_format
-    I18n.t('activerecord.attributes.interview.format.' + interview.format)
+    I18n.t('interview.format.' + interview.format)
   end
 
   def decision_buttons

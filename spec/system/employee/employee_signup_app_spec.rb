@@ -4,7 +4,9 @@ feature 'Employee signup app' do
   scenario 'successfully' do
     visit root_path
 
-    click_on 'Cadastro de funcionário'
+    click_on 'Login/Cadastro'
+    click_on 'Empresa'
+    click_on 'Inscrever-se'
 
     fill_in 'Nome', with: 'João Silva'
     fill_in 'E-mail', with: 'employee@company.com'
@@ -21,7 +23,9 @@ feature 'Employee signup app' do
   scenario 'and fill in validates' do
     visit root_path
 
-    click_on 'Cadastro de funcionário'
+    click_on 'Login/Cadastro'
+    click_on 'Empresa'
+    click_on 'Inscrever-se'
 
     fill_in 'Nome', with: ''
     fill_in 'E-mail', with: ''
@@ -35,15 +39,16 @@ feature 'Employee signup app' do
   end
 
   scenario 'and logout' do
-    employee = create(:employee, email: 'employee@company.com')
+    employee = create(:employee, name: 'João', email: 'employee@company.com')
 
     login_as(employee, scope: :employee)
     visit root_path
 
-    click_on 'Logout'
+    click_on 'Empresa'
+    click_on 'Sair'
 
-    expect(page).to have_link('Cadastro de funcionário')
-    expect(page).not_to have_link('Logout')
+    expect(page).to have_link('Login/Cadastro')
+    expect(page).not_to have_link('Sair')
   end
 
   scenario 'and see your company dashboard' do
@@ -52,7 +57,9 @@ feature 'Employee signup app' do
 
     visit root_path
 
-    click_on 'Cadastro de funcionário'
+    click_on 'Login/Cadastro'
+    click_on 'Empresa'
+    click_on 'Inscrever-se'
 
     fill_in 'Nome', with: 'João Silva'
     fill_in 'E-mail', with: 'joao.silva@revelo.com.br'

@@ -5,7 +5,9 @@ feature 'candidate register' do
     candidate = build(:candidate)
 
     visit root_path
-    click_on 'Cadastro de candidato'
+    click_on 'Login/Cadastro'
+    click_on 'Candidato'
+    click_on 'Inscrever-se'
     fill_in 'Nome', with: candidate.name
     fill_in 'Cpf', with: candidate.cpf
     fill_in 'Endereço', with: candidate.address
@@ -30,7 +32,9 @@ feature 'candidate register' do
     candidate = build(:candidate)
 
     visit root_path
-    click_on 'Cadastro de candidato'
+    click_on 'Login/Cadastro'
+    click_on 'Candidato'
+    click_on 'Inscrever-se'
     fill_in 'Nome', with: candidate.name
     fill_in 'Endereço', with: candidate.address
     fill_in 'Telefone', with: candidate.phone
@@ -51,7 +55,7 @@ feature 'candidate register' do
 
     login_as(candidate, scope: :candidate)
     visit root_path
-    click_on 'Logout'
+    click_on 'Sair'
 
     expect(page).to have_content 'Logout efetuado com sucesso'
   end

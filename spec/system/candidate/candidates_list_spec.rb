@@ -12,7 +12,7 @@ feature 'Candidates list' do
 
     login_as employee, scope: :employee
     visit dashboard_companies_path
-    click_on 'Candidatos disponíveis'
+    click_on 'Ver candidatos'
 
     expect(page).to have_css('.candidate', count: 3)
     expect(page).to have_content('João')
@@ -28,7 +28,7 @@ feature 'Candidates list' do
 
     login_as employee, scope: :employee
     visit dashboard_companies_path
-    click_on 'Candidatos disponíveis'
+    click_on 'Ver candidatos'
 
     expect(page).to have_css('.candidate', count: 1)
     expect(page).to have_content('João')
@@ -40,7 +40,7 @@ feature 'Candidates list' do
 
     login_as employee, scope: :employee
     visit dashboard_companies_path
-    click_on 'Candidatos disponíveis'
+    click_on 'Ver candidatos'
 
     expect(page).to have_css('.candidate', count: 0)
     expect(page).to have_content('Não há candidatos cadastrados até agora')
@@ -56,7 +56,7 @@ feature 'Candidates list' do
 
     login_as employee, scope: :employee
     visit dashboard_companies_path
-    click_on 'Candidatos disponíveis'
+    click_on 'Ver candidatos'
     click_on 'Gustavo'
 
     expect(page).to have_content('Gustavo')
@@ -74,7 +74,7 @@ feature 'Candidates list' do
 
     login_as employee, scope: :employee
     visit dashboard_companies_path
-    click_on 'Candidatos disponíveis'
+    click_on 'Ver candidatos'
     click_on 'Gustavo'
     click_on I18n.t('messages.go_back')
 

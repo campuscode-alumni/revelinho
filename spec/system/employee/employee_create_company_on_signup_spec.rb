@@ -4,7 +4,9 @@ feature 'employee create company on signup' do
   scenario 'successfully' do
     visit root_path
 
-    click_on 'Cadastro de funcionário'
+    click_on 'Login/Cadastro'
+    click_on 'Empresa'
+    click_on 'Inscrever-se'
 
     fill_in 'Nome', with: 'João Silva'
     fill_in 'E-mail', with: 'employee@company.com'
@@ -28,8 +30,7 @@ feature 'employee create company on signup' do
 
     click_on 'Salvar'
 
-    expect(current_path).to eq(company_path(employee.company))
-    expect(page).to have_content('Av. Paulista, 1234')
+    expect(current_path).to eq(dashboard_companies_path)
   end
 
   scenario 'and validates company update' do

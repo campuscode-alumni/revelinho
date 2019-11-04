@@ -13,7 +13,7 @@ feature 'employee send message' do
     invite.create_selection_process
 
     login_as(employee, scope: :employee)
-    visit selection_process_candidates_path(invite.selection_process)
+    visit selection_process_path(invite.selection_process)
 
     fill_in 'Escreva a sua mensagem', with: 'Seja bem vindo!'
     click_on('Enviar')
@@ -37,7 +37,7 @@ feature 'employee send message' do
     invite.create_selection_process
 
     login_as(employee, scope: :employee)
-    visit selection_process_candidates_path(invite.selection_process)
+    visit selection_process_path(invite.selection_process)
 
     fill_in 'Escreva a sua mensagem', with: ''
     click_on('Enviar')
