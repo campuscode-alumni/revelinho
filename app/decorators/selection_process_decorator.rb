@@ -40,12 +40,9 @@ class SelectionProcessDecorator < Draper::Decorator
             company_path(company)
   end
 
-  def schedule_interview_link
-    return '' unless employee_signed_in?
-
-    link_to 'Agendar entrevista',
-            new_selection_process_interview_path(selection_process),
-            class: 'btn btn-primary'
+  def btn_schedule_interview
+    link_to 'Agendar nova entrevista', new_selection_process_interview_path(id),
+            class: 'btn btn-outline-info btn-sm mb-3'
   end
 
   private
@@ -126,7 +123,7 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def btn_offer
-    link_to 'Quero contrata-lo!', new_candidate_offer_path(candidate.id, id),
+    link_to 'Quero contratá-lo!', new_candidate_offer_path(candidate.id, id),
             class: 'btn btn-info btn-lg mb-3'
   end
 
