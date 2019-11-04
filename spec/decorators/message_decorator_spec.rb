@@ -63,7 +63,7 @@ RSpec.describe MessageDecorator do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
       company.company_profile = create(:company_profile)
       candidate = create(:candidate, status: :published)
-      employee = create(:employee, company: company)
+      employee = create(:employee, :without_avatar, company: company)
       position = create(:position, company: company)
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending)
