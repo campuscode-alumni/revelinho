@@ -75,8 +75,8 @@ feature 'employee send offer to candidate' do
 
     login_as(selection_process.employee, scope: :employee)
 
-    visit selection_process_candidates_path(selection_process)
-    click_on 'Quero contrata-lo!'
+    visit new_candidate_offer_path(selection_process.candidate,
+                                   selection_process)
 
     fill_in 'Salário', with: '2.500,00'
     select 'CLT', from: 'Regime de contratação'

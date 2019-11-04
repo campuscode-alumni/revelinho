@@ -3,7 +3,7 @@ class SelectionProcessDecorator < Draper::Decorator
   include Draper::LazyHelpers
 
   def offers_menu
-    return menu_employee if employee_signed_in?
+    return msg_offer if employee_signed_in?
     return menu_candidate if offers.pending.any?
     return menu_accepted if offers.accepted.any?
 
@@ -43,10 +43,6 @@ class SelectionProcessDecorator < Draper::Decorator
   def btn(text, path, style)
     link_to(text, send(path, candidate.id, id, offers.pending.first.id),
             class: "btn btn-#{style} btn-lg mt-2 mr-3", method: 'post')
-  end
-
-  def menu_employee
-    btn_offer + msg_offer
   end
 
   def menu_accepted
@@ -97,7 +93,7 @@ class SelectionProcessDecorator < Draper::Decorator
     link_to(image_tag(data[:image][:avatar],
                       class: 'avatar-100 float-left mr-2'),
             data[:image][:path]) +
-      content_tag(:div, class: 'float-left pl-2') do
+      content_tag(:div, class: 'float-left pl-2 mb-3') do
         content_tag(:h5, data[:title], class: 'main-title') +
           content_tag(:h6, 'Seu contato principal é:', class: 'lead-4') +
           description(data[:description])
@@ -108,11 +104,6 @@ class SelectionProcessDecorator < Draper::Decorator
     content_tag(:p, data[:name]) +
       content_tag(:p, "Telefone: #{data[:phone]}") +
       content_tag(:p, "Email: #{data[:email]}")
-  end
-
-  def btn_offer
-    link_to 'Quero contrata-lo!', new_candidate_offer_path(candidate.id, id),
-            class: 'btn btn-info btn-lg mb-3'
   end
 
   def msg_offer
