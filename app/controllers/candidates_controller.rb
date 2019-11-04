@@ -65,7 +65,7 @@ class CandidatesController < ApplicationController
 
     @invite.accepted!
 
-    redirect_to selection_process_candidates_path(@invite.selection_process)
+    redirect_to selection_process_path(@invite.selection_process)
   end
 
   def reject_invite
