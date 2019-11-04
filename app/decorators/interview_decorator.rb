@@ -2,14 +2,6 @@ class InterviewDecorator < Draper::Decorator
   delegate_all
   include Draper::LazyHelpers
 
-  def time_from_localized
-    I18n.localize(Time.zone.parse(time_from, Time.zone.now), format: :short)
-  end
-
-  def time_to_localized
-    I18n.localize(Time.zone.parse(time_to, Time.zone.now), format: :short)
-  end
-
   def formatting_datetime
     I18n.l(interview.date, format: :long) +
       ", #{interview.time_from} - #{interview.time_to}"
@@ -20,7 +12,7 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def interview_format
-    I18n.t('activerecord.attributes.interview.format.' + interview.format)
+    I18n.t('interview.format.' + interview.format)
   end
 
   def decision_buttons

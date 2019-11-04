@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   
   resources :selection_processes, only: %i[show] do
     post 'selection_process/:id', to: 'selection_processes#send_message', as: :send_message
-    resources :interviews, only: %i[new create]
+    resources :interviews, only: %i[index new create update]
   end
 
   resources :positions, only: %i[new create show]

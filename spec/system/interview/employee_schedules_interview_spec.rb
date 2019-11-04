@@ -21,7 +21,7 @@ feature 'Employee schedules interview' do
     click_on 'Agendar nova entrevista'
     click_on 'interview-modal-button'
 
-    find('#date-field > div > i > svg').click
+    find('#date-field > div > .anticon-calendar > svg').click
     find('.ant-calendar-selected-day').click
 
     find('#time-from-field > input').click
