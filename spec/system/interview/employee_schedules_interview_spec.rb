@@ -6,8 +6,7 @@ feature 'Employee schedules interview' do
     create(:company_profile, company: company)
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
-    candidate = create(:candidate, name: 'Gustavo')
-    create(:candidate_profile, candidate: candidate)
+    candidate = create(:candidate, :with_candidate_profile, name: 'Gustavo')
     position = create(:position, title: 'Engenheiro de Software Pleno',
                                  company: company)
     invite = create(:invite, position: position, candidate: candidate,

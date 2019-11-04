@@ -1,14 +1,11 @@
 <div class="selection-process-card">
   <section class="header mt-3">
-    <%= image_tag selection_process.invite.candidate.candidate_profile.avatar, class: 'avatar' %>
-    <div class="content">
-      <h2><%= selection_process.invite.candidate.name %></h2>
-      <%= link_to 'Ver perfil', selection_process.invite.candidate %>
-    </div>
+    <%= image_tag selection_process.decorate.image_logo, class: 'image img-thumbnail rounded mx-auto d-block', width: '200px'%>
   </section>
   <section class="content rounded px-4 py-3">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-12">
+        <h2 class="text-center my-3"><%= selection_process.invite.candidate.name %></h2>
         <h2><%= selection_process.invite.position.title%></h2>
         <p><span>Data do convite:</span> <%= l(selection_process.invite.created_at, format: :long) %></p>
         <p><span>Faixa salarial:</span> <%= number_to_currency selection_process.invite.position.salary_from %>-<%= number_to_currency selection_process.invite.position.salary_to %> </p>
@@ -17,9 +14,10 @@
         <p><span>Regime de contratação:</span> <%= t("activerecord.attributes.position.hiring_scheme.#{selection_process.invite.position.hiring_scheme}") %></p>
         <p><span>Horário de expediente:</span> <%= t("activerecord.attributes.position.office_hours.#{selection_process.invite.position.office_hours}") %></p>
       </div>
-      <div class="col-md-3 d-flex justify-content-end flex-wrap align-content-center">
-        <%= link_to t('selection_process.messages.see_details'), selection_process_candidates_path(selection_process) %>
-      </div>
     </div>
+      <div class="col-mt-6 my-3 d-flex justify-content-end">
+        <%= link_to t('selection_process.messages.see_details'), selection_process_candidates_path(selection_process), class: 'btn btn-outline-dark'%>
+        <%= link_to 'Ver perfil', selection_process.invite.candidate, class: 'btn btn-outline-dark mx-2'%>
+      </div>
   </section>
 </div>
