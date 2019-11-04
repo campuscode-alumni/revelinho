@@ -36,6 +36,11 @@ Rails.application.routes.draw do
       post 'reject', on: :member
     end
   end
+  
+  resources :selection_processes, only: %i[show] do
+    post 'selection_process/:id', to: 'selection_processes#send_message', as: :send_message
+    resources :interviews, only: %i[new create]
+  end
 
   resources :positions, only: %i[new create show]
   resources :candidate_profiles, only: %i[new create edit update]
