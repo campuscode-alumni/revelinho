@@ -14,8 +14,8 @@
         <p><span>Faixa salarial:</span> <%= number_to_currency selection_process.invite.position.salary_from %>-<%= number_to_currency selection_process.invite.position.salary_to %> </p>
         <p><span>Área de atuação:</span> <%=selection_process.invite.position.industry %></p>
         <p><span>Descrição do cargo:</span> <%=selection_process.invite.position.description%></p>
-        <p><span>Regime de contratação:</span> <%= t("activerecord.attributes.position.hiring_scheme.#{selection_process.invite.position.hiring_scheme}") %></p>
-        <p><span>Horário de expediente:</span> <%= t("activerecord.attributes.position.office_hours.#{selection_process.invite.position.office_hours}") %></p>
+        <p><span>Regime de contratação:</span> <%= t("activerecord.enums.position.hiring_scheme.#{selection_process.invite.position.hiring_scheme}") %></p>
+        <p><span>Horário de expediente:</span> <%= t("activerecord.enums.position.office_hours.#{selection_process.invite.position.office_hours}") %></p>
       </div>
       <div class="col-md-3 d-flex justify-content-end flex-wrap align-content-center">
         <%= link_to t('selection_process.messages.see_details'), selection_process_candidates_path(selection_process) %>

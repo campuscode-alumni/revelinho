@@ -19,13 +19,13 @@ class SelectionProcessDecorator < Draper::Decorator
 
   def p_print_hiring_scheme
     content_tag(:p, 'Regime de contratação: ' +
-      I18n.t('activerecord.attributes.position.hiring_scheme.' +
+      I18n.t('activerecord.enums.position.hiring_scheme.' +
       position.hiring_scheme), class: 'mb-0')
   end
 
   def p_print_office_hours
     content_tag(:p, 'Horário de expediente: ' +
-      I18n.t('activerecord.attributes.position.office_hours.' +
+      I18n.t('activerecord.enums.position.office_hours.' +
       position.office_hours), class: 'mb-0')
   end
 

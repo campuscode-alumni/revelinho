@@ -26,6 +26,14 @@
         <span class="font-weight-bold"><%= t('activerecord.attributes.position.salary') %>:</span>
         <%= position.salary %>
       </p>
+      <p class="my-0 px-2">
+        <span class="font-weight-bold"><%= t('activerecord.attributes.position.hiring_scheme') %>:</span>
+        <%= t("activerecord.enums.position.hiring_scheme.#{position.hiring_scheme}") %>
+      </p>
+      <p class="my-0 px-2">
+        <span class="font-weight-bold"><%= t('activerecord.attributes.position.office_hours') %>:</span>
+        <%= t("activerecord.enums.position.hiring_scheme.#{position.office_hours}") %>
+      </p>
     </div>
   </div>
 </div>
