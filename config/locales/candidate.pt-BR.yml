@@ -28,6 +28,10 @@ pt-BR:
         skype_username: Usuário do Skype
         linkedin_profile_url: LinkedIn
         github_profile_url: GitHub
+  candidate:
+    title: 'Candidato'
+    sign_in:
+      text: 'Seja visto por<br> <span class="red-text">milhares</span><br> de empresas'
   candidates:
     confirmations:
       confirmed: A sua conta foi confirmada com sucesso.

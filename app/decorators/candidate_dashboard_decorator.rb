@@ -57,12 +57,6 @@ class CandidateDashboardDecorator < Draper::Decorator
     I18n.t("activerecord.models.#{class_name.downcase}").pluralize
   end
 
-  def link_edit_profile
-    link_to 'Editar Perfil',
-            edit_candidate_profile_path(candidate.candidate_profile),
-            class: 'btn btn-secondary btn-large'
-  end
-
   def link_finish_profile
     link_to 'Concluir perfil', new_candidate_profile_path,
             class: 'btn btn-primary btn-large'

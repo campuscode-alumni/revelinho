@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class ApplicationPresenter < SimpleDelegator
   include ActionView::Helpers::OutputSafetyHelper
   include Rails.application.routes.url_helpers
@@ -74,9 +75,24 @@ class ApplicationPresenter < SimpleDelegator
   def nav_sign_in
     return '' if signed_in?
 
-    nav_builder(I18n.t('navbar.sign_in.employee'), new_employee_session_path) +
-      nav_builder(I18n.t('navbar.sign_in.candidate'),
-                  new_candidate_session_path)
+    content_tag(:li, class: 'nav-items dropdown') do
+      content_tag(:a, 'Login/Cadastro',
+                  class: 'nav-link dropdown-toggle p-2 text-uppercase',
+                  href: '#', id: 'navbarLoginDropdown', role: 'button',
+                  data: { toggle: 'dropdown' },
+                  aria: { haspopup: 'true', expanded: 'false' }) +
+        nav_sign_in_items
+    end
+  end
+
+  def nav_sign_in_items
+    content_tag(:div, class: 'dropdown-menu dropdown-menu-right',
+                      aria: { labelledby: 'navbarDropdown' }) do
+      nav_dropdown_item_builder(text: I18n.t('navbar.sign_in.employee'),
+                                path: new_employee_session_path) +
+        nav_dropdown_item_builder(text: I18n.t('navbar.sign_in.candidate'),
+                                  path: new_candidate_session_path)
+    end
   end
 
   def nav_builder(text, path, method = :get)
@@ -117,3 +133,4 @@ class ApplicationPresenter < SimpleDelegator
     ApplicationController.helpers
   end
 end
+# rubocop:enable Metrics/ClassLength
