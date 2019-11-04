@@ -1,6 +1,5 @@
 class InvitePresenter < SimpleDelegator
   include Rails.application.routes.url_helpers
-
   delegate :content_tag, :link_to, to: :h
 
   def initialize(invite, user)

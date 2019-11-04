@@ -12,7 +12,7 @@ feature 'candidate see interview invite' do
     selection_process = invite.create_selection_process
     create(:interview, date: '2019-10-26',
                        time_from: '17:00',
-                       time_to: '18:00',
+                       time_to: '17:30',
                        format: :face_to_face,
                        address: 'Av. Paulista, 2000',
                        selection_process: selection_process)
@@ -21,11 +21,9 @@ feature 'candidate see interview invite' do
     visit selection_process_candidates_path(selection_process)
 
     expect(page).to have_content('Entrevistas')
-    expect(page).to have_content('26 de outubro de 2019')
-    expect(page).to have_content('das 17:00')
-    expect(page).to have_content('às 18:00')
+    expect(page).to have_content('26 de outubro de 2019, 17:00 - 17:30')
     expect(page).to have_content('Endereço: Av. Paulista, 2000')
-    expect(page).to have_content('Formato: Presencial')
+    expect(page).to have_content('Presencial')
     expect(page).to have_content('Aguardando resposta')
     expect(page).to have_link('Aceitar')
     expect(page).to have_link('Recusar')
@@ -42,7 +40,7 @@ feature 'candidate see interview invite' do
     selection_process = invite.create_selection_process
     interview = create(:interview, date: '2019-10-26',
                                    time_from: '17:00',
-                                   time_to: '18:00',
+                                   time_to: '17:30',
                                    format: :face_to_face,
                                    address: 'Av. Paulista, 2000',
                                    selection_process: selection_process)
@@ -76,7 +74,7 @@ feature 'candidate see interview invite' do
     selection_process = invite.create_selection_process
     create(:interview, date: '2019-10-26',
                        time_from: '17:00',
-                       time_to: '18:00',
+                       time_to: '17:30',
                        format: :face_to_face,
                        address: 'Av. Paulista, 2000',
                        selection_process: selection_process)
