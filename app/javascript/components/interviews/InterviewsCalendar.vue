@@ -30,11 +30,6 @@
                               }))
                               .sort(a => a.time_from).reverse() || []
       },
-      getMonthData(value) {
-        if (value.month() === 8) {
-          return 1394
-        }
-      },
       onSelect(value) {
         this.$emit('clickDate', value)
       },
