@@ -51,7 +51,7 @@ feature 'candidate register' do
 
     login_as(candidate, scope: :candidate)
     visit root_path
-    click_on 'Logout'
+    click_on 'Sair'
 
     expect(page).to have_content 'Logout efetuado com sucesso'
   end
