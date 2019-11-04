@@ -13,5 +13,9 @@ FactoryBot.define do
       fixture_file_upload(Rails.root.join('spec', 'support', 'images',
                                           'gatinho.jpg'), 'image/jpg')
     end
+
+    trait :without_avatar do
+      avatar { nil }
+    end
   end
 end
