@@ -1,4 +1,4 @@
-<div class="border-top p-3">
+<div id="interview-<%=interview.id%>" class="border-top p-3">
   <%= interview.interview_status_badge%><br/>
   <p>
     <b><%= interview.formatting_datetime %></b><br/>
@@ -6,6 +6,8 @@
     <%= interview.interview_format %><br/>
   </p>
   <section class="row d-flex justify-content-around">
-  <%= interview.decision_buttons %>
+    <div class="btn-group">
+      <%= interview.footer(current_employee || current_candidate) %>
+    </div>
   </section>
 </div>

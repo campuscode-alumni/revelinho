@@ -61,9 +61,4 @@ class CandidateDashboardDecorator < Draper::Decorator
     link_to 'Concluir perfil', new_candidate_profile_path,
             class: 'btn btn-primary btn-large'
   end
-
-  def link_my_profile
-    link_to 'Ver seu perfil', my_profile_candidates_path,
-            class: 'btn btn-primary btn-large mx-2'
-  end
 end

@@ -59,7 +59,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   Capybara.server = :puma, { Silent: true }
-  
+
   config.before(:each, type: :system) do
     driven_by :rack_test
   end

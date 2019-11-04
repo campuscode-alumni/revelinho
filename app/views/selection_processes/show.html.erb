@@ -10,20 +10,12 @@
           <h3 class="my-2">Entrevistas</h3>
           <%= @selection_process.btn_schedule_interview %>
         </header>
-        <%= render partial: '/interviews/interview_invite', collection: @interviews.order(id: :desc), as: :interview %>
+        <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
       </div>
     </div>
     <div class="col-12 col-md-8 h-100">
-      <div class="card card-body">
-        <%= form_with(url: send_message_candidates_path(@selection_process), method: 'post') do |f| %>
-          <div class="form-group">
-            <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
-          </div>      
-          <%= link_to 'Voltar', invites_candidates_path, class: 'btn btn-info float-left' %>
-          <%= f.submit 'Enviar Mensagem', class: 'btn btn-outline-danger float-right' %>
-        <% end %>
-      </div>
-        <%= render partial: 'messages', collection: @selection_process.messages.order(id: :desc).decorate, as: :message %>
+      <%= render partial: 'shared/input_field', locals: {input_destiny: send_message_candidates_path(@selection_process), go_back:@selection_process.decorate.go_back_button(current_candidate || current_employee), send_button_message:'Enviar Mensagem'} %>
+      <%= render partial: 'messages', collection: @selection_process.messages_show, as: :message %>
     </div>
   </div>
 </div>
