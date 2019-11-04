@@ -13,14 +13,10 @@ class PositionsController < ApplicationController
     @position = Position.new(position_params)
     @position.company = current_employee.company
     if @position.save
-      redirect_to @position
+      redirect_to positions_path
     else
       render :new
     end
-  end
-
-  def show
-    @position = Position.find(params[:id])
   end
 
   private
