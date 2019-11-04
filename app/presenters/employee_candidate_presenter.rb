@@ -1,9 +1,8 @@
 class EmployeeCandidatePresenter < SimpleDelegator
-  include Rails.application.routes.url_helpers
   include ActionView::Helpers::OutputSafetyHelper
+
   attr_reader :candidate, :employee
 
-  # delegate :name, :id, to: :candidate
   delegate :content_tag, :link_to, to: :h
 
   def initialize(candidate, employee)

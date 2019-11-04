@@ -1,25 +1,28 @@
 pt-BR:
   activerecord:
     models:
-      interview: Entrevista
+      interview:
+        one: Entrevista
+        other: Entrevistas
     attributes:
       interview:
-        format: Formato
-        address: "Endereço: %{address}"
+        format: Tipo de entrevista
+        address: 'Endereço: '
         datetime: Dia %{date} às %{time}
-        status:
-          pending: Pendente
-          scheduled: Agendada
-          done: Realizada
-          absent: Ausente
-          rejected: Cancelada
-        format:
-          online: 'Formato: Online'
-          face_to_face: 'Formato: Presencial'
+        status: Estado
   interview:
     status_badge:
       pending: Aguardando resposta
       scheduled: Entrevista agendada
       done: Entrevista realizada
       absent: Candidato faltou
-      rejected: Entrevista cancelada
+      canceled: Entrevista cancelada
+    status:
+      pending: Pendente
+      scheduled: Agendada
+      done: Realizada
+      absent: Ausente
+      canceled: Cancelada
+    format:
+      online: Online
+      face_to_face: Presencial

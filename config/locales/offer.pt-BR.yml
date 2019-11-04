@@ -1,0 +1,13 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      offer: Proposta
+    attributes:
+      offer:
+        start_date: Data de início
+        hiring_scheme:
+          internship: Estágio
+          contractor: PJ
+          clt: CLT
+        salary: Salário

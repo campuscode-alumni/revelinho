@@ -1,5 +1,25 @@
 body {
   background-color: #f5f7fb !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+h1.home-text {
+  font-size: 4rem !important;
+}
+
+.red-text {
+  color: #ef474a;
+}
+
+.btn-revelo {
+  background-color: #ef474a !important;
+}
+
+.btn-revelo-dark {
+  background-color: #273a50 !important;
+  border-color: #273a50 !important;
 }
 
 a:hover.link-defaut-color{
@@ -8,4 +28,8 @@ a:hover.link-defaut-color{
 
 .font-size-32 {
  font-size: 32px;
+}
+
+.container, .container-fluid {
+  margin-top: 20px;
 }

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       get 'dashboard'
       get 'invites'
+      get 'selection_processes'
     end
   end
   resources :company_profiles, only: %i[new create edit update]
@@ -15,19 +16,30 @@ Rails.application.routes.draw do
     member do
       post 'add-comment', to: 'candidates#add_comment', as: :add_comment
       post 'invite', to: 'candidates#invite'
+      post 'invites/accept/:id', to: 'candidates#accept_invite', as: :accept_invites
+      post 'invites/reject/:id', to: 'candidates#reject_invite', as: :reject_invites
+      post 'interviews/accept/:id', to: 'interviews#accept', as: :accept_interview
+      post 'interviews/reject/:id', to: 'interviews#reject', as: :reject_interview
     end
 
     collection do
       get 'dashboard'
       get 'invites'
+      get 'offers'
+      get 'invites/select_process/:id', to: 'selection_processes#show', as: :selection_process
+      post 'invites/select_process/:id', to: 'selection_processes#send_message', as: :send_message
+      get 'my-profile'
     end
 
-    post 'invites/accept/:id', to: 'candidates#accept_invite', on: :member, as: :accept_invites
-    post 'invites/reject/:id', to: 'candidates#reject_invite', on: :member, as: :reject_invites
-    get 'invites/select_process/:id', to: 'selection_processes#show', on: :collection, as: :selection_process
-    post 'invites/select_process/:id', to: 'selection_processes#send_message', on: :collection, as: :send_message
-    post 'interviews/accept/:id', to: 'interviews#accept', on: :member, as: :accept_interview
-    post 'interviews/reject/:id', to: 'interviews#reject', on: :member, as: :reject_interview
+    resources :offers, only: %i[new create show], path: 'invites/selection_process/:selection_process_id/offers' do
+      post 'accept', on: :member
+      post 'reject', on: :member
+    end
+  end
+  
+  resources :selection_processes, only: %i[show] do
+    post 'selection_process/:id', to: 'selection_processes#send_message', as: :send_message
+    resources :interviews, only: %i[index new create update]
   end
 
   resources :positions, only: %i[new create show]

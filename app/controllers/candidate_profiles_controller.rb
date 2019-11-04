@@ -9,11 +9,13 @@ class CandidateProfilesController < ApplicationController
   def create
     @candidate_profile = CandidateProfile.new(candidate_profile_params)
     @candidate_profile.candidate = current_candidate
+
     if @candidate_profile.save
       @candidate_profile.candidate.published!
-      redirect_to @candidate_profile.candidate,
-                  notice: 'Seu perfil foi atualizado com sucesso.'
+      flash[:alert] = I18n.t('candidates.update')
+      redirect_to my_profile_candidates_url
     else
+      current_candidate.candidate_profile = nil
       render :new
     end
   end
@@ -22,8 +24,8 @@ class CandidateProfilesController < ApplicationController
 
   def update
     if @candidate_profile.update(candidate_profile_params)
-      redirect_to @candidate_profile.candidate,
-                  notice: 'Seu perfil foi atualizado com sucesso.'
+      flash[:alert] = I18n.t('candidates.update')
+      redirect_to my_profile_candidates_url
     else
       render :edit
     end
