@@ -89,7 +89,7 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def candidate_data
-    data({ avatar: candidate.avatar, path:candidate_path(candidate) }, '',
+    data({ avatar: candidate.avatar, path: candidate_path(candidate) }, '',
          name: candidate.name, phone: candidate.phone, email: candidate.email)
   end
 
