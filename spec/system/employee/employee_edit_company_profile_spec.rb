@@ -12,7 +12,7 @@ feature 'Employee edit company profile' do
     click_on 'Atualizar'
 
     visit dashboard_companies_path
-    click_on 'Editar perfil da empresa'
+    click_on 'Editar perfil'
 
     fill_in 'Descrição da empresa', with: 'Empresa legal de trabalhar!'
     fill_in 'Benefícios', with: 'Vale refeição, vale transporte'

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Candidate completes personal profile' do
-  scenario 'successfully' do
+  scenario 'successfully', :js do
     candidate = create(:candidate, status: :hidden)
     candidate_profile = build(:candidate_profile)
     login_as(candidate, scope: :candidate)
@@ -85,7 +85,6 @@ feature 'Candidate completes personal profile' do
     visit root_path
 
     expect(page).to have_content('Seu perfil está ativo.')
-    expect(page).to have_link('Editar Perfil')
     expect(page).not_to have_link('Concluir perfil')
   end
 
@@ -109,8 +108,9 @@ feature 'Candidate completes personal profile' do
 
     login_as(candidate, scope: :candidate)
 
-    visit dashboard_candidates_path
-    click_on 'Ver seu perfil'
+    visit root_path
+    click_on 'Candidato'
+    click_on 'Ver perfil'
 
     expect(current_path).to eq(my_profile_candidates_path)
   end
