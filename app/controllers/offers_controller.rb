@@ -8,8 +8,6 @@ class OffersController < ApplicationController
   def new; end
 
   def create
-    return redirect_if_pending if pending_offer?
-
     offer = @selection_process.offers << @offer
     if offer.present?
       OfferMailer.notify_candidate(@offer.id).deliver_now
@@ -58,6 +56,10 @@ class OffersController < ApplicationController
   end
 
   def new_offer
+    return redirect_if_pending if pending_offer?
+
+    return unless is_valid_date?
+
     @offer = Offer.new(offer_params) do |o|
       o.employee = current_employee
       o.message = Message.create(text: params[:offer][:message],
@@ -65,6 +67,11 @@ class OffersController < ApplicationController
                                  selection_process: @selection_process,
                                  message_type: :new_offer)
     end
+  end
+
+  def is_valid_date?
+    day, month, year = params[:offer][:start_date].split '/'
+    Date.valid_date? year.to_i, month.to_i, day.to_i
   end
 
   def pending_offer?
