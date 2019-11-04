@@ -23,14 +23,12 @@ class CompanyProfileDecorator < Draper::Decorator
   def link_to_edit_profile
     link_to 'Editar perfil da empresa',
             edit_company_profile_path(@company.company_profile),
-            class: 'btn btn-outline-dark'
+            class: 'btn btn-outline-dark mb-3'
   end
 
   def link_to_complete_profile
-    content_tag :div, class: 'row justify-content-center' do
-      link_to 'Completar perfil da empresa', new_company_profile_path,
-              class: 'btn btn-outline-dark'
-    end
+    link_to 'Completar perfil da empresa', new_company_profile_path,
+            class: 'btn btn-outline-dark mb-3'
   end
 
   private

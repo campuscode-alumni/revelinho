@@ -15,8 +15,8 @@ feature 'Employee creates position' do
                                'JavaScript e Ruby on Rails'
     select 'CLT', from: 'Regime'
     select 'Integral', from: 'Expediente'
-    fill_in 'De:', with: '2000'
-    fill_in 'Até:', with: '4000'
+    fill_in 'Salário de', with: '2000'
+    fill_in 'Salário até', with: '4000'
     click_on 'Enviar'
 
     expect(page).to have_content('Desenvolvedor Ruby')
@@ -45,8 +45,8 @@ feature 'Employee creates position' do
     fill_in 'Título', with: ''
     fill_in 'Área', with: ''
     fill_in 'Descrição', with: ''
-    fill_in 'De:', with: ''
-    fill_in 'Até:', with: ''
+    fill_in 'Salário de', with: ''
+    fill_in 'Salário até', with: ''
     click_on 'Enviar'
 
     expect(page).to have_content('Título não pode ficar em branco')

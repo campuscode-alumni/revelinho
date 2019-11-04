@@ -3,6 +3,9 @@ pt-BR:
   activerecord:
     models:
       position: Posição
+      hiring_scheme:
+        singular: Regime
+        plural: Regimes
     attributes:
       position:
         title: Título

@@ -1,5 +1,5 @@
 <div class="container flex-column justify-content-center">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center my-3">
     <h2 class=>Bem vindo! Registre seu perfil abaixo para começar:</h2>
   </div>
   <div class="row justify-content-center">
@@ -56,10 +56,10 @@
           </div>
           <div class='field form-group row'>
             <%= f.label :password %>
-            <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
             <% if @minimum_password_length %>
-              <em>(mínimo de <%= @minimum_password_length %> caracteres)</em>
+              <em>&nbsp;(mínimo de <%= @minimum_password_length %> caracteres)</em>
             <% end %><br />
+            <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
           </div>
           <div class="form-group row">
             <%= f.label :password_confirmation, 'Confirmar Senha' %>

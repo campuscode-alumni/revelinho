@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-    <h1 class="text-center">Cadastre a posição desejada:</h1>
-    <%= form_with model: @position, local: true do |f| %>
+    <h1 class="text-center my-2">Cadastre a posição desejada</h1>
+    <%= form_with model: @position, local: true, class: 'card card-body bg-light' do |f| %>
       <% if @position.errors.any? %>
         <div id="error_explanation">
           <h2><%= "#{@position.errors.count} erro".pluralize(@position.errors.count) %> impediram que essa posição fosse salvada:</h2>
@@ -23,32 +23,37 @@
       <%= f.label :description, 'Descrição' %>
       <%= f.text_area :description, class: "form-control" %>
       <div class="form-group mt-4">
-      <p class="text-center"><strong>Faixa salarial</strong></p>
       <div class="form-row">
-        <div class="col">
-          <%= f.label :salary_from, 'De:' %>
-          <%= f.number_field :salary_from, class: "form-control" %>
+        <div class="col border-top border-right border-left">
+          <p class="text-center"><strong>Faixa salarial</strong></p>
         </div>
-        <div class="col">
-          <%= f.label :salary_to, 'Até:' %>
-          <%= f.number_field :salary_to, class: "form-control" %>
+        <div class="col border-top border-right border-left ml-2">
+          <p class="text-center"><strong>Condições</strong></p>
         </div>
       </div>
-      <div class="form-group mt-4">
-        <p class="text-center"><strong>Condições</strong></p>
-        <div class="form-row">
-          <div class="col">
+      <div class="form-row">
+        <div class="col border-bottom border-left pb-3">
+          <%= f.label :salary_from %>
+          <%= f.number_field :salary_from, class: "form-control" %>
+        </div>
+        <div class="col border-bottom border-right">
+          <%= f.label :salary_to %>
+          <%= f.number_field :salary_to, class: "form-control" %>
+        </div>
+        <div class="col border-bottom border-left ml-2">
             <%= f.label :hiring_scheme, 'Regime' %>
             <%= f.select :hiring_scheme, Position.hiring_schemes.map { |k, v| [ I18n.t("activerecord.attributes.position.hiring_scheme.#{k}"), k] }, {}, class: "form-control" %>
           </div>
 
-          <div class="col">
+          <div class="col border-bottom border-right">
             <%= f.label :office_hours, 'Expediente' %>
             <%= f.select :office_hours, Position.office_hours.map { |k, v| [ I18n.t("activerecord.attributes.position.office_hours.#{k}"), k] }, {}, class: "form-control" %>
           </div>
-        </div>
       </div>
-      <%= f.submit 'Enviar', class: "mt-4 form-control btn btn-primary" %>
+      <div class="row justify-content-end">
+        <%= link_to 'Voltar', dashboard_companies_path, class: "mt-4 btn btn-secondary" %>
+        <%= f.submit 'Enviar', class: "mt-4 btn btn-primary mx-2" %>
+      </div>
     <% end %>
     </div>
   </div>
