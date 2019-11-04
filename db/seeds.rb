@@ -56,7 +56,8 @@ Message.create!(sendable: employee, selection_process: selection_process,
                       'podemos marcar uma entrevista?')
 offer_message = Message.create!(sendable: employee,
                                 selection_process: selection_process,
-                                text: 'Venha fazer parte da nossa equipe!')
+                                text: 'Venha fazer parte da nossa equipe!',
+                                message_type: :new_offer)
 
 offer = Offer.create!(salary: 2500.00, selection_process: selection_process,
                       hiring_scheme: :clt, status: :pending,
