@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :companies, only: %i[index edit update show] do
+  resources :companies, only: %i[edit update show] do
     collection do
       get 'dashboard'
       get 'invites'
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
     post 'interviews/accept/:id', to: 'interviews#accept', on: :member, as: :accept_interview
     post 'interviews/reject/:id', to: 'interviews#reject', on: :member, as: :reject_interview
-    
+
     resources :offers, only: %i[new create], path: 'invites/selection_process/:selection_process_id/offers'
   end
 
