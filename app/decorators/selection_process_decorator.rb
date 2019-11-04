@@ -16,6 +16,13 @@ class SelectionProcessDecorator < Draper::Decorator
     btn_offer + msg_offer
   end
 
+  def image_logo
+    logo = candidate.candidate_profile.avatar.attached?
+    return candidate.candidate_profile.avatar if logo
+
+    image_url('placeholder.png')
+  end
+
   private
 
   def btn_offer
