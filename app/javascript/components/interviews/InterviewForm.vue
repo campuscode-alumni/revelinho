@@ -56,9 +56,9 @@
     data() {
       return {
         initialInterview: {
-          date: null,
-          time_from: null,
-          time_to: null,
+          date: moment().format('YYYY-MM-DD'),
+          time_from: moment().format('HH:mm'),
+          time_to: moment().format('HH:mm'),
           address: '',
           format: '',
         },
@@ -95,13 +95,13 @@
         return JSON.parse(this.formats_json || {}).formats
       },
       date() {
-        return this.interview.date ? moment(this.interview.date, 'YYYY-MM-DD') : moment()
+        return moment(this.interview.date, 'YYYY-MM-DD')
       },
       timeFrom() {
-        return this.interview.time_from ? moment(this.interview.time_from, 'HH:mm') : moment()
+        return moment(this.interview.time_from, 'HH:mm')
       },
       timeTo() {
-        return this.interview.time_to ? moment(this.interview.time_to, 'HH:mm') : moment()
+        return moment(this.interview.time_to, 'HH:mm')
       }
     },
     methods: {
@@ -109,7 +109,7 @@
         this.$emit('show')
       },
       onChangeDate(date, dateString) {
-        this.interview.date = dateString
+        this.interview.date = date.format('YYYY-MM-DD')
       },
       onChangeTimeFrom(time, timeString) {
         this.interview.time_from = timeString
