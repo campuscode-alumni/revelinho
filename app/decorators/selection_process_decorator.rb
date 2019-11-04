@@ -41,8 +41,13 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def btn_schedule_interview
-    link_to 'Agendar nova entrevista', new_selection_process_interview_path(id),
-            class: 'btn btn-outline-info btn-sm mb-3'
+    if employee_signed_in?
+      link_to 'Agendar nova entrevista',
+              new_selection_process_interview_path(id),
+              class: 'btn btn-outline-info btn-sm mb-3'
+    else
+      ''
+    end
   end
 
   private
