@@ -79,14 +79,23 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def employee_data
-    data({ avatar: company_profile.logo, path: candidate_path(candidate) },
+    data({ avatar: avatar(company_profile.logo,
+                          'companies/company-default-logo.jpeg'),
+           path: candidate_path(candidate) },
          company.name, name: employee.name, email: employee.email,
                        phone: company_profile.phone)
   end
 
   def candidate_data
-    data({ avatar: candidate.avatar, path: company_path(company) }, '',
+    data({ avatar: avatar(candidate.avatar, 'users/user-default.png'),
+           path: company_path(company) }, '',
          name: candidate.name, phone: candidate.phone, email: candidate.email)
+  end
+
+  def avatar(logo, path_file)
+    return image_url(path_file) unless logo&.attached?
+
+    logo
   end
 
   def main_content(data)

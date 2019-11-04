@@ -9,7 +9,7 @@ class InviteDecorator < Draper::Decorator
   def logo
     return company_profile.logo if company_profile.logo.attached?
 
-    image_url('placeholder.png')
+    image_url('companies/company-default-logo.jpeg')
   end
 
   private
