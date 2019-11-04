@@ -14,10 +14,6 @@ FactoryBot.define do
                                           'gatinho.jpg'), 'image/jpg')
     end
 
-    trait :with_candidate do
-      candidate
-    end
-
     trait :without_avatar do
       avatar { nil }
     end
