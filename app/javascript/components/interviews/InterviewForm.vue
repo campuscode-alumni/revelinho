@@ -10,7 +10,7 @@
     >
       <a-form :form="form">
         <a-form-item label="Data" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
-          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :value="date"/>
+          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :value="date" :allow-clear="false"/>
         </a-form-item>
 
         <a-form-item label="Horário" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
