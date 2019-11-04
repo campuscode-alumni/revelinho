@@ -8,8 +8,8 @@ class OffersController < ApplicationController
   def new; end
 
   def create
-    offer = @selection_process.offers << @offer
-    if offer.present?
+    if @offer.present?
+      @selection_process.offers << @offer
       OfferMailer.notify_candidate(@offer.id).deliver_now
       return redirect_to selection_process_candidates_path(@selection_process)
     end
@@ -58,7 +58,7 @@ class OffersController < ApplicationController
   def new_offer
     return redirect_if_pending if pending_offer?
 
-    return unless is_valid_date?
+    return unless valid_date?
 
     @offer = Offer.new(offer_params) do |o|
       o.employee = current_employee
@@ -69,7 +69,7 @@ class OffersController < ApplicationController
     end
   end
 
-  def is_valid_date?
+  def valid_date?
     day, month, year = params[:offer][:start_date].split '/'
     Date.valid_date? year.to_i, month.to_i, day.to_i
   end
