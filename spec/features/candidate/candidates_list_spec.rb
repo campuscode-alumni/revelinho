@@ -64,7 +64,7 @@ feature 'Candidates list' do
     expect(page).to have_content('Mestrado em andamento')
   end
 
-  scenario 'Employee sees candidate\'s page and returns to home page' do
+  scenario 'Employee sees candidate\'s page and returns to all candidates' do
     candidate = create(:candidate, name: 'Gustavo',
                                    occupation: 'full stack developer',
                                    educational_level: 'Mestrado em andamento')
@@ -76,9 +76,9 @@ feature 'Candidates list' do
     visit dashboard_companies_path
     click_on 'Candidatos disponíveis'
     click_on 'Gustavo'
-    click_on 'Voltar'
+    click_on I18n.t('messages.go_back')
 
-    expect(current_path).to eq(dashboard_companies_path)
+    expect(current_path).to eq(candidates_path)
   end
 
   scenario 'Candidate cannot see index showing profiles of other candidates' do
