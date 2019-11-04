@@ -20,7 +20,6 @@ RSpec.describe CandidateDashboardDecorator do
         include 'Seu perfil está ativo. Aguarde o contato das empresas '\
            'interessadas.'
       )
-      expect(candidate_decorator.info_header_text).to(include 'Editar Perfil')
       expect(candidate_decorator.info_header_text).to(include 'Ver seu perfil')
     end
 
