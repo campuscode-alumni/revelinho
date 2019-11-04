@@ -2,15 +2,6 @@ require 'rails_helper'
 
 describe CompanyProfileDecorator do
   context '#company_profile_link' do
-    it 'has to present an edit link if company profile exists' do
-      company = create(:company)
-      create(:company_profile, company: company)
-      company_link = CompanyProfileDecorator.decorate(company)
-                                            .company_profile_link
-
-      expect(company_link).to include('Editar perfil da empresa')
-    end
-
     it 'has to present a create link if company profile does not exist' do
       company = create(:company)
       company_link = CompanyProfileDecorator.decorate(company)
@@ -41,21 +32,6 @@ describe CompanyProfileDecorator do
 
       expect(card_render).to include('2')
       expect(card_render).to include('Convites')
-    end
-
-    it 'shows pending interviews count' do
-      company = create(:company, url_domain: 'revelo.com.br')
-      candidate = create(:candidate)
-      create(:candidate_profile, candidate: candidate)
-      position = create(:position, company: company)
-      invite = create(:invite, position: position, candidate: candidate)
-      selection_process = create(:selection_process, invite: invite)
-      create(:interview, selection_process: selection_process)
-      create(:interview, selection_process: selection_process)
-      card_render = CompanyProfileDecorator.decorate(company).card_render
-
-      expect(card_render).to include('2')
-      expect(card_render).to include('Entrevistas')
     end
   end
 end
