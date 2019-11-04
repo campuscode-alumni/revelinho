@@ -8,6 +8,7 @@
       <div class="card card-body">
         <header class="text-center">
           <h3 class="my-2">Entrevistas</h3>
+          <%= @selection_process.btn_schedule_interview %>
         </header>
         <%= render partial: '/interviews/interview_invite', collection: @interviews, as: :interview %>
       </div>

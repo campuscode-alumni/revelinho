@@ -9,7 +9,7 @@ class MessageDecorator < Draper::Decorator
   end
 
   def message_sendable
-    return '' unless chat?
+    return '' unless as_chat?
 
     content_tag(:div, image_tag(avatar, class: 'avatar-50') +
                 content_tag(:h5, sendable.name),
@@ -17,6 +17,10 @@ class MessageDecorator < Draper::Decorator
   end
 
   def card_style
-    message_type + (chat? ? '' : ' notification-card')
+    message_type + (as_chat? ? '' : ' notification-card')
+  end
+
+  def as_chat?
+    chat? || new_offer? || new_interview?
   end
 end

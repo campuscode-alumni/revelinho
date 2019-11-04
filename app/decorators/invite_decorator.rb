@@ -16,7 +16,7 @@ class InviteDecorator < Draper::Decorator
 
   def link_invite
     link_to('Ver convite',
-            selection_process_candidates_path(invite.selection_process),
+            selection_process_path(invite.selection_process),
             class: 'btn btn-primary flex-grow-1 m-3')
   end
 end

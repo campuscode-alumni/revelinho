@@ -13,6 +13,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -38,6 +39,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+require 'webdrivers'
+
 FactoryBot::SyntaxRunner.class_eval do
   include ActionDispatch::TestProcess
 end
@@ -49,12 +52,23 @@ RSpec.configure do |config|
 
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :decorators
-  config.include Warden::Test::Helpers, type: :decorators
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  Capybara.server = :puma, { Silent: true }
+
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
+  end
+
+  Capybara.javascript_driver = :selenium_chrome_headless
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

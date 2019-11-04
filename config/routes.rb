@@ -32,12 +32,18 @@ Rails.application.routes.draw do
       post 'invites/select_process/:id', to: 'selection_processes#send_message', as: :send_message
       post 'invites/interviews/:id/feedbacks', to: 'interview_feedbacks#send_feedback', as: :send_feedback
       get 'offers'
+      get 'my-profile'
     end
-    
+
     resources :offers, only: %i[new create show], path: 'invites/selection_process/:selection_process_id/offers' do
       post 'accept', on: :member
       post 'reject', on: :member
     end
+  end
+  
+  resources :selection_processes, only: %i[show] do
+    post 'selection_process/:id', to: 'selection_processes#send_message', as: :send_message
+    resources :interviews, only: %i[index new create update]
   end
 
   resources :positions, only: %i[new create show]

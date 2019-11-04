@@ -1,30 +1,18 @@
 class InterviewDecorator < Draper::Decorator
-  include Draper::LazyHelpers
-  # attr_reader :interview
   delegate_all
-
-  # def initialize(interview, user)
-  #   @interview = interview
-  #   @user = user
-  #   super(interview)
-  # end
-
-  # def self.decorate_collection(interview, user)
-  #   interview.map { |i| new(i, user) }
-  # end
+  include Draper::LazyHelpers
 
   def formatting_datetime
-    I18n.l(interview.date, format: :long) + ', das ' + interview.time_from +
-      ' às ' + interview.time_to
+    I18n.l(interview.date, format: :long) +
+      ", #{interview.time_from} - #{interview.time_to}"
   end
 
   def interview_address
-    I18n.t('activerecord.attributes.interview.address',
-           address: interview.address)
+    I18n.t('activerecord.attributes.interview.address') + interview.address
   end
 
   def interview_format
-    I18n.t('activerecord.attributes.interview.format.' + interview.format)
+    I18n.t('interview.format.' + interview.format)
   end
 
   def interview_status_badge
@@ -32,7 +20,7 @@ class InterviewDecorator < Draper::Decorator
     content_tag(:span, badge_info[:content], class: badge_info[:class])
   end
 
-  def footer (user)
+  def footer(user)
     return decision_buttons if user.is_a? Candidate
 
     employee_footer
@@ -41,7 +29,7 @@ class InterviewDecorator < Draper::Decorator
   def status_buttons
     safe_join(Interview.statuses.map do |stats|
       link_to(
-        I18n.t("activerecord.attributes.interview.status.#{stats[0]}"),
+        I18n.t("interview.status.#{stats[0]}"),
         set_interview_status_candidate_path(interview, status: stats[0].to_sym),
         class: 'dropdown-item', method: :post
       )

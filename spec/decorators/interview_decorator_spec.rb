@@ -14,13 +14,13 @@ describe InterviewDecorator do
       interview = create(:interview,
                          date: '2019-10-26',
                          time_from: '17:00',
-                         time_to: '18:00',
+                         time_to: '17:30',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process).decorate
 
-      expect(interview.formatting_datetime).to eq '26 de outubro de 2019, ' \
-        'das 17:00 às 18:00'
+      expect(interview.formatting_datetime).to eq '26 de outubro de 2019, '\
+                                                  '17:00 - 17:30'
     end
   end
   context '#interview_address' do
@@ -33,16 +33,18 @@ describe InterviewDecorator do
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending)
       selection_process = invite.create_selection_process
-      interview = create(:interview,
-                         date: '2019-10-26',
-                         time_from: '17:00',
-                         time_to: '18:00',
-                         format: :face_to_face,
-                         address: 'Av. Paulista, 2000',
-                         selection_process: selection_process).decorate
+      interview = create(
+        :interview,
+        date: '2019-10-26',
+        time_from: '17:00',
+        time_to: '17:30',
+        format: :face_to_face,
+        address: 'Av. Paulista, 2000',
+        selection_process: selection_process
+      ).decorate
 
       expect(interview.interview_address).to eq 'Endereço: Av. Paulista, 2000'
-      expect(interview.interview_format).to eq 'Formato: Presencial'
+      expect(interview.interview_format).to eq 'Presencial'
     end
   end
   context '#footer' do
@@ -80,13 +82,13 @@ describe InterviewDecorator do
       interview = create(:interview,
                          date: '2019-10-26',
                          time_from: '17:00',
-                         time_to: '18:00',
+                         time_to: '17:30',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
                          status: :scheduled).decorate
 
-      expect(interview.footer candidate).to eq ''
+      expect(interview.footer(candidate)).to eq ''
     end
     it 'shows status picker if it is a employee' do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
@@ -100,7 +102,7 @@ describe InterviewDecorator do
       selection_process = invite.create_selection_process
       interview = create(:interview, date: '2019-10-26',
                                      time_from: '17:00',
-                                     time_to: '18:00',
+                                     time_to: '17:30',
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process,
@@ -155,7 +157,7 @@ describe InterviewDecorator do
       interview = create(:interview,
                          date: '2019-10-26',
                          time_from: '17:00',
-                         time_to: '18:00',
+                         time_to: '17:30',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
@@ -180,7 +182,7 @@ describe InterviewDecorator do
       interview = create(:interview,
                          date: '2019-10-26',
                          time_from: '17:00',
-                         time_to: '18:00',
+                         time_to: '17:30',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
@@ -205,7 +207,7 @@ describe InterviewDecorator do
       interview = create(:interview,
                          date: '2019-10-26',
                          time_from: '17:00',
-                         time_to: '18:00',
+                         time_to: '17:30',
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
@@ -224,8 +226,7 @@ describe InterviewDecorator do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
       company.company_profile = create(:company_profile)
       candidate = create(:candidate, status: :published)
-      employee = create(:employee, email: 'joao@revelo.com.br',
-                                   company: company)
+      create(:employee, email: 'joao@revelo.com.br', company: company)
       position = create(:position, company: company)
       invite = create(:invite, candidate: candidate, position: position,
                                status: :pending)

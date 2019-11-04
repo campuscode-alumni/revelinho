@@ -5,6 +5,7 @@ class SelectionProcessesController < ApplicationController
 
   def show
     redirect_to dashboard_companies_path unless belongs_here?
+    @selection_process.decorate
   end
 
   def send_message
@@ -15,16 +16,12 @@ class SelectionProcessesController < ApplicationController
     flash[:notice] = 'Não foi possivel enviar mensagem. Tente novamente' if
      message.errors.any?
 
-    redirect_to selection_process_candidates_path(@selection_process)
+    redirect_to selection_process_path(@selection_process)
   end
 
   private
 
   def decorate_interview
-    # user = current_candidate || current_employee
-    # @interviews = InterviewDecorator.decorate_collection(
-    #   @selection_process.interviews.order(id: :desc), user
-    # )
     @interviews = @selection_process.interviews.order(id: :desc).decorate
   end
 
