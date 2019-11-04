@@ -65,7 +65,7 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def feedback_button
-    link_to 'Ver feedbacks', interview_feedback_candidates_path(interview),
+    link_to 'Feedbacks', interview_feedback_candidates_path(interview),
             class: 'btn btn-info'
   end
 

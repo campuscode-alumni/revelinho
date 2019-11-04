@@ -139,6 +139,6 @@ feature 'candidate sees interview invite' do
 
     expect(page).to have_content(interview.address)
     expect(page).not_to have_link('Marcar como')
-    expect(page).not_to have_link('Ver feedbacks')
+    expect(page).not_to have_link('Feedbacks')
   end
 end

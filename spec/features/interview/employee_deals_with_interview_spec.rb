@@ -59,7 +59,7 @@ feature 'employee sees interview invite' do
     expect(page).to have_content('Formato: Presencial')
     expect(page).to have_content('Entrevista realizada')
     expect(page).not_to have_content('Aguardando resposta')
-    expect(page).to have_link('Ver feedbacks')
+    expect(page).to have_link('Feedbacks')
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
   end
@@ -84,7 +84,7 @@ feature 'employee sees interview invite' do
     login_as(employee, scope: :employee)
     visit selection_process_candidates_path(selection_process)
 
-    expect(page).to have_link('Ver feedbacks')
+    expect(page).to have_link('Feedbacks')
     expect(page).to have_link('Marcar como')
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')

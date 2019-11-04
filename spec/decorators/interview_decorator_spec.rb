@@ -139,7 +139,7 @@ describe InterviewDecorator do
       expect(footer).to include 'Ausente'
       expect(footer).to include 'Cancelada'
       expect(footer).to include 'Marcar'
-      expect(footer).to include 'Ver feedbacks'
+      expect(footer).to include 'Feedbacks'
     end
   end
   context '#interview_status_badge' do

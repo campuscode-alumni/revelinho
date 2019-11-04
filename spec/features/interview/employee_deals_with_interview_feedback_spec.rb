@@ -20,7 +20,7 @@ feature 'employee sees interview feedback' do
 
     login_as(employee, scope: :employee)
     visit selection_process_candidates_path(selection_process)
-    click_on 'Ver feedbacks'
+    click_on 'Feedbacks'
 
     expect(page).to have_link('Voltar')
     expect(page).to have_button('Enviar Feedback')
@@ -45,7 +45,7 @@ feature 'employee sees interview feedback' do
 
     login_as(employee, scope: :employee)
     visit selection_process_candidates_path(invite.selection_process)
-    click_on 'Ver feedbacks'
+    click_on 'Feedbacks'
 
     fill_in 'Escreva a sua mensagem', with: 'A entrevista foi um sucesso'
     click_on('Enviar Feedback')
@@ -73,7 +73,7 @@ feature 'employee sees interview feedback' do
 
     login_as(employee, scope: :employee)
     visit selection_process_candidates_path(invite.selection_process)
-    click_on 'Ver feedbacks'
+    click_on 'Feedbacks'
 
     fill_in 'Escreva a sua mensagem', with: ''
     click_on('Enviar Feedback')
@@ -108,7 +108,7 @@ feature 'employee sees interview feedback' do
 
     login_as(another_employee, scope: :employee)
     visit selection_process_candidates_path(invite.selection_process)
-    click_on 'Ver feedbacks'
+    click_on 'Feedbacks'
 
     expect(page).to have_content(employee.name)
     expect(page).to have_content('Foi uma boa entrevista')
@@ -146,7 +146,7 @@ feature 'employee sees interview feedback' do
     visit selection_process_candidates_path(invite.selection_process)
 
     within "#interview-#{another_interview.id}" do
-      click_on 'Ver feedbacks'
+      click_on 'Feedbacks'
     end
 
     expect(page).not_to have_content(employee.name)
