@@ -28,9 +28,13 @@ Rails.application.routes.draw do
       get 'offers'
       get 'invites/select_process/:id', to: 'selection_processes#show', as: :selection_process
       post 'invites/select_process/:id', to: 'selection_processes#send_message', as: :send_message
+      get 'my-profile'
     end
-    
-    resources :offers, only: %i[new create], path: 'invites/selection_process/:selection_process_id/offers'
+
+    resources :offers, only: %i[new create show], path: 'invites/selection_process/:selection_process_id/offers' do
+      post 'accept', on: :member
+      post 'reject', on: :member
+    end
   end
 
   resources :positions, only: %i[new create show]

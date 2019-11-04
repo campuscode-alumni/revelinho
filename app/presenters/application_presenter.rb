@@ -66,7 +66,7 @@ class ApplicationPresenter < SimpleDelegator
 
   def nav_user_options_candidate
     [{ text: I18n.t('navbar.candidate_profile'),
-       path: candidate_path(user) },
+       path: my_profile_candidates_path },
      { text: I18n.t('navbar.edit_candidate'),
        path: edit_candidate_profile_path(user) }]
   end

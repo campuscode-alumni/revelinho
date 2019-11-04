@@ -101,4 +101,17 @@ feature 'Candidate completes personal profile' do
     expect(current_path).to eq root_path
     expect(page).to have_content(I18n.t('error_messages.duplicated_login'))
   end
+
+  scenario 'and is able to see his own profile' do
+    candidate = create(:candidate, status: :published)
+    create(:candidate_profile, candidate: candidate)
+
+    login_as(candidate, scope: :candidate)
+
+    visit root_path
+    click_on 'Candidato'
+    click_on 'Ver perfil'
+
+    expect(current_path).to eq(my_profile_candidates_path)
+  end
 end

@@ -26,8 +26,8 @@ Candidate.all.each do |candidate|
   )
   profile.avatar.attach(io: File.open(Rails.root.join('spec', 'support',
                                                       'images',
-                                                      'gatinho.jpg')),
-                        filename: 'gatinho.jpg')
+                                                      'user-default.png')),
+                        filename: 'user-default.png')
 end
 
 company = Company.create!(name: 'Revelo', url_domain: 'revelo.com.br', status: :active)
@@ -51,20 +51,20 @@ selection_process = Invite.last.create_selection_process
 
 Message.create!(sendable: c_jose, selection_process: selection_process,
                 text: 'Olá, obrigado pelo convite.')
-Message.create!(sendable: Employee.first, selection_process: selection_process,
+Message.create!(sendable: employee, selection_process: selection_process,
                 text: 'Olá! Adoramos o seu perfil, '\
                       'podemos marcar uma entrevista?')
-offer_message = Message.create!(sendable: Candidate.first,
+offer_message = Message.create!(sendable: employee,
                                 selection_process: selection_process,
                                 text: 'Venha fazer parte da nossa equipe!')
 
 offer = Offer.create!(salary: 2500.00, selection_process: selection_process,
                       hiring_scheme: :clt, status: :pending,
-                      start_date: Date.current, employee: Employee.last,
+                      start_date: Date.current, employee: employee,
                       message: offer_message)
 
-company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
-employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'gatinho.jpg')), filename: "gatinho.jpg")
+company.company_profile.logo.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'logo-revelo.png')), filename: "logo-revelo.png")
+employee.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'user-default2.png')), filename: "user-default2.png")
 
 Interview.create!(date: '2019-10-26', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process)
 Interview.create!(date: '2019-08-30', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
