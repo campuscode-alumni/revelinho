@@ -24,6 +24,16 @@
 .candidate-page {
   $image-height: 8em;
 
+  .candidate {
+    .heading {
+      margin-bottom: 0;
+    }
+
+    .text {
+      color: black;
+    }
+  }
+
   .candidate-header {
     background-color: $dark;
     width: 100%;
@@ -72,54 +82,54 @@
     }
   }
   
-  .candidate {
-    padding-top: $image-height / 2;
-    position: relative;
+  // .candidate {
+  //   padding-top: $image-height / 2;
+  //   position: relative;
   
-    .text-wrapper {
-      padding: .2em;
-      margin-right: 40px;
+  //   .text-wrapper {
+  //     padding: .2em;
+  //     margin-right: 40px;
       
-      @include media-breakpoint-down(sm) {
-        margin-right: 0;
-        padding: .5em;
-      }
+  //     @include media-breakpoint-down(sm) {
+  //       margin-right: 0;
+  //       padding: .5em;
+  //     }
   
-      .header {
-        font-weight: bold;
+  //     .header {
+  //       font-weight: bold;
   
-        @include media-breakpoint-up(md) {
-          text-align: end;
-        }
-        @include media-breakpoint-down(sm) {
-          text-align: center;
-        }
-      }
+  //       @include media-breakpoint-up(md) {
+  //         text-align: end;
+  //       }
+  //       @include media-breakpoint-down(sm) {
+  //         text-align: center;
+  //       }
+  //     }
   
-      .content{
-        @include media-breakpoint-down(sm) {
-          text-align: center;
-        }
-      }
-    }
+  //     .content{
+  //       @include media-breakpoint-down(sm) {
+  //         text-align: center;
+  //       }
+  //     }
+  //   }
 
-    .employee-notes {
-      $header-height: 3em;
-      margin-top: -1 * ($image-height / 2 + $header-height);
+  //   .employee-notes {
+  //     $header-height: 3em;
+  //     margin-top: -1 * ($image-height / 2 + $header-height);
 
-      .header {
-        height: $header-height;
-        background-color: $red;
-        display: flex;
-        align-items: center;
-        color: $white;
-        font-weight: bold;
-      }
+  //     .header {
+  //       height: $header-height;
+  //       background-color: $red;
+  //       display: flex;
+  //       align-items: center;
+  //       color: $white;
+  //       font-weight: bold;
+  //     }
       
-      .comments {
-        max-height: 25em;
-        overflow: auto;
-      }
-    }
-  }
+  //     .comments {
+  //       max-height: 25em;
+  //       overflow: auto;
+  //     }
+  //   }
+  // }
 }

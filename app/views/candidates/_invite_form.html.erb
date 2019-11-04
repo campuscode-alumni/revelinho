@@ -4,7 +4,7 @@
     <%= f.collection_select :position_id, @positions, :id, :title, {}, class: 'custom-select'  %>
   </div>
   <div class="form-group">
-    <%= f.text_field(:message, placeholder: 'Mensagem para o candidato', name: 'invite-message', class: 'form-control') %>
+    <%= f.text_area(:message, placeholder: 'Mensagem para o candidato', name: 'invite-message', class: 'form-control') %>
   </div>
   <div class="form-group d-flex justify-content-between">
     <%= link_to 'Adicionar posição', new_position_path %>
