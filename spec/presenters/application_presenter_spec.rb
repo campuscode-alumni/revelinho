@@ -17,6 +17,7 @@ describe 'ApplicationPresenter' do
       nav_links = ApplicationPresenter.new(employee).nav_links
 
       expect(nav_links).to include('Criar posição')
+      expect(nav_links).to include('Ver posições')
       expect(nav_links).to include('Empresa')
       expect(nav_links).to include('Ver empresa')
       expect(nav_links).to include('Editar perfil')
