@@ -6,24 +6,16 @@ class CompanyProfileDecorator < Draper::Decorator
   end
 
   def company_profile_link
-    return link_to_edit_profile if company_profile_complete?
+    return link_to_complete_profile unless company_profile_complete?
 
-    link_to_complete_profile
+    ''
   end
 
   def card_render
     render(partial: 'shared/dashboard_card_button',
            locals: invites_card_locals) +
       render(partial: 'shared/dashboard_card_button',
-             locals: selection_processes_card_locals) +
-      render(partial: 'shared/dashboard_card_button',
-             locals: interviews_card_locals)
-  end
-
-  def link_to_edit_profile
-    link_to 'Editar perfil da empresa',
-            edit_company_profile_path(@company.company_profile),
-            class: 'btn btn-outline-dark'
+             locals: selection_processes_card_locals)
   end
 
   def link_to_complete_profile
@@ -35,10 +27,18 @@ class CompanyProfileDecorator < Draper::Decorator
 
   private
 
+  def count
+    count_invite = 0
+    @company.positions.each do |position|
+      count_invite += position.invites.count
+    end
+    count_invite
+  end
+
   def invites_card_locals
     { icon: 'fa-edit',
       title: I18n.t('activerecord.models.invite').pluralize,
-      count: @company.invites.pending.count,
+      count: count,
       id: 'invites-card',
       path: 'invites' }
   end
@@ -49,14 +49,6 @@ class CompanyProfileDecorator < Draper::Decorator
       count: CompanySelectionProcessesQuery.new(@company).count,
       id: 'selection-processes-card',
       path: 'selection_processes' }
-  end
-
-  def interviews_card_locals
-    { icon: 'fa-edit',
-      title: I18n.t('activerecord.models.interview.other'),
-      count: 1,
-      id: 'interviews-card',
-      path: 'interviews' }
   end
 
   def company_profile_complete?

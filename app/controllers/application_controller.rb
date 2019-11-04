@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_presenter
-    @application_presenter = ApplicationPresenter.new(self)
+    @application_presenter = ApplicationPresenter.new(current_user)
+    @flash_alerts = ApplicationDecorator.new(self).flash_alerts
   end
 
   def not_found

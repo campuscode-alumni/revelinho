@@ -17,17 +17,12 @@ feature 'Employee schedules interview' do
 
     login_as(employee, scope: :employee)
 
-    visit new_selection_process_interview_path(selection_process)
+    visit selection_process_candidates_path(selection_process)
+    click_on 'Agendar nova entrevista'
     click_on 'interview-modal-button'
 
     find('#date-field > div > i > svg').click
-    if has_css?('.ant-calendar-selected-day')
-      select_day_input = find('.ant-calendar-selected-day')
-      select_day_input.click
-    else
-      find('#date-field > div > i > svg').click
-      find('.ant-calendar-selected-day').click
-    end
+    find('.ant-calendar-selected-day').click
 
     find('#time-from-field > input').click
     find('.ant-time-picker-panel-select-option-selected', match: :first).click
@@ -59,7 +54,8 @@ feature 'Employee schedules interview' do
     selection_process = create(:selection_process, invite: invite)
 
     login_as(employee, scope: :employee)
-    visit new_selection_process_interview_path(selection_process)
+    visit selection_process_candidates_path(selection_process)
+    click_on 'Agendar nova entrevista'
     click_on 'interview-modal-button'
 
     fill_in 'address-field', with: ''

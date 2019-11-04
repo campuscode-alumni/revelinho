@@ -12,8 +12,7 @@ class CandidateProfilesController < ApplicationController
     if @candidate_profile.save
       @candidate_profile.candidate.published!
       flash[:alert] = I18n.t('candidates.update')
-
-      redirect_to @candidate_profile.candidate
+      redirect_to my_profile_candidates_url
     else
       render :new
     end
@@ -24,8 +23,7 @@ class CandidateProfilesController < ApplicationController
   def update
     if @candidate_profile.update(candidate_profile_params)
       flash[:alert] = I18n.t('candidates.update')
-
-      redirect_to @candidate_profile.candidate
+      redirect_to my_profile_candidates_url
     else
       render :edit
     end
