@@ -11,6 +11,10 @@ pt-BR:
         occupation: Profissão
         educational_level: Nível de Escolaridade
         address: Endereço
+        city: Cidade
+        state: Estado
+        country: País
+        zip_code: CEP
         birthday: Data de Nascimento
         cpf: Cpf
         password: Senha

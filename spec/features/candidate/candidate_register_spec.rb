@@ -13,7 +13,7 @@ feature 'candidate register' do
     fill_in 'Profissão', with: candidate.occupation
     fill_in 'Data de Nascimento', with: candidate.birthday
     fill_in 'Nível de Escolaridade', with: candidate.educational_level
-    fill_in 'Email', with: candidate.email
+    fill_in 'E-mail', with: candidate.email
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar Senha', with: '123456'
     fill_in 'Cidade', with: 'Manaus'
@@ -37,7 +37,7 @@ feature 'candidate register' do
     fill_in 'Profissão', with: candidate.occupation
     fill_in 'Data de Nascimento', with: candidate.birthday
     fill_in 'Nível de Escolaridade', with: candidate.educational_level
-    fill_in 'Email', with: candidate.email
+    fill_in 'E-mail', with: candidate.email
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar Senha', with: '123456'
     click_on 'Registrar'
