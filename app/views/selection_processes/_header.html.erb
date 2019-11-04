@@ -1,21 +1,15 @@
 <div class="col-12 bg-white">
   <div class="col-12 col-md-10 offset-md-1 mb-3 pt-3 pb-3">
     <div class="row">
-      <div class="col-12 col-md-6">
-        <%= link_to image_tag(@selection_process.company_profile.logo, class: 'avatar-process float-left mr-2'), company_path(@selection_process.company) %>
-        <div class="float-left pl-2">
-          <h5><b><%= @selection_process.company.name %></b></h5>
-          <h6 class="lead-4">Seu contato principal é:</h6>
-          
-          <p class="mb-0"><small><%= @selection_process.employee.name %></small></p>
-          <p class="mb-0"><small>Telefone: <%= @selection_process.company_profile.phone %></small></p>
-          <p class="mb-0"><small>Email: <%= @selection_process.employee.email %></small></p>
-        </div>
+      <div class="col-12 col-md-6 main-description">
+        <%= @selection_process.decorate.main_contact %>
       </div>
       <div class="col-12 col-md-6 text-md-right">
-        <div class="float-md-right">
-          <h3><%= @selection_process.position.title %></h3>
-          <%= @selection_process.decorate.contract_resume %>
+        <div class="float-md-right position-description">
+          <h5><%= @selection_process.position.title %></h5>
+          <%= @selection_process.decorate.p_print_hiring_scheme  %>
+          <%= @selection_process.decorate.p_print_office_hours %>
+          <%= @selection_process.decorate.p_print_salary %>
         </div>
       </div>
     </div>

@@ -1,16 +1,22 @@
 class InterviewDecorator < Draper::Decorator
+  delegate_all
   include Draper::LazyHelpers
 
-  delegate_all
+  def time_from_localized
+    I18n.localize(Time.zone.parse(time_from, Time.zone.now), format: :short)
+  end
+
+  def time_to_localized
+    I18n.localize(Time.zone.parse(time_to, Time.zone.now), format: :short)
+  end
 
   def formatting_datetime
-    I18n.l(interview.date, format: :long) + ', das ' + interview.time_from +
-      ' às ' + interview.time_to
+    I18n.l(interview.date, format: :long) +
+      ", #{interview.time_from} - #{interview.time_to}"
   end
 
   def interview_address
-    I18n.t('activerecord.attributes.interview.address',
-           address: interview.address)
+    I18n.t('activerecord.attributes.interview.address') + interview.address
   end
 
   def interview_format
@@ -24,27 +30,17 @@ class InterviewDecorator < Draper::Decorator
   end
 
   def interview_status_badge
-    return scheduled_badge if interview.scheduled?
-    return canceled_badge if interview.canceled?
+    return badge('scheduled') if interview.scheduled?
+    return badge('canceled') if interview.canceled?
 
-    pending_badge
+    badge('pending')
   end
 
   private
 
-  def pending_badge
-    content_tag(:span, I18n.t('interview.status_badge.pending'),
-                class: 'badge badge-warning mb-2')
-  end
-
-  def scheduled_badge
-    content_tag(:span, I18n.t('interview.status_badge.scheduled'),
-                class: 'badge badge-primary mb-2')
-  end
-
-  def canceled_badge
-    content_tag(:span, I18n.t('interview.status_badge.rejected'),
-                class: 'badge badge-danger mb-2')
+  def badge(status)
+    content_tag(:span, I18n.t('interview.status_badge.' + status),
+                class: 'mb-2 badge badge-' + status)
   end
 
   def accept_button

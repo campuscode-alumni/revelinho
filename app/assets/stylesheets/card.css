@@ -26,3 +26,36 @@
 .order-card i {
   font-size: 26px;
 }
+
+.notification-card {
+  color: white;
+  font-size: large;
+  text-align: center;
+  padding: 5px !important;
+  margin-left: 175px;
+  margin-right: 175px;
+}
+
+.new_interview {
+  border-right: 20px solid #8b94eb !important;
+}
+
+.interview_scheduled {
+  background-color: #7fd1af !important;
+}
+
+.interview_canceled {
+  background-color: #f08080 !important;
+}
+
+.new_offer {
+  border-right: 20px solid #8b94eb !important;
+}
+
+.offer_accepted {
+  background-color: #7fd1af !important;
+}
+
+.offer_rejected {
+  background-color: #f08080 !important;
+}

@@ -8,8 +8,7 @@ FactoryBot.define do
     skype_username { 'candidate.skype' }
     linkedin_profile_url { 'https://www.linkedin.com/in/candidate' }
     github_profile_url { 'https://github.com/candidate' }
-    candidate { nil }
-
+    candidate
     avatar do
       fixture_file_upload(Rails.root.join('spec', 'support', 'images',
                                           'gatinho.jpg'), 'image/jpg')
