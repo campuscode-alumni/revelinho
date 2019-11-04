@@ -22,13 +22,7 @@ feature 'Employee schedules interview' do
     click_on 'interview-modal-button'
 
     find('#date-field > div > i > svg').click
-    if has_css?('.ant-calendar-selected-day')
-      select_day_input = find('.ant-calendar-selected-day')
-      select_day_input.click
-    else
-      find('#date-field > div > i > svg').click
-      find('.ant-calendar-selected-day').click
-    end
+    find('.ant-calendar-selected-day').click
 
     find('#time-from-field > input').click
     find('.ant-time-picker-panel-select-option-selected', match: :first).click
