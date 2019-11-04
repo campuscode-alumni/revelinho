@@ -4,7 +4,9 @@ feature 'employee create company on signup' do
   scenario 'successfully' do
     visit root_path
 
-    click_on 'Cadastro de funcionário'
+    click_on 'Login/Cadastro'
+    click_on 'Empresa'
+    click_on 'Inscrever-se'
 
     fill_in 'Nome', with: 'João Silva'
     fill_in 'E-mail', with: 'employee@company.com'

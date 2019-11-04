@@ -1,9 +1,8 @@
 <template>
-  <div id="app">
+  <div id="interviews-form">
     <a-button id="interview-modal-button" type="primary" @click="showModal" shape="circle" icon="plus" :style="showModalButtonStyle"></a-button>
-
     <a-modal
-      title="Agendar Entrevista"
+      :title="title"
       :visible="visible"
       @ok="handleSubmit"
       :confirmLoading="loading"
@@ -11,16 +10,16 @@
     >
       <a-form :form="form">
         <a-form-item label="Data" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
-          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat"/>
+          <a-date-picker id="date-field" @change="onChangeDate" :format="dateFormat" :value="date" :allow-clear="false"/>
         </a-form-item>
 
         <a-form-item label="Horário" :label-col="controlStyle.label" :wrapper-col="controlStyle.wrapper" :style="controlStyle.item">
           <a-form-item :style="{ display: 'inline-block', marginRight: '2em' }">
-            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat"></a-time-picker>
+            <a-time-picker id="time-from-field" @change="onChangeTimeFrom" :minuteStep="5" :format="timeFormat" :value="timeFrom"></a-time-picker>
           </a-form-item>
 
           <a-form-item :style="{ display: 'inline-block' }">
-            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat"></a-time-picker>
+            <a-time-picker id="time-to-field" @change="onChangeTimeTo" :minuteStep="5" :format="timeFormat" :value="timeTo"></a-time-picker>
           </a-form-item>
         </a-form-item>
 
@@ -49,18 +48,17 @@
 </template>
 
 <script>
-  import { InterviewClient } from '../packs/interviews/interviews_client'
-
-  const client = new InterviewClient()
-  const authToken = $('meta[name=csrf-token]').attr('content')
+  import moment from 'moment'
+  import 'moment/locale/pt-br'
+  moment.locale('pt-br')
 
   export default {
     data() {
       return {
         initialInterview: {
-          date: '',
-          time_from: '',
-          time_to: '',
+          date: moment().format('YYYY-MM-DD'),
+          time_from: moment().format('HH:mm'),
+          time_to: moment().format('HH:mm'),
           address: '',
           format: '',
         },
@@ -68,8 +66,6 @@
         dateFormat: 'DD/MM/YYYY',
         timeFormat: 'HH:mm',
         form: this.$form.createForm(this, { name: 'new-interview' }),
-        visible: false,
-        loading: false,
         controlStyle: {
           label: { span: 7 },
           wrapper: { span: 17, marginBottom: 0 },
@@ -82,23 +78,38 @@
         },
         errorMessage: 'Erro ao salvar entrevista',
         successMessage: 'Entrevista salva com sucesso'
-      };
+      }
     },
     props: {
+      setInterview: null,
       formats_json: '',
-      create_url: ''
+      createUrl: '',
+      loading: false,
+      visible: false
     },
     computed: {
-      formats: function() {
+      title() {
+        return this.setInterview ? 'Reagendar Entrevista' : 'Agendar Entrevista'
+      },
+      formats() {
         return JSON.parse(this.formats_json || {}).formats
+      },
+      date() {
+        return moment(this.interview.date, 'YYYY-MM-DD')
+      },
+      timeFrom() {
+        return moment(this.interview.time_from, 'HH:mm')
+      },
+      timeTo() {
+        return moment(this.interview.time_to, 'HH:mm')
       }
     },
     methods: {
       showModal() {
-        this.visible = true;
+        this.$emit('show')
       },
       onChangeDate(date, dateString) {
-        this.interview.date = dateString
+        this.interview.date = date.format('YYYY-MM-DD')
       },
       onChangeTimeFrom(time, timeString) {
         this.interview.time_from = timeString
@@ -107,37 +118,25 @@
         this.interview.time_to = timeString
       },
       handleCancel() {
-        this.visible = false
+        this.$emit('close')
       },
-      handleSubmit(e) {
-        this.loading = true
-        client.create({
-          ...this.interview
-        }, {
-          url: this.create_url,
-          token: authToken
-        }, this.submitCallback)
-      },
-      submitCallback(res, error) {
-        this.loading = false;
-        if (error) {
-          this.notifyUserError()
-        } else {
-          this.visible = false;
-          this.notifyUserSuccess()
-        }
-      },
-      notifyUserSuccess() {
-        this.$notification['success']({
-          message: 'Sucesso',
-          description: 'Entrevista salva',
-        });
-      },
-      notifyUserError() {
-        this.$notification['error']({
-          message: 'Erro',
-          description: 'Erro ao salvar entrevista'
+      handleSubmit() {
+        const method = this.setInterview ? 'update' : 'create'
+        this.$emit(method, {
+          interview: this.interview,
+          url: this.createUrl
         })
+      }
+    },
+    watch: {
+      visible(visible) {
+        if (visible) {
+          if (this.setInterview) {
+            this.interview = {...this.setInterview}
+          } else {
+            this.interview = {...this.initialInterview}
+          }
+        }
       }
     }
   }

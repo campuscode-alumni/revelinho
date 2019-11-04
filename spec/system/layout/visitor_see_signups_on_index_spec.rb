@@ -4,8 +4,10 @@ feature 'Visitor see signups links' do
   scenario 'successfully' do
     visit root_path
 
-    expect(page).to have_content('Cadastro de funcionário')
-    expect(page).to have_content('Cadastro de candidato')
+    click_on 'Login/Cadastro'
+
+    expect(page).to have_link('Candidato')
+    expect(page).to have_link('Empresa')
   end
 
   scenario 'only when not logged' do

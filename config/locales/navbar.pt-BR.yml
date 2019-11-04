@@ -8,8 +8,8 @@ pt-BR:
     interviews: Entrevistas
     logout: Sair
     sign_in:
-      employee: Login funcionário
-      candidate: Login candidato
+      employee: Empresa
+      candidate: Candidato
     see_company: Ver empresa
     edit_company: Editar perfil
     candidate_profile: Ver perfil

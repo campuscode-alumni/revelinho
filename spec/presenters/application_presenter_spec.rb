@@ -25,8 +25,9 @@ describe 'ApplicationPresenter' do
 
     it 'shows links for visitor' do
       nav_links = ApplicationPresenter.new.nav_links
-      expect(nav_links).to include('Login funcionário')
-      expect(nav_links).to include('Login candidato')
+      expect(nav_links).to include('Login/Cadastro')
+      expect(nav_links).to include('Empresa')
+      expect(nav_links).to include('Candidato')
     end
   end
 end
