@@ -1,17 +1,20 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="page-header">
-        <h1>
-          <%= @position.title %> <small>@ <%= @position.company.name %></small>
-        </h1>
+  <h1 class="text-center">Posição criada para a empresa <%= current_employee.company.name %></h1>
+  <div class="mt-4">
+      <div class="invite-card">
+        <h2 class="text-center mt-4" style="font-size: 1.5rem">Posição: <%= @position.title%></h2>
+        <section class="invites-info rounded px-4 py-3">
+          <div class="row">
+            <div class="col-md-9">
+              <p><span>Área:</span> <%= @position.industry %></p>
+              <p><span>Descrição:</span> <%= @position.description %></p>
+              <p><span>Faixa salarial:</span> <%= number_to_currency @position.salary_from %> - <%= number_to_currency @position.salary_to %> </p>
+              <p><span>Regime de Contratação:</span> <%= t("activerecord.attributes.@position.hiring_scheme.#{@position.hiring_scheme}") %></p>
+              <p><span>Horário:</span> <%= t("activerecord.attributes.@position.office_hours.#{@position.office_hours}") %></p>
+            </div>
+          </div>
+          </section>
       </div>
-        <ul>
-          <li><%= @position.industry %></li>
-          <li><%= @position.description %></li>
-          <li>Faixa salarial: R$ <%= @position.salary_from %> - <%= @position.salary_to %></li>
-      </ul>
-    </div>
   </div>
   <div class="container mt-5">
     <div class="row justify-content-center">

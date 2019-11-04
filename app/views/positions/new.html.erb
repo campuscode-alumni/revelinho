@@ -24,28 +24,28 @@
       <%= f.text_area :description, class: "form-control" %>
       <div class="form-group mt-4">
       <div class="form-row">
-        <div class="col border-top border-right border-left">
+        <div class="col">
           <p class="text-center"><strong>Faixa salarial</strong></p>
         </div>
-        <div class="col border-top border-right border-left ml-2">
+        <div class="col ml-2">
           <p class="text-center"><strong>Condições</strong></p>
         </div>
       </div>
       <div class="form-row">
-        <div class="col border-bottom border-left pb-3">
+        <div class="col pb-3">
           <%= f.label :salary_from %>
           <%= f.number_field :salary_from, class: "form-control" %>
         </div>
-        <div class="col border-bottom border-right">
+        <div class="col">
           <%= f.label :salary_to %>
           <%= f.number_field :salary_to, class: "form-control" %>
         </div>
-        <div class="col border-bottom border-left ml-2">
+        <div class="col ml-2">
             <%= f.label :hiring_scheme, 'Regime' %>
             <%= f.select :hiring_scheme, Position.hiring_schemes.map { |k, v| [ I18n.t("activerecord.attributes.position.hiring_scheme.#{k}"), k] }, {}, class: "form-control" %>
           </div>
 
-          <div class="col border-bottom border-right">
+          <div class="col">
             <%= f.label :office_hours, 'Expediente' %>
             <%= f.select :office_hours, Position.office_hours.map { |k, v| [ I18n.t("activerecord.attributes.position.office_hours.#{k}"), k] }, {}, class: "form-control" %>
           </div>

@@ -24,8 +24,7 @@ feature 'Employee creates position' do
     expect(page).to have_content('Desenvolvimento')
     expect(page).to have_content('Posição que exige conhecimentos '\
                                  'em HTTP, CSS, JavaScript e Ruby on Rails')
-    expect(page).to have_content('Salário de: 2000')
-    expect(page).to have_content('até: 4000')
+    expect(page).to have_content('Faixa salarial: R$ 2.000,00 - R$ 4.000,00')
   end
 
   scenario 'and must be logged in' do

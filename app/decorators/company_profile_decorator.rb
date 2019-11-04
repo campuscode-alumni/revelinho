@@ -28,7 +28,7 @@ class CompanyProfileDecorator < Draper::Decorator
 
   def link_to_complete_profile
     link_to 'Completar perfil da empresa', new_company_profile_path,
-            class: 'btn btn-outline-dark mb-3'
+            class: 'btn btn-success mb-3'
   end
 
   private
