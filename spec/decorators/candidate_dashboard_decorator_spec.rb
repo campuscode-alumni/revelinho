@@ -17,9 +17,11 @@ RSpec.describe CandidateDashboardDecorator do
       candidate_decorator = CandidateDashboardDecorator.new(candidate)
 
       expect(candidate_decorator.info_header_text).to(
-        eq '<p>Seu perfil está ativo. Aguarde o contato das empresas '\
-           'interessadas.</p>'
+        include 'Seu perfil está ativo. Aguarde o contato das empresas '\
+           'interessadas.'
       )
+      expect(candidate_decorator.info_header_text).to(include 'Editar Perfil')
+      expect(candidate_decorator.info_header_text).to(include 'Ver seu perfil')
     end
 
     it 'has to show info header text when not published' do
