@@ -62,9 +62,9 @@ describe InterviewDecorator do
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
-                         status: :pending).decorate(candidate)
+                         status: :pending).decorate
 
-      footer = interview.footer
+      footer = interview.footer candidate
       expect(footer).to(include 'Aceitar')
       expect(footer).to(include 'Recusar')
     end
@@ -84,9 +84,9 @@ describe InterviewDecorator do
                          format: :face_to_face,
                          address: 'Av. Paulista, 2000',
                          selection_process: selection_process,
-                         status: :scheduled).decorate(candidate)
+                         status: :scheduled).decorate
 
-      expect(interview.footer).to eq ''
+      expect(interview.footer candidate).to eq ''
     end
     it 'shows status picker if it is a employee' do
       company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
@@ -104,9 +104,9 @@ describe InterviewDecorator do
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process,
-                                     status: :scheduled).decorate(employee)
+                                     status: :scheduled).decorate
 
-      footer = interview.footer
+      footer = interview.footer employee
       expect(footer).to include 'Realizada'
       expect(footer).to include 'Agendada'
       expect(footer).to include 'Pendente'
@@ -130,9 +130,9 @@ describe InterviewDecorator do
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process,
-                                     status: :done).decorate(employee)
+                                     status: :done).decorate
 
-      footer = interview.footer
+      footer = interview.footer employee
       expect(footer).to include 'Pendente'
       expect(footer).to include 'Realizada'
       expect(footer).to include 'Agendada'
@@ -236,7 +236,7 @@ describe InterviewDecorator do
                                      format: :face_to_face,
                                      address: 'Av. Paulista, 2000',
                                      selection_process: selection_process,
-                                     status: :done).decorate(employee)
+                                     status: :done).decorate
 
       status_buttons = interview.status_buttons
       expect(status_buttons).to include 'Pendente'

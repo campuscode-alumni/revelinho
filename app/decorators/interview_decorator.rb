@@ -1,18 +1,17 @@
 class InterviewDecorator < Draper::Decorator
   include Draper::LazyHelpers
-  attr_reader :interview, :user
-
+  # attr_reader :interview
   delegate_all
 
-  def initialize(interview, user)
-    @interview = interview
-    @user = user
-    super(interview)
-  end
+  # def initialize(interview, user)
+  #   @interview = interview
+  #   @user = user
+  #   super(interview)
+  # end
 
-  def self.decorate_collection(interview, user)
-    interview.map { |i| new(i, user) }
-  end
+  # def self.decorate_collection(interview, user)
+  #   interview.map { |i| new(i, user) }
+  # end
 
   def formatting_datetime
     I18n.l(interview.date, format: :long) + ', das ' + interview.time_from +
@@ -33,7 +32,7 @@ class InterviewDecorator < Draper::Decorator
     content_tag(:span, badge_info[:content], class: badge_info[:class])
   end
 
-  def footer
+  def footer (user)
     return decision_buttons if user.is_a? Candidate
 
     employee_footer

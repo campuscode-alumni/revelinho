@@ -21,10 +21,11 @@ class SelectionProcessesController < ApplicationController
   private
 
   def decorate_interview
-    user = current_candidate || current_employee
-    @interviews = InterviewDecorator.decorate_collection(
-      @selection_process.interviews.order(id: :desc), user
-    )
+    # user = current_candidate || current_employee
+    # @interviews = InterviewDecorator.decorate_collection(
+    #   @selection_process.interviews.order(id: :desc), user
+    # )
+    @interviews = @selection_process.interviews.order(id: :desc).decorate
   end
 
   def set_selection_process

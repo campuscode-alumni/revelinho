@@ -1,6 +1,8 @@
 class InterviewFeedbacksController < ApplicationController
   before_action :interview, only: %i[index send_feedback]
-  def index; end
+  def index
+    @feedbacks = @interview.interview_feedbacks.order(id: :desc)
+  end
 
   def send_feedback
     feedback = @interview.interview_feedbacks.create(
