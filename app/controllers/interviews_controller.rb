@@ -1,13 +1,9 @@
 class InterviewsController < ApplicationController
-  before_action :authenticate_employee!, only: %i[index
-                                                  new
-                                                  create
-                                                  update
-                                                  status]
+  before_action :authenticate_employee!, only: %i[index new create update]
   before_action :parametize, only: %i[new create update]
   before_action :parametize_interview, only: %i[create update]
   before_action :authorize_employee!, only: %i[create update]
-  before_action :interview, only: %i[accept reject status]
+  before_action :set_interview, only: %i[accept reject]
   before_action :authenticate_candidate!, only: %i[accept reject]
 
   def index
@@ -61,16 +57,7 @@ class InterviewsController < ApplicationController
     redirect_to selection_process_candidates_path(@interview.selection_process)
   end
 
-  def status
-    @interview.send("#{params[:status]}!")
-    redirect_to selection_process_candidates_path(@interview.selection_process)
-  end
-
   private
-
-  def interview
-    @interview ||= Interview.find(params[:id])
-  end
 
   def parametize
     @selection_process = SelectionProcess.find(params[:selection_process_id])
@@ -90,6 +77,10 @@ class InterviewsController < ApplicationController
               current_employee.company
 
     render json: {}, status: :forbidden
+  end
+
+  def set_interview
+    @interview = Interview.find(params[:id])
   end
 
   def send_message(message_type)

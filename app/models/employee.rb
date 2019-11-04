@@ -6,7 +6,6 @@ class Employee < ApplicationRecord
 
   belongs_to :company, optional: true
   has_many :candidate_notes, dependent: :nullify
-  has_many :interview_feedback, dependent: :nullify
   has_many :messages, as: :sendable, dependent: :nullify
   has_one_attached :avatar
 

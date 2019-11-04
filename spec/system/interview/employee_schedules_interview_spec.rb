@@ -67,7 +67,8 @@ feature 'Employee schedules interview' do
 
   scenario 'must be logged in' do
     company = create(:company, url_domain: 'revelo.com.br')
-    create(:employee, email: 'renata@revelo.com.br', company: company)
+    create(:employee, email: 'renata@revelo.com.br',
+                      company: company)
     candidate = create(:candidate, name: 'Gustavo')
     create(:candidate_profile, candidate: candidate)
     position = create(:position, title: 'Engenheiro de Software Pleno',

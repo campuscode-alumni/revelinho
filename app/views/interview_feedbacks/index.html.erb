@@ -1,3 +1,0 @@
-<div class="container-fluid px-5">
-  <%= render partial: 'shared/input_field', locals: {input_destiny: send_feedback_candidates_path, go_back: selection_process_candidates_path(@interview.selection_process), send_button_message:'Enviar Feedback'} %>
-  <%= render partial: 'feedbacks', collection: @feedbacks, as: :feedback %></div>

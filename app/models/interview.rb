@@ -1,6 +1,5 @@
 class Interview < ApplicationRecord
   belongs_to :selection_process
-  has_many :interview_feedbacks, dependent: :nullify
   delegate :invite, to: :selection_process
   delegate :position, to: :invite
   delegate :candidate, to: :invite

@@ -4,7 +4,6 @@ class SelectionProcessesController < ApplicationController
   before_action :decorate_interview, only: %i[show]
 
   def show
-    redirect_to dashboard_companies_path unless belongs_here?
     @selection_process.decorate
   end
 
@@ -22,15 +21,12 @@ class SelectionProcessesController < ApplicationController
   private
 
   def decorate_interview
-    @interviews = @selection_process.interviews.order(id: :desc).decorate
+    @interviews = InterviewDecorator.decorate_collection(
+      @selection_process.interviews
+    )
   end
 
   def set_selection_process
     @selection_process = SelectionProcess.find(params[:id]).decorate
-  end
-
-  def belongs_here?
-    current_candidate || (current_employee &&
-      @selection_process.company.name == current_employee.company.name)
   end
 end
