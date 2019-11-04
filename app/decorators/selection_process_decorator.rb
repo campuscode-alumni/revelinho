@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class SelectionProcessDecorator < Draper::Decorator
   delegate_all
   include Draper::LazyHelpers
@@ -31,6 +32,23 @@ class SelectionProcessDecorator < Draper::Decorator
   def p_print_salary
     content_tag(:p, "Salário: #{number_to_currency(position.salary_from)}"\
       " à #{number_to_currency(position.salary_to)}", class: 'mb-0')
+  end
+
+  def btn_schedule_interview
+    if employee_signed_in?
+      link_to 'Agendar nova entrevista',
+              new_selection_process_interview_path(id),
+              class: 'btn btn-outline-info btn-sm mb-3'
+    else
+      ''
+    end
+  end
+
+  def image_logo
+    logo = candidate.candidate_profile.avatar.attached?
+    return candidate.candidate_profile.avatar if logo
+
+    image_url('placeholder.png')
   end
 
   private
@@ -122,3 +140,4 @@ class SelectionProcessDecorator < Draper::Decorator
                 class: 'alert alert-info')
   end
 end
+# rubocop:enable Metrics/ClassLength

@@ -1,0 +1,30 @@
+<div id="interviews">
+  <a-layout class="body">
+    <interviews-sidebar
+      candidate-json="<%= @candidate %>"
+      position-json="<%= @position %>"
+      candidate-url="<%= @candidate_path %>"
+    ></interviews-sidebar>
+    <a-layout class="calendar">
+      <a-layout-content>
+        <interviews-calendar
+          :interviews="interviews"
+          search-url="<%= @url %>"
+          @load="load"
+          @click-event="formEdit"
+        ></interviews-calendar>
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
+  <interview-form
+    formats_json="<%= @formats_json %>"
+    @create="create"
+    @update="update"
+    @show="formShow"
+    @close="formClose"
+    :loading="formLoading"
+    :visible="formVisible"
+    :set-interview="formInterview"
+    create-url="<%= @url %>"
+  ></interview-form>
+</div>

@@ -2,22 +2,14 @@ pt-BR:
   activerecord:
     models:
       interview:
-        singular: Entrevista
-        plural: Entrevistas
+        one: Entrevista
+        other: Entrevistas
     attributes:
       interview:
         format: Tipo de entrevista
-        address: "Endereço: %{address}"
+        address: 'Endereço: '
         datetime: Dia %{date} às %{time}
-        status:
-          pending: Pendente
-          scheduled: Agendada
-          done: Realizada
-          absent: Ausente
-          canceled: Cancelada
-        format:
-          online: 'Formato: Online'
-          face_to_face: 'Formato: Presencial'
+        status: Estado
   interview:
     status_badge:
       pending: Aguardando resposta
@@ -25,3 +17,12 @@ pt-BR:
       done: Entrevista realizada
       absent: Candidato faltou
       canceled: Entrevista cancelada
+    status:
+      pending: Pendente
+      scheduled: Agendada
+      done: Realizada
+      absent: Ausente
+      canceled: Cancelada
+    format:
+      online: Online
+      face_to_face: Presencial

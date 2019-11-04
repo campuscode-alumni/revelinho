@@ -5,6 +5,23 @@ body {
   min-height: 100%;
 }
 
+h1.home-text {
+  font-size: 4rem !important;
+}
+
+.red-text {
+  color: #ef474a;
+}
+
+.btn-revelo {
+  background-color: #ef474a !important;
+}
+
+.btn-revelo-dark {
+  background-color: #273a50 !important;
+  border-color: #273a50 !important;
+}
+
 a:hover.link-defaut-color{
  text-decoration: none !important;
 }
