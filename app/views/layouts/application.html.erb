@@ -23,8 +23,14 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
+          <% if employee_signed_in? %>
+            <%= link_to 'Convites', '#', class: 'nav-link p-3' %>
+          <% end %>
+
+
+
           <% dp_down = 'Login/Cadastro'
-            dp_down = current_candidate.name if candidate_signed_in?
+             dp_down = current_candidate.name if candidate_signed_in?
              dp_down = current_employee.name if employee_signed_in? %>
           <li class="nav-item dropdown">
               <%= link_to dp_down, '#', id: "login", role: "button",
