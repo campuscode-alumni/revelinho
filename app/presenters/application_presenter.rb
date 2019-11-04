@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class ApplicationPresenter < SimpleDelegator
   include ActionView::Helpers::OutputSafetyHelper
   include Rails.application.routes.url_helpers
@@ -132,3 +133,4 @@ class ApplicationPresenter < SimpleDelegator
     ApplicationController.helpers
   end
 end
+# rubocop:enable Metrics/ClassLength
