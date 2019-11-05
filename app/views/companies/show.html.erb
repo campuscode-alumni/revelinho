@@ -1,87 +1,101 @@
-<div class="container-fluid candidate-page p-0">
-  <div class="container-fluid candidate-header">
-    <div class="row name-wrapper justify-content-center">
-      <h1 id="company-title" class="name text-center"><%= @company.name %><br>
-        <small>
-          <%= @company.address %>
-        </small>
-      </h1>
-    </div>
-  </div>
-
-  <% if @company.company_profile %>
-    <% if @company_profile.logo.attached? %>
-      <div class="image-wrapper my-3">
-        <%= image_tag @company_profile.logo, class: 'image img-thumbnail rounded mx-auto d-block', width:'200px' %>
-      </div>
-    <% else %>
-      <div class="image-wrapper">
-        <%= image_tag 'placeholder.png', class: 'image img-thumbnail rounded mx-auto d-block', style: "width:200px"%>
-      </div>
-    <% end %>
-    <div class="candidate p-2">
-      <div class="candidate p-2">
-        <div class="container-fluid">
-          <% if @company_profile.full_description %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Descrição da empresa</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.full_description %></div>
+<article class="container candidate-page">
+  <div class="row">
+    <section class="col-md-12 col-lg-12">
+      <div class="candidate card card-body p-4">
+        <div class="row">
+        <% if @company.company_profile %>    
+          <div class="col-2 image-section">
+              <% if @company_profile.logo.attached? %>
+                <%= image_tag @company_profile.logo, class: 'image img-thumbnail', style: "border-radius: 0" %>
+              <% else %>
+                <%= image_tag 'placeholder.png', class: 'image'%>
+              <% end %>
+          </div>
+        <% end %>
+          <div class="col-10 content">
+            <h4><%= @company.name %></h4>
+            <p class="font-weight-bold text"><%= @company.address %></p>    
+          </div>
+        </div>
+        <hr>
+        <div class="row"> 
+          <div class="col-12">
+            <% if @company.company_profile %>    
+            <div class="candidate p-2">
+              <div class="candidate p-2">
+                <div class="container-fluid">
+                  <% if @company_profile.full_description %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header" style="font-weight:bold !important; font-size:18px;">Descrição da empresa: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.full_description %></div>
+                    </div>
+                  <% end %>
+                  <% if @company_profile.benefits %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 heading" style="font-weight:bold !important; font-size:18px;">Benefícios: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.benefits %></div>
+                    </div>
+                  <% end %>
+                  <% if @company_profile.employees_number %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 heading" style="font-weight:bold !important; font-size:18px;">Número de funcionários: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.employees_number %></div>
+                    </div>
+                  <% end %>
+                  <% if @company_profile.website %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header" style="font-weight:bold !important; font-size:18px;">Site da empresa: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.website %></div>
+                    </div>
+                  <% end %>
+                  <% if @company_profile.phone %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header" style="font-weight:bold !important; font-size:18px;">Telefone: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.phone %></div>
+                    </div>
+                  <% end %>
+                  <% if @company_profile.mission %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header" style="font-weight:bold !important; font-size:18px;">Missão: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.mission %></div>
+                    </div>
+                  <% end %>
+                  <% if @company_profile.category %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header" style="font-weight:bold !important; font-size:18px;">Categoria: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.category %></div>
+                    </div>
+                  <% end %>
+                  <% if @company_profile.attractives %>
+                    <div class="row justify-content-center text-wrapper mr-0">
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header" style="font-weight:bold !important; font-size:18px;">Atrativos: </div>
+                      <div class="spacer"></div>
+                      <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.attractives %></div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
             </div>
           <% end %>
-          <% if @company_profile.benefits %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Benefícios</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.benefits %></div>
-            </div>
-          <% end %>
-          <% if @company_profile.employees_number %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Número de funcionários</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.employees_number %></div>
-            </div>
-          <% end %>
-          <% if @company_profile.website %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Site da empresa</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.website %></div>
-            </div>
-          <% end %>
-          <% if @company_profile.phone %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Telefone</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.phone %></div>
-            </div>
-          <% end %>
-          <% if @company_profile.mission %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Missão</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.mission %></div>
-            </div>
-          <% end %>
-          <% if @company_profile.category %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Categoria</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.category %></div>
-            </div>
-          <% end %>
-          <% if @company_profile.attractives %>
-            <div class="row justify-content-center text-wrapper mr-0">
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 header">Atrativos</div>
-              <div class="spacer"></div>
-              <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 content"><%= @company_profile.attractives %></div>
-            </div>
-          <% end %>
+          </div>  
+        </div>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    </section>
+  </div>
+<article>
+
+
+
+  
 
     <div class="row justify-content-center mr-3">
         <%= link_to t('messages.go_back'), dashboard_companies_path, class: 'btn btn-outline-primary' %>
