@@ -4,10 +4,6 @@ class SelectionProcessDecorator < Draper::Decorator
 
   delegate_all
 
-  def contract_resume
-    p_print_hiring_scheme + p_print_office_hours + p_print_salary
-  end
-
   def go_back_button(user)
     return invites_candidates_path if user.is_a? Candidate
 
@@ -19,7 +15,7 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def offers_menu
-    return menu_employee if employee_signed_in?
+    return msg_offer if employee_signed_in?
     return menu_candidate if offers.pending.any?
     return menu_accepted if offers.accepted.any?
 
@@ -78,10 +74,6 @@ class SelectionProcessDecorator < Draper::Decorator
             class: "btn btn-#{style} btn-lg mt-2 mr-3", method: 'post')
   end
 
-  def menu_employee
-    btn_offer + msg_offer
-  end
-
   def menu_accepted
     content_tag :div, class: 'card card-body bg-success text-white' do
       content_tag(:h4, 'Oferta aceita!') +
@@ -116,21 +108,30 @@ class SelectionProcessDecorator < Draper::Decorator
   end
 
   def employee_data
-    data({ avatar: company_profile.logo, path: company_path(company) },
+    data({ avatar: avatar(company_profile.logo,
+                          'companies/company-default-logo.jpeg'),
+           path: candidate_path(candidate) },
          company.name, name: employee.name, email: employee.email,
                        phone: company_profile.phone)
   end
 
   def candidate_data
-    data({ avatar: candidate.avatar, path: candidate_path(candidate) }, '',
+    data({ avatar: avatar(candidate.avatar, 'users/user-default.png'),
+           path: company_path(company) }, '',
          name: candidate.name, phone: candidate.phone, email: candidate.email)
+  end
+
+  def avatar(logo, path_file)
+    return image_url(path_file) unless logo&.attached?
+
+    logo
   end
 
   def main_content(data)
     link_to(image_tag(data[:image][:avatar],
                       class: 'avatar-100 float-left mr-2'),
             data[:image][:path]) +
-      content_tag(:div, class: 'float-left pl-2') do
+      content_tag(:div, class: 'float-left pl-2 mb-3') do
         content_tag(:h5, data[:title], class: 'main-title') +
           content_tag(:h6, 'Seu contato principal é:', class: 'lead-4') +
           description(data[:description])
@@ -141,11 +142,6 @@ class SelectionProcessDecorator < Draper::Decorator
     content_tag(:p, data[:name]) +
       content_tag(:p, "Telefone: #{data[:phone]}") +
       content_tag(:p, "Email: #{data[:email]}")
-  end
-
-  def btn_offer
-    link_to 'Quero contratá-lo!', new_candidate_offer_path(candidate.id, id),
-            class: 'btn btn-info btn-lg mb-3'
   end
 
   def msg_offer
