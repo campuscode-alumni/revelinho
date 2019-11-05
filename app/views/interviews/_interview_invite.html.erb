@@ -6,8 +6,6 @@
     <%= interview.interview_format %><br/>
   </p>
   <section class="row d-flex justify-content-around">
-    <div class="btn-group">
-      <%= interview.footer(current_employee || current_candidate) %>
-    </div>
+    <%= interview.footer(current_employee || current_candidate) %>
   </section>
 </div>

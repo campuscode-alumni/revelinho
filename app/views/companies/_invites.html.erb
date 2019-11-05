@@ -1,0 +1,22 @@
+<div class="mt-4">
+    <% @invites.group_by(&:position).each do |position, group_invite| %>
+      <div class="card card-body invite-card mb-3">
+        <h2 class="text-center mb-3" style="font-size: 1.5rem">Posição: <%= position.title%></h2>
+          <% group_invite.each do |invite| %>
+            <section class="invites-info rounded p-4 mb-3">
+              <div class="row">
+                <div class="col-md-9">
+                  <p><span>Nome do candidato:</span> <%= invite.candidate.name %></p>
+                  <p><span>Data do convite:</span> <%= l(invite.created_at.to_date, format: :long) %></p>
+                  <p><span>Faixa salarial:</span> <%= number_to_currency invite.position.salary_from %>-<%= number_to_currency invite.position.salary_to %> </p>
+                  <p><span>Regime de Contratação:</span> <%= t("activerecord.enums.position.hiring_scheme.#{invite.position.hiring_scheme}") %></p>
+                </div>
+                <div class="col-md-3 align-self-center">
+                  <%= invite.invite_links %>
+                </div>
+              </div>
+             </section>
+            <% end %>
+      </div>
+    <% end %>
+  </div>

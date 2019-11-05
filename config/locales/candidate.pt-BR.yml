@@ -96,6 +96,7 @@ pt-BR:
       send_paranoid_instructions: Se o seu email existir em nosso banco de dados, você receberá um email com um link para recuperação da senha.
       updated: A sua senha foi alterada com sucesso. Você está autenticado.
       updated_not_active: Sua senha foi alterada com sucesso.
+      characters_minimum: A senha deve conter no mínimo %{count} carateres
     registrations:
       destroyed: Adeus! A sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve.
       edit:

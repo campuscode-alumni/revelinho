@@ -3,15 +3,15 @@
   <%= render 'devise/shared/error_messages', resource: resource %>
   <div class="card card-body bg-light">
     <h2 class="text-center mb-4">Candidato</h2>
-    
+
     <h5>Dados</h5>
     <hr class="mt-0">
-    
+
     <div class="form-group">
       <%= f.label :name, 'Nome' %>
       <%= f.text_field(:name, class: 'form-control') %>
     </div>
-    
+
     <div class="row">
       <div class="col-12 col-md-6">
         <div class="form-group">
@@ -19,7 +19,7 @@
           <%= f.date_field(:birthday, class: 'form-control') %>
         </div>
       </div>
-      
+
       <div class="col-12 col-md-6">
         <div class="form-group">
           <%= f.label :cpf, 'Cpf' %>
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-12 col-md-6">
         <div class="form-group">
@@ -35,14 +35,14 @@
           <%= f.text_field(:address, class: 'form-control') %>
         </div>
       </div>
-      
+
       <div class="col-12 col-md-3">
         <div class="form-group">
           <%= f.label :city, 'Cidade' %>
           <%= f.text_field(:city, class: 'form-control') %>
         </div>
       </div>
-      
+
       <div class="col-12 col-md-3">
         <div class="form-group">
           <%= f.label :state, 'Estado' %>
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="form-group">
       <%= f.label :country, 'País' %>
       <%= f.text_field(:country, class: 'form-control') %>
@@ -71,10 +71,10 @@
       <%= f.label :educational_level, 'Nível de Escolaridade' %>
       <%= f.text_field(:educational_level, class: 'form-control') %>
     </div>
-    
+
     <h5 class="mt-4">Usuário de acesso</h5>
     <hr class="mt-0">
-    
+
     <div class="form-group">
       <%= f.label :email, 'E-mail' %>
       <%= f.text_field(:email, class: 'form-control') %>
@@ -83,7 +83,7 @@
       <%= f.label :password, 'Senha'%>
       <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
       <% if @minimum_password_length %>
-      <em>(mínimo de <%= @minimum_password_length %> caracteres)</em>
+        <em>(<%= I18n.t("candidates.passwords.characters_minimum", count: @minimum_password_length) %>)</em>
       <% end %><br />
     </div>
     <div class="form-group">
