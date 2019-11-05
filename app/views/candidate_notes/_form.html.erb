@@ -1,6 +1,6 @@
 <%= form_with url: add_comment_candidate_path(candidate), method: 'post' do %>
   <div class="form-group">
-    <%= text_field_tag(:comment, nil, placeholder: 'Novo comentário', class: 'form-control') %>
+    <%= text_area_tag(:comment, nil, placeholder: 'Novo comentário', class: 'form-control') %>
   </div>
   <div class="text-right">
     <%= submit_tag('Postar', class: 'btn btn-primary') %>

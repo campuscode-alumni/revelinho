@@ -63,7 +63,7 @@ campuscode.company_profile = CompanyProfile.create!(company: campuscode,full_des
     
 employee_revelo = Employee.create!(name: 'João Silva', email: "joao.silva@revelo.com.br",
                             password: '123456', company: revelo)
-Employee.create!(name: 'Rafael Timbó', email: "rafael.timbo@revelo.com.br",
+employee_timbo = Employee.create!(name: 'Rafael Timbó', email: "rafael.timbo@revelo.com.br",
   password: '123456', company: revelo)
 Employee.create!(name: 'Jeferson', email: "jeferson@revelo.com.br",
   password: '123456', company: revelo)
@@ -115,6 +115,20 @@ Company.active.each_with_index do |company, i_company|
 
     Interview.create!(date: '2019-11-26', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process)
 
+    Interview.create!(date: '2019-08-26', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :absent)
+    Interview.create!(date: '2019-08-30', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :canceled)
+    interview = Interview.create!(date: '2019-09-04', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
+    another_interview = Interview.create!(date: '2019-09-14', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :done)
+    Interview.create!(date: '2019-10-10', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :scheduled)
+    Interview.create!(date: '2019-10-15', time_from: '10:00', time_to: '11:00', format: :face_to_face, address: 'Av. Paulista, 2000', selection_process: selection_process, status: :pending)
+    Interview.create!(date: '2019-10-26', time_from: '10:00', time_to: '11:00', format: :online, address: 'skype', selection_process: selection_process, status: :pending)
+
+    interview.interview_feedbacks << InterviewFeedback.create!(interview: interview, employee: selection_process.employee, message: 'Foi uma ótima entrevista')
+    interview.interview_feedbacks << InterviewFeedback.create!(interview: interview, employee: company.employees.last, message: 'Também achei')
+
+    another_interview.interview_feedbacks << InterviewFeedback.create!(interview: another_interview, employee: selection_process.employee, message: 'Não achei que o perfil se alinha')
+    another_interview.interview_feedbacks << InterviewFeedback.create!(interview: another_interview, employee: company.employees.last, message: 'Talvez para a outra posição faça sentido')
+
     next unless i_candidate % 2
 
     offer_message = Message.create!(sendable: company.employees.first,
@@ -127,3 +141,4 @@ Company.active.each_with_index do |company, i_company|
             message: offer_message)
   end
 end
+

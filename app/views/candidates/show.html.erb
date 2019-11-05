@@ -1,1 +1,37 @@
-<%= render "candidate_profile", candidate: @candidate %>
+<article class="container candidate-page">
+  <div class="row">
+    <section class="col-md-12 col-lg-8">
+      <div class="candidate card card-body p-4">
+        <%= render "candidate_profile", candidate: @candidate %>
+      </div>
+    </section>
+    <section class="col-md-12 col-lg-4">
+      <% if employee_signed_in? %>
+        <div class="p-2 pt-3 card card-body employee-invite">
+          <h6 class="header px-2">Convidar</h6>
+          <div class="make-invite p-2">
+            <%= render partial: 'invite_form', locals: { candidate: @candidate, no_invitable_positions: @employee_candidate_presenter.no_invitable_positions? } %>
+          </div>
+          <div class="current-invites px-2 pt-2 border-top">
+            <%= @employee_candidate_presenter.invited_positions_card %>
+          </div>
+        </div>
+        <div class="employee-comments p-2 pt-3 card card-body">
+          <h6 class="header px-2">Comentários</h6>
+          <div class="comments">
+            <%= render partial: 'candidate_notes/candidate_note', collection: @notes %>
+          </div>
+          <div class="new-comment px-2 py-3">
+            <%= render partial: 'candidate_notes/form', locals: {candidate: @candidate} %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+</article>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <%= link_to 'Voltar', candidates_path, class: 'btn btn-outline-secondary' %>
+  </div>
+</div>
