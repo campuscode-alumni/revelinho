@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-md-8 card bg-light">
+  <div class="col-md-8 card card-body bg-light">
     <%= form_with model: @company_profile do |f| %>
       <div class="form-group">
         <%= f.label :full_description %>
@@ -38,8 +38,8 @@
         <%= f.file_field :logo, class: 'form-control' %>
       </div>
       <div class="actions float-right  mb-4">
-        <%= f.submit 'Atualizar', class: 'btn btn-primary' %>
         <%= link_to t('messages.go_back'), :back, class: 'btn btn-secondary' %>
+        <%= f.submit 'Atualizar', class: 'btn btn-primary' %>
       </div>
     <% end %>
   </div>
