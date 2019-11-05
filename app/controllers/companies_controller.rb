@@ -28,8 +28,7 @@ class CompaniesController < ApplicationController
   end
 
   def selection_processes
-    @selection_processes = CompanySelectionProcessesQuery
-                           .new(@current_company).all
+    @selection_processes = current_employee.company.selection_processes
   end
 
   def invites

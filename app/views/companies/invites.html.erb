@@ -1,30 +1,17 @@
-<div class="container mt-4">
-  <h2 class="text-center">Esses são os seus convites até o momento :)</h2>
-  <div class="mt-4">
-    <% @invites.group_by(&:position).each do |position, invites| %>
-      <div class="invite-card">
-        <h2 class="text-center mt-4" style="font-size: 1.5rem">Posição: <%= position.title%></h2>
-          <% invites.each do |invite| %>
-            <section class="invites-info rounded px-4 py-3">
-              <div class="row">
-                <div class="col-md-9">
-                  <p><span>Nome do candidato:</span> <%= invite.candidate.name %></p>
-                  <p><span>Data do convite:</span> <%= l(invite.created_at.to_date, format: :long) %></p>
-                  <p><span>Faixa salarial:</span> <%= number_to_currency invite.position.salary_from %>-<%= number_to_currency invite.position.salary_to %> </p>
-                  <p><span>Regime de Contratação:</span> <%= t("activerecord.enums.position.hiring_scheme.#{invite.position.hiring_scheme}") %></p>
-                </div>
-                <div class="col-md-3 d-flex align-items-end flex-wrap align-content-end">
-                  <%= invite.invite_links %>
-                </div>
-              </div>
-             </section>
-            <% end %>
-      </div>
-    <% end %>
+<div class="col-12 col-md-8 offset-md-2 pt-3">
+  <h2 class="mb-3 text-center">Convites</h2>
+
+  <% if @invites.empty? %>
+  <div class="card card-body">
+    <h5>No momento não há convites enviados. <br>
+      Veja os candidatos que separamos para você! <br> <br></h5>
+    <%= link_to 'Ver candidatos', candidates_path, class: 'btn btn-primary btn-revelo-dark' %>
   </div>
-</div>
-<div class="container mt-5">
-  <div class="row justify-content-center">
+  <% end %>
+
+  <%= render partial: 'invites', locals: { invites: @invites } %>
+
+  <div class="text-center">
     <%= link_to t('messages.go_back'), :back, class: 'btn btn-outline-secondary' %>
   </div>
 </div>

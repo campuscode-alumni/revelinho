@@ -35,20 +35,7 @@
   font-weight: bold;
 }
 
-.invite-card .invite-card-infos {
-  padding: 16px;
-}
-
-.invites-header {
-  display: flex;
-}
-
 .invites-info {
-  margin: 20px;
   background-color: #e9ecef;
 }
 
-.invite-card .buttons {
-  bottom: 0;
-  right: 0;
-}
