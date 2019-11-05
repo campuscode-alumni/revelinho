@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     resources :interviews, only: %i[index new create update]
   end
 
-  resources :positions, only: %i[new create show]
+  resources :positions, only: %i[index new create]
   resources :candidate_profiles, only: %i[new create edit update]
 
   get 'my_company', to: 'company#my_company'
