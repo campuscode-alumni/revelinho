@@ -1,0 +1,9 @@
+<div class="card card-body">
+  <%= form_with(url:input_destiny, method: 'post') do |f| %>
+    <div class="form-group">
+      <%= f.text_area :text, class: 'form-control', rows: '4', placeholder: 'Escreva a sua mensagem' %>
+    </div>      
+    <%= link_to 'Voltar', go_back, class: 'btn btn-info float-left' %>
+    <%= f.submit send_button_message, class: 'btn btn-outline-danger float-right' %>
+  <% end %>
+</div>

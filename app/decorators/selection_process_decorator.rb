@@ -1,7 +1,22 @@
 # rubocop:disable Metrics/ClassLength
 class SelectionProcessDecorator < Draper::Decorator
-  delegate_all
   include Draper::LazyHelpers
+
+  delegate_all
+
+  def contract_resume
+    p_print_hiring_scheme + p_print_office_hours + p_print_salary
+  end
+
+  def go_back_button(user)
+    return invites_candidates_path if user.is_a? Candidate
+
+    candidates_path
+  end
+
+  def messages_show
+    messages.order(id: :desc).decorate
+  end
 
   def offers_menu
     return menu_employee if employee_signed_in?
@@ -19,13 +34,13 @@ class SelectionProcessDecorator < Draper::Decorator
 
   def p_print_hiring_scheme
     content_tag(:p, 'Regime de contratação: ' +
-      I18n.t('activerecord.attributes.position.hiring_scheme.' +
+      I18n.t('activerecord.enums.position.hiring_scheme.' +
       position.hiring_scheme), class: 'mb-0')
   end
 
   def p_print_office_hours
     content_tag(:p, 'Horário de expediente: ' +
-      I18n.t('activerecord.attributes.position.office_hours.' +
+      I18n.t('activerecord.enums.position.office_hours.' +
       position.office_hours), class: 'mb-0')
   end
 

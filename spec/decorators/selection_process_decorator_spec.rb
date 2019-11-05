@@ -11,6 +11,25 @@ RSpec.describe SelectionProcessDecorator do
     end
   end
 
+  context '#go_back_button' do
+    it 'returns the invite list path if a candidate is logged in' do
+      candidate = create(:candidate, status: :published)
+
+      selection_process = create(:selection_process).decorate
+      expect(selection_process.go_back_button(candidate)).to(
+        eq '/candidates/invites'
+      )
+    end
+    it 'returns the candidate list path if a employee is logged in' do
+      employee = create(:employee)
+
+      selection_process = create(:selection_process).decorate
+      expect(selection_process.go_back_button(employee)).to(
+        eq '/candidates'
+      )
+    end
+  end
+
   context '#p_print_office_hours' do
     it 'show resume of invite contract' do
       selection_process = create(:selection_process).decorate

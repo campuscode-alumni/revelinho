@@ -1,94 +1,93 @@
 require 'rails_helper'
 
-feature 'candidate see interview invite' do
+feature 'employee sees interview invite' do
   scenario 'successfully' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
     candidate = create(:candidate, status: :published)
-    create(:employee, email: 'joao@revelo.com.br', company: company)
+    create(:candidate_profile, candidate: candidate)
+    employee = create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
+                             status: :accepted)
     selection_process = invite.create_selection_process
     create(:interview, date: '2019-10-26',
                        time_from: '17:00',
-                       time_to: '17:30',
+                       time_to: '18:00',
                        format: :face_to_face,
+                       status: :pending,
                        address: 'Av. Paulista, 2000',
                        selection_process: selection_process)
 
-    login_as(candidate, scope: :candidate)
+    login_as(employee, scope: :employee)
     visit selection_process_candidates_path(selection_process)
 
     expect(page).to have_content('Entrevistas')
-    expect(page).to have_content('26 de outubro de 2019, 17:00 - 17:30')
+    expect(page).to have_content('26 de outubro de 2019, 17:00 - 18:00')
     expect(page).to have_content('Endereço: Av. Paulista, 2000')
     expect(page).to have_content('Presencial')
     expect(page).to have_content('Aguardando resposta')
-    expect(page).to have_link('Aceitar')
-    expect(page).to have_link('Recusar')
-  end
-
-  scenario 'and accept' do
-    company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
-    company.company_profile = create(:company_profile)
-    candidate = create(:candidate, :with_candidate_profile, status: :published)
-    create(:employee, email: 'joao@revelo.com.br', company: company)
-    position = create(:position, company: company)
-    invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
-    selection_process = invite.create_selection_process
-    interview = create(:interview, date: '2019-10-26',
-                                   time_from: '17:00',
-                                   time_to: '17:30',
-                                   format: :face_to_face,
-                                   address: 'Av. Paulista, 2000',
-                                   selection_process: selection_process)
-    mailer_spy = class_spy('InterviewMailer')
-    stub_const('InterviewMailer', mailer_spy)
-    mail = double('mail', deliver_now: nil)
-    allow(mailer_spy).to receive(:interview_accepted).and_return(mail)
-
-    login_as(candidate, scope: :candidate)
-    visit selection_process_candidates_path(selection_process)
-    click_on 'Aceitar'
-
-    expect(page).to have_content('Entrevista agendada')
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
-    expect(mailer_spy).to have_received(:interview_accepted).with(interview.id)
-    within '.interview_scheduled' do
-      expect(page).to have_content('Entrevista agendada: '\
-        '26 de outubro de 2019')
-    end
   end
 
-  scenario 'and reject' do
+  scenario 'and changes its status' do
     company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
     company.company_profile = create(:company_profile)
     candidate = create(:candidate, :with_candidate_profile, status: :published)
-    create(:employee, email: 'joao@revelo.com.br', company: company)
+    create(:candidate_profile, candidate: candidate)
+    employee = create(:employee, email: 'joao@revelo.com.br', company: company)
     position = create(:position, company: company)
     invite = create(:invite, candidate: candidate, position: position,
-                             status: :pending)
+                             status: :accepted)
     selection_process = invite.create_selection_process
     create(:interview, date: '2019-10-26',
                        time_from: '17:00',
-                       time_to: '17:30',
+                       time_to: '18:00',
                        format: :face_to_face,
+                       address: 'Av. Paulista, 2000',
+                       status: :absent,
+                       selection_process: selection_process)
+
+    login_as(employee, scope: :employee)
+    visit selection_process_candidates_path(selection_process)
+
+    click_on 'Realizada'
+
+    expect(page).to have_content('26 de outubro de 2019, 17:00 - 18:00')
+    expect(page).to have_content('Endereço: Av. Paulista, 2000')
+    expect(page).to have_content('Presencial')
+    expect(page).to have_content('Entrevista realizada')
+    expect(page).not_to have_content('Aguardando resposta')
+    expect(page).to have_link('Feedbacks')
+    expect(page).not_to have_link('Aceitar')
+    expect(page).not_to have_link('Recusar')
+  end
+
+  scenario 'and sees the feedback button' do
+    company = create(:company, name: 'Revelo', url_domain: 'revelo.com.br')
+    company.company_profile = create(:company_profile)
+    candidate = create(:candidate, :with_candidate_profile, status: :published)
+    create(:candidate_profile, candidate: candidate)
+    employee = create(:employee, email: 'joao@revelo.com.br', company: company)
+    position = create(:position, company: company)
+    invite = create(:invite, candidate: candidate, position: position,
+                             status: :accepted)
+    selection_process = invite.create_selection_process
+    create(:interview, date: '2019-10-26',
+                       time_from: '17:00',
+                       time_to: '18:00',
+                       format: :face_to_face,
+                       status: :done,
                        address: 'Av. Paulista, 2000',
                        selection_process: selection_process)
 
-    login_as(candidate, scope: :candidate)
+    login_as(employee, scope: :employee)
     visit selection_process_candidates_path(selection_process)
-    click_on 'Recusar'
 
-    expect(page).to have_content('Entrevista cancelada')
+    expect(page).to have_link('Feedbacks')
+    expect(page).to have_link('Marcar como')
     expect(page).not_to have_link('Aceitar')
     expect(page).not_to have_link('Recusar')
-    within '.interview_canceled' do
-      expect(page).to have_content('Entrevista cancelada: '\
-        '26 de outubro de 2019')
-    end
   end
 end
