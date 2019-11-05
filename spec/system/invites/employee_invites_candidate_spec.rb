@@ -180,15 +180,16 @@ feature 'Invites' do
     employee = create(:employee, email: 'renata@revelo.com.br',
                                  company: company)
     candidate = create(:candidate, name: 'Gustavo')
-    create(:position, title: 'Engenheiro de Software Pleno',
-                      company: company)
+    position = create(:position, title: 'Engenheiro de Software Pleno',
+                                 company: company)
     create(:candidate_profile, candidate: candidate)
 
-    # allow_any_instance_of(Invite).to receive(:save).and_return(false)
     invite_double = double('invites')
     allow(Candidate).to receive(:find).and_return(candidate)
     allow(candidate).to receive(:invites).and_return(invite_double)
     allow(invite_double).to receive(:build).and_return(invite_double)
+    allow(invite_double).to receive(:pending).and_return(invite_double)
+    allow(invite_double).to receive(:each).and_return(position)
     allow(invite_double).to receive(:save).and_return(false)
 
     login_as(employee, scope: :employee)

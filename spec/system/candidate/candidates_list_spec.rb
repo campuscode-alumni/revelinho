@@ -2,9 +2,12 @@ require 'rails_helper'
 
 feature 'Candidates list' do
   scenario 'Employee sees candidates list' do
-    create(:candidate, name: 'João')
-    create(:candidate, name: 'Henrique')
-    create(:candidate, name: 'Derick')
+    joao = create(:candidate, name: 'João')
+    create(:candidate_profile, candidate: joao)
+    henrique = create(:candidate, name: 'Henrique')
+    create(:candidate_profile, candidate: henrique)
+    derick = create(:candidate, name: 'Derick')
+    create(:candidate_profile, candidate: derick)
 
     company_profile = create(:company_profile)
     company = create(:company, company_profile: company_profile)
@@ -21,7 +24,8 @@ feature 'Candidates list' do
   end
 
   scenario 'Employee does not see hidden candidates' do
-    create(:candidate, name: 'João')
+    candidate = create(:candidate, name: 'João')
+    create(:candidate_profile, candidate: candidate)
     create(:candidate, :hidden, name: 'Henrique')
 
     employee = create(:employee)
