@@ -1,0 +1,9 @@
+<div class="card card-body">
+  <header>
+    <%= t('activerecord.messages.position.why_create_new_position') %>
+  </header>
+  <%= link_to(
+    t('activerecord.messages.position.create_new_position'),
+    new_position_path,
+    class: 'btn btn-outline-primary mt-4') %>
+</div>

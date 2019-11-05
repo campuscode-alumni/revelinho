@@ -12,7 +12,7 @@ class ApplicationPresenter < SimpleDelegator
   end
 
   def nav_links
-    safe_join([nav_candidates, nav_sign_in, nav_user_options])
+    safe_join([nav_candidates, nav_positions, nav_sign_in, nav_user_options])
   end
 
   private
@@ -20,6 +20,14 @@ class ApplicationPresenter < SimpleDelegator
   def nav_candidates
     if logged_as_employee?
       nav_builder(I18n.t('navbar.candidates'), candidates_path)
+    else
+      ''
+    end
+  end
+
+  def nav_positions
+    if logged_as_employee?
+      nav_builder(I18n.t('navbar.positions'), positions_path)
     else
       ''
     end

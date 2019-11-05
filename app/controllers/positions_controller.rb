@@ -1,5 +1,9 @@
 class PositionsController < ApplicationController
-  before_action :authenticate_employee!, only: %i[new create]
+  before_action :authenticate_employee!, only: %i[index new create]
+
+  def index
+    @positions = current_employee.company.positions.decorate
+  end
 
   def new
     @position = Position.new
@@ -9,14 +13,10 @@ class PositionsController < ApplicationController
     @position = Position.new(position_params)
     @position.company = current_employee.company
     if @position.save
-      redirect_to @position
+      redirect_to positions_path
     else
       render :new
     end
-  end
-
-  def show
-    @position = Position.find(params[:id])
   end
 
   private

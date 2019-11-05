@@ -8,6 +8,13 @@ pt-BR:
         title: Título
         industry: Área
         description: Descrição
+        salary_from: Salário de
+        salary_to: Salário até
+        salary: Salário
+        hiring_scheme: Regime
+        office_hours: Expediente
+    enums:
+      position:
         hiring_scheme:
           internship: Estágio
           contractor: PJ
@@ -15,5 +22,9 @@ pt-BR:
         office_hours:
           full_time: Integral
           part_time: Meio Período
-        salary_from: Salário de
-        salary_to: Salário até
+    messages:
+      position:
+        my_company_positions: Posições da empresa
+        create_new_position: Nova posição
+        why_create_new_position: Crie novas posições para atrair os melhores talentos à sua empresa
+        salary_separator: ' a '

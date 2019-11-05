@@ -28,8 +28,11 @@ class InterviewsController < ApplicationController
   def create
     @interview = Interview.new(@interview_params)
     if @interview.save
-      render json: @interview,
-             status: :created
+      render json: @interview, status: :created
+      text = I18n.t('new_interview')
+      @interview.selection_process
+                .messages.create!(text: text, sendable: current_employee,
+                                  message_type: :new_interview)
     else
       render json: @interview.errors, status: :unprocessable_entity
     end
