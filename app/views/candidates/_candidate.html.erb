@@ -1,7 +1,11 @@
 <div class="candidate card my-3 rounded-lg" id="candidate-<%= candidate.id%>">
   <div class="row no-gutters">
     <div class="image-container col-sm-4 col-md-4 col-lg-3 col-xl-2 rounded-left py-3">
-      <%= image_tag 'placeholder.png', class:"image card-img", alt:candidate.name %>
+      <% if candidate.candidate_profile.avatar.attached? %>
+        <%= image_tag candidate.candidate_profile.avatar, class: 'image img-thumbnail' %>
+      <% else %>
+        <%= image_tag 'placeholder.png', class:'image img-thumbnail', alt: candidate.name %>
+      <% end %>
     </div>
     <div class="details-container">
       <div class="card-body">

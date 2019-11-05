@@ -3,7 +3,7 @@
     <% if candidate.candidate_profile.avatar.attached? %>
       <%= image_tag candidate.candidate_profile.avatar, class: 'image img-thumbnail', style: "border-radius: 0" %>
     <% else %>
-      <%= image_tag 'placeholder.png', class:"image", alt: candidate.name %>
+      <%= image_tag 'placeholder.png', class:"image img-thumbnail", alt: candidate.name %>
     <% end %>
   </div>
   <div class="col-10 content">
