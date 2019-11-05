@@ -16,7 +16,11 @@ class EmployeeCandidatePresenter < SimpleDelegator
   end
 
   def invited_positions
-    candidate.positions.where(company: employee.company)
+    positions = []
+    candidate.invites.pending.each do |i|
+      positions << i.position if i.company == employee.company
+    end
+    positions
   end
 
   def uninvited_positions
