@@ -1,1 +1,14 @@
-<%= render "candidate_profile", candidate: current_candidate %>
+<article class="container candidate-page">
+  <div class="row">
+    <section class="col-md-12 col-lg-12">
+      <div class="candidate card card-body p-4">
+        <%= render "candidate_profile", candidate: current_candidate %>
+      </div>
+    </section>
+  </div>
+<article>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <%= link_to 'Voltar', root_path, class: 'btn btn-outline-secondary' %>
+  </div>
+</div>
